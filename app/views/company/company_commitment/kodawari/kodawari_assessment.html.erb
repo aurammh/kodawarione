@@ -1,0 +1,123 @@
+
+<!--begin::Header-->
+<% breadcrumbs_navigation_add ("こだわりプロフィル"), '#' %>
+<%= render_company_breadcrumbs_navigation("こだわりプロフィル") %>
+<!--end::Header-->
+<div class="mb-9">
+    <%= render partial: "company/shared/companies/profile_banner" %> 
+</div>
+<% flash.each do |key, value| %>
+    <% if value != nil %>
+        <% if key == 'email_change' %>
+            <div class="container">
+                <div class="alert alert-success d-flex justify-content-between align-items-center" role="alert">
+                <%= value %>
+                <button type="button" class="close btn btn-outline-none fw-bold fs-2 p-0" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+            </div>
+        <% end %>
+    <% end %>
+<% end %>
+
+<!--begin::Container-->
+<div class="container-xxl">
+  <div id="kt_content_container" class="d-flex flex-column-fluid align-items-start">
+    <!--begin::Post-->
+    <div class="content flex-row-fluid" id="kt_content">
+      <!--begin::Navbar-->
+      <%= render partial: "company/shared/companies/profile_navbar", :locals =>{:current_route => "assessment"} %>
+      <!--end::Navbar-->
+      
+      <div class="card">
+        <div class="card-body">
+          <%= form_with(model: @company_commitment) do |form| %>
+            <!--begin::Modal-->
+            <div class="notice d-flex bg-light-primary rounded border-primary border border-dashed rounded-3 p-6 mb-5">
+              <!--begin::Wrapper-->
+              <div class="d-flex flex-stack flex-wrap w-100 my-3">
+                <!--begin::Content-->
+                <div class="fw-bold">
+                  <h4 class="text-gray-900 fw-bolder"><%= form.label :"あなたのこだわりに最も近いものを3つ選択してください。" %><span class="ml-1 text-danger"></span></h4>
+                </div>
+                <!--end::Content-->
+                <%= render 'student/shared/student_commitment/ability_modal',commitment_form: form, user_commitment: @company_commitment %>
+              </div>
+              <!--end::Wrapper-->
+            </div>
+            <!--end::Modal-->
+            <div id="ability_text" class="py-10">
+              <%= form.text_area :append_data_modal, rows: 4, class: "form-control form-control-solid mb-3",:id => "displayed_text", placeholder: t("placeholder.append_data_modal"), readonly: true%>
+            </div>
+            <!--begin::Ability data-->
+            <div class="row mt-5">
+              <div class="col-xl-6 mb-5" id="ability_one_section">
+                <div class="form-group">
+                  <div id="ability_title_one" class="fs-5 fw-bolder mb-5"></div>
+                  <div class="slider-container mb-5">									
+                    <div class="slider-ticks px-0 mt-3">
+                      <span><%= t 'common.low' %></span>
+                      <span><%= t 'common.high' %></span>
+                    </div>
+                    <div class="sliderWithLabels" id="slider-1" data-initial=<%= @company_commitment.ability_one%>>
+                      <%= form.range_field :ability_one, in: 1..10 %>
+                    </div>		
+                  </div>
+                  <%= form.text_area :ability_reason_one, id: "ability_reason_one", class: "form-control form-control-solid",rows: 4, maxlength: 500 %>
+                  <p class ="text-danger font-size-sm ms-invalid-feedback mt-1"><%= @company_commitment.errors.full_messages_for(:ability_reason_one)[0] %></p>
+                </div> 
+              </div>
+              <div class="col-xl-6 mb-5" id="ability_two_section">
+                <div class="form-group" id="ability_two_section">
+                  <div id="ability_title_two" class="fs-5 fw-bolder mb-5"></div>
+                  <div class="slider-container mb-5">									
+                    <div class="slider-ticks px-0 mt-3">
+                      <span><%= t 'common.low' %></span>
+                      <span><%= t 'common.high' %></span>
+                    </div>
+                    <div class="sliderWithLabels" id="slider-2" data-initial=<%= @company_commitment.ability_two%>>
+                      <%= form.range_field :ability_two, in: 1..10 %>
+                    </div>
+                  </div>  
+                  <%= form.text_area :ability_reason_two, id: "ability_reason_two", class: "form-control form-control-solid",rows: 4, maxlength: 500 %>
+                  <p class ="text-danger font-size-sm ms-invalid-feedback mt-1"><%= @company_commitment.errors.full_messages_for(:ability_reason_two)[0] %></p>
+                </div>
+              </div>
+              <div class="col-xl-6 mb-5" id="ability_three_section">
+                <div class="form-group">
+                  <div id="ability_title_three" class="fs-5 fw-bolder mb-5"></div>
+                  <div class="slider-container mb-5">									
+                    <div class="slider-ticks px-0 mt-3">
+                      <span><%= t 'common.low' %></span>
+                      <span><%= t 'common.high' %></span>
+                    </div>
+                    <div class="sliderWithLabels" id="slider-3" data-initial=<%= @company_commitment.ability_three%>>
+                      <%= form.range_field :ability_three, in: 1..10 %>
+                    </div>
+                  </div>  
+                  <%= form.text_area :ability_reason_three, id: "ability_reason_three", class: "form-control form-control-solid",rows: 4, maxlength: 500 %>
+                  <p class ="text-danger font-size-sm ms-invalid-feedback mt-1"><%= @company_commitment.errors.full_messages_for(:ability_reason_three)[0] %></p>
+                </div> 
+              </div>
+             
+              <div class="d-flex justify-content-center">
+                <%= form.submit t('btn.submit'), class: "btn btn-primary mb-5", id: "execute" %>
+                <%= form.text_field :route_check , class: "d-none", value: "assessment" %>
+              </div>
+            </div>
+            <!--end::Ability data-->
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <!--end::Post-->
+  </div>
+</div>
+<!--end::Container-->
+<%= render "users/shared/toastr" %>
+<script> 
+    var error_msg = "<%= t('student_commitment.title.error_message') %>"; 
+    var error_btn = "<%= t('student_commitment.title.close') %>"; 
+</script>
+<%= javascript_pack_tag "student/student_commitment.js" %>

@@ -1,0 +1,2 @@
+module Kodawarione::SuperPartnerManage::SuperPartnerManageHelper
+end

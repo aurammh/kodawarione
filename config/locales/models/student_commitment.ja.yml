@@ -1,0 +1,45 @@
+ja:
+  student_commitment:
+    title:
+      complete_cover_photo: ホーム画像
+      student_commitment_title: こだわりプロフィール
+      student_commitment_title1: 仮登録画面
+      modal_title: こだわり属性
+      commitment_title: ★あなたの一番の「こだわり」を教えてください。
+      ability_reassons_title: ★あなたの「こだわり領域（分野）」とその理由や自慢できることを教えてください。
+      additional_reason_title: ★あなたのこだわりで不足している事やもっとよくするために必要なことはなんですか？
+      close: 閉じる
+      error_message: こだわり登録を３つお選びください
+      image_and_color_palette_title: ※画像を設定しない場合には、下記カラーパレットよりお好きな色をご選択ください。
+      ability_title: 選択した３つのこだわりを10段階で評価しその理由も併せて記載ください。
+    placeholder:
+      full_name: お名前（フルネーム）
+      address: 住所（都道府県）
+      desired_location: 希望勤務地（都道府県）
+      commitment: 例　コミュニケーション
+    steps:
+      title:
+        step1: "基本情報"
+        step2: "こだわりポイント"
+        step3: "こだわり自己評価"
+        step4: "補足"
+        step5: "ホーム画像の設定"
+        complete: "完了"
+      question:
+        step1: "お名前、住所と希望勤務地を教えてください"
+        step2: "あなたが最もアピールしたいこだわりを教えてください。"
+        step3: "こだわり領域のリストから一番最も適当なものを３つ選んでください。"
+        step4: "選択した「こだわり属性」で、不足しているのはどんなことですか？"
+        step5: "カバー写真の選択"
+    btn:
+      previous: "戻る"
+      next: "次へ"
+      interested_registration: "興味あり登録"
+    menu:
+      corporate_information_management: "企業情報管理"
+      corporate_information_management_company: "企業情報"
+      discerning_registration: "こだわり登録 "
+      create_company_page: "企業ページ作成"
+      setting: "設定"
+      corporate_information_registration: "企業情報登録"
+      new_corporate_information_registration: "新規仮登録入力"

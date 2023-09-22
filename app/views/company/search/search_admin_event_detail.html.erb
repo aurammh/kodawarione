@@ -1,0 +1,274 @@
+<!--begin::Breadcrumb-->    
+<% if @admin_event_participants.present? %>
+  <% breadcrumbs_navigation_add (t'btn.event_search'), company_search_event_path %>
+  <% breadcrumbs_navigation_add (t('event.title.joined_event_title')), '#' %>
+  <%= render_company_breadcrumbs_navigation(t'event.title.joined_event_title') %>
+<% else %>
+  <% breadcrumbs_navigation_add (t'btn.event_search'), company_search_event_path %>
+  <% breadcrumbs_navigation_add (t('event.title.event_information')), '#' %>
+  <%= render_company_breadcrumbs_navigation(t'event.title.event_information') %>
+<% end %>
+<!--end::Breadcrumb--> 
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+  <!--begin::Container-->
+  <div class="container-xxl" id="kt_content_container">
+    <!--begin::Layout-->
+    <div class="d-flex flex-column flex-lg-row">
+      <!--begin::Content-->
+      <div class="flex-lg-row-fluid">
+        <!--begin::Card-->
+        <div class="card card-flush bg-body pt-3 mb-5 mb-xl-10">
+          <!--begin::Card header-->
+          <div class="card-header">
+            <!--begin::Card title-->
+            <div class="card-title">
+              <h2 class="fw-bolder"><%= @event_details.event_name %></h2>
+            </div>
+          </div>
+          <!--end::Card header-->
+          <!--begin::Card body-->
+          <div class="card-body pt-3">
+            <!--begin::Section-->
+            <div class="">
+              <!--begin::Image-->
+              <% if @event_details.event_image.attached? %>
+                <div class="bgi-no-repeat bgi-position-center bgi-size-cover card-rounded min-h-350px" style="background-image: url(<%= url_for(@event_details.event_image) %>)"></div>
+              <% end %>
+              <!--end::Image-->
+              <!--begin::Event Category-->
+              <% unless @event_details.category.nil?%>
+                <!--begin::Info-->
+                <div class="d-flex flex-wrap mt-7">
+                  <% @event_details.category.each do |v| %>
+                    <% if v != nil %>
+                      <!--begin::Item-->
+                      <div class="me-9 my-1">
+                        <!--begin::Icon-->
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                        <span class="svg-icon svg-icon-primary svg-icon-2 me-1">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
+                            <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
+                            <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
+                            <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
+                          </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                        <!--end::Icon-->
+                        <!--begin::Label-->
+                        <span class="fw-bolder text-gray-400"><%= t("event.category.#{Event.event_categories.key(v)}") %></span>
+                        <!--end::Label-->
+                      </div>
+                      <!--end::Item-->
+                    <% end %>      
+                  <% end %>
+                  <!--begin::Item-->
+                  <div>
+                    <!--begin::Title-->
+                    <% if @event_details.event_type == 1 %>
+                      <span class="badge badge-warning"><%= t'search.event_organizer' %>: <%= t('welcome.privacy policy.top_page_link.text2') %></span>
+                    <% elsif @event_details.event_type == 2 %>
+                      <span class="badge badge-warning"><%= t'search.event_organizer' %>: <%=  t('partner.partners_tab') %></span>
+                    <% elsif @event_details.event_type == 4 %>
+                      <span class="badge badge-warning"><%= t'search.event_organizer' %>: <%=  t('partner.super_partners_tab') %></span>
+                    <% else %>
+                      <span class="badge badge-warning"><%= t'search.event_organizer' %>: <%=  t('Kodawari One') %></span>
+                    <% end %>
+                    <!--end::Title-->
+                  </div>
+                  <!--end::Item-->
+                </div>
+                <!--end::Info-->
+              <% end %> 
+              <!--end::Event Category-->
+              <div class="row mt-3"> 
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 my-3">
+                  <div class="text-dark fs-6 fw-bolder"><%= t('event.title.event_date')  %></div>
+                  <div class="d-flex flex-wrap my-3">
+                    <!--begin::Due-->
+                    <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-7 mb-3">
+                      <div class="fs-6 text-gray-800 fw-bolder"><%= l @event_details.event_start_date %><span class="text-primary ms-2 fs-8"><%= t('date.day_names')[@event_details.event_start_date.wday] %></span></div>
+                      <div class="fw-bold text-gray-400"><%= Event.human_attribute_name('event_start_date') %></div>
+                    </div>
+                    <!--end::Due-->
+                    <!--begin::Budget-->
+                    <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 mb-3">
+                      <div class="fs-6 text-gray-800 fw-bolder"><%= l @event_details.event_end_date %><span class="text-primary ms-2 fs-8"><%= t('date.day_names')[@event_details.event_end_date.wday] %></span></div>
+                      <div class="fw-bold text-gray-400"><%= Event.human_attribute_name('event_end_date') %></div>
+                    </div>
+                    <!--end::Budget-->
+                  </div>
+                </div>
+                <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 my-3">
+                  <div class="text-dark fs-6 fw-bolder"><%= t('event.title.application_period')  %></div>
+                  <div class="d-flex flex-wrap my-3">
+                    <!--begin::Due-->
+                    <% if @event_details.application_start_date.present? %>
+                      <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-7 mb-3">
+                        <div class="fs-6 text-gray-800 fw-bolder"><%= l @event_details.application_start_date %><span class="text-primary ms-2 fs-8"><%= t('date.day_names')[@event_details.application_start_date.wday] %></span></div>
+                        <div class="fw-bold text-gray-400"><%= Event.human_attribute_name('application_start_date') %></div>
+                      </div>
+                    <% end %>
+                    <!--end::Due-->
+                    <!--begin::Budget-->
+                    <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 mb-3">
+                      <div class="fs-6 text-gray-800 fw-bolder"><%= l @event_details.application_deadline %><span class="text-primary ms-2 fs-8"><%= t('date.day_names')[@event_details.application_deadline.wday] %></span></div>
+                      <div class="fw-bold text-gray-400"><%= Event.human_attribute_name('application_deadline') %></div>
+                    </div>
+                    <!--end::Budget-->
+                  </div>
+                </div>
+              </div>  
+              <div class="row mt-3">  
+                <div class="col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2 my-3">
+                    <div class="text-dark fs-6 fw-bolder"><%= Event.human_attribute_name('apply_event_limit')  %></div>
+                    <div class="d-flex align-items-center flex-wrap mt-3">
+                      <!--begin::Item-->
+                      <div class="d-flex align-items-center flex-lg-fill me-5 mb-2">
+                        <span class="me-4">
+                          <i class="flaticon-users display-6 text-muted font-weight-bold"></i>
+                        </span>
+                        <div class="d-flex flex-column text-dart-75">
+                          <span class="fw-bolder">
+                              <%= number_with_delimiter(@event_details.apply_event_limit) %> <%= t('unit.persons') %>
+                          </span>
+                        </div>
+                      </div>
+                      <!--end::Item-->
+                    </div>
+                </div>
+                <div class="col-12 col-sm-12 col-md-10 col-lg-10 col-xl-10 my-3">
+                    <div class="text-dark fs-6 fw-bolder"><%= Event.human_attribute_name('venue')  %></div>
+                    <div class="d-flex align-items-center flex-wrap mt-3">
+                      <!--begin::Item-->
+                      <div class="d-flex align-items-center flex-lg-fill me-5 mb-2">
+                        <span class="me-4">
+                          <i class="flaticon2-location display-6 text-muted font-weight-bold"></i>
+                        </span>
+                        <div class="d-flex flex-column text-dart-75">
+                            <span class="fw-bolder">
+                                <%= @event_details.venue.present? ? @event_details.venue : t("event.venue_types.online") %> 
+                            </span>
+                        </div>
+                      </div>
+                      <!--end::Item-->
+                    </div>
+                </div> 
+              </div>   
+              <div class="row mt-3"> 
+                <% if @event_details.event_content.present? %>
+                  <div class="fs-5 fw-bold text-gray-600">
+                    <div class="text-dark fs-6 fw-bolder"><%= Event.human_attribute_name('event_content')  %></div>
+                    <p><%= @event_details.event_content %></p>
+                  </div>
+                <% end %>
+              </div> 
+            </div>
+            <!--end::Section-->
+            <!--begin::Section-->
+            <% if @admin_event_participants.present? %>
+              <div class="mb-0">
+                <!--begin::Title-->
+                
+                <% if can?(:join_participant, Company::AdminEvent) %>
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5><%= t("event.title.join_participant") %>:</h5>
+                    <!--end::Title-->
+                    <% if @admin_event_participants.size > 0 %>
+                      <%= link_to company_admin_event_search_join_participant_path, class: "btn btn-primary #{check_event_join_avaliable(@event_details) ? "" : "d-none"}  me-3" do %>
+                        <i class="fas fa-user-plus"></i>
+                        <span class='label join-text mx-5'><%= t('event.title.edit_join') %></span>
+                      <% end %>
+                    <% end %>
+                  </div>
+                <% end %>
+                
+                
+                <!--begin::Product table-->              
+                <div class="table-responsive">
+                  <!--begin::Table-->
+                  <table class="table align-middle table-row-dashed fs-6 gy-4 mb-0">
+                    <!--begin::Table head-->
+                    <thead>
+                      <!--begin::Table row-->
+                      <tr class="border-bottom border-gray-200 text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                        <th class="min-w-200px"><%= Admin::EventParticipant.human_attribute_name('email')  %></th>
+                        <th class="min-w-160px"><%= t('role.title.role_type') %></th>
+                        <th class="pe-0 min-w-120px"><%= Admin::EventParticipant.human_attribute_name('position') %></th>
+                        <th class="pe-0 min-w-120px"><%= Admin::EventParticipant.human_attribute_name('department') %></th>
+                      </tr>
+                      <!--end::Table row-->
+                    </thead>
+                    <!--end::Table head-->
+                    <!--begin::Table body-->
+                    <tbody class="fw-bold text-gray-800">
+                      <% @admin_event_participants.each do |participant| %>   
+                        <tr>
+                          <td class="w-sm-150px w-md-300px w-lg-150px w-xl-300px">
+                            <div class="d-flex align-items-center">
+                              <!--begin:: Avatar -->
+                              <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
+                                <% if participant.image.attached? %>
+                                  <%= image_tag (participant.image), :class=> "symbol-label" %>
+                                <% else %>
+                                  <%= image_tag "avatar/male.svg", :class=> "symbol-label" %>   
+                                <% end %> 
+                              </div>
+                              <!--end::Avatar-->
+                              <!--begin::User details-->
+                              <div class="d-flex flex-column w-lg-75px w-xl-250px text-truncate">
+                                <span class="text-gray-800 mb-1">
+                                  <%= participant.last_name %><%= participant.first_name %>
+                                </span>
+                                <span class="text-muted fw-bold text-hover-primary d-block fs-7 w-sm-150px w-md-300px w-lg-150px w-xl-300px text-truncate"><%= participant.email %></span>
+                              </div>
+                              <!--begin::User details-->
+                            </div>
+                          </td>
+                          <td class="w-sm-75px w-md-100px w-lg-75px w-xl-200px">
+                            <span class="badge  <%= participant.company_roles_id == 1 ? "badge-light-success" : " badge-light-primary"  %>"><%= participant.company_roles_id == 1? "ADMIN" : "MEMBER" %></span>
+                          </td>
+                          <td class="w-sm-100px w-md-150px w-lg-100px w-xl-200px"><%= participant.position %></td>
+                          <td class="w-sm-100px w-md-150px w-lg-100px w-xl-200px"><%= participant.department %></td>
+                        </tr>
+                      <% end %>
+                    </tbody>
+                    <!--end::Table body-->
+                  </table>
+                  <!--end::Table-->
+                </div>                
+                <!--end::Product table-->
+              </div>
+            <% end %>
+            <!--end::Section-->
+          </div>
+          <!--end::Card body-->
+          <% if @admin_event_participants.size == 0 %>
+            <!--begin::Footer-->
+            <div class="card-footer pt-0">
+              <!--begin::Actions-->
+              <div class="d-flex justify-content-center">
+                <%= link_to company_admin_event_search_join_participant_path, class: "btn btn-primary #{check_event_join_avaliable(@event_details) ? "" : "d-none"}  me-3" do %>
+                  <i class="fas fa-user-plus"></i>
+                  <span class='label join-text mx-5'><%= t('event.title.join') %></span>
+                <% end %>
+              </div>
+              <!--end::Actions-->  
+            </div>
+            <!--begin::Footer-->
+          <% end %>  
+        </div>
+        <!--end::Card-->
+      </div>
+      <!--end::Content-->
+    </div>
+    <!--end::Layout-->
+  </div>
+  <!--end::Container-->
+</div>
+<!--end::Content-->
+<div  id="eventParticipantModal">
+  <%# render 'company/admin_event/join_participant'%>
+</div> 
+<%= javascript_pack_tag "admin/admin_search.js" %>

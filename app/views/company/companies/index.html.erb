@@ -1,0 +1,1263 @@
+<!--begin::Header-->
+<% breadcrumbs_navigation_add (t ("student.title.header_link")), '#' %>
+<%= render_company_breadcrumbs_navigation (t ("student.title.header_link")) %>
+<!--end::Header-->
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Container-->
+    <div class="container-xxl" id="kt_content_container">
+        <!--begin::Summary Cards--> 
+        <div class="row gy-5 g-xl-10">
+            <!--begin::Col-->
+            <div class="col-xl-4">
+                <div class="card mb-5 mb-xl-10" style="background-color: #ECECEC">
+                    <!--begin::Header-->
+                    <div class="card-header border-0 pt-5">
+                        <h3 class="card-title align-items-start flex-column">
+                        <span class="card-label fw-bolder text-dark"><%= t ('dashboard.company_progress_title')%></span>
+                        <!--<span class="text-gray-600 mt-1 fw-bold fs-7"><%= t('dashboard.profile_complete_title') %> <%= (current_company.progress_details) %>% <%= t('dashboard.completed_profile') %></span>-->
+                        </h3>
+                    </div>
+                    <!--end::Header-->
+                    <!--begin::Body-->
+                    <div class="card-body pt-0"> 
+                        <!--begin::Item--> 
+                        <div class="w-100">   
+                            <% if can?(:update, Company::Company) %>                           
+                                <%= link_to edit_company_company_path(@user_data), class: "text-gray-800 text-hover-primary fs-7 fw-bolder lh-0" do %>
+                                    <%= t ('dashboard.main_registration') %>
+                                <% end %>
+                            <% else %>
+                                <span class = "text-gray-800 fs-7 fw-bolder lh-0">
+                                    <%= t ('dashboard.main_registration') %>
+                                </span>
+                            <% end %>
+                            <!--begin::Statistics-->
+                            <div class="d-flex align-items-center w-100">                                
+                                <!--begin::Progress-->
+                                <div class="progress h-6px w-100 me-2 bg-light">
+                                    <div class="progress-bar bg-primary" role="progressbar" style="width: <%= current_company.progress_details[2]['percent'] %>%" aria-valuenow="<%= current_company.progress_details[2]['percent'] %>" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <!--end::Progress-->
+                                <!--begin::Value-->
+                                <span class="text-gray-800 fw-bold w-35px"><%= current_company.progress_details[2]['percent'] %>%</span>
+                                <!--end::Value-->
+                            </div>
+                            <!--end::Statistics-->
+                        </div>    
+                        <!--end::Item-->                                         
+                        <!--begin::Item-->
+                        <div class="w-100">
+                            <% if can?(:read, Company::CompanyCommitmentAbility) %> 
+                                <%= link_to company_commitment_ability_index_path, class: "text-gray-800 text-hover-primary fs-7 fw-bolder lh-0" do %>
+                                    <%= t('title.company_commitment_ability_title') %>
+                                <% end %>
+                            <% else %>
+                                <span class = "text-gray-800 fs-7 fw-bolder lh-0">
+                                    <%= t('title.company_commitment_ability_title') %>
+                                </span>
+                            <% end %>
+                            <!--begin::Statistics-->
+                            <div class="d-flex align-items-center w-100">
+                                <!--begin::Progress-->
+                                <div class="progress h-6px w-100 me-2 bg-light">
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: <%= current_company.progress_details[1]['percent'] %>%" aria-valuenow="<%= current_company.progress_details[1]['percent'] %>" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <!--end::Progress-->
+                                <!--begin::Value-->
+                                <span class="text-gray-800 fw-bold w-35px"><%= current_company.progress_details[1]['percent'] %>%</span>
+                                <!--end::Value-->
+                            </div>
+                            <!--end::Statistics-->
+                        </div>
+                        <!--end::Item-->   
+                        <!--begin::Item-->
+                        <div class="w-100">
+                            <% if can?(:index, Company::MCompanyQuestionnaire) %>
+                                <%= link_to company_assessments_path, class: "text-gray-800 text-hover-primary fs-7 fw-bolder lh-0" do %>
+                                    <%= t('dashboard.commitment_registratoin') %>                            
+                                <% end %>
+                            <% else %>
+                                <span class= "text-gray-800 fs-7 fw-bolder lh-0">
+                                    <%= t('dashboard.commitment_registratoin') %>                            
+                                </span>
+                            <% end %>
+                            <!--begin::Statistics-->
+                            <div class="d-flex align-items-center w-100">
+                                <!--begin::Progress-->
+                                <div class="progress h-6px w-100 me-2 bg-light">
+                                    <div class="progress-bar bg-warning" role="progressbar" style="width: <%= current_company.progress_details[3]['percent'] %>%" aria-valuenow="<%= current_company.progress_details[3]['percent'] %>" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <!--end::Progress-->
+                                <!--begin::Value-->
+                                <span class="text-gray-800 fw-bold w-35px"><%= current_company.progress_details[3]['percent'] %>%</span>
+                                <!--end::Value-->
+                            </div>
+                            <!--end::Statistics-->
+                        </div>
+                        <!--end::Item-->                                       
+                        <!--begin::Item-->
+                        <div class="w-100">
+                            <% if can?(:home, Company::Company) %> 
+                                <%= link_to home_company_commitment_profiles_path, class: "text-gray-800 text-hover-primary fs-7 fw-bolder lh-0" do %>
+                                    <%= t( 'student_commitment.menu.create_company_page') %>
+                                <% end %>
+                            <% else %>
+                                <span class= "text-gray-800 fs-7 fw-bolder lh-0">
+                                    <%= t( 'student_commitment.menu.create_company_page') %>
+                                </span>
+                            <% end %>
+                            <!--begin::Statistics-->
+                            <div class="d-flex align-items-center w-100">
+                                <!--begin::Progress-->
+                                <div class="progress h-6px w-100 me-2 bg-light">
+                                <div class="progress-bar bg-danger" role="progressbar" style="width: <%= company_profile_percent %>%" aria-valuenow="<%= company_profile_percent %>" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                                <!--end::Progress-->
+                                <!--begin::Value-->
+                                <span class="text-gray-800 fw-bold w-35px"><%= company_profile_percent %>%</span>
+                                <!--end::Value-->
+                            </div>
+                            <!--end::Statistics-->
+                        </div>
+                        <!--end::Item-->  
+                    </div>
+                    <!--end::Body-->
+                </div>
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-xl-4">
+                <!--begin::Mixed Widget 13-->
+                <div class="card card-xl-stretch mb-xl-10" style="background-color: #F7D9E3">
+                    <!--begin::Body-->
+                    <div class="card-body d-flex flex-column">
+                        <!--begin::Wrapper-->
+                        <div class="d-flex flex-column flex-grow-1">
+                            <!--begin::Title-->
+                            <a href="#" class="text-dark text-hover-primary fw-bolder fs-3"><%= t('menu.scout_result1') %></a>
+                            <!--end::Title-->
+                            <!--begin::Chart-->
+                            <div class="mixed-widget-13-chart" style="height: 100px"></div>
+                            <!--end::Chart-->
+                        </div>
+                        <!--end::Wrapper-->
+                        <!--begin::Stats-->
+                        <div class="pt-5">
+                            <!--begin::Symbol-->
+                            <span class="text-dark fw-bolder fs-5 lh-0"><%= t('menu.scout_result2') %></span>
+                            <!--end::Symbol-->
+                            <!--begin::Number-->
+                            <span class="text-dark fw-bolder fs-4 me-2 lh-0"> :  <%=  @scouted_result_count.length %></span>
+                            <!--end::Number--> 
+                        </div>
+                        <!--end::Stats-->
+                    </div>
+                    <!--end::Body-->
+                </div>
+                <!--end::Mixed Widget 13-->
+            </div>
+            <!--end::Col-->
+            <!--begin::Col-->
+            <div class="col-xl-4">
+                <!--begin::Mixed Widget 14-->
+                <div class="card card-xxl-stretch mb-xl-10" style="background-color: #CBF0F4">
+                    <!--begin::Body-->
+                    <div class="card-body d-flex flex-column">
+                        <!--begin::Wrapper-->
+                        <div class="d-flex flex-column flex-grow-1">
+                            <!--begin::Title-->
+                            <a href="#" class="text-dark text-hover-primary fw-bolder fs-3"><%= t('menu.applied_job_approval_screen1') %></a>
+                            <!--end::Title-->
+                            <!--begin::Chart-->
+                            <div class="mixed-widget-14-chart" style="height: 100px"></div>
+                            <!--end::Chart-->
+                        </div>
+                        <!--end::Wrapper-->
+                        <!--begin::Stats-->
+                        <div class="pt-5">
+                            <!--begin::Symbol-->
+                            <span class="text-dark fw-bolder fs-5 lh-0"><%= t('menu.applied_job_approval_screen2') %></span>
+                            <!--end::Symbol-->
+                            <!--begin::Number-->
+                            <span class="text-dark fw-bolder fs-4 me-2 lh-0"> :  <%=  @applied_job_approval_list_count.length %></span>
+                            <!--end::Number--> 
+                        </div>
+                        <!--end::Stats-->
+                    </div>
+                </div>
+                <!--end::Mixed Widget 14-->
+            </div>
+            <!--end::Col-->
+        </div>
+        <!--end::Summary Cards-->
+        <% if @scotted_conversation.present? %>
+            <div class="card bg-body mb-5 mb-xl-10">
+                <!--begin::Header-->
+                <div class="card-header border-0 pt-5">
+                    <h3 class="card-title align-items-start flex-column">
+                        <span class="card-label fw-bolder fs-3 mb-1"><%= t("communication.title.scouted_message")%></span>
+                    </h3>
+                    <div class="card-toolbar">               
+                        <% if @scotted_conversation.size > 3 %>
+                        <!--begin::Filter-->
+                        <%= link_to company_scouted_result_path, class: "btn btn-sm btn-light btn-active-primary" do %>
+                            <%= t 'btn.view_all' %>
+                        <% end %>
+                        <!--end::Filter-->
+                        <% end %>            
+                    </div>
+                </div>
+                <!--end::Header-->
+                <!--begin::Body-->
+                <div class="card-body py-3">
+                    <table class="table table-row-dashed table-row-gray-300 table-hover custom-table gy-4">
+                        <!--begin::Table head-->
+                        <thead>
+                            <tr class="fw-bolder text-muted">
+                                <th class="min-w-150px w-150px w-sm-175px w-md-250px w-lg-250px"><%= t('status.student_name')%></th> 
+                                <th class=""><%= t('status.mail_description') %></th>
+                                <th class="min-w-75px w-75px w-md-100px w-lg-100px"><%= t('status.approval_status') %></th>
+                                <th class="min-w-75px w-75px w-md-100px w-lg-100px text-center"><%= t('status.send_date')%></th> 
+                                <th class="min-w-50px w-50px"><%= t('event.title.edit_text_title') %></th>
+                            </tr>
+                        </thead>
+                        <!--end::Table head-->
+                        <!--begin::Table body-->
+                        <tbody>
+                            <% @scotted_conversation.each_with_index do |conversation_list,index| %>
+                                <%  @mail_info, @view_info = scout_mail_sender_and_receiver_info(conversation_list.company_user_id,conversation_list.user_id,conversation_list.company_id,conversation_list.mail_type,conversation_list.sent_type) %>
+                                <tr>
+                                    <td class="min-w-150px w-150px w-sm-175px w-md-250px w-lg-250px p-0">
+                                        <div class="d-flex align-items-center">
+                                            <div class="symbol symbol-circle symbol-50px py-2 me-4">
+                                                <% if @view_info.image.attached? %>
+                                                    <%= image_tag @view_info.image %>  
+                                                <% else %>
+                                                    <% if @view_info.gender == "female" %>
+                                                        <%= image_tag "avatar/female.svg", class: "symbol-label" %>                                
+                                                    <% else %>
+                                                        <%= image_tag "avatar/male.svg", class: "symbol-label" %>   
+                                                    <% end %>
+                                                <% end %>
+                                            </div>
+                                            <span class="fw-bold text-truncate text-dark"> 
+                                                <% if conversation_list.scout_status == 1 ||  conversation_list.scout_status == 2 %>
+                                                    <%= link_to(company_scouted_student_detail_path(mail_id: conversation_list.communication_id, student_id: conversation_list.id)) do %><%= @mail_info["name"] %><% end %>
+                                                <% else %>
+                                                    <%= @mail_info["name"] %>   
+                                                <% end %>                                                                                             
+                                            </span>
+                                        </div>
+                                    </td> 
+                                    <td class="p-0">
+                                        <div class="text-truncate"> 
+                                            <span class="fw-bolder text-dark<%= @new_communication_arr.include?(conversation_list.id) ? '' : '' %>"><%= conversation_list.title %> -</span>
+                                            <span class="text-dark<%= @new_communication_arr.include?(conversation_list.id) ? '' : '' %> "> <%= conversation_list.content.to_plain_text  %></span>
+                                        </div> 
+                                    </td> 
+                                    <td class="min-w-75px w-75px w-md-100px w-lg-100px p-0">
+                                        <div class="d-flex justify-content-center">
+                                            <% if conversation_list.scout_status == 1 %> 
+                                                <span class="badge badge-light-warning badge-lg"><%= t('status.not_yet') %></span> 
+                                            <% elsif conversation_list.scout_status == 2 %> 
+                                                <span class="badge badge-light-primary badge-lg"><%= t('status.replied') %></span>                                      
+                                            <% else %>
+                                                <span class="badge badge-light-danger badge-lg"><%=  t('status.rejected') %></span> 
+                                            <% end %> 
+                                        </div>
+                                    </td>
+                                    <td class="min-w-75px w-75px w-md-100px w-lg-100px p-0">
+                                        <div class="d-flex justify-content-center">
+                                            <span class="font-weight-normal text-dark"><%= time_date( conversation_list.created_at)%></span> 
+                                        </div>
+                                    </td>
+                                    <% if can?(:scouted_student_detail, Company::Company) %>
+                                        <td class="min-w-50px w-50px p-0">
+                                            <%= link_to communication_communication_path(:id => conversation_list.communication_id, :student_id=> conversation_list.receiver_id), remote: true, class: "btn btn-icon btn-sm btn-light-primary" do %> 
+                                                <i class="fas fa-envelope-open-text fs-4 "></i>
+                                            <% end %>
+                                            <div id="communicationModal"></div>
+                                        </td>
+                                    <% end %>
+                                </tr>  
+                            <% end %>
+                        </tbody>
+                        <!--end::Table body-->
+                    </table>
+                </div>
+                <!--begin::Body-->
+            </div>
+        <% else %>
+            <!--begin::Card-->
+            <div class="card bg-body mb-5 mb-xl-10">
+                <!--begin::Card body-->
+                <div class="card-body p-0">
+                    <!--begin::Wrapper-->
+                    <div class="card-px text-center py-5 my-5">
+                        <!--begin::Title-->
+                        <h2 class="fs-2x fw-bolder mb-10"><%= t("communication.title.scouted_message")%></h2>
+                        <!--end::Title-->
+                        <!--begin::Description-->
+                        <p class="text-gray-400 fs-4 fw-bold mb-10">スカウトメールはありません。</p>
+                        <!--end::Description-->
+                    </div>
+                    <!--end::Wrapper-->
+                </div>
+                <!--end::Card body-->
+            </div>
+            <!--end::Card-->
+        <% end %>
+        <!--begin::Favourite Users-->      
+        <% if @favourite_users_list.present? %>            
+            <!--begin::Favourite Users Desktop -->
+            <div class="card bg-body d-none d-sm-none d-md-none d-lg-block d-xl-block mb-5 mb-xl-10">
+                <!--begin::Header-->
+                <div class="card-header border-0 pt-5">
+                    <h3 class="card-title align-items-start flex-column">
+                        <span class="card-label fw-bolder fs-3 mb-1"><%= t('common.favourite_users')%></span>
+                    </h3>
+                    <% if can?(:favourite_student_index, Company::Company) %>
+                        <div class="card-toolbar">
+                            <% if @favourite_users_list.size > 3 %>
+                                <%= link_to (t 'btn.view_all'), company_favourite_student_index_path, class: "btn btn-sm btn-light btn-active-primary" %>
+                            <% end %>
+                        </div>
+                    <% end %>
+                </div>
+                <!--end::Header-->
+                <!--begin::Body-->
+                <div class="card-body py-3">
+                    <!--begin::Table container-->
+                    <div class="table-responsive overflow-auto">
+                        <!--begin::Table-->
+                        <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
+                            <!--begin::Table head-->
+                            <thead>
+                                <tr class="fw-bolder text-muted">
+                                    <th class="min-w-100px"><%= t('student.student_show.name')%></th>
+                                    <th class="min-w-100px"><%= Student::Student.human_attribute_name('school_type') %></th>
+                                    <th class="min-w-100px"><%= Student::Student.human_attribute_name('school_name') %></th>
+                                    <th class="min-w-100px"><%= Student::Student.human_attribute_name('graduation_date') %></th>
+                                    <th class="min-w-30px text-end"><%= t('event.title.edit_text_title') %></th>
+                                </tr>
+                            </thead>
+                            <!--end::Table head-->
+                            <!--begin::Table body-->
+                            <tbody>
+                                <% @favourite_users_list.each do |student| %>
+                                    <tr>
+                                        <td class="d-flex align-items-center">
+                                            <!--begin:: Avatar -->
+                                            <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
+                                                <% if student.image.attached? %>
+                                                <%= image_tag (student.image), :class=> "symbol-label" %>
+                                                <% else %>
+                                                    <% if student.gender == "female" %>
+                                                        <%= image_tag "avatar/female.svg", :class=> "symbol-label" %>                                
+                                                    <% else %>
+                                                        <%= image_tag "avatar/male.svg", :class=> "symbol-label" %>   
+                                                    <% end %>
+                                                <% end %> 
+                                            </div>
+                                            <!--end::Avatar-->
+                                            <!--begin::User details-->
+                                            <div class="d-flex flex-column w-lg-50px w-xl-250px">
+                                                <span class="text-gray-800 text-truncate mb-1">
+                                                    <%= student.nick_name %>
+                                                </span>
+                                                <span class="text-muted text-truncate fw-bold text-muted d-block fs-7"><%= student.user.email %></span>
+                                            </div>
+                                            <!--end::User details-->
+                                        </td>
+                                        <td>
+                                            <span class="text-muted fw-bold d-block fs-6"><%= get_school_type(student.school_type) %></span>
+                                        </td>
+                                        <td>
+                                            <span class="text-muted fw-bold d-block fs-6"><%=  get_student_field_name(student.school_name) %></span>
+                                        </td>
+                                        <td>
+                                            <span class="text-muted fw-bold d-block fs-6"><%=  get_graduation_date(student.graduation_date) %></span>
+                                        </td>  
+                                        <% if can?(:student_details, Company::Search) %>                                  
+                                            <td>
+                                                <div class="d-flex justify-content-end flex-shrink-0">
+                                                    <%= link_to company_student_details_path(:id => student.user_id), :class=>"btn btn-icon btn-bg-light btn-active-color-primary btn-sm" do %>
+                                                        <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
+                                                        <span class="svg-icon svg-icon-3">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                <path d="M17.5 11H6.5C4 11 2 9 2 6.5C2 4 4 2 6.5 2H17.5C20 2 22 4 22 6.5C22 9 20 11 17.5 11ZM15 6.5C15 7.9 16.1 9 17.5 9C18.9 9 20 7.9 20 6.5C20 5.1 18.9 4 17.5 4C16.1 4 15 5.1 15 6.5Z" fill="black" />
+                                                                <path opacity="0.3" d="M17.5 22H6.5C4 22 2 20 2 17.5C2 15 4 13 6.5 13H17.5C20 13 22 15 22 17.5C22 20 20 22 17.5 22ZM4 17.5C4 18.9 5.1 20 6.5 20C7.9 20 9 18.9 9 17.5C9 16.1 7.9 15 6.5 15C5.1 15 4 16.1 4 17.5Z" fill="black" />
+                                                            </svg>
+                                                        </span>
+                                                        <!--end::Svg Icon-->
+                                                    <% end %>
+                                                </div>
+                                            </td>
+                                        <% end %>
+                                    </tr>
+                                <% end %>
+                            </tbody>
+                            <!--end::Table body-->
+                        </table>
+                        <!--end::Table-->
+                    </div>
+                    <!--end::Table container-->
+                </div>
+                <!--begin::Body-->
+            </div>
+            <!--end::Favourite Users Desktop -->
+            <!--begin::Favourite Users Mobile-->
+            <div class="card d-lg-none mb-5 mb-xl-10">
+                <!--begin::Header-->
+                    <div class="d-flex flex-stack pt-4">
+                        <div class="d-flex align-items-center">
+                            <h3 class="d-flex card-title align-items-start flex-column">
+                                <span class="card-label fw-bolder fs-3 mb-1"><%= t('common.favourite_users')%></span>
+                            </h3>
+                        </div>
+                        <% if can?(:favourite_student_index, Company::Company) %>
+                            <div class="d-flex justify-content-end flex-shrink-0">
+                                <div class="card-toolbar">
+                                    <% if @favourite_users_list.size > 3 %>
+                                        <%= link_to (t 'btn.view_all'), company_favourite_student_index_path, class: "btn btn-sm btn-light-primary btn-active-primary me-2" %>
+                                    <% end %>
+                                </div>
+                            </div>
+                        <% end %>
+                    </div>
+                <!--end::Header-->
+                <!--begin::Body-->
+                <% @favourite_users_list.each do |student| %>
+                    <div class="col-xxl-4">
+                        <!--begin::Card-->
+                            <div class="card bg-body card-custom gutter-b card-stretch mb-3 mb-xl-10">
+                                <!--begin::Body-->
+                                <div class="card-body pt-4">
+                                    <!--begin::User-->
+                                    <div class="d-flex flex-stack pt-4">
+                                        <div class="d-flex align-items-center">
+                                            <!--begin:: Avatar -->
+                                            <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
+                                                <div class="symbol-label">
+                                                    <% if student.image.attached? %>
+                                                    <%= image_tag (student.image), :class=> "w-100" %>
+                                                    <% else %>
+                                                        <% if student.gender == "female" %>
+                                                            <%= image_tag "avatar/female.svg", :class=> "Responsive image" %>                                
+                                                        <% else %>
+                                                            <%= image_tag "avatar/male.svg", :class=> "Responsive image" %>   
+                                                        <% end %>
+                                                    <% end %> 
+                                                </div>
+                                            </div>
+                                            <!--end::Avatar-->
+                                            <!--begin::User details-->
+                                            <div class="d-flex flex-column">
+                                                <span class="text-gray-800 mb-1">
+                                                    <%= student.nick_name %>
+                                                </span>
+                                                <span class="text-muted fw-bold text-muted d-block fs-7"><%= student.user.email %></span>
+                                            </div>
+                                            <!--end::User details-->
+                                        </div>
+                                        <% if can?(:student_details, Company::Search) %>
+                                            <div class="d-flex justify-content-end flex-shrink-0">
+                                                <%= link_to company_student_details_path(:id => student.id), :class=>"btn btn-icon btn-bg-light btn-active-color-primary btn-sm" do %>
+                                                    <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
+                                                    <span class="svg-icon svg-icon-3">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                            <path d="M17.5 11H6.5C4 11 2 9 2 6.5C2 4 4 2 6.5 2H17.5C20 2 22 4 22 6.5C22 9 20 11 17.5 11ZM15 6.5C15 7.9 16.1 9 17.5 9C18.9 9 20 7.9 20 6.5C20 5.1 18.9 4 17.5 4C16.1 4 15 5.1 15 6.5Z" fill="black" />
+                                                            <path opacity="0.3" d="M17.5 22H6.5C4 22 2 20 2 17.5C2 15 4 13 6.5 13H17.5C20 13 22 15 22 17.5C22 20 20 22 17.5 22ZM4 17.5C4 18.9 5.1 20 6.5 20C7.9 20 9 18.9 9 17.5C9 16.1 7.9 15 6.5 15C5.1 15 4 16.1 4 17.5Z" fill="black" />
+                                                        </svg>
+                                                    </span>
+                                                    <!--end::Svg Icon-->
+                                                <% end %>
+                                            </div>
+                                        <% end %>
+                                    </div>
+                                    <!--end::User-->
+                                </div>
+                                <!--end::Body-->
+                            </div>
+                        <!--end:: Card-->
+                    </div>
+                <% end %>
+                <!--begin::Body-->
+            </div>
+            <!--end::Favourite Users Mobile-->
+        <% else %> 
+            <!--begin::Card-->
+            <div class="card bg-body mb-5 mb-xl-10">
+                <!--begin::Card body-->
+                <div class="card-body p-0">
+                    <!--begin::Wrapper-->
+                    <div class="card-px text-center py-5 my-5">
+                        <!--begin::Title-->
+                        <h2 class="fs-2x fw-bolder mb-10"><%= t('common.favourite_users')%></h2>
+                        <!--end::Title-->
+                        <!--begin::Description-->
+                        <p class="text-gray-400 fs-4 fw-bold mb-10">
+                            <%= t('company_assessment.no_wish_list_added_1')%>（<i class="fas fa-heart icon-mid mx-2">
+                            </i>）<%= t('company_assessment.no_wish_list_added_2')%>
+                        </p>
+                        <!--end::Description-->
+                        <!--begin::Action-->
+                        <% if can?(:student_search, Company::Search) %>
+                            <%= link_to (t'btn.fav-text'), company_students_search_path, class: "btn btn-primary" %>
+                        <% end %>
+                        <!--end::Action-->
+                    </div>
+                    <!--end::Wrapper-->
+                </div>
+                <!--end::Card body-->
+            </div>
+            <!--end::Card-->
+        <% end %>                                      
+        <!--end::Favourite Users --> 
+        <!--begin::Company Event -->
+        <% if @event_entry_list.present? %>
+            <!--begin::Event Tables Desktop -->
+            <div class="card bg-body d-none d-sm-none d-md-none d-lg-block d-xl-block mb-5 mb-xl-10">
+                <!--begin::Header-->
+                <div class="card-header border-0 pt-5">
+                    <h3 class="card-title align-items-start flex-column">
+                        <span class="card-label fw-bolder fs-3 mb-1"><%= t ('event.title.event_entry_list_tilte') %></span>
+                    </h3>
+                    <div class="card-toolbar">
+                        <% if @event_entry_list.size > 3 %>
+                            <% if can?(:read, Event) %>
+                                <%= link_to (t 'btn.view_all'), company_events_path, class: "btn btn-sm btn-light btn-active-primary me-2" %>
+                            <% end %>
+                            <% if can?(:select_past_events, Event) %>
+                                <%= link_to (t'event.title.past_event'), company_select_past_events_path, class: "btn btn-sm btn-light btn-active-primary" %>
+                            <% end %>
+                        <% end %>
+                    </div>
+                </div>
+                <!--end::Header-->
+                <!--begin::Body-->
+                <div class="card-body py-3">
+                    <!--begin::Table container-->
+                    <div class="table-responsive overflow-auto">
+                        <!--begin::Table-->
+                        <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
+                            <!--begin::Table head-->
+                            <thead>
+                                <tr class="fw-bolder text-muted">
+                                    <th class="min-w-150px"><%= Event.human_attribute_name('event_name') %></th>
+                                    <th class="min-w-100px"><%=  t('event.title.publish_status') %></th>
+                                    <th class="min-w-50px"><%= t('event.placeholder.apply_event_limit') %></th>
+                                    <th class="min-w-50px"><%= t('event.title.apply_limit') %></th>
+                                    <th class="min-w-100px"><%= t('event.title.event_date') %></th>
+                                    <th class="min-w-50px text-end"><%= t('event.title.edit_text_title') %></th>
+                                </tr>
+                            </thead>
+                            <!--end::Table head-->
+                            <!--begin::Table body-->
+                            <tbody>
+                                <% @event_entry_list.each do |event| %>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="symbol symbol-45px me-5">
+                                                    <div class="d-flex flex-column justify-content-center text-dark symbol-label bg-primary bg-opacity-75">
+                                                        <span class="fs-7 text-white"><%= t('date.abbr_month_names')[event.event_start_date.month] %></span>
+                                                        <span class="fs-5 fw-boldest text-white"><%= event.event_start_date.strftime('%d') %><%= t('date.prompts.day') %></span>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex justify-content-start flex-column w-lg-100px w-xl-250px">
+                                                    <span class="text-dark text-truncate fw-bolder fs-6"><%= event.event_name.truncate(45) %></span>
+                                                    <span class="text-muted text-truncate fw-bold text-muted d-block fs-7"><i class="flaticon2-pin me-1"></i> <%= event.venue.present? ? event.venue.truncate(45) : t("event.venue_types.online") %></span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span class="badge badge-light-<%= event.status == '3' || event.status == '4' ? "danger" : "primary" %> py-2 px-4 fs-6"><%= event.status == '1'  ? t('event.title.new_event_recuirment'): event.status == '2' ? t('event.title.event_in_progress') : 
+                                            event.status == '3' ? t('event.title.recuirment_full') : t('event.title.recuirment_closed')%></span>
+                                        </td>
+                                        <td>
+                                            <span class="text-muted fw-bolder d-block fs-6"><%= event.apply_event_limit == nil ? '0' : event.apply_event_limit %> 人</span>
+                                        </td>
+                                        <td>
+                                            <span class="text-muted fw-bolder d-block fs-6"><%= event.join_count == nil ? '0' : event.join_count %> 人</span>
+                                        </td>
+                                        <td>
+                                            <span class="text-muted fw-bold d-block fs-6"><%= l event.event_start_date.to_date %>～<%= l event.event_end_date.to_date %></span>
+                                        </td>
+                                        <td >
+                                            <div class="d-flex justify-content-end flex-shrink-0">
+                                                <% if can?(:read, Event) %>
+                                                    <%= link_to company_event_path(:id => event.id), :class=>"btn btn-icon btn-bg-light btn-active-color-primary btn-sm" do %>
+                                                        <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
+                                                        <span class="svg-icon svg-icon-3">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                <path d="M17.5 11H6.5C4 11 2 9 2 6.5C2 4 4 2 6.5 2H17.5C20 2 22 4 22 6.5C22 9 20 11 17.5 11ZM15 6.5C15 7.9 16.1 9 17.5 9C18.9 9 20 7.9 20 6.5C20 5.1 18.9 4 17.5 4C16.1 4 15 5.1 15 6.5Z" fill="black" />
+                                                                <path opacity="0.3" d="M17.5 22H6.5C4 22 2 20 2 17.5C2 15 4 13 6.5 13H17.5C20 13 22 15 22 17.5C22 20 20 22 17.5 22ZM4 17.5C4 18.9 5.1 20 6.5 20C7.9 20 9 18.9 9 17.5C9 16.1 7.9 15 6.5 15C5.1 15 4 16.1 4 17.5Z" fill="black" />
+                                                            </svg>
+                                                        </span>
+                                                        <!--end::Svg Icon-->
+                                                    <% end %>
+                                                <% end %>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <% end %>
+                            </tbody>
+                            <!--end::Table body-->
+                        </table>
+                        <!--end::Table-->
+                    </div>
+                    <!--end::Table container-->
+                </div>
+                <!--begin::Body-->
+            </div>
+            <!--end::Event Tables Desktop -->
+            <!--begin::Event Tables Mobile -->
+            <div class="card d-lg-none mb-5 mb-xl-10">
+                <!--begin::Header-->
+                <div class="d-flex flex-stack pt-4">
+                    <div class="d-flex align-items-center">
+                        <h3 class="d-flex card-title align-items-start flex-column">
+                            <span class="card-label fw-bolder fs-3 mb-1"><%= t ('event.title.event_entry_list_tilte') %></span>
+                        </h3>
+                    </div>
+                    <% if can?(:read, Event) %>
+                        <div class="d-flex justify-content-end flex-shrink-0">
+                            <div class="card-toolbar">
+                                <% if @event_entry_list.size > 3 %>
+                                    <% if can?(:read, Event) %>
+                                        <%= link_to (t 'btn.view_all'), company_events_path, class: "btn btn-sm btn-light-primary btn-active-primary me-2" %>
+                                    <% end %>
+                                    <% if can?(:select_past_events, Event) %>
+                                        <%= link_to (t'event.title.past_event'), company_select_past_events_path, class: "btn btn-sm btn-light-primary btn-active-primary" %>
+                                    <% end %>
+                                <% end %>
+                            </div>
+                        </div>
+                    <% end %>
+                </div>
+                <!--end::Header-->
+                <!--begin::Body-->
+                <% @event_entry_list.each do |event| %>                                                    
+                    <div class="col-xxl-4">
+                        <!--begin::Card-->                             
+                        <div class="card bg-body card-custom card-stretch mb-3 mb-xl-10" >       
+                            <!--begin::Body-->
+                            <div class="card-body pt-4">
+                                <div class="d-flex flex-stack pt-4">
+                                    <div class="d-flex align-items-center">
+                                        <div class="d-flex flex-column">
+                                            <span class="text-gray-800 mb-1">
+                                                <%= event.event_name %>
+                                            </span>
+                                            <span class="font-weight-lighter fs-8 <%= event.status == '3' || event.status == '4' ? "text-danger" : "text-success" %>">
+                                                <%= event.status == '1'  ? t('event.title.new_event_recuirment'): event.status == '2' ? t('event.title.event_in_progress') : 
+                                                event.status == '3' ? t('event.title.recuirment_full') : t('event.title.recuirment_closed') %>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <% if can?(:read, Event) %>
+                                        <div class="d-flex justify-content-end flex-shrink-0">
+                                            <%= link_to company_event_path(:id => event.id), :class=>"btn btn-icon btn-bg-light btn-active-color-primary btn-sm" do %>
+                                                <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
+                                                <span class="svg-icon svg-icon-3">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                        <path d="M17.5 11H6.5C4 11 2 9 2 6.5C2 4 4 2 6.5 2H17.5C20 2 22 4 22 6.5C22 9 20 11 17.5 11ZM15 6.5C15 7.9 16.1 9 17.5 9C18.9 9 20 7.9 20 6.5C20 5.1 18.9 4 17.5 4C16.1 4 15 5.1 15 6.5Z" fill="black" />
+                                                        <path opacity="0.3" d="M17.5 22H6.5C4 22 2 20 2 17.5C2 15 4 13 6.5 13H17.5C20 13 22 15 22 17.5C22 20 20 22 17.5 22ZM4 17.5C4 18.9 5.1 20 6.5 20C7.9 20 9 18.9 9 17.5C9 16.1 7.9 15 6.5 15C5.1 15 4 16.1 4 17.5Z" fill="black" />
+                                                    </svg>
+                                                </span>
+                                                <!--end::Svg Icon-->
+                                            <% end %>
+                                        </div>
+                                    <% end %>
+                                </div>
+                                <div class="d-flex mt-4">
+                                    <div class="border border-gray-300 border-dashed rounded min-w-100px p-2 me-lg-3 me-1 me-lg-3">
+                                        <div class="fs-6 text-gray-800 fw-bolder"><%= l event.event_start_date %></div>
+                                        <div class="fw-bold text-gray-400"><%= Event.human_attribute_name('event_start_date') %></div>
+                                    </div>
+                                    <div class="border border-gray-300 border-dashed rounded min-w-100px p-2">
+                                        <div class="fs-6 text-gray-800 fw-bolder"><%= l event.event_end_date %></div>
+                                        <div class="fw-bold text-gray-400"><%= Event.human_attribute_name('event_end_date') %></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::Body-->                             
+                        </div>
+                        <!--end::Card-->
+                    </div>                                                   
+                <% end %>
+                <!--begin::Body-->
+            </div>
+            <!--end::Event Tables Mobile -->
+        <% else %> 
+            <!--begin::Card-->
+            <div class="card bg-body mb-5 mb-xl-10">
+                <!--begin::Card body-->
+                <div class="card-body p-0">
+                    <!--begin::Wrapper-->
+                    <div class="card-px text-center py-5 my-5">
+                        <!--begin::Title-->
+                        <h2 class="fs-2x fw-bolder mb-10"><%= t ('event.title.event_entry_list_tilte') %></h2>
+                        <!--end::Title-->
+                        <!--begin::Description-->
+                        <p class="text-gray-400 fs-4 fw-bold mb-10"><%= t ('event.title.no_data_text') %></p>
+                        <!--end::Description-->
+                        <!--begin::Action-->
+                        <% if can?(:create, Event) %>
+                            <%= link_to t('event.title.event_header'), new_company_event_path, class: "btn btn-primary" %>
+                        <% end %>
+                        <!--end::Action-->
+                    </div>
+                    <!--end::Wrapper-->
+                </div>
+                <!--end::Card body-->
+            </div>
+            <!--end::Card-->
+        <% end %>                                      
+        <!--end::Company Event -->        
+        <!--begin::Admin Event -->
+        <% if @admin_event_entry_list.present? %>
+            <!--begin::Event Tables Widget -->
+            <div class="card bg-body d-none d-sm-none d-md-none d-lg-block d-xl-block mb-5 mb-xl-10">
+                <!--begin::Header-->
+                <div class="card-header border-0 pt-5">
+                    <h3 class="card-title align-items-start flex-column">
+                    
+                        <span class="card-label fw-bolder fs-3 mb-1"><%= t ('event.title.admin_event_participant_list_title') %></span>
+                    </h3>
+                    <div class="card-toolbar">
+                        <% if @admin_event_entry_list.size > 3 %>
+                            <%= link_to (t 'btn.view_all'), company_admin_event_list_path, class: "btn btn-sm btn-light btn-active-primary" %>
+                        <% end %>
+                    </div>
+                </div>
+                <!--end::Header-->
+                <!--begin::Body-->
+                <div class="card-body py-3">
+                <!--begin::Table container-->
+                <div class="table-responsive  overflow-auto">
+                    <!--begin::Table-->
+                    <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
+                        <!--begin::Table head-->
+                        <thead>
+                            <tr class="fw-bolder text-muted">
+                                <th class="min-w-150px"><%= Event.human_attribute_name('event_name') %></th>
+                                <th class="min-w-50px"><%= t('activerecord.attributes.admin/event.applicants_count') %></th>
+                                <th class="min-w-150px"><%= t('event.title.event_date') %></th>
+                                <th class="min-w-50px text-end"><%= t('event.title.edit_text_title') %></th>
+                            </tr>
+                        </thead>
+                        <!--end::Table head-->
+                        <!--begin::Table body-->
+                        <tbody>
+                            <% @admin_event_entry_list.each do |event| %>
+                                <tr>
+                                    <td >
+                                        <div class="d-flex align-items-center">
+                                            <div class="symbol symbol-45px me-5">
+                                                <div class="d-flex flex-column justify-content-center text-dark text-truncate  symbol-label bg-primary bg-opacity-75">
+                                                    <span class="fs-7 text-white"><%= t('date.abbr_month_names')[event.event_start_date.month] %></span>
+                                                    <span class="fs-5 fw-boldest text-white"><%= event.event_start_date.strftime('%d') %><%= t('date.prompts.day') %></span>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-start flex-column  w-lg-150px w-xl-200px">
+                                                <span class="text-dark text-truncate fw-bolder fs-6"><%= event.event_name.truncate(45) %></span>
+                                                <span class="text-muted text-truncate fw-bold text-muted d-block fs-7"><i class="flaticon2-pin me-1"></i> <%= event.venue.present? ? event.venue.truncate(45) : t("event.venue_types.online") %></span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="text-muted fw-bolder d-block fs-6"><%= event.join_count == nil ? '0' : event.join_count %> 人</span>
+                                    </td>
+                                    <td>
+                                        <span class="text-muted fw-bold d-block fs-6"><%= l event.event_start_date.to_date %>～<%= l event.event_end_date.to_date %></span>
+                                    </td>
+                                    <td>
+                                        <% if can?(:admin_event_detail_search, Company::Search) %>
+                                            <div class="d-flex justify-content-end flex-shrink-0">
+                                                <%= link_to company_admin_event_detail_search_path(:id => event.id), :class=>"btn btn-icon btn-bg-light btn-active-color-primary btn-sm" do %>
+                                                    <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
+                                                    <span class="svg-icon svg-icon-3">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                            <path d="M17.5 11H6.5C4 11 2 9 2 6.5C2 4 4 2 6.5 2H17.5C20 2 22 4 22 6.5C22 9 20 11 17.5 11ZM15 6.5C15 7.9 16.1 9 17.5 9C18.9 9 20 7.9 20 6.5C20 5.1 18.9 4 17.5 4C16.1 4 15 5.1 15 6.5Z" fill="black" />
+                                                            <path opacity="0.3" d="M17.5 22H6.5C4 22 2 20 2 17.5C2 15 4 13 6.5 13H17.5C20 13 22 15 22 17.5C22 20 20 22 17.5 22ZM4 17.5C4 18.9 5.1 20 6.5 20C7.9 20 9 18.9 9 17.5C9 16.1 7.9 15 6.5 15C5.1 15 4 16.1 4 17.5Z" fill="black" />
+                                                        </svg>
+                                                    </span>
+                                                    <!--end::Svg Icon-->
+                                                <% end %>
+                                            <% end %>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <% end %>
+                        </tbody>
+                        <!--end::Table body-->
+                    </table>
+                    <!--end::Table-->
+                </div>
+                <!--end::Table container-->
+                </div>
+                <!--begin::Body-->
+            </div>
+            <!--end::Event Tables Widget -->
+            <!--begin::Admin Event Mobile -->
+            <div class="d-lg-none">
+                <% @admin_event_entry_list.each do |event| %>                                                    
+                    <div class="col-xxl-4">
+                        <!--begin::Card-->                             
+                            <div class="card bg-body card-custom card-stretch mb-3 mb-xl-10" >       
+                                <!--begin::Body-->
+                                <div class="card-body pt-5">
+                                    <div class="d-flex">
+                                        <div class="flex-grow-1 text-break">
+                                            <div class="d-flex flex-column pl-5">
+                                                <h2 class="card-title fs-2 fw-bolder mb-2">
+                                                    <%= event.event_name %>
+                                                </h2>
+                                                <% unless event.category.nil?%>
+                                                    <!--begin::Info-->
+                                                    <div class="d-flex flex-wrap mb-2">
+                                                        <% event.category.each do |v| %>
+                                                        <% if v != nil %>
+                                                            <!--begin::Item-->
+                                                            <div class="me-5">
+                                                            <!--begin::Icon-->
+                                                            <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                                                            <span class="svg-icon svg-icon-primary svg-icon-6 me-1">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
+                                                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
+                                                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
+                                                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
+                                                                </svg>
+                                                            </span>
+                                                            <!--end::Svg Icon-->
+                                                            <!--end::Icon-->
+                                                            <!--begin::Label-->
+                                                            <span class="fw-bolder fs-8 text-gray-400"><%= t("event.category.#{Event.event_categories.key(v)}") %></span>
+                                                            <!--end::Label-->
+                                                            </div>
+                                                            <!--end::Item-->
+                                                        <% end %>
+                                                        <% end %>
+                                                    </div>
+                                                <% end %>
+                                                <% if event.event_content.present? %>
+                                                    <p class="card-title text-muted mt-3">
+                                                        <%= event.event_content.to_plain_text.truncate(70) %>
+                                                    </p>
+                                                <% end %>
+                                                <p class="card-title fw-bolder mt-3">
+                                                    <i class="fas fa-map-marker-alt text-primary mr-2"></i> <%= event.venue.present? ? event.venue.truncate(60) : t("event.venue_types.online") %>                     
+                                                </p>                                             
+                                            </div>
+                                            <div class="d-flex my-6">
+                                                <!--begin::Due-->
+                                                <div class="border border-gray-300 border-dashed rounded min-w-100px p-2 me-lg-3 me-1 me-lg-3">
+                                                    <div class="fs-6 text-gray-800 fw-bolder"><%= l event.event_start_date %></div>
+                                                    <div class="fw-bold text-gray-400"><%= Event.human_attribute_name('event_start_date') %></div>
+                                                </div>
+                                                <!--end::Due-->
+                                                <!--begin::Budget-->
+                                                <div class="border border-gray-300 border-dashed rounded min-w-100px p-2">
+                                                    <div class="fs-6 text-gray-800 fw-bolder"><%= l event.event_end_date %></div>
+                                                    <div class="fw-bold text-gray-400"><%= Event.human_attribute_name('event_end_date') %></div>
+                                                </div>
+                                                <!--end::Budget-->
+                                            </div>
+                                            <div class="d-flex justify-content-end flex-shrink-0">
+                                                <% if can?(:admin_event_detail_search, Company::Search) %>
+                                                    <%= link_to company_admin_event_detail_search_path(:id => event.id), :class=>"btn btn-icon btn-bg-light btn-active-color-primary btn-sm" do %>
+                                                        <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
+                                                        <span class="svg-icon svg-icon-3">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                <path d="M17.5 11H6.5C4 11 2 9 2 6.5C2 4 4 2 6.5 2H17.5C20 2 22 4 22 6.5C22 9 20 11 17.5 11ZM15 6.5C15 7.9 16.1 9 17.5 9C18.9 9 20 7.9 20 6.5C20 5.1 18.9 4 17.5 4C16.1 4 15 5.1 15 6.5Z" fill="black" />
+                                                                <path opacity="0.3" d="M17.5 22H6.5C4 22 2 20 2 17.5C2 15 4 13 6.5 13H17.5C20 13 22 15 22 17.5C22 20 20 22 17.5 22ZM4 17.5C4 18.9 5.1 20 6.5 20C7.9 20 9 18.9 9 17.5C9 16.1 7.9 15 6.5 15C5.1 15 4 16.1 4 17.5Z" fill="black" />
+                                                            </svg>
+                                                        </span>
+                                                        <!--end::Svg Icon-->
+                                                    <% end %>
+                                                <% end %>
+                                            </div>  
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end::Body-->                             
+                            </div>
+                        <!--end::Card-->
+                    </div>                                                   
+                <% end %>
+            </div>
+            <!--end::Admin Event Mobile -->
+        <% else %> 
+            <!--begin::Card-->
+            <div class="card bg-body mb-5 mb-xl-10">
+                <!--begin::Card body-->
+                <div class="card-body p-0">
+                    <!--begin::Wrapper-->
+                    <div class="card-px text-center py-5 my-5">
+                        <!--begin::Title-->
+                        <h2 class="fs-2x fw-bolder mb-10"><%= t ('event.title.admin_event_participant_list_title') %></h2>
+                        <!--end::Title-->
+                        <!--begin::Description-->
+                        <p class="text-gray-400 fs-4 fw-bold mb-10"><%= t('event.title.admin_event_participant_list_text') %></p>
+                        <!--end::Description-->
+                    </div>
+                    <!--end::Wrapper-->
+                </div>
+                <!--end::Card body-->
+            </div>
+            <!--end::Card-->
+        <% end %>                                      
+        <!--end::Admin Event -->  
+        <!--begin::Vacancy -->
+        <% if @company_vacancies.present? %>
+            <!--begin::Vacancy Tables Desktop -->
+            <div class="card bg-body d-none d-sm-none d-md-none d-lg-block d-xl-block mb-5 mb-xl-10">
+                <!--begin::Header-->
+                <div class="card-header border-0 pt-5">
+                    <h3 class="card-title align-items-start flex-column">
+                        <span class="card-label fw-bolder fs-3 mb-1"><%= t ('title.vacancy_list') %></span>
+                    </h3>
+                    <% if can?(:read, Company::Vacancy) %>
+                        <div class="card-toolbar">
+                            <% if @company_vacancies.size > 3 %>
+                                <%= link_to (t 'btn.view_all'), company_vacancies_path, class: "btn btn-sm btn-light btn-active-primary" %>
+                            <% end %>
+                        </div>
+                    <% end %>
+                </div>
+                <!--end::Header-->
+                <!--begin::Body-->
+                <div class="card-body py-3">
+                    <!--begin::Table container-->
+                    <div class="table-responsive overflow-auto">
+                        <!--begin::Table-->
+                        <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
+                            <!--begin::Table head-->
+                            <thead>
+                                <tr class="fw-bolder text-muted">
+                                    <th class="min-w-140px"><%= Company::Vacancy.human_attribute_name('vacancy_title') %></th>
+                                    <th class="min-w-140px"><%= Company::Vacancy.human_attribute_name('recruit_industry_type') %></th>                                    
+                                    <th class="pe-0 min-w-120px"><%= Company::Vacancy.human_attribute_name('applied_count')%></th>
+                                    <th class="pe-0 min-w-120px"><%= t('title.publish_status') %></th>
+                                    <th class="pe-0 min-w-120px"><%= t('title.create_vacan_date') %></th>
+                                    <th class="pe-0 min-w-120px text-end"><%= t('event.title.edit_text_title') %></th>
+                                </tr>
+                            </thead>
+                            <!--end::Table head-->
+                            <!--begin::Table body-->
+                            <tbody>
+                                <% @company_vacancies.each do |company_vacancy| %>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="symbol symbol-45px me-5">
+                                                    <% if current_company.image.attached? %>
+                                                        <%= image_tag (current_company.image), class: "border border-secondary" %>
+                                                    <% else %>
+                                                    <%= image_tag "avatar/building.jpg", class: "border border-secondary" %>
+                                                    <% end %>
+                                                </div>
+                                                <div class="d-flex justify-content-start flex-column w-lg-50px w-xl-150px">
+                                                    <span class="text-dark fw-bolder fs-6 w-lg-50px w-xl-150px text-truncate"><%= company_vacancy.vacancy_title %></span>
+                                                    <span class="text-muted fw-bold text-muted d-block fs-7 w-lg-50px w-xl-150px text-truncate"><%= company_vacancy.occupation_name %></span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span class="badge badge-light-primary"><%= get_industry_name_by_ID(company_vacancy.recruit_industry_type) %></span>
+                                        </td>
+                                        
+                                        <td><%= company_vacancy.apply_count %> <%= t('unit.persons') %></td> 
+                                        <td>
+                                            <span class="badge badge-light-<%= company_vacancy.published_flg? ? 'primary' : 'danger' %> py-2 px-4 fs-6"><%= company_vacancy.published_flg? ? t("title.publishing") : t("title.process") %></span>
+                                        </td>
+                                        <td class="w-xl-150px">
+                                            <span class="text-muted fw-bold d-block fs-6"><%= l company_vacancy.updated_at.to_date %></span>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex justify-content-end flex-shrink-0">
+                                                <% if can?(:read, Company::Vacancy) %>
+                                                    <%= link_to (company_vacancy_path(:id => company_vacancy.id)), :class=>"btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" do %>
+                                                        <!--begin::Svg Icon | path: icons/duotune/general/gen019.svg-->
+                                                        <span class="svg-icon svg-icon-3">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                <path d="M17.5 11H6.5C4 11 2 9 2 6.5C2 4 4 2 6.5 2H17.5C20 2 22 4 22 6.5C22 9 20 11 17.5 11ZM15 6.5C15 7.9 16.1 9 17.5 9C18.9 9 20 7.9 20 6.5C20 5.1 18.9 4 17.5 4C16.1 4 15 5.1 15 6.5Z" fill="black" />
+                                                                <path opacity="0.3" d="M17.5 22H6.5C4 22 2 20 2 17.5C2 15 4 13 6.5 13H17.5C20 13 22 15 22 17.5C22 20 20 22 17.5 22ZM4 17.5C4 18.9 5.1 20 6.5 20C7.9 20 9 18.9 9 17.5C9 16.1 7.9 15 6.5 15C5.1 15 4 16.1 4 17.5Z" fill="black" />
+                                                            </svg>
+                                                        </span>
+                                                        <!--end::Svg Icon-->
+                                                    <% end %>
+                                                <% end %>
+                                                <% if can?(:update, Company::Vacancy) %>
+                                                    <%= link_to (edit_company_vacancy_path(:id => company_vacancy.id)), :class=>"btn btn-icon btn-bg-light btn-active-color-primary btn-sm" do %>
+                                                        <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
+                                                        <span class="svg-icon svg-icon-3">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                <path opacity="0.3" d="M21.4 8.35303L19.241 10.511L13.485 4.755L15.643 2.59595C16.0248 2.21423 16.5426 1.99988 17.0825 1.99988C17.6224 1.99988 18.1402 2.21423 18.522 2.59595L21.4 5.474C21.7817 5.85581 21.9962 6.37355 21.9962 6.91345C21.9962 7.45335 21.7817 7.97122 21.4 8.35303ZM3.68699 21.932L9.88699 19.865L4.13099 14.109L2.06399 20.309C1.98815 20.5354 1.97703 20.7787 2.03189 21.0111C2.08674 21.2436 2.2054 21.4561 2.37449 21.6248C2.54359 21.7934 2.75641 21.9115 2.989 21.9658C3.22158 22.0201 3.4647 22.0084 3.69099 21.932H3.68699Z" fill="black" />
+                                                                <path d="M5.574 21.3L3.692 21.928C3.46591 22.0032 3.22334 22.0141 2.99144 21.9594C2.75954 21.9046 2.54744 21.7864 2.3789 21.6179C2.21036 21.4495 2.09202 21.2375 2.03711 21.0056C1.9822 20.7737 1.99289 20.5312 2.06799 20.3051L2.696 18.422L5.574 21.3ZM4.13499 14.105L9.891 19.861L19.245 10.507L13.489 4.75098L4.13499 14.105Z" fill="black" />
+                                                            </svg>
+                                                        </span>
+                                                        <!--end::Svg Icon-->
+                                                    <% end %>
+                                                <% end %>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <% end %>
+                            </tbody>
+                            <!--end::Table body-->
+                        </table>
+                        <!--end::Table-->
+                    </div>
+                    <!--end::Table container-->
+                </div>
+                <!--begin::Body-->
+            </div>
+            <!--end::Vacancy Tables Desktop -->
+            <!--begin::Vacancy Tables Mobile -->
+            <div class="card d-lg-none  mb-5 mb-xl-10">
+                <!--begin::Header-->
+                <div class="d-flex flex-stack pt-4">
+                    <div class="d-flex align-items-center">
+                        <h3 class="d-flex card-title align-items-start flex-column">
+                            <span class="card-label fw-bolder fs-3 mb-1"><%= t ('title.vacancy_list') %></span>
+                        </h3>
+                    </div>
+                    <% if can?(:read, Company::Vacancy) %>
+                        <div class="d-flex justify-content-end flex-shrink-0">
+                            <div class="card-toolbar">
+                                <% if @company_vacancies.size > 3 %>
+                                    <%= link_to (t 'btn.view_all'), company_vacancies_path, class: "btn btn-sm btn-light-primary btn-active-primary" %>
+                                <% end %>
+                            </div>
+                        </div>
+                    <% end %>
+                </div>
+                <!--end::Header-->
+                <!--begin::Body-->
+                <% @company_vacancies.each do |company_vacancy| %>
+                    <div class="col-xxl-4">
+                        <!--begin::Card-->
+                        <div class="card bg-body card-custom gutter-b card-stretch mb-3 mb-xl-10">
+                            <!--begin::Body-->
+                            <div class="card-body pt-4">
+                                <div class="d-flex flex-stack pt-4">
+                                    <div class="d-flex align-items-center">
+                                        <div class="d-flex flex-column">
+                                            <span class="text-gray-800 mb-1">
+                                                <%= company_vacancy.vacancy_title.truncate(20) %>
+                                            </span>
+                                            <span class="text-muted fw-bold text-muted d-block fs-7"><%= company_vacancy.occupation_name %></span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-end flex-shrink-0">
+                                        <% if can?(:read, Company::Vacancy) %>
+                                            <%= link_to (company_vacancy_path(:id => company_vacancy.id)), :class=>"btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" do %>
+                                                <!--begin::Svg Icon | path: icons/duotune/general/gen019.svg-->
+                                                    <span class="svg-icon svg-icon-3">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                            <path d="M17.5 11H6.5C4 11 2 9 2 6.5C2 4 4 2 6.5 2H17.5C20 2 22 4 22 6.5C22 9 20 11 17.5 11ZM15 6.5C15 7.9 16.1 9 17.5 9C18.9 9 20 7.9 20 6.5C20 5.1 18.9 4 17.5 4C16.1 4 15 5.1 15 6.5Z" fill="black" />
+                                                            <path opacity="0.3" d="M17.5 22H6.5C4 22 2 20 2 17.5C2 15 4 13 6.5 13H17.5C20 13 22 15 22 17.5C22 20 20 22 17.5 22ZM4 17.5C4 18.9 5.1 20 6.5 20C7.9 20 9 18.9 9 17.5C9 16.1 7.9 15 6.5 15C5.1 15 4 16.1 4 17.5Z" fill="black" />
+                                                        </svg>
+                                                    </span>
+                                                <!--end::Svg Icon-->
+                                            <% end %>
+                                        <% end %>
+                                        <% if can?(:update, Company::Vacancy) %>
+                                            <%= link_to (edit_company_vacancy_path(:id => company_vacancy.id)), :class=>"btn btn-icon btn-bg-light btn-active-color-primary btn-sm" do %>
+                                                <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
+                                                    <span class="svg-icon svg-icon-3">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                            <path opacity="0.3" d="M21.4 8.35303L19.241 10.511L13.485 4.755L15.643 2.59595C16.0248 2.21423 16.5426 1.99988 17.0825 1.99988C17.6224 1.99988 18.1402 2.21423 18.522 2.59595L21.4 5.474C21.7817 5.85581 21.9962 6.37355 21.9962 6.91345C21.9962 7.45335 21.7817 7.97122 21.4 8.35303ZM3.68699 21.932L9.88699 19.865L4.13099 14.109L2.06399 20.309C1.98815 20.5354 1.97703 20.7787 2.03189 21.0111C2.08674 21.2436 2.2054 21.4561 2.37449 21.6248C2.54359 21.7934 2.75641 21.9115 2.989 21.9658C3.22158 22.0201 3.4647 22.0084 3.69099 21.932H3.68699Z" fill="black" />
+                                                            <path d="M5.574 21.3L3.692 21.928C3.46591 22.0032 3.22334 22.0141 2.99144 21.9594C2.75954 21.9046 2.54744 21.7864 2.3789 21.6179C2.21036 21.4495 2.09202 21.2375 2.03711 21.0056C1.9822 20.7737 1.99289 20.5312 2.06799 20.3051L2.696 18.422L5.574 21.3ZM4.13499 14.105L9.891 19.861L19.245 10.507L13.489 4.75098L4.13499 14.105Z" fill="black" />
+                                                        </svg>
+                                                    </span>
+                                                <!--end::Svg Icon-->
+                                            <% end %>
+                                        <% end %>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::Body-->
+                        </div>
+                        <!--end:: Card-->
+                    </div>
+                <% end %>
+                <!--begin::Body-->
+            </div>
+            <!--end::Vacancy Tables Mobile -->
+        <% else %> 
+            <!--begin::Card-->
+            <div class="card bg-body mb-5 mb-xl-10">
+                <!--begin::Card body-->
+                <div class="card-body p-0">
+                    <!--begin::Wrapper-->
+                    <div class="card-px text-center py-5 my-5">
+                        <!--begin::Title-->
+                        <h2 class="fs-2x fw-bolder mb-10"><%= t ('title.vacancy_list') %></h2>
+                        <!--end::Title-->
+                        <!--begin::Description-->
+                        <p class="text-gray-400 fs-4 fw-bold mb-10"><%= t('common.vacancy_no_data') %></p>
+                        <!--end::Description-->
+                        <% if can?(:create, Company::Vacancy) %>
+                            <!--begin::Action-->
+                            <%= link_to (t"common.vacancy_registration_confirm_screen"), new_company_vacancy_path, class: "btn btn-primary" %>
+                            <!--end::Action-->
+                        <% end %>
+                    </div>
+                    <!--end::Wrapper-->
+                </div>
+                <!--end::Card body-->
+            </div>
+            <!--end::Card-->
+        <% end %>  
+        <!--end::Vacancy -->
+        <!-- Partner News List -->
+        <% if  @partner_news_list.present? %>
+            <div class="card bg-body my-5">
+                <!--begin::Card header-->
+                <div class="card-header border-0">
+                    <!--begin::Card title-->
+                    <div class="card-title">
+                    <h2><%= t('partner_news.title.news_list') %></h2>
+                    </div>
+                    <!--end::Card title-->
+                    <!--begin::Card toolbar-->
+                    <div class="card-toolbar">
+                    <% if @partner_news_list.size > 3 %>
+                        <!--begin::Filter-->
+                        <%= link_to company_partner_news_company_index_path, class: "btn btn-sm btn-light btn-active-primary" do %>
+                            もっと見る
+                        <% end %>
+                        <!--end::Filter-->
+                    <% end %>        
+                    </div>            
+                    <!--end::Card toolbar-->
+                </div>          
+                <!--end::Card header-->
+                <!--begin::Card body-->
+                <div class="card-body pt-0 pb-5"> 
+                    <div class="table-responsive d-none d-sm-none d-md-none d-lg-block d-xl-block mb-5 mb-xl-10">
+                        <table class="table align-middle table-row-dashed gy-5" id="kt_table_customers_payment">
+                            <!--begin::Table head-->
+                            <thead class="border-bottom border-gray-200 fs-7 fw-bolder">
+                                <!--begin::Table row-->
+                                <tr class="text-start text-muted text-uppercase gs-0">
+                                    <!-- <th class="min-w-150px"><%= Event.human_attribute_name('event_name') %></th> -->
+                                    <th class="min-w-140px"><%= t('partner_news.title.news_list_col_title') %></th>
+                                    <th class="min-w-140px"><%= t('partner_news.title.news_type') %></th>                  
+                                    <th class="min-w-140px"><%= t('partner_news.title.news_list_col_content') %></th>                  
+                                    <th class="pe-0 min-w-120px"><%= t('partner_news.title.news_list_col_createdDate') %></th>                  
+                                    <th class="pe-0 min-w-120px text-end"><%= t('event.title.edit_text_title') %></th>
+                                </tr>
+                                <!--end::Table row-->
+                            </thead>
+                            <!--end::Table head-->         
+                            <!--begin::Table body-->
+                            <tbody class="fs-6 fw-bold text-gray-600">
+                                <% @partner_news_list.each do |noti| %>
+                                    <!--begin::Table row-->
+                                    <tr>
+                                        <!--Title-->
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                            <div class="d-flex justify-content-start flex-column w-sm-75px w-md-100px w-lg-100px w-xl-150px">
+                                                <span class="d-block fs-6 w-sm-75px w-md-100px w-lg-50px w-xl-150px text-truncate"><%= noti.title %></span>
+                                            </div>
+                                            </div>
+                                        </td>
+                
+                                        <!--NewsType-->
+                                        <td class="w-sm-75px w-md-100px w-lg-50px w-xl-100px">
+                                            <span class="badge badge-light-primary"><%= t("partner_news.news_type_options.#{noti.news_category}") %></span>
+                                        </td>
+                
+                                        <!--Content-->
+                                        <td class="w-sm-150px w-md-200px w-lg-150px w-xl-300px">
+                                            <span class="d-block fs-6 w-sm-80px w-md-100px w-lg-150px w-xl-300px text-truncate"><%= noti.content.to_plain_text %></span>
+                                        </td>  
+                                        <!-- <td><%= noti.first_name %><%= noti.last_name %></td>   -->
+                
+                                        <!--CreatedDate-->
+                                        <td><%= l(noti.created_at.strftime('%Y-%m-%d').to_date, default: '-') %></td>
+                                        
+                                        <!--Partner News Detail Action-->
+                                        <% if can?(:partner_news_detail, Company::Company) %>
+                                            <td class="pe-0 text-end">
+                                                <%= link_to company_partner_news_company_detail_path(id: noti.id), class: "btn btn-icon btn-active-light-primary w-30px h-30px" do %>
+                                                <span class="svg-icon svg-icon-3">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                    <path d="M17.5 11H6.5C4 11 2 9 2 6.5C2 4 4 2 6.5 2H17.5C20 2 22 4 22 6.5C22 9 20 11 17.5 11ZM15 6.5C15 7.9 16.1 9 17.5 9C18.9 9 20 7.9 20 6.5C20 5.1 18.9 4 17.5 4C16.1 4 15 5.1 15 6.5Z" fill="currentColor" />
+                                                    <path opacity="0.3" d="M17.5 22H6.5C4 22 2 20 2 17.5C2 15 4 13 6.5 13H17.5C20 13 22 15 22 17.5C22 20 20 22 17.5 22ZM4 17.5C4 18.9 5.1 20 6.5 20C7.9 20 9 18.9 9 17.5C9 16.1 7.9 15 6.5 15C5.1 15 4 16.1 4 17.5Z" fill="currentColor" />
+                                                    </svg>
+                                                </span>
+                                                <% end %>
+                                            </td>
+                                        <% end %>                                        
+                                    </tr>                    
+                                    <!--end::Table row-->        
+                                <% end %>                
+                            </tbody>
+                            <!--end::Table body-->
+                        </table> 
+                    </div>
+                    <!--begin::Mobile View-->
+                    <div class="d-lg-none  mb-5 mb-xl-10">
+                        <% @partner_news_list.each do |noti| %>
+                            <%= link_to company_partner_news_company_detail_path(id: noti.id), class: "text-decoration-none text-dark" do %>                                 
+                                <div class="card border border-primary border-4 border-top-0 border-end-0 border-bottom-0 border-start bg-light card-custom gutter-b mb-3">
+                                    <!--begin::Body-->
+                                    <div class="card-body p-4">
+                                    <div class="d-flex align-items-center"> 
+                                        <div>
+                                        <div class="d-flex justify-content-between">
+                                            <div>
+                                            <span class="text-gray-400 fs-8 fw-bolder me-2 d-block w-150px w-sm-400px w-md-600px text-truncate lh-1 pb-1"><%= noti.title %></span>
+                                            <span class="text-gray-800 fs-5 fw-bolder"><%= t("partner_news.news_type_options.#{noti.news_category}") %></span>
+                                            </div>
+                                        </div>                                        
+                                        <div class="d-flex flex-wrap">
+                                            <!--begin::Text-->
+                                            <span class="fw-bolder fs-6 me-2 w-150px w-sm-300px w-md-500px text-truncate"><i class="flaticon-shapes me-1 text-primary"></i> <%= noti.content.to_plain_text %> </span>
+                                            <span class="fw-bold text-gray-600 fs-7"><i class="flaticon-event-calendar-symbol me-1 text-primary"></i><%= l(noti.created_at.strftime('%Y-%m-%d').to_date, default: '-') %></span>
+                                            <!--end::Text-->                                 
+                                        </div>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <!--end::Body-->    
+                                </div>
+                            <% end %>
+                        <% end %>
+                    </div>
+                    <!--end::Mobile View-->
+                </div>
+                <!--end::Card body-->
+            </div> 
+        <% else %>     
+            <div class="card bg-body mb-5">
+                <!--begin::Card body-->
+                <div class="card-body p-0">
+                    <!--begin::Wrapper-->
+                    <div class="card-px text-center py-2 my-10">
+                        <!--begin::Title-->
+                        <h2 class="fs-2x fw-bolder mb-10"> <%= t("partner_news.title.news_list")%></h2>
+                        <!--end::Title-->
+                        <!--begin::Description-->
+                        <p class="text-gray-400 fs-4 fw-bold mb-10"><%= t('common.partner_news_no_data') %></p>
+                        <!--end::Description-->
+                    </div>
+                    <!--end::Wrapper-->
+                </div>
+                <!--end::Card body-->
+            </div> 
+        <% end %>
+    </div>
+    <!--end::Container-->
+</div>
+<!--end::Content-->
+<%= javascript_pack_tag 'common.js'%>

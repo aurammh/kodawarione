@@ -1,0 +1,13 @@
+<% if current_user %>
+  <li class="page-item btn-bg-blue">
+    <%= link_to url, class: 'page-link btn-bg-blue' do %>
+      <i class="ki ki-bold-double-arrow-back icon-xs"></i>
+    <% end %>
+  </li>
+<% else %>
+<li class="page-item btn-bg-blue">
+      <%= link_to url, class: 'page-link btn-bg-blue' do %>
+        <i class="fas fa-angle-double-left"></i>
+      <% end %>
+  </li>
+<% end %>

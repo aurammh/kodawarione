@@ -1,0 +1,196 @@
+<div>
+    <%= render partial: "kodawarione/shared/company_manage/profile_navbar", :locals =>{:current_route => "basic_info"}  %>
+</div>
+<!--begin::Container-->
+<!--begin::Card-->
+<div class="card bg-body card-flush pt-3 mb-5 mb-xl-10">
+    <!--begin::Card header-->
+    <div class="card-header">
+        <!--begin::Card title-->
+        <div class="card-title">
+            <h2 class="fw-bolder"><%= (t "title.student_search_detail_title") %></h2>
+        </div>
+        <!--begin::Card title-->
+    </div>
+	<!--end::Card header-->
+	<!--begin::Card body-->	
+	<div class="card-body pt-3">	
+	    <!--begin::Section-->
+		<div class="mb-10">									
+            <!--begin::Title-->								
+			<h5 class="mb-4"><%= t('title.company_basic_information') %>:</h5>									
+			<!--end::Title-->									
+			<!--begin::Details-->
+			<div class="d-flex flex-wrap py-5">
+				<!--begin::Row-->
+				<div class="flex-equal me-5">
+					<!--begin::Details-->
+					<table class="table fs-6 fw-bold gs-0 gy-2 gx-2 m-0">
+						<!--begin::Row-->
+						<tr>
+							<td class="text-gray-600 min-w-175px w-175px"><%= t'activerecord.attributes.company/company.company_name' %>:</td>
+							<td class="text-gray-800 min-w-200px">
+								<span class="text-gray-800 fw-bolder text-hover-primary"><%= @company_details.company_name %></span>
+							</td>
+						</tr>
+						<!--end::Row-->
+						<!--begin::Row-->
+                        <% if @company_details.company_name_kana.present? %>
+                            <tr>
+                                <td class="text-gray-600"><%= t'activerecord.attributes.company/company.company_name_kana' %>:</td>
+                                <td class="text-gray-800 fw-bolder"><%= @company_details.company_name_kana %></td>
+                            </tr>
+                        <% end %>
+						<!--end::Row-->
+						<!--begin::Row-->
+                        <% if @company_details.phone_no.present? %>
+                            <tr>
+                                <td class="text-gray-600"><%= t'activerecord.attributes.company/company.phone_no' %>:</td>
+                                <td class="text-gray-800 fw-bolder"><%= @company_details.phone_no %></td>
+                            </tr>
+                        <% end %>
+						<!--end::Row-->
+						<!--begin::Row-->
+                        <% if @company_details.display_address.present? %>
+                            <tr>
+                                <td class="text-gray-600"><%= t'activerecord.attributes.company/company.display_address' %>:</td>
+                                <td class="text-gray-800 fw-bolder"><%= @company_details.display_address %></td>
+                            </tr>
+                        <% end %>
+						<!--end::Row-->
+					</table>
+					<!--end::Details-->
+				</div>
+				<!--end::Row-->
+				<!--begin::Row-->
+				<div class="flex-equal">
+					<!--begin::Details-->
+					<table class="table fs-6 fw-bold gs-0 gy-2 gx-2 m-0">
+						<!--begin::Row-->
+                        <% if @company_details.company_established.present? %>
+                            <tr>
+                                <td class="text-gray-600 min-w-175px w-175px"><%= t'activerecord.attributes.company/company.company_established' %>:</td>
+                                <td class="text-gray-800 min-w-200px">
+                                    <span class="text-gray-800 fw-bolder"><%= l @company_details.company_established %></span>
+                                </td>
+                            </tr>
+                        <% end %>
+						<!--end::Row-->
+						<!--begin::Row-->
+                        <% if @company_details.website_url.present? %>
+                            <tr>
+                                <td class="text-gray-600"><%= t'activerecord.attributes.company/company.website_url' %>:</td>
+                                <td class="text-gray-800 fw-bolder"><%= @company_details.website_url %></td>
+                            </tr>
+                        <% end %>
+						<!--end::Row-->
+					</table>
+					<!--end::Details-->
+				</div>
+				<!--end::Row-->
+			</div>
+			<!--end::Row-->
+		</div>
+		<!--end::Section-->
+        <% if @company_details.representative.present? %>
+        <!--begin::Section-->
+		<div class="mb-10">
+            <div class="separator separator-dashed mt-9 mb-6"></div>
+			<!--begin::Title-->
+			<h5 class="mb-4"><%= t ('title.main_registration_title') %>:</h5>
+			<!--end::Title-->
+			<!--begin::Details-->
+			<div class="d-flex flex-wrap py-5">
+				<!--begin::Row-->
+				<div class="flex-equal me-5">
+					<!--begin::Details-->
+					<table class="table fs-6 fw-bold gs-0 gy-2 gx-2 m-0">
+						<!--begin::Row-->
+                        <% if @company_details.capital_amount.present? %>
+                            <tr>
+                                <td class="text-gray-600 min-w-175px w-175px"><%= t'activerecord.attributes.company/company.capital_amount' %>:</td>
+                                <td class="text-gray-800 min-w-200px">
+                                    <span class="text-gray-800 fw-bolder"><%= @company_details.capital_amount %></span>
+                                </td>
+                            </tr>
+                        <% end %>
+						<!--end::Row-->
+						<!--begin::Row-->
+                        <% if @company_details.sales_amount.present? %>
+                            <tr>
+                                <td class="text-gray-600"><%= t'activerecord.attributes.company/company.sales_amount' %>:</td>
+                                <td class="text-gray-800 fw-bolder"><%= @company_details.sales_amount %></td>
+                            </tr>
+                        <% end %>
+						<!--end::Row-->
+						<!--begin::Row-->
+                        <% if @company_details.related_company.present? %>
+                            <tr>
+                                <td class="text-gray-600"><%= t'activerecord.attributes.company/company.related_company' %>:</td>
+                                <td class="text-gray-800 fw-bolder"><%= @company_details.related_company %></td>
+                            </tr>
+                        <% end %>
+						<!--end::Row-->
+						<!--begin::Row-->
+                        <% if @company_details.main_bank.present? %>
+                            <tr>
+                                <td class="text-gray-600"><%= t'activerecord.attributes.company/company.main_bank' %>:</td>
+                                <td class="text-gray-800 fw-bolder"><%= @company_details.main_bank %></td>
+                            </tr>
+                        <% end %>
+						<!--end::Row-->
+					</table>
+					<!--end::Details-->
+				</div>
+				<!--end::Row-->
+				<!--begin::Row-->
+				<div class="flex-equal">
+					<!--begin::Details-->
+					<table class="table fs-6 fw-bold gs-0 gy-2 gx-2 m-0">
+						<!--begin::Row-->
+                        <% if @company_details.basic_idea.present? %>
+                            <tr>
+                                <td class="text-gray-600 min-w-175px w-175px"><%= t'activerecord.attributes.company/company.basic_idea' %>:</td>
+                                <td class="text-gray-800 min-w-200px">
+                                    <span class="text-gray-800 fw-bolder"><%= @company_details.basic_idea %></span>
+                                </td>
+                            </tr>
+                        <% end %>
+						<!--end::Row-->
+						<!--begin::Row-->
+                        <% if @company_details.representative.present? %>
+                            <tr>
+                                <td class="text-gray-600"><%= t'activerecord.attributes.company/company.representative' %>:</td>
+                                <td class="text-gray-800 fw-bolder"><%= @company_details.representative %></td>
+                            </tr>
+                        <% end %>
+						<!--end::Row-->
+						<!--begin::Row-->
+                        <% if @company_details.contact.present? %>
+                            <tr>
+                                <td class="text-gray-600"><%= t'activerecord.attributes.company/company.contact' %>:</td>
+                                <td class="text-gray-800 fw-bolder"><%= @company_details.contact %></td>
+                            </tr>
+                        <% end %>
+						<!--end::Row-->
+						<!--begin::Row-->
+                        <% if @company_details.transportation_facilities.present? %>
+                            <tr>
+                                <td class="text-gray-600"><%= t'activerecord.attributes.company/company.transportation_facilities' %>:</td>
+                                <td class="text-gray-800 fw-bolder"><%= @company_details.transportation_facilities %></td>
+                            </tr>
+                        <% end %>
+						<!--end::Row-->
+					</table>
+					<!--end::Details-->
+				</div>
+				<!--end::Row-->
+			</div>
+			<!--end::Row-->
+		</div>
+        <% end %>
+		<!--end::Section-->
+	</div>
+	<!--end::Card body-->
+</div>
+<!--end::Card-->

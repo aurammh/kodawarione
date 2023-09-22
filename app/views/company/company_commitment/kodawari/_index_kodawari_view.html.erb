@@ -1,0 +1,65 @@
+
+<!--begin::Kodawari-->
+<div class="card card-custom card-stretch gutter-b bg-white ">
+    <!--begin::Header-->
+    <div class="card-header h-auto border-0 py-3">
+        <div class="card-title py-5">
+            <h3 class="card-label">
+                <span class="d-block text-dark fw-bolder"><%= t('student.assessment.kodawari_assessment_title')%></span>
+            </h3>
+        </div>
+    </div>
+    <!--end::Header-->
+    <!--begin::Body-->
+    <div class="card-body">
+        <div class="d-flex flex-column flex-lg-row">
+            <div class="flex-lg-row-auto w-100 w-lg-275px w-xxl-350px mb-3 h-100">
+                <!--begin::Block-->
+                <div class="card bg-light p-8 w-100">
+                    <!--begin::Item-->
+                    <h4 class="text-gray-700 fs-bolder mb-3"><%= t('student.assessment.kodawari_assessment_title')%></h4>
+                    <!--end::Item-->
+                     <div class="fs-8 text-dart mb-5">
+                        <span class="svg-icon svg-icon-primary svg-icon-3 me-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black"></rect>
+                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black"></rect>
+                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black"></rect>
+                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black"></rect>
+                            </svg>
+                        </span>
+                         <%= t('student_assessment.std_assessment_chart_date')%>：
+                        <%=if @company_commitment.updated_at != nil
+                            l(@company_commitment.updated_at.to_date, format: :default )
+                        else
+                            "-"   
+                        end%>
+                    </div>
+                    <% unless @ability_list.nil? %>
+                        <% @ability_list.each_with_index do |ability, ind|%>
+                            <div class="my-2">
+                                <!--begin::Row-->
+                                <div class="d-flex align-items-center mb-2">
+                                    <!--begin::Bullet-->
+                                    <span class="bullet me-3"></span>
+                                    <!--end::Bullet-->
+                                    <!--begin::Label-->
+                                    <div class="text-gray-600 fw-bold fs-6"><%= @chart_commitment_label[ind] %>：　<span><%= ability %></span></div>
+                                    <!--end::Label-->
+                                </div>
+                                <!--end::Row-->
+                            </div>
+                        <%end%>
+                    <% end %> 
+                    <%= link_to t('student.assessment.kodawari_assessment_btn') , company_commitment_kodawari_assessment_path, :class => "btn btn-block text-center btn-primary font-weight-bold font-size-lg mt-5 " %>
+                </div>
+                <!--end::Block-->
+            </div>
+            <div class="flex-lg-row-fluid mt-lg-0 mt-3">
+                <div id="kodawariAssessmentChart"></div> 
+            </div>
+        </div>
+    </div>
+    <!--end::Body-->
+</div>   
+<!--end::Kodawari-->

@@ -1,0 +1,20 @@
+<!--begin::Header-->
+<% breadcrumbs_navigation_add (t('btn.company_search')), kodawarione_company_manage_company_search_path %>
+<% breadcrumbs_navigation_add (t ('student.title.header_link1')), '#' %>
+<%= render_partner_breadcrumbs_navigation(t ('student.title.header_link1')) %>		
+<!--end::Header-->
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+	<!--begin::Container-->
+	<div class="container-fluid" id="kt_content_container">
+		<!--begin::Tab Content-->
+		<div class="tab-content">
+			<!--begin::Tab pane-->
+			<div id="kt_project_users_card_pane" class="tab-pane fade show active">
+			<% if can?(:company_details_company_page, Kodawarione::CompanyManage) %>
+                <%= render partial: "kodawarione/shared/company_manage/company_details_company_page" %>           
+			<% end %>
+            </div>
+        </div>
+    </div>
+</div>

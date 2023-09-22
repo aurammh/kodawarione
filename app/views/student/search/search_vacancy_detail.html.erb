@@ -1,0 +1,106 @@
+<!--begin::Breadcrumb-->
+<div class="toolbar py-5 py-lg-5" id="kt_toolbar">
+    <!--begin::Container-->
+    <div id="kt_toolbar_container" class="container-xxl d-flex flex-stack flex-wrap">    
+        <!--begin::Breadcrumb-->          
+        <% breadcrumbs_navigation_add (t('common.favourite_vacancy')), student_favourite_vacancy_index_path if cookies[:previous_url] == "/student/favourite_vacancy_index" %>
+        <% breadcrumbs_navigation_add (t('common.applied_vacancy')), student_applied_vacancy_index_path if cookies[:previous_url] == "/student/applied_vacancy_index" %>
+        <% breadcrumbs_navigation_add (t('search.job_search')), student_vacancy_search_path if cookies[:previous_url] == "/student/vacancy_search" %>        
+        <% breadcrumbs_navigation_add (t('title.detail_title')),'#' %>
+        <%= render_student_breadcrumbs_navigation(t("title.detail_title")) %>                    
+        <!--end::Breadcrumb-->
+    </div>
+</div>
+<!--end::Breadcrumb--> 
+<div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">            
+	<!--begin::Post-->
+	<div class="content flex-row-fluid" id="kt_content">
+        <% if @apply_vacancy %>
+            <div class="notice d-flex bg-light-warning rounded border-warning border border-dashed rounded-3 p-6 mb-9">
+                <!--begin::Wrapper-->
+                <div class="d-flex flex-stack flex-grow-1">
+                <!--begin::Content-->
+                <div class="fw-bold">
+                    <div class="fs-6 text-gray-800"><%= t("title.vacancy_apply_cancel_notice") %></div>
+                </div>
+                <!--end::Content-->
+                </div>
+                <!--end::Wrapper-->
+            </div>
+        <% end %>
+        <div class="row">
+            <% if @company_vacancy_list.status == 2 %>
+                <%= render 'student/shared/search/vacancy_detail_all' %>
+            <% else %>
+                <%= render 'student/shared/search/vacancy_detail_limiting' %>
+            <% end %>
+            <div class="col-12 col-xl-4 col-lg-4">
+                <!--begin::Sidebar-->
+                <div class="flex-column flex-lg-row-auto mb-10 order-1 order-lg-2" >
+                    <div class="card card-flush d-flex flex-column">
+                        <div class="card-body fs-6">
+                            <div class="d-flex flex-column">
+                                <div id="favourite_vacancy" class="btn btn-light-danger pulse pulse-danger <%= @fav_vacancy ? 'active' : 'inactive' %>">
+                                    <i class="fas fa-heart mr-5"></i><span class='label mx-5'><%= @fav_vacancy ? t("btn.fav-cancel-text") : t("btn.fav-text") %></span>
+                                </div>                       
+                            </div>
+                            <!--begin::Seperator-->
+                            <div class="separator separator-dashed mb-5"></div>
+                            <!--end::Seperator-->
+                            <div class="d-flex flex-column  <%= 'cursor-not-allowed' if @apply_vacancy %>">
+                                <div id="apply_vacancy" class="btn <%= @apply_vacancy ? 'btn-secondary pe-none' : 'btn-light-primary' %>">
+                                    <i class="fas fa-bookmark"></i><span class='label mx-5'><%= @apply_vacancy ? t("btn.apply-text") : t("btn.not-apply-text") %></span>
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end::Sidebar-->
+                <div class="card bg-light  d-none d-xl-block">
+                    <!--begin::Body-->
+                    <div class="card-body">
+                        <!--begin::Item-->
+                        <div class="mb-8">
+                            <!--begin::Title-->
+                            <h4 class="text-gray-700 w-bolder mb-8"><%= t ('title.detail_title') %> (<%= t('event.title.edit_text_title') %>) </h4>
+                            <!--end::Title-->
+                            <div class="mb-6">
+                                <div class="fw-bold text-gray-600 fs-7"><%= Company::Vacancy.human_attribute_name('display_to') %>:</div>
+                                <div class="fw-bolder fs-6 text-gray-800 d-flex align-items-center">
+                                    <%=l @company_vacancy_list.display_to %>
+                                    <span class="fs-7 text-danger d-flex align-items-center">
+                                        <span class="bullet bullet-dot bg-danger mx-2"></span>
+                                        <%= expiry_day_left(@company_vacancy_list.display_from, @company_vacancy_list.display_to)%>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="mb-6">
+                                <div class="fw-bold text-gray-600 fs-7"><%= Company::Vacancy.human_attribute_name('recruit_industry_type') %>:</div>
+                                <div class="fw-bolder fs-6 text-gray-800 d-flex align-items-center">
+                                    <%= @company_vacancy_list.industry_name %><br/>
+                                    <span class="fs-7 text-success d-flex align-items-center">
+                                        <span class="bullet bullet-dot bg-success mx-2"></span>
+                                        <%= @company_vacancy_list.occupation_name %>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="mb-6">
+                                <div class="fw-bold text-gray-600 fs-7"><%= Company::Vacancy.human_attribute_name('required_applicants') %>:</div>
+                                <div class="fw-bolder fs-6 text-gray-800 d-flex align-items-center"><%= number_with_delimiter(@company_vacancy_list.required_applicants) %> <%= t 'unit.persons'%></div>
+                            </div>
+                            <% if @company_vacancy_list.status == 2 %>
+                                <%= render 'student/shared/search/vacancy_detail_sidebar_data' %>
+                            <% end %>
+                        </div>
+                        <!--end::Item-->
+                    </div>
+                    <!--end::Body-->
+                </div>
+            </div>
+        </div>						
+    </div>
+    <!--end::Post-->
+</div>
+<!--end::Container-->
+<%= hidden_field_tag(:vacancy_id, @company_vacancy_list.id) %>
+<%= javascript_pack_tag "student/students.js" %>

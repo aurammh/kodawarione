@@ -1,0 +1,100 @@
+<div class="card card-xl-stretch bg-body border-0 mb-xl-8">
+    <!--begin::Heading-->
+    <div class="card-header border-0 pt-5">
+        <h3 class="card-title align-items-start flex-column">
+            <span class="card-label fw-bolder text-dark"><%= t('dashboard.progress_title') %></span>
+        </h3>
+    </div>
+    <!--end::Heading-->
+    <!--begin::Body-->
+    <div class="card-body pt-5">
+        <!--begin::Item-->
+        <div class="d-flex flex-stack">
+        <!--begin::Wrapper-->
+        <div class="d-flex align-items-center me-3">
+            <!--begin::Section-->
+            <div class="flex-grow-1">
+            <!--begin::Text-->
+            <%= link_to t('dashboard.progress_basic_title'), edit_student_url, class: "text-gray-800 text-hover-primary fs-5 fw-bolder lh-0" %></a>
+            <!--end::Text-->
+            </div>
+            <!--end::Section-->
+        </div>
+        <!--end::Wrapper-->
+        <!--begin::Statistics-->
+        <div class="d-flex align-items-center w-100 mw-125px">
+            <!--begin::Progress-->
+            <div class="progress h-6px w-100 me-2 bg-light-primary">
+            <div class="progress-bar bg-primary" role="progressbar" style="width: <%= student.progress_details[2]['percent'] %>%" aria-valuenow="<%= student.progress_details[2]['percent'] %>" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <!--end::Progress-->
+            <!--begin::Value-->
+            <span class="text-gray-400 fw-bold w-50px"><%= student.progress_details[2]['percent'] %>%</span>
+            <!--end::Value-->
+        </div>
+        <!--end::Statistics-->
+        </div>
+        <!--end::Item-->
+        <!--begin::Separator-->
+        <div class="separator separator-dashed my-5"></div>
+        <!--end::Separator--> 
+        <!--begin::Item-->
+        <div class="d-flex flex-stack">
+        <!--begin::Wrapper-->
+        <div class="d-flex align-items-center me-3">              
+            <!--begin::Section-->
+            <div class="flex-grow-1">
+            <!--begin::Text-->
+            <%= link_to t('dashboard.progress_assessment_title'), student_commitment_url, class: "text-gray-800 text-hover-primary fs-5 fw-bolder lh-0" %>
+            <!--end::Text-->
+            </div>
+            <!--end::Section-->
+        </div>
+        <!--end::Wrapper-->
+        <!--begin::Basic-->
+        <div class="d-flex align-items-center w-100 mw-125px">
+            <!--begin::Progress-->
+            <div class="progress h-6px w-100 me-2 bg-light-warning">
+            <div class="progress-bar bg-warning" role="progressbar" style="width: <%= student.progress_details[1]['percent'] %>%" aria-valuenow="<%= student.progress_details[1]['percent'] %>" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <!--end::Progress-->
+            <!--begin::Value-->
+            <span class="text-gray-400 fw-bold w-50px"><%= student.progress_details[1]['percent'] %>%</span>
+            <!--end::Value-->
+        </div>
+        <!--end::Basic-->
+        </div>
+        <!--end::Item-->
+        <!--begin::Separator-->
+        <div class="separator separator-dashed my-5"></div>
+        <!--end::Separator-->
+        <!--begin::Item-->
+        <div class="d-flex flex-stack">
+        <!--begin::Wrapper-->
+        <div class="d-flex align-items-center me-3">
+            <!--begin::Section-->
+            <div class="flex-grow-1">
+            <!--begin::Text-->
+            <%= link_to t('dashboard.question_match_title'), student_questionnarie_url, class: "text-gray-800 text-hover-primary fs-5 fw-bolder lh-0" %></a>
+            <!--end::Text-->
+            </div>
+            <!--end::Section-->
+        </div>
+        <!--end::Wrapper-->
+        <!--begin::Statistics-->
+        <div class="d-flex align-items-center w-100 mw-125px">
+            <!--begin::Progress-->
+            <div class="progress h-6px w-100 me-2 bg-light-danger">
+            <div class="progress-bar bg-danger" role="progressbar" style="width: <%= student.progress_details[6]['percent'] %>%" aria-valuenow="<%= student.progress_details[6]['percent'] %>" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <!--end::Progress-->
+            <!--begin::Value-->
+            <span class="text-gray-400 fw-bold w-50px"><%= student.progress_details[6]['percent'] %>%</span>
+            <!--end::Value-->
+        </div>
+        <!--end::Statistics-->
+        </div>
+        <!--end::Item-->     
+    </div>
+    <!--end::Body-->
+</div>

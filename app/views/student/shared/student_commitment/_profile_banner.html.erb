@@ -1,0 +1,11 @@
+<!--begin::Banner-->
+<!--
+<%# if @user_student.cover_photo.attached? %>
+    <div class="d-flex flex-row-fluid bgi-no-repeat bgi-size-cover bgi-position-y-center bgi-position-x-center h-200px h-sm-200px h-md-250px h-lg-400px h-xl-400px" style="background: url(<%= url_for('') %>)">
+    </div>
+<%# elsif @user_student.cover_color.present? %>
+    <div class="d-flex flex-row-fluid h-200px h-sm-200px h-md-250px h-lg-400px h-xl-400px" style="background: <%= url_for(@user_data.cover_color) %>;" >
+    </div>
+<%# end %>
+-->
+<!--end::Banner-->

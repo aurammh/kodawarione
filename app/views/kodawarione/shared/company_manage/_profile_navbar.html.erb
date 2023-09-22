@@ -1,0 +1,235 @@
+<div class="card bg-body mb-5 mb-xl-10">
+	<div class="card-body pt-9 pb-0">
+		<!--begin::Details-->
+		<div class="d-flex flex-wrap flex-sm-nowrap mb-3">
+			<!--begin: Pic-->
+			<div class="me-7 mb-4">
+				<div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
+					<% if @company_details.image.attached? %>
+						<%= image_tag (@company_details.image) %>
+					<% else %>
+						<%= image_tag "avatar/preview.svg" %> 
+					<% end %>
+				</div>
+			</div>
+			<!--end::Pic-->
+			<!--begin::Info-->
+			<div class="flex-grow-1">
+				<!--begin::Title-->
+				<div class="d-flex justify-content-between align-items-start flex-wrap mb-2">
+					<!--begin::User-->
+					<div class="d-flex flex-column">
+						<!--begin::Name-->
+						<div class="d-flex align-items-center mb-2">
+							<div class=" text-break text-gray-900 text-hover-primary fs-2 fw-bolder me-1"><%= @company_details.company_name %></div>
+							<div>
+								<!--begin::Svg Icon | path: icons/duotune/general/gen026.svg-->
+								<span class="svg-icon svg-icon-1 svg-icon-primary">
+									<svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24">
+										<path d="M10.0813 3.7242C10.8849 2.16438 13.1151 2.16438 13.9187 3.7242V3.7242C14.4016 4.66147 15.4909 5.1127 16.4951 4.79139V4.79139C18.1663 4.25668 19.7433 5.83365 19.2086 7.50485V7.50485C18.8873 8.50905 19.3385 9.59842 20.2758 10.0813V10.0813C21.8356 10.8849 21.8356 13.1151 20.2758 13.9187V13.9187C19.3385 14.4016 18.8873 15.491 19.2086 16.4951V16.4951C19.7433 18.1663 18.1663 19.7433 16.4951 19.2086V19.2086C15.491 18.8873 14.4016 19.3385 13.9187 20.2758V20.2758C13.1151 21.8356 10.8849 21.8356 10.0813 20.2758V20.2758C9.59842 19.3385 8.50905 18.8873 7.50485 19.2086V19.2086C5.83365 19.7433 4.25668 18.1663 4.79139 16.4951V16.4951C5.1127 15.491 4.66147 14.4016 3.7242 13.9187V13.9187C2.16438 13.1151 2.16438 10.8849 3.7242 10.0813V10.0813C4.66147 9.59842 5.1127 8.50905 4.79139 7.50485V7.50485C4.25668 5.83365 5.83365 4.25668 7.50485 4.79139V4.79139C8.50905 5.1127 9.59842 4.66147 10.0813 3.7242V3.7242Z" fill="#00A3FF" />
+										<path class="permanent" d="M14.8563 9.1903C15.0606 8.94984 15.3771 8.9385 15.6175 9.14289C15.858 9.34728 15.8229 9.66433 15.6185 9.9048L11.863 14.6558C11.6554 14.9001 11.2876 14.9258 11.048 14.7128L8.47656 12.4271C8.24068 12.2174 8.21944 11.8563 8.42911 11.6204C8.63877 11.3845 8.99996 11.3633 9.23583 11.5729L11.3706 13.4705L14.8563 9.1903Z" fill="white" />
+									</svg>
+								</span>
+								<!--end::Svg Icon-->
+							</div>
+						</div>
+						<!--end::Name-->
+						<!--begin::Info-->
+						<div class="d-flex flex-wrap fw-bold fs-6 mb-4 pe-2">
+							<div class="d-flex align-items-center text-gray-600 text-hover-primary me-5 mb-2">
+								<!--begin::Svg Icon | path: icons/duotune/general/gen018.svg-->
+								<span class="svg-icon svg-icon-4 me-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path opacity="0.3" d="M21 19H3C2.4 19 2 18.6 2 18V6C2 5.4 2.4 5 3 5H21C21.6 5 22 5.4 22 6V18C22 18.6 21.6 19 21 19Z" fill="black" />
+                                        <path d="M21 5H2.99999C2.69999 5 2.49999 5.10005 2.29999 5.30005L11.2 13.3C11.7 13.7 12.4 13.7 12.8 13.3L21.7 5.30005C21.5 5.10005 21.3 5 21 5Z" fill="black" />
+                                    </svg>
+								</span>
+								<!--end::Svg Icon-->
+                                <%= @company_details.contact_email %>
+							</div>
+							<div class="<%= 'd-none' unless @company_details.phone_no.present? %> d-flex align-items-center text-gray-600 text-hover-primary me-5 mb-2">
+								<!--begin::Svg Icon | path: icons/duotune/communication/com011.svg-->
+								<span class="svg-icon svg-icon-4 me-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                        <rect x="0" y="0" width="24" height="24"/>
+                                        <path d="M11.914857,14.1427403 L14.1188827,11.9387145 C14.7276032,11.329994 14.8785122,10.4000511 14.4935235,9.63007378 L14.3686433,9.38031323 C13.9836546,8.61033591 14.1345636,7.680393 14.7432841,7.07167248 L17.4760882,4.33886839 C17.6713503,4.14360624 17.9879328,4.14360624 18.183195,4.33886839 C18.2211956,4.37686904 18.2528214,4.42074752 18.2768552,4.46881498 L19.3808309,6.67676638 C20.2253855,8.3658756 19.8943345,10.4059034 18.5589765,11.7412615 L12.560151,17.740087 C11.1066115,19.1936265 8.95659008,19.7011777 7.00646221,19.0511351 L4.5919826,18.2463085 C4.33001094,18.1589846 4.18843095,17.8758246 4.27575484,17.613853 C4.30030124,17.5402138 4.34165566,17.4733009 4.39654309,17.4184135 L7.04781491,14.7671417 C7.65653544,14.1584211 8.58647835,14.0075122 9.35645567,14.3925008 L9.60621621,14.5173811 C10.3761935,14.9023698 11.3061364,14.7514608 11.914857,14.1427403 Z" fill="#000000"/>
+                                        </g>
+                                    </svg>
+								</span>
+								<!--end::Svg Icon--><%= @company_details.phone_no %>
+							</div>
+							<span class="<%= 'd-none' unless @company_details.m_industry_id.present? %> badge badge-light-primary mb-3"><%=  get_industry_name_by_ID(@company_details.m_industry_id) %></span>
+						</div>
+						<!--end::Info-->
+					</div>
+					<!--end::User-->
+					<% if can?(:edit_company, Kodawarione::CompanyManage) %>
+					<div class="d-flex my-4">					
+						<%= link_to t('btn.edit'), kodawarione_company_manage_edit_commitment_path(@company_details.id), class: "btn btn-sm btn-primary me-2" %>
+					</div>
+					<% end %>
+				</div>
+				<!--end::Title-->
+				<!--begin::Info-->
+				<div class="d-flex flex-wrap justify-content-start">
+					<!--begin::Stats-->
+					<div class="d-flex flex-wrap">
+						<!--begin::Stat-->
+						<% if @company_details.company_established.present? %>
+							<div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
+								<!--begin::Number-->
+								<div class="d-flex align-items-center">
+									<div class="fs-4 fw-bolder"><%= l @company_details.company_established %></div>
+								</div>
+								<!--end::Number-->
+								<!--begin::Label-->
+								<div class="fw-bold fs-6 text-gray-600"><%= t'activerecord.attributes.company/company.company_established' %></div>
+								<!--end::Label-->
+							</div>
+						<% end %>
+						<!--end::Stat-->
+						<!--begin::Stat-->
+						<div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
+							<!--begin::Number-->
+							<div class="d-flex align-items-center">
+								<!--begin::Svg Icon | path: icons/duotune/arrows/arr065.svg-->
+								<span class="svg-icon svg-icon-3 svg-icon-danger me-2">
+									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+										<rect opacity="0.5" x="11" y="18" width="13" height="2" rx="1" transform="rotate(-90 11 18)" fill="black" />
+										<path d="M11.4343 15.4343L7.25 11.25C6.83579 10.8358 6.16421 10.8358 5.75 11.25C5.33579 11.6642 5.33579 12.3358 5.75 12.75L11.2929 18.2929C11.6834 18.6834 12.3166 18.6834 12.7071 18.2929L18.25 12.75C18.6642 12.3358 18.6642 11.6642 18.25 11.25C17.8358 10.8358 17.1642 10.8358 16.75 11.25L12.5657 15.4343C12.2533 15.7467 11.7467 15.7467 11.4343 15.4343Z" fill="black" />
+									</svg>
+								</span>
+								<!--end::Svg Icon-->
+								<div class="fs-4 fw-bolder" data-kt-countup="true" data-kt-countup-value="<%= @open_jobs_count %>">0</div>
+							</div>
+							<!--end::Number-->
+							<!--begin::Label-->
+							<div class="fw-bold fs-6 text-gray-600"><%= t'admin.count.created_vacancies' %></div>
+							<!--end::Label-->
+						</div>
+						<!--end::Stat-->
+						<!--begin::Stat-->
+						<div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
+							<!--begin::Number-->
+							<div class="d-flex align-items-center">
+								<!--begin::Svg Icon | path: icons/duotune/arrows/arr066.svg-->
+								<span class="svg-icon svg-icon-3 svg-icon-success me-2">
+									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+										<rect opacity="0.5" x="13" y="6" width="13" height="2" rx="1" transform="rotate(90 13 6)" fill="black" />
+										<path d="M12.5657 8.56569L16.75 12.75C17.1642 13.1642 17.8358 13.1642 18.25 12.75C18.6642 12.3358 18.6642 11.6642 18.25 11.25L12.7071 5.70711C12.3166 5.31658 11.6834 5.31658 11.2929 5.70711L5.75 11.25C5.33579 11.6642 5.33579 12.3358 5.75 12.75C6.16421 13.1642 6.83579 13.1642 7.25 12.75L11.4343 8.56569C11.7467 8.25327 12.2533 8.25327 12.5657 8.56569Z" fill="black" />
+									</svg>
+								</span>
+								<!--end::Svg Icon-->
+								<div class="fs-4 fw-bolder" data-kt-countup="true" data-kt-countup-value="<%= @events_count %>">0</div>
+							</div>
+							<!--end::Number-->
+							<!--begin::Label-->
+							<div class="fw-bold fs-6 text-gray-600"><%= t'admin.count.created_events' %></div>
+							<!--end::Label-->
+						</div>
+					<!--end::Stat-->
+					</div>
+					<!--end::Stats-->
+					<!--begin::Stat-->
+					<div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
+						<!--begin::Number-->
+						<div class="d-flex align-items-center">
+							<!--begin::Svg Icon | path: icons/duotune/arrows/arr066.svg-->
+							<span class="svg-icon svg-icon-3 svg-icon-success me-2">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+									<rect opacity="0.5" x="13" y="6" width="13" height="2" rx="1" transform="rotate(90 13 6)" fill="black" />
+									<path d="M12.5657 8.56569L16.75 12.75C17.1642 13.1642 17.8358 13.1642 18.25 12.75C18.6642 12.3358 18.6642 11.6642 18.25 11.25L12.7071 5.70711C12.3166 5.31658 11.6834 5.31658 11.2929 5.70711L5.75 11.25C5.33579 11.6642 5.33579 12.3358 5.75 12.75C6.16421 13.1642 6.83579 13.1642 7.25 12.75L11.4343 8.56569C11.7467 8.25327 12.2533 8.25327 12.5657 8.56569Z" fill="black" />
+								</svg>
+							</span>
+							<!--end::Svg Icon-->
+							<div class="fs-4 fw-bolder" data-kt-countup="true" data-kt-countup-value="<%= @members_list.size %>">0</div>
+						</div>
+						<!--end::Number-->
+						<!--begin::Label-->
+						<div class="fw-bold fs-6 text-gray-600"><%= t'admin.count.members' %></div>
+						<!--end::Label-->
+					</div>
+					<!--end::Stat-->
+					<% if @members_list.present? %>
+						<!--begin::User-->
+						<div class="symbol-group symbol-hover mb-3">
+							<% @members_list.limit(5).each do |member| %>
+								<!--begin::User-->
+								<%# link_to kodawarione_company_manage_company_details_overview_path(:company_id => member.id,:status => 1) do %> 
+									<div class="symbol symbol-35px symbol-circle" data-bs-toggle="tooltip" title="<%= member.last_name %> <%= member.first_name %>">
+										<% if member.image.attached? %>
+											<%= image_tag (member.image) %>
+										<% else %>
+											<span class="symbol-label bg-primary text-inverse-primary fw-bolder"><%= member.last_name.chr.upcase %></span>
+										<% end %>
+									</div>
+								<%# end %>
+								<!--end::User-->
+							<% end %>
+							<% if @members_list.size > 5 %>
+								<a href="#" class="symbol symbol-35px symbol-circle" data-bs-toggle="modal" data-bs-target="#kt_modal_view_users">
+									<span class="symbol-label bg-dark text-inverse-dark fs-8 fw-bolder" data-bs-toggle="tooltip" data-bs-trigger="hover" title="View more members">+<%=@members_list.size - 5 %></span>
+								</a>
+							<% end %>
+						</div>
+					<% end %>
+					<!--end::Users-->
+				</div>
+				<!--end::Info-->
+			</div>
+			<!--end::Info-->
+		</div>
+		<!--end::Details-->
+		<div class="separator"></div>
+		<!--begin::Navs-->
+		<div class="d-flex overflow-auto h-55px">
+			<ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bolder flex-nowrap">
+				<!--begin::Nav item-->
+				<% if can?(:company_details_overview, Kodawarione::CompanyManage) %>
+					<li class="nav-item">
+						<%= link_to (t 'kodawarione.company_details.nav.overview'), kodawarione_company_manage_company_details_overview_path(:company_id => @company_details.id,:status => 1), :class=> "text-gray-600 nav-link text-active-primary me-6 #{current_route == "overview" && 'active'}" %>
+					</li>
+				<% end %>
+				<!--end::Nav item-->
+				<!--begin::Nav item-->
+				<% if can?(:company_details_basic_info, Kodawarione::CompanyManage) %>
+					<li class="nav-item">
+						<%= link_to (t 'title.company_basic_information'), kodawarione_company_manage_company_details_basic_info_path(:company_id => @company_details.id,:status => 1), :class=> "text-gray-600 nav-link text-active-primary me-6 #{current_route == "basic_info" && 'active'}" %>
+					</li>
+				<% end %>
+				<!--end::Nav item--> 
+				<!--begin::Nav item-->
+				<% if can?(:company_details_company_page, Kodawarione::CompanyManage) %>
+					<li class="nav-item">
+						<%= link_to (t 'kodawarione.company_details.nav.company_page'), kodawarione_company_manage_company_details_company_page_path(:company_id => @company_details.id,:status => 1), :class=> "text-gray-600 nav-link text-active-primary me-6 #{current_route == "company_page" && 'active'}" %>
+					</li>
+				<% end %>
+				<!--end::Nav item--> 
+				<!--begin::Nav item-->
+				<!--<%# if can?(:company_details_activity_page, Kodawarione::CompanyManage) %>
+					<li class="nav-item">
+						<%# link_to (t 'Activity'), kodawarione_company_manage_company_details_activity_page_path(:company_id => @company_details.id,:status => 1), :class=> "text-gray-600 nav-link text-active-primary me-6 #{current_route == "activity_page" && 'active'}" %>
+					</li>
+				<%# end %>
+				<%# if can?(:favourite_student_list, Kodawarione::CompanyManage) %>
+					<li class="nav-item">
+						<%# link_to (t 'common.favourite_users'), kodawarione_company_manage_favourite_student_list_path(:company_id => @company_details.id,:status => 1), :class=> "text-gray-600 nav-link text-active-primary me-6 #{current_route == "favourite_student_list" && 'active'}" %>
+					</li>
+				<%# end %>
+				<%# if can?(:join_event_list, Kodawarione::CompanyManage) %>
+					<li class="nav-item">
+						<%# link_to (t 'event.title.admin_event_participant_list_title'), kodawarione_company_manage_join_event_list_path(:company_id => @company_details.id,:status => 1), :class=> "text-gray-600 nav-link text-active-primary me-6 #{current_route == "join_event_list" && 'active'}" %>
+					</li>
+				<%# end %>
+				<%# if can?(:company_vacancy_list, Kodawarione::CompanyManage) %>
+					<li class="nav-item">
+						<%# link_to (t 'title.vacancy_list'), kodawarione_company_manage_company_vacancy_list_path(:company_id => @company_details.id,:status => 1), :class=> "text-gray-600 nav-link text-active-primary me-6 #{current_route == "company_vacancy_list" && 'active'}" %>
+					</li>
+				<%# end %>-->
+				<!--end::Nav item--> 
+			</ul>
+		</div>
+		<!--begin::Navs-->
+	</div>
+</div>

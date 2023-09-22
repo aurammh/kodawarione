@@ -1,0 +1,1 @@
+json.partial! "communication_mail_template_registrations/communication_mail_template_registration", communication_mail_template_registration: @communication_mail_template_registration

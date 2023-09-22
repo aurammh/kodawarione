@@ -1,0 +1,200 @@
+<!--begin::Header-->
+<% breadcrumbs_navigation_add (t ('student_commitment.menu.create_company_page')), '#' %>
+<%= render_company_breadcrumbs_navigation(t ('commitment_profile.title.commitment_profile_title')) %>	
+<!--end::Header-->
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+  <!--begin::Container-->
+  <div class="container-xxl" id="kt_content_container">
+    <%= render partial: "company/shared/commitment_profiles/common_banner" %>
+    <!--begin::Card-->
+    <div class="card bg-body mb-5 mb-xl-10">
+      <!--begin::Form-->
+      <%= form_with(model: @company_commitment_profile, url: home_form_company_commitment_profiles_url, method: "patch", local: true, multipart: true) do |form| %>
+        <div class="card-body" >
+          <%= form.hidden_field :form_name, value:  'home_form'%>
+          <%= form.hidden_field :home_edit, value: true %>
+          <%= form.hidden_field :not_company_edit, :value => true %>
+          <!--begin::Input group-->
+          <div class="row mb-6 cover-photo">
+            <!--begin::Label-->
+            <label class="col-lg-4 col-form-label fw-bold fs-6"><%= form.label :cover_photo %></label>
+            <!--end::Label-->
+            <!--begin::Col-->
+            <div class="col-lg-8">                            
+              <div class="image-input image-input-outline w-100">
+                  <label class="image-input-wrapper upload-kodawari-cover-preview  upload-cover-preview w-100 h-150px">
+                    <%= image_tag @company_commitment_profile.cover_photo.attached? && @company_commitment_profile.cover_photo.persisted? ? @company_commitment_profile.cover_photo : "avatar/preview.svg", class: "kodawari-banner-image-file w-100 h-100" %>
+                    <span class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow edit-pen">
+                      <i class="fa fa-pen icon-sm text-muted "></i>
+                    </span>
+                    <%= form.hidden_field :cover_image_data, :value => false , id: "cover_image_data" %>
+                    <%= form.hidden_field :coverImageFlag, :value => false , id: "coverImageFlag" %>
+                    <%= form.file_field :cover_photo,accept: "image/png,image/gif,image/jpeg,image/jpg", :class=> "d-none kodawari-banner-cover-input-file", :id => "cover-image", "data-existed": form.object.cover_photo.attached?%>
+                    <input type="hidden" name="profile_avatar_remove" />   
+                  </label>                                                            
+                  <span class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow"
+                    data-kt-image-input-action="cancel"
+                    data-bs-toggle="tooltip"
+                    data-bs-dismiss="click"
+                    title="Cancel avatar">
+                    <i class="ki ki-bold-close icon-xs text-muted"></i>
+                  </span>
+                  <span type="button" id="cover-img-remove" class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow"
+                    data-kt-image-input-action="remove"
+                    data-bs-toggle="tooltip"
+                    data-bs-dismiss="click"
+                    title="Remove avatar">
+                    <i class="ki ki-bold-close icon-xs text-muted"></i>
+                  </span>          
+              </div>                            
+              <div class="py-4 d-flex ">
+                  <% if @company_commitment_profile.cover_photo.attached? && @company_commitment_profile.cover_photo.persisted? %>
+                    <span class="form-text text-muted chosen-text img-name text-break"><%= @company_commitment_profile.cover_photo.filename %></span>
+                  <% else %>
+                    <span class="form-text text-muted chosen-text"><%=t('common.profile_upload_text')%></span>
+                  <% end %>
+              </div>      
+              <%# image crop modal start%>
+              <%= render "common/banner_image_crop" %>
+              <%# image crop modal end%>
+            </div>
+            <!--end::Col-->
+          </div>
+          <!--end::Input group-->
+          <!--begin::Input group-->
+          <div class="row mb-6">
+              <!--begin::Label-->
+              <label class="col-lg-4 col-form-label required fw-bold fs-6"><%= form.label :company_logo %></label>
+              <!--end::Label-->
+              <!--begin::Col-->
+              <div class="col-lg-8">
+                <!--begin::Image input-->
+                <div class="image-input image-input-outline">
+                <label class="image-input-wrapper upload-preview">
+                  <%= image_tag @company_commitment_profile.image.attached? && @company_commitment_profile.image.persisted? ? @company_commitment_profile.image : "avatar/preview.svg", class: "w-100 h-100" %>
+                  <span class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow edit-pen">
+                    <i class="fa fa-pen icon-sm text-muted "></i>
+                  </span>
+                  <%= form.hidden_field :image_data, :value => false , id: "image_data" %>
+                  <%= form.hidden_field :imageFlag, :value => false , id: "imageFlag" %>
+                  <%= form.file_field :image,accept: "image/png,image/gif,image/jpeg,image/jpg", :class=> "d-none input-file", :id => "image", "data-existed": form.object.image.attached?%>
+                  <p class ="text-danger fs-6 ms-invalid-feedback mt-1"><%= @company_commitment_profile.errors.full_messages_for(:image)[0] %></p>
+                  <input type="hidden" name="profile_avatar_remove" />
+                </label>                        
+                <span class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow"
+                  data-kt-image-input-action="cancel"
+                  data-bs-toggle="tooltip"
+                  data-bs-dismiss="click"
+                  title="Cancel avatar">
+                  <i class="ki ki-bold-close icon-xs text-muted"></i>
+                </span>
+                <span type="button" id="img-remove" class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow"
+                  data-kt-image-input-action="remove"
+                  data-bs-toggle="tooltip"
+                  data-bs-dismiss="click"
+                  title="Remove avatar">
+                  <i class="ki ki-bold-close icon-xs text-muted"></i>
+                </span>
+              </div>
+              <!--begin::Hint-->
+              <div class="py-4">
+                <% if @company_commitment_profile.image.attached? && @company_commitment_profile.image.persisted? %>
+                  <span class="form-text text-muted chosen-text img-name text-break"><%= @company_commitment_profile.image.filename %></span>
+                <% else %>
+                  <span class="form-text text-muted chosen-text"><%=t('common.profile_upload_text')%></span>
+                <% end %>
+              </div>
+              <!--end::Hint-->
+              <%# image upload modal start%>
+              <%= render "common/image_crop" %>
+              <%# image upload modal end%>                                
+              <!--end::Image input-->
+          </div>
+          <!--end::Input group-->
+          <!--begin::Input group-->
+          <div class="row mb-6">
+            <!--begin::Label-->
+            <label class="col-lg-4 col-form-label required fw-bold fs-6"><%= form.label :m_industry_id %></label>
+            <!--end::Label-->
+            <!--begin::Col-->
+            <div class="col-lg-8 fv-row">
+              <%= form.collection_select(:m_industry_id,industry_type_options , :id ,:industry_name, { :include_blank => (t "select.not_select")}, selected: form.object.m_industry_id, id: "industry", :class=> "form-select form-select-lg form-select-solid", :data => { :control => 'select2', 'hide-search' => true }) %>
+              <p class ="text-danger fs-6 ms-invalid-feedback mt-1"><%= @company_commitment_profile.errors.full_messages_for(:m_industry_id)[0] %></p>
+            </div>
+            <!--end::Col-->
+          </div>
+          <!--end::Input group-->
+          <!--begin::Input group-->
+					<div class="row mb-6">
+						<!--begin::Label-->
+						<label class="col-lg-4 col-form-label fw-bold fs-6 required"><%= form.label :job_info %></label>
+						<!--end::Label-->
+						<!--begin::Col-->
+						<div class="col-lg-8 fv-row hide-trix-attachment">
+              <%= form.rich_text_area :job_info, class: "form-control form-control-lg form-control-solid h-200px h-lg-300px h-xl-300px overflow-auto", id: "job_info", rows: 4, maxlength: 3000 %>
+              <p class="text-danger fs-6 ms-invalid-feedback mt-1"><%= @company_commitment_profile.errors.full_messages_for(:job_info)[0] %></p>
+						</div>
+						<!--end::Col-->
+					</div>
+					<!--end::Input group-->
+          <!--begin::Input group-->
+					<div class="row mb-6">
+						<!--begin::Label-->
+						<label class="col-lg-4 col-form-label required fw-bold fs-6"><%= form.label :employee_count %></label>
+						<!--end::Label-->
+						<!--begin::Col-->
+						<div class="col-lg-8 fv-row">
+              <%= form.text_field :employee_count_string, id: "employee_count_string", class: "form-control form-control-lg form-control-solid number-with-delimeter errors",value: number_with_delimiter(form.object.employee_count),  maxlength: 16 %>
+              <p class="text-danger fs-6 ms-invalid-feedback mt-1"><%= @company_commitment_profile.errors.full_messages_for(:employee_count_string)[0] %></p>
+						</div>
+						<!--end::Col-->
+					</div>
+					<!--end::Input group-->
+          <!--begin::Input group-->
+					<div class="row mb-6">
+						<!--begin::Label-->
+						<label class="col-lg-4 col-form-label fw-bold fs-6"><%= form.label :company_intro %></label>
+						<!--end::Label-->
+						<!--begin::Col-->
+						<div class="col-lg-8 fv-row hide-trix-attachment">
+              <%= form.rich_text_area :company_intro, class: "form-control form-control-lg form-control-solid h-200px h-lg-300px h-xl-300px overflow-auto", id: "company_intro", rows: 4, maxlength: 3000 %>
+              <p class="text-danger fs-6 ms-invalid-feedback mt-1"><%= @company_commitment_profile.errors.full_messages_for(:company_intro)[0] %></p>
+						</div>
+						<!--end::Col-->
+					</div>
+					<!--end::Input group-->
+          <!--begin::Input group-->
+					<div class="row mb-6">
+						<!--begin::Label-->
+						<label class="col-lg-4 col-form-label fw-bold fs-6">
+              <%= form.label :history %>
+            </label>
+						<!--end::Label-->
+						<!--begin::Col-->
+						<div class="col-lg-8 fv-row">
+              <%= form.text_area :history, class: "form-control form-control-lg form-control-solid", id: "history", rows: 4, maxlength: 1000 %>
+              <p class="text-danger fs-6 ms-invalid-feedback mt-1"><%= @company_commitment_profile.errors.full_messages_for(:history)[0] %></p>
+            </div>
+						<!--end::Col-->
+					</div>
+					<!--end::Input group-->
+        </div>
+        <!--begin::Actions-->
+        <div class="card-footer d-flex justify-content-end py-6 px-9">
+          <%= link_to t('btn.cancel'), home_company_commitment_profiles_path, class: "btn btn-light btn-active-light-primary me-2" %>
+          <%= form.submit t('btn.submit'), class: "btn btn-primary" %>
+        </div>
+        <!--end::Actions-->            
+      <% end %>
+      <!--end::Form-->
+    </div>
+    <!--end::Card-->
+  </div>
+  <!--end::Container-->
+</div>
+<!--end::Content-->
+<%= render "users/shared/toastr" %>
+<%= javascript_pack_tag "company/commitment_profile.js" %>
+<%= javascript_pack_tag "common.js" %>
+<%= javascript_pack_tag "company/company.js" %>

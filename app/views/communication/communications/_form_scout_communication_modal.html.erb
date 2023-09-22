@@ -1,0 +1,56 @@
+<%= form_with(model: @communication_communication,id: "communication-form") do |form| %>
+    <%= form.hidden_field :sender_id, value: current_user_data.id, id: "sender_id" %>
+    <%= form.hidden_field :receiver_id, value: @receiver_id ,id: "receiver_id" %>
+    <%= form.hidden_field :user_id, value: @user_id %>
+    <%= form.hidden_field :company_user_id, value: @company_user_id %>
+    <%= form.hidden_field :category, value:  @category_name%>
+    <%= form.hidden_field :forum_id, value: params[:forum_id] %> 
+    <%= form.hidden_field :company_id, value: @company_id %>
+    <!--begin::Input group-->
+    <div class="d-none flex-column fv-row">
+        <!--begin::Label-->
+        <%= form.email_field :receiver_email, id: "receiver_email", value: @receiverMail ,class: "form-control form-control-solid", readonly: true %>
+        <!--end::Label-->
+    </div>
+    <div class="d-flex justify-content-between fw-bolder fs-1 mb-7">
+        <%= t('communication.title.scout')%>  
+    </div>
+    <div class="col-12 error_vacancy_id mb-7">
+        <%= form.collection_select(:vacancy_id, vacancy_options(@user_id || 0), :id, :vacancy_title,{:include_blank => (t'select.vacancy_not_select')}, {:class => "form-control form-select form-select-lg form-select-solid errors",:id => "vacancy_id", :data => { :control => 'select2', 'hide-search' => true}}) %>
+        <p class="text-danger fs-6 ms-invalid-feedback mt-1">
+            <span class ="err_vacancy_id d-none"><%= Communication::Communication.human_attribute_name('vacancy_id') %>  <%= t('errors.messages.blank') %></span>
+        </p>
+    </div>
+    <div class="col-12 mb-7">
+        <%= form.collection_select(:mail_template_id, mail_template_options, :id, :template_name,{:include_blank => (t'テンプレートを選択する')}, {:class => "form-control form-select form-select-lg form-select-solid",:id => "mail_template_id", :data => { :control => 'select2', 'hide-search' => true }}) %>
+        <p class="text-danger fs-6 ms-invalid-feedback mt-1">
+            <span class ="err_mail_template_id d-none"><%= Communication::Communication.human_attribute_name('mail_template_id') %>  <%= t('errors.messages.blank') %></span>
+        </p>
+    </div>
+    <div class="col-12 error_title mb-7">
+        <%= form.text_field :title, id: "title",class: "form-control form-control-solid errors", placeholder: (t'activerecord.attributes.communication/communication.title') + " *", maxlength: 255 %>
+        <p class="text-danger fs-6 ms-invalid-feedback mt-1">
+            <span class ="err_title d-none"><%= Communication::Communication.human_attribute_name('title') %>  <%= t('errors.messages.blank') %></span>
+        </p>
+    </div>
+    <div class="col-12 error_content mb-7">
+        <%= form.rich_text_area :content, id: "content",class: "form-control form-control-solid h-200px h-lg-300px h-xl-300px overflow-auto errors", placeholder: (t'communication.title.content')+ t('errors.messages.blank') + "*" %>
+        <p class="text-danger fs-6 ms-invalid-feedback mt-1">
+            <span class ="err_content d-none"><%= Communication::Communication.human_attribute_name('content') %>  <%= t('errors.messages.blank') %></span>
+        </p>
+    </div>
+    <div class="col-12 form-check form-check-custom form-check-solid form-check-inline">
+        <%= form.check_box :save_template_chk_box, checked: false, class: "form-check-input" ,id: "save-template" %>
+        <%= form.label :save_template_chk_box, t('btn.new_mail_template'), class: "form-check-label flex-grow-1 fw-bold link-primary fs-6", for: "save-template" %>
+    </div>
+    <!--begin::Actions-->
+    <div class="mt-10 mb-5"> 
+        <%= form.submit (t "btn.scout_sent_btn"),:class => "btn btn-primary w-100", :id => "btn-communicaion" %>
+    </div> 
+    <div class="mb-10"> 
+        <button type="button" class="btn btn-light w-100" id="modal-btn-no" data-bs-dismiss="modal"><%= t "btn.confirm_no" %></button>
+    </div> 
+    <!--end::Actions-->
+<% end %>
+<%= hidden_field_tag(:new_template, t('btn.new_mail_template')) %>
+<%= hidden_field_tag(:edit_template, t('btn.edit_mail_template')) %>

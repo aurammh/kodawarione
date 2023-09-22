@@ -1,0 +1,347 @@
+<div id="communication-modal" class="modal fade overflow-hidden communication-section" tabindex="-1" aria-hidden="true">
+    <!--begin::Modal dialog-->
+    <div class="modal-dialog modal-dialog-centered modal-fullscreen">
+        <!--begin::Modal content-->
+        <div class="modal-content">
+            <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+                <!--begin::Close-->
+                <div class="d-flex justify-content-end p-3">
+                    <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                        <span class="svg-icon svg-icon-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                                <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </div>
+                </div>
+                <!--end::Close-->  
+                <!--begin::Modal body-->
+                <div class="custom-scroll">
+                    <div class="modal-body d-flex flex-column-fluid align-items-center container-xxl my-5" id="kt_content_container"> 
+                        <!--begin::Container-->
+                        <div class="content flex-row-fluid" id="kt_content">
+                            <% if @communication_communication.scout_status == 'waiting_accept' %>
+                                <div class="notice d-flex rounded border border-dashed rounded-3 p-6 mb-7 <%= @communication_communication.scout_status == 'waiting_accept'? 'bg-light-warning border-warning' : @communication_communication.scout_status == 'accept'? 'bg-light-primary border-primary' : 'bg-light-danger border-danger' %>">
+                                    <!--begin::Wrapper-->
+                                    <div class="d-flex flex-stack flex-grow-1">
+                                        <!--begin::Content-->
+                                        <div class="fw-bold">
+                                            <h4 class="text-gray-900 fw-bolder"><%= t('communication.title.scout')%></h4>
+                                            <div class="fs-6 text-gray-700">
+                                                <%= current_user.student.nick_name.upcase %><%= t('communication.scout.text.std_waiting_accept') %>
+                                            </div>
+                                        </div>
+                                        <!--end::Content-->
+                                    </div>
+                                    <!--end::Wrapper-->
+                                </div>
+                            <% end %>
+
+                            <!--begin::Content-->
+                            <div class="row mb-15">
+                                <% if @company_vacancy_list.status == 2 %>
+                                    <%= render 'student/shared/search/vacancy_detail_all' %>
+                                <% else %>
+                                    <%= render 'student/shared/search/vacancy_detail_limiting' %>
+                                <% end %>
+                                <div class="col-12 col-xl-4 col-lg-4">
+                                    <div class="card">   
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between align-items-center fw-bolder fs-1 mb-7">
+                                                <%= t('communication.title.scout')%>  
+                                                <% if @communication_communication.scout_status == 'waiting_accept' %>
+                                                    <span class="badge badge-lg badge-light-warning px-5 py-3 fs-4"><%= t('status.not_yet') %></span> 
+                                                <% elsif @communication_communication.scout_status == 'accept' %>
+                                                    <span class="badge badge-lg badge-light-primary px-5 py-3 fs-4"><%= t('communication.scout.status.accept') %></span> 
+                                                <% else %>
+                                                    <span class="badge badge-lg badge-light-danger px-5 py-3 fs-4"><%=  t('communication.scout.status.reject') %></span>
+                                                <% end %>
+                                            </div>
+                                            <!--begin::Message content-->
+                                            <div class="mb-5">
+                                                <div class="fw-bolder mb-1"><%= t('communication.title.sender_email')%></div>
+                                                <div class="form-control form-control-lg form-control-solid fs-7 "> 
+                                                    <%= get_sender_detail_info(@communication_communication.company_user_id , @communication_communication.user_id , @communication_communication.company_id, @communication_communication.mail_type,@communication_communication.sent_type)["name"]+" <"+get_sender_detail_info(@communication_communication.company_user_id, @communication_communication.user_id,  @communication_communication.company_id, @communication_communication.mail_type,@communication_communication.sent_type)["email"]+">" %>
+                                                </div>
+                                            </div>
+                                            <div class="mb-5">
+                                                <div class="fw-bolder mb-1"><%= t('communication.title.subject')%></div>
+                                                <div class="form-control form-control-lg form-control-solid fs-7 ">
+                                                    <%= @communication_communication.title %>
+                                                </div>
+                                            </div> 
+                                            <div class="mb-10">
+                                                <div class="fw-bolder mb-1"><%= t('communication.title.content')%></div>
+                                                <div class="form-control form-control-lg form-control-solid fs-7  h-375px overflow-auto">
+                                                    <%= @communication_communication.content %>
+                                                </div> 
+                                            </div>
+                                            <!--begin::Subject--> 
+                                            <div class="d-none d-flex fw-bolder fs-4 my-5">
+                                                <div class="w-75px">
+                                                    <%= t('communication.title.subject')%>:
+                                                </div>
+                                                <div class="flex-shrink-1">
+                                                    <%= @communication_communication.title %>
+                                                    <span class="ms-3 <%= @communication_communication.scout_status == 'accept' ? 'badge badge-light-primary' : @communication_communication.scout_status == 'denied' ? 'badge badge-light-danger' : 'd-none' %>">
+                                                        <%= @communication_communication.scout_status == 'accept' ? t('status.replied') : t('status.rejected') %>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <!--end::Subject-->
+                                            <!--begin::Message accordion-->
+                                            <div  data-bs-toggle="collapse"  data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" class="cursor-pointer toggle-on d-none ">   
+                                                <div data-kt-inbox-message="message_wrapper">
+                                                    <!--begin::Message header-->
+                                                    <div class="d-flex flex-wrap gap-2 flex-stack cursor-pointer" data-kt-inbox-message="header">
+                                                        <!--begin::Author-->
+                                                        <div class="d-flex align-items-center">
+                                                            <!--begin::Avatar-->
+                                                            <div class="symbol symbol-light-primary symbol-50 me-4">
+                                                                <% if @company_img.image.present? %>
+                                                                    <%= image_tag (@company_img.image), class: "symbol-label" %>
+                                                                <% else %>
+                                                                    <%= image_tag "avatar/building.jpg", class: "symbol-label" %>
+                                                                <% end %>
+                                                            </div>
+                                                            <!--end::Avatar-->
+                                                            <div class="pe-5">
+                                                                <!--begin::Author details-->
+                                                                <div class="d-flex align-items-center flex-wrap gap-1">
+                                                                    <span class="fw-bolder text-dark text-hover-primary">
+                                                                    <%= get_sender_detail_info(@communication_communication.company_user_id, @communication_communication.user_id, @communication_communication.company_id, @communication_communication.mail_type,@communication_communication.sent_type)["name"]%>
+                                                                    </span>
+                                                                    <!--begin::Svg Icon | path: icons/duotune/abstract/abs050.svg-->
+                                                                    <!--end::Svg Icon-->
+                                                                    <span class="text-muted fw-bolder"><%=  time_date(@communication_communication.created_at) %></span>
+                                                                </div>
+                                                                <!--end::Author details-->
+                                                                <!--begin::Message details-->
+                                                                <div data-kt-inbox-message="details" class="">
+                                                                    <span class="text-muted fw-bold">
+                                                                        <%=" <"+ get_sender_detail_info(@communication_communication.company_user_id, @communication_communication.user_id , @communication_communication.company_id, @communication_communication.mail_type,@communication_communication.sent_type)["email"] +"> "%>
+                                                                    </span>
+                                                                    <!--begin::Menu toggle-->
+                                                                    <span class="me-1" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-start">
+                                                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
+                                                                        <span class="svg-icon svg-icon-5 m-0">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                                <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor"></path>
+                                                                            </svg>
+                                                                        </span>
+                                                                        <!--end::Svg Icon-->
+                                                                    </span>
+                                                                    <!--end::Menu toggle-->
+                                                                    <!--begin::Menu-->
+                                                                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-300px p-4" data-kt-menu="true">
+                                                                        <!--begin::Table-->
+                                                                        <table class="table mb-0">
+                                                                            <tbody>
+                                                                                <!--begin::From-->
+                                                                                <tr>
+                                                                                    <td class="w-75px text-muted">From</td>
+                                                                                    <td> 
+                                                                                    email
+                                                                                    <%=" <"+ get_sender_detail_info(@communication_communication.company_user_id, @communication_communication.user_id , @communication_communication.company_id, @communication_communication.mail_type,@communication_communication.sent_type)["email"] +"> "%></td>
+                                                                                    </tr>
+                                                                                    <!--end::From-->
+                                                                                    <!--begin::Date-->
+                                                                                    <tr>
+                                                                                        <td class="text-muted">Date</td>
+                                                                                        <td><%= @communication_communication.created_at.strftime("%Y年%m月%d日 (%I:%M %p)") %></td>
+                                                                                    </tr>
+                                                                                    <!--end::Date-->
+                                                                                    <!--begin::Subject-->
+                                                                                    <tr>
+                                                                                        <td class="text-muted">Subject</td>
+                                                                                        <td>【<%= t("communication.title.#{@communication_communication.category}") %>】<%= @communication_communication.title %></td>
+                                                                                    </tr>
+                                                                                    <!--end::Subject--> 
+                                                                            </tbody>
+                                                                        </table>
+                                                                        <!--end::Table-->
+                                                                    </div>
+                                                                    <!--end::Menu-->
+                                                                </div>
+                                                                <!--end::Message details-->
+                                                                <!--begin::Preview message-->
+                                                                <div class="text-muted fw-bold mw-450px d-none" data-kt-inbox-message="preview"></div>
+                                                                <!--end::Preview message-->
+                                                            </div>
+                                                        </div>
+                                                        <!--end::Author-->
+                                                        <!--begin::Actions-->
+                                                        <div class="d-flex align-items-center flex-wrap gap-2">
+                                                            <!--begin::Date-->
+                                                            <span class="fw-bold text-muted text-end me-3"><%= @communication_communication.created_at.strftime("%Y年%m月%d日 (%I:%M %p)") %></span>
+                                                            <!--end::Date-->
+                                                        </div>
+                                                        <!--end::Actions-->
+                                                    </div>
+                                                    <!--end::Message header-->
+                                                </div>
+                                            </div>
+                                            <!--begin::Message content-->
+                                            <div id="collapseOne" class="d-none collapse show" aria-labelledby="headingOne" data-parent="#accordion"> 
+                                                <div class="py-5 ms-5">
+                                                    <p><%= @communication_communication.content %></p> 
+                                                </div>
+                                            </div>
+                                            <div class="separator my-6"></div>
+                                            <!--end::Message content-->
+                                            <!--end::Message accordion-->
+                                            <% if @conversation_detail_list.present? %>
+                                                <div class="mh-400px overflow-auto">
+                                                    <% @conversation_detail_list.each_with_index do |all_conversation,index| %>
+                                                        <% if index > 0 %>
+                                                            <div data-kt-inbox-message="message_wrapper">
+                                                                <!--begin::Message header-->
+                                                                <div  data-bs-toggle="collapse"  data-bs-target="#collapse<%= all_conversation.id.to_s %>" aria-expanded="true" aria-controls="collapseOne" class="cursor-pointer toggle-on">                                    
+                                                                    <div class="d-flex flex-wrap gap-2 flex-stack cursor-pointer" data-kt-inbox-message="header">
+                                                                        <!--begin::Author-->
+                                                                        <div class="d-flex align-items-center">
+                                                                            <!--begin::Avatar-->
+                                                                            <% if all_conversation.sent_type == 1 %>
+                                                                                <div class="symbol symbol-light-primary symbol-50 me-4">
+                                                                                    <% if @company_img.image.present? %>
+                                                                                        <%= image_tag (@company_img.image), class: "symbol-label" %>
+                                                                                    <% else %>
+                                                                                        <%= image_tag "avatar/building.jpg", class: "symbol-label" %>
+                                                                                    <% end %> 
+                                                                                </div>
+                                                                            <% end %>
+                                                                            <!--end::Avatar-->
+                                                                            <div class="pe-5 ">
+                                                                                <!--begin::Author details-->
+                                                                                <div class="d-flex align-items-center flex-wrap gap-1">
+                                                                                    <span class="fw-bolder text-dark text-hover-primary"> <%= get_sender_detail_info(all_conversation.company_user_id , all_conversation.user_id , @communication_communication.company_id, @communication_communication.mail_type,all_conversation.sent_type)["name"]%></span>
+                                                                                    <!--begin::Svg Icon | path: icons/duotune/abstract/abs050.svg-->
+                                                                                    <span class="svg-icon svg-icon-7 svg-icon-success mx-3">
+                                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                                                            <circle fill="currentColor" cx="12" cy="12" r="8"></circle>
+                                                                                        </svg>
+                                                                                    </span>
+                                                                                    <!--end::Svg Icon-->
+                                                                                    <span class="text-muted fw-bolder"><%=  time_date(all_conversation.created_at) %></span>
+                                                                                </div>
+                                                                                <!--end::Author details-->
+                                                                                <!--begin::Message details-->
+                                                                                <div class="" data-kt-inbox-message="details">
+                                                                                    <span class="text-muted fw-bold">
+                                                                                        <%=" <"+ get_sender_detail_info(all_conversation.company_user_id , all_conversation.user_id , @communication_communication.company_id, @communication_communication.mail_type,all_conversation.sent_type)["email"] +"> " %>
+                                                                                    </span>
+                                                                                    <!--begin::Menu toggle-->
+                                                                                    <span class="me-1" >
+                                                                                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr072.svg-->
+                                                                                        <span class="svg-icon svg-icon-5 m-0">
+                                                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                                                <path d="M11.4343 12.7344L7.25 8.55005C6.83579 8.13583 6.16421 8.13584 5.75 8.55005C5.33579 8.96426 5.33579 9.63583 5.75 10.05L11.2929 15.5929C11.6834 15.9835 12.3166 15.9835 12.7071 15.5929L18.25 10.05C18.6642 9.63584 18.6642 8.96426 18.25 8.55005C17.8358 8.13584 17.1642 8.13584 16.75 8.55005L12.5657 12.7344C12.2533 13.0468 11.7467 13.0468 11.4343 12.7344Z" fill="currentColor"></path>
+                                                                                            </svg>
+                                                                                        </span>
+                                                                                        <!--end::Svg Icon-->
+                                                                                    </span>
+                                                                                    <!--end::Menu toggle-->
+                                                                                </div>
+                                                                                <!--end::Message details-->
+                                                                            </div>
+                                                                        </div>
+                                                                        <!--end::Author-->
+                                                                        <!--begin::Actions-->
+                                                                        <div class="d-flex align-items-center flex-wrap gap-2">
+                                                                            <!--begin::Date-->
+                                                                            <span class="fw-bold text-muted text-end me-3"><%= all_conversation.created_at.strftime("%Y年%m月%d日 (%I:%M %p)") %></span>
+                                                                            <!--end::Date-->
+                                                                        </div>
+                                                                        <!--end::Actions-->
+                                                                    </div>
+                                                                </div>
+                                                                <!--end::Message header-->
+                                                                <!--begin::Message content-->
+                                                                <div id="collapse<%= all_conversation.id.to_s %>" class="collapse " aria-labelledby="headingTwo" data-parent="#accordion"> 
+                                                                    <div class="py-5 ms-5">
+                                                                        <p><%= all_conversation.content %></p>
+                                                                    </div>
+                                                                </div>
+                                                                <!--end::Message content-->
+                                                            </div>
+                                                            <div class="separator my-6"></div> 
+                                                        <% end %>
+                                                    <% end %>
+                                                </div>  
+                                            <% end %>
+                                            <% if  @communication_communication.scout_status == "waiting_accept" && current_user %>
+                                                <!--begin::Actions-->
+                                                <div class="my-5"> 
+                                                    <%= link_to(communication_scout_mail_accept_path(id: @communication_communication.id), class: "btn btn-primary w-100 fw-bold px-6 mb-5") do %>
+                                                        <%= t 'btn.accept' %>
+                                                    <% end %>
+                                                    <%= link_to(communication_scout_mail_reject_path(id: @communication_communication.id), class: "btn btn-danger w-100 fw-bold px-6") do %>
+                                                        <%= t 'btn.deny' %>
+                                                    <% end %>
+                                                </div> 
+                                                <!--end::Actions--> 
+                                            <% end %>
+                                            <div class="d-none <%= 'd-none' if @communication_communication.scout_status == "denied" %> mt-5" id="kt_inbox_reply">                        
+                                                <!--begin::Form-->
+                                                <%= form_with(model: Communication::CommunicationDetail.new,url: [ @communication_communication_detail, Communication::CommunicationDetail.new ], method: :post,id: "communication-form") do |form| %>
+                                                    <%= form.hidden_field :communication_id, value: @communication_communication.id %>
+                                                        
+                                                    <%= form.hidden_field :user_id, value: @communication_communication.user_id ,id: "user_id" %>
+                                                    <%= form.hidden_field :company_user_id, value: @communication_communication.company_user_id %>
+
+                                                    <%= form.hidden_field :sender_id, value: @user_id ,id: "sender_id" %>
+                                                    <%= form.hidden_field :receiver_id, value: @receiver_id %>
+                                                    <%= form.hidden_field :company_id, value: @communication_communication.company_id %>
+                                                    <%= form.hidden_field :mail_type, value: @communication_communication.mail_type %>
+                                                    <%= form.hidden_field :category, value: @communication_communication.category %> 
+                                                    <!--begin::Body-->
+                                                    <div class="d-block">
+                                                        <!--begin::To-->
+                                                        <div class="d-flex align-items-center border-bottom inbox-to min-h-50px">
+                                                            <div class="fs-6 fw-bolder w-75px">From:</div>
+                                                                <div class="d-flex align-items-center flex-grow-1">
+                                                                    <span><%= @email %></span>                                                 
+                                                                </div> 
+                                                            </div>
+                                                            <!--end::To--> 
+                                                            <!--begin::Message-->
+                                                            <div class="hide-trix-toolbar py-4">
+                                                                <div class="d-flex error_content">
+                                                                    <%= form.label :content,t('communication.title.content') ,class: "fs-6 fw-bolder form-label" %>
+                                                                        【<label class="ml-auto required-label"><%= t('common.require') %> </label>】
+                                                                </div>
+                                                                <%= form.rich_text_area :content, id: "content",class: "form-control form-control-solid  h-200px h-lg-300px h-xl-300px overflow-auto errors" %>
+                                                                <p class="text-danger font-size-sm ms-invalid-feedback mt-1">
+                                                                    <span class ="err_content d-none"><%= Communication::Communication.human_attribute_name('content') %>  <%= t('errors.messages.blank') %></span>
+                                                                </p>
+                                                            </div>
+                                                            <!--end::Message--> 
+                                                        </div>
+                                                        <!--end::Body-->
+                                                        <!--begin::Actions-->
+                                                        <div class="mt-5 mb-10"> 
+                                                            <%= form.submit (t "btn.sent_btn"), :class => "btn btn-primary w-100 fw-bold px-6 mb-5" ,:id => "btn-communicaion"  %>
+                                                            <input type='reset' value='<%= t('btn.cancel') %>' class="btn btn-light w-100 fw-bold px-6 mb-5">
+                                                        </div>
+                                                        <!--end::Actions-->
+                                                    </div>
+                                                <% end %>
+                                                <!--end::Form-->
+                                            </div>  
+                                        </div>
+                                    </div>                                        
+                                </div>
+                            </div>
+                            <!--end::Content-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end::Container-->
+        </div>
+    </div>
+</div>
+<%= javascript_pack_tag "communication/communication.js" %>

@@ -1,0 +1,125 @@
+<!--begin::Header-->
+<% breadcrumbs_navigation_add (t ('kodawarione.sidebar.company_authority_permission')), '#' %>
+<%= render_partner_breadcrumbs_navigation(t ('kodawarione.sidebar.company_authority_permission')) %>		
+<!--end::Header-->
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+	<!--begin::Container-->
+	<div class="container-fluid" id="kt_content_container">
+		<!--begin::Tab Content-->
+		<div class="tab-content">
+			<!--begin::Tab pane-->
+			<div id="kt_project_users_card_pane" class="tab-pane fade show active">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-5 g-xl-9">
+          <% @kodawarione_company_roles.each do |role| %>
+            <% if role.id == 1 %>
+              <!--begin::Col-->
+              <div class="col-md-4">
+                <!--begin::Card-->
+                <div class="card card-flush bg-body">
+                    <!--begin::Card header-->
+                    <div class="card-header"> 
+                      <div class="card-title">
+                       <h2><%= t("company_user_roles.#{role.role_type}") %></h2>
+                      </div>
+                    </div>
+                    <!--end::Card header-->
+                    <!--begin::Card body-->
+                    <div class="card-body pt-1"> 
+                        <!--begin::Permissions-->
+                        <div class="d-flex flex-column text-gray-600">                            
+                          <%  @permission1.each do |role| %>
+                            <div class="d-flex align-items-center py-2">
+                              <span class="bullet <%= role.can == true ? "bg-primary" :  "" %> me-3 "></span> <span class="<%= role.can == true ? "text-primary fw-bolder" :  "" %>" ><%= role.permission_name %> </span>
+                            </div> 
+                          <% end %>
+                        </div>
+                        <!--end::Permissions-->
+                        <h4 class="text-center"><%= t 'text.can_access_all_permission' %></h4>
+                    </div>
+                    <!--end::Card body-->
+                </div>
+                <!--end::Card-->
+              </div>
+              <!--end::Col-->
+            <% elsif role.id == 2 %>
+              <!--begin::Col-->
+              <div class="col-md-4">
+                <!--begin::Card-->
+                <div class="card card-flush h-md-100 bg-body">
+                    <!--begin::Card header-->
+                    <div class="card-header"> 
+                      <div class="card-title">
+                        <h2><%= t("company_user_roles.#{role.role_type}") %></h2>
+                      </div>
+                    </div>
+                    <!--end::Card header-->
+                    <!--begin::Card body-->
+                    <div class="card-body pt-1"> 
+                        <!--begin::Permissions-->
+                        <div class="d-flex flex-column text-gray-600">                            
+                        <%  @permission2.each do |role| %>
+                          <div class="d-flex align-items-center py-2">
+                            <span class="bullet <%= role.can == true ? "bg-primary" :  "" %> me-3 "></span> <span class="<%= role.can == true ? "text-primary fw-bolder" :  "" %>" ><%= role.permission_name %> </span>
+                          </div> 
+                        <% end %>
+                        </div>
+                        <!--end::Permissions-->
+                    </div>
+                    <!--end::Card body-->
+                    <!--begin::Card footer-->
+                    <div class="card-footer flex-wrap pt-0">
+                      <%= link_to kodawarione_company_permission_categories_path(:com_role_id => role.id), :class=> 'btn btn-light btn-active-primary my-1 me-2' do %> 
+                        <%= t('role.title.choose_permission') %>
+                      <% end %>
+                    </div>
+                    <!--end::Card footer-->
+                </div>
+                <!--end::Card-->
+              </div>
+              <!--end::Col-->
+            <% else %>
+              <!--begin::Col-->
+              <div class="col-md-4">
+                <!--begin::Card-->
+                <div class="card card-flush h-md-100 bg-body">
+                    <!--begin::Card header-->
+                    <div class="card-header"> 
+                      <div class="card-title">
+                        <h2><%= t("company_user_roles.#{role.role_type}") %></h2>
+                      </div>
+                    </div>
+                    <!--end::Card header-->
+                    <!--begin::Card body-->
+                    <div class="card-body pt-1"> 
+                        <!--begin::Permissions-->
+                        <div class="d-flex flex-column text-gray-600">                            
+                        <%  @permission3.each do |role| %>
+                          <div class="d-flex align-items-center py-2">
+                            <span class="bullet <%= role.can == true ? "bg-primary" :  "" %> me-3 "></span> <span class="<%= role.can == true ? "text-primary fw-bolder" :  "" %>" ><%= role.permission_name %> </span>
+                          </div> 
+                        <% end %>
+                        </div>
+                        <!--end::Permissions-->
+                    </div>
+                    <!--end::Card body-->
+                    <!--begin::Card footer-->
+                    <div class="card-footer flex-wrap pt-0">
+                    <% if can?(:permission_categories, Kodawarione::CompanyRole)%>	
+                      <%= link_to kodawarione_company_permission_categories_path(:com_role_id => role.id), :class=> 'btn btn-light btn-active-primary my-1 me-2' do %> 
+                        <%= t('role.title.choose_permission') %>
+                      <% end %>
+                    <% end %>
+                    </div>
+                    <!--end::Card footer-->
+                </div>
+                <!--end::Card-->
+              </div>
+              <!--end::Col-->
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

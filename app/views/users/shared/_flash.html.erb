@@ -1,0 +1,31 @@
+<% if flash[:active_flag].present? %>
+    <div id="flash"  class="flash-container">
+          <div class="noti">
+            <div class="alert alert-danger" role="alert">
+              <%= flash[:active_flag] %>
+            </div>
+          </div>
+    </div>
+<% else %>
+    <% flash.each do |key, value| %>
+      <% if value != nil %>
+        <div id="flash"  class="flash-container">
+          <div class="noti">
+          <% unless key == 'timedout' || value == ''%>
+            <div class="alert <%= key == 'notice' ? 'alert-success' : 'alert-danger' %>" role="alert">
+              <%= value %>
+            </div>
+          <% end %>  
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+<% end %>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    setTimeout(function(){
+    $('#flash').fadeOut();
+    }, 5000);
+  })
+</script>

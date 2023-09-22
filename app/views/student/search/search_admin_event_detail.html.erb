@@ -1,0 +1,201 @@
+
+<div class="toolbar py-5 py-lg-5" id="kt_toolbar">
+  <!--begin::Container-->
+  <div id="kt_toolbar_container" class="container-xxl d-flex flex-stack flex-wrap">    
+    <!--begin::Breadcrumb-->          
+    <% breadcrumbs_navigation_add ((t'btn.kodawari_event_search')), student_admin_event_search_path if cookies[:previous_url] == "/student/admin_event_search" %>
+    <% breadcrumbs_navigation_add (t('common.join_event')), student_join_event_index_path if cookies[:previous_url] == "/student/join_event_index" %>
+    <% breadcrumbs_navigation_add (t('common.favourite_event')), student_favourite_event_index_path if cookies[:previous_url] == "/student/favourite_event_index" %>
+    <% breadcrumbs_navigation_add (t('event.title.kodawari_event_detail')),'#' %>
+    <%= render_student_breadcrumbs_navigation(t("event.title.kodawari_event_detail")) %>                 
+    <!--end::Breadcrumb-->
+  </div>
+</div>
+<!--end::Breadcrumb--> 
+<!--end::Breadcrumbs-->
+<div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
+  <!--begin::Post-->
+  <div class="content flex-row-fluid" id="kt_content">
+    <% if @join_event %>
+      <div class="notice d-flex bg-light-warning rounded border-warning border border-dashed rounded-3 p-6 mb-9">
+        <!--begin::Wrapper-->
+        <div class="d-flex flex-stack flex-grow-1">
+          <!--begin::Content-->
+          <div class="fw-bold">
+            <div class="fs-6 text-gray-800"><%= t("event.title.event_joint_cancel_notice") %></div>
+          </div>
+          <!--end::Content-->
+        </div>
+        <!--end::Wrapper-->
+      </div>
+    <% end %>
+    <!--begin::Layout-->
+    <div class="d-flex flex-column flex-lg-row">
+      <!--begin::Content-->
+      <div class="flex-lg-row-fluid order-2 order-lg-1 mb-10 mb-lg-0">
+        <!--begin::Post card-->
+        <div class="card card-flush">
+          <!--begin::Body-->
+          <div class="card-body">
+            <!--begin::Layout-->
+            <div class="d-flex flex-column flex-xl-row">
+              <!--begin::Content-->
+              <div class="flex-lg-row-fluid">
+                <div class="mb-8">
+                  <div class="d-flex align-items-center flex-wrap mt-3">
+                      <!--begin::Item-->
+                      <div class="d-flex align-items-center flex-lg-fill me-5 mb-2">
+                        <!--begin::Title-->
+                        <div class="text-dark text-hover-primary fs-2 fw-bolder"><%= @event_details.event_name %></div>
+                        <!--end::Title-->
+                        <div class="d-flex flex-column text-dart-75 ms-5 <%= "d-none" if check_event_avaliable(@event_details) %>">
+                          <span class="badge font-weight-lighter fs-8 min-w-125px w-125px badge-light-danger"><%= t('event.title.recuirment_full')  %></span>
+                        </div>
+                      </div>
+                      <!--end::Item-->
+                  </div>                  
+                  <!--begin::Container-->
+                  <div class="mt-8">
+                    <!--begin::Image-->
+                    <% if @event_details.event_image.attached? %>
+                      <div class="bgi-no-repeat bgi-position-center bgi-size-cover card-rounded min-h-350px" style="background-image: url(<%= url_for(@event_details.event_image) %>)"></div>
+                    <% end %>
+                    <!--end::Image-->
+                  </div>
+                  <!--end::Container-->
+                </div> 
+                <!--begin::Actions-->
+                <div class="d-flex justify-content-end my-5 <%= 'cursor-not-allowed' if @join_event %> <%= check_event_avaliable(@event_details) ? " " : "disable"  %>">                 
+                   <div id="join_admin_event" class="btn btn-light-primary <%= @join_event ? 'btn-secondary pe-none' : 'btn-light-primary' %>">
+                    <i class="fas fa-bookmark"></i><span class='label mx-5'><%= @join_event ? t("btn.joined-text") : t("btn.join-text") %></span>
+                  </div>
+                </div>   
+                <!--end::Actions-->            
+                <!--begin::Event Category-->
+                <% unless @event_details.category.nil?%>
+                  <!--begin::Info-->
+                  <div class="d-flex flex-wrap">
+                    <% @event_details.category.each do |v| %>
+                      <% if v != nil %>
+                        <!--begin::Item-->
+                        <div class="me-9 my-1">
+                          <!--begin::Icon-->
+                          <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                          <span class="svg-icon svg-icon-primary svg-icon-2 me-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                              <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
+                              <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
+                              <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
+                              <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
+                            </svg>
+                          </span>
+                          <!--end::Svg Icon-->
+                          <!--end::Icon-->
+                          <!--begin::Label-->
+                          <span class="fw-bolder text-gray-400"><%= t("event.category.#{Event.event_categories.key(v)}") %></span>
+                          <!--end::Label-->
+                        </div>
+                        <!--end::Item-->
+                      <% end %>      
+                    <% end %>
+                  </div>
+                  <!--end::Info-->
+                <% end %> 
+                <!--end::Event Category-->
+                <!--begin::Event Detail-->
+                <div class="d-flex flex-wrap py-5">
+									<!--begin::Row-->
+									<div class="flex-equal me-5">
+                    <table class="table fs-6 fw-bold gs-0 gy-2 gx-2 m-0">
+                      <!--begin::Row-->
+                      <tr>
+                        <td class="text-gray-400 min-w-175px w-175px"><%= Event.human_attribute_name('event_start_date') %>:</td>
+                        <td class="text-gray-800 min-w-200px">
+                          <span><%= l @event_details.event_start_date %><span class="fs-8 text-primary ms-2"><%= t('date.day_names')[@event_details.event_start_date.wday] %></span></span> 
+                        </td>
+                      </tr>
+                      <!--end::Row-->
+                      <!--begin::Row-->
+                      <tr>
+                        <td class="text-gray-400"><%= Event.human_attribute_name('event_end_date') %>:</td>
+                        <td class="text-gray-800">
+                          <span><%= l @event_details.event_end_date %><span class="fs-8 text-danger ms-2"><%= t('date.day_names')[@event_details.event_end_date.wday] %></span></span>
+                        </td>
+                      </tr>
+                      <!--end::Row-->
+                      <!--begin::Row-->
+                      <tr class="">
+                        <td class="text-gray-400"><%= Event.human_attribute_name('application_deadline')  %>:</td>
+                        <td class="text-gray-800">
+                          <span><%= l @event_details.application_deadline %><span class="fs-8 text-danger ms-2"><%= t('date.day_names')[@event_details.application_deadline.wday] %></span></span>
+                        </td>
+                      </tr>
+                      <!--end::Row-->                        
+                      <!--begin::Row-->
+                      <tr>
+                        <td class="text-gray-400"><%= Event.human_attribute_name('venue') %>:</td>
+                        <td class="text-gray-800"><%= @event_details.venue %></td>
+                      </tr>
+                      <!--end::Row-->
+                    </table> 
+                  </div> 
+                  <div class="flex-equal">
+                    <table class="table fs-6 fw-bold gs-0 gy-2 gx-2 m-0">
+                      <!--begin::Row-->
+                      <tr>
+                        <td class="text-gray-400 min-w-175px w-175px"><%= Event.human_attribute_name('post_start_date') %>:</td>
+                        <td class="text-gray-800 min-w-200px">
+                          <span><%= l @event_details.post_start_date %><span class="fs-8 text-primary ms-2"><%= t('date.day_names')[@event_details.post_start_date.wday] %></span></span>
+                        </td>
+                      </tr>
+                      <!--end::Row-->
+                      <!--begin::Row-->
+                      <tr>
+                        <td class="text-gray-400"><%= Event.human_attribute_name('post_end_date') %>:</td>
+                        <td class="text-gray-800"><span><%= l @event_details.post_end_date %><span class="fs-8 text-danger ms-2"><%= t('date.day_names')[@event_details.post_end_date.wday] %></span></span></td>
+                      </tr>
+                      <!--end::Row--> 
+                      <!--begin::Row-->
+                      <tr class="">
+                        <td class="text-gray-400"><%= Event.human_attribute_name('apply_event_limit') %>:</td>
+                        <td class="text-gray-800"><%= number_with_delimiter(@event_details.apply_event_limit) %> <%= t('unit.persons') %></td>
+                      </tr>
+                      <!--end::Row--> 
+                      <!--begin::Row-->
+                      <tr class="">
+                        <td class="text-gray-400"><%= t('event.title.publish_status') %>:</td>
+                        <td>
+                          <span class="badge font-weight-lighter fs-8 <%= check_event_avaliable(@event_details) ? "badge-light-success" : " badge-light-danger"  %>">
+                            <%= check_event_avaliable(@event_details) ?  t('event.title.event_in_progress') : t('event.title.recuirment_full')  %>
+                          </span>
+                        </td>
+                      </tr>
+                      <!--end::Row-->             
+                    </table>       
+                  </div>
+                  <!--begin::Description-->
+                  <% if @event_details.event_content.present? %>
+                    <div class="my-10"> 
+                      <h5 class=""><%= t('event.title.event_information') %></h5>
+                      <p class="fs-6 fw-bold pt-3 mb-0"><%= @event_details.event_content %></p>                    
+                    </div>  
+                  <% end %>
+                  <!--end::Description-->
+                </div>    
+                <!--end::Event details-->
+              </div>
+              <!--end::Content-->
+            </div>
+            <!--end::Layout-->
+          </div>
+          <!--end::Body-->
+        </div>
+        <!--end::Post card-->
+      </div>
+      <!--end::Content-->
+    </div>   
+  </div>  
+</div>    
+<%= hidden_field_tag(:event_id, @event_details.id) %>
+<%= javascript_pack_tag "student/students.js" %>
+

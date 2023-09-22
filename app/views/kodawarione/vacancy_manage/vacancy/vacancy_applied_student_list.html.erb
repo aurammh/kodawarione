@@ -1,0 +1,379 @@
+<!--begin::Header-->
+<% breadcrumbs_navigation_add (t('vacancy detail')), kodawarione_vacancy_manage_search_vacancy_detail_path %>
+<% breadcrumbs_navigation_add (t ('applied student list')), '#' %>
+<%= render_partner_breadcrumbs_navigation(t ('applied student list')) %>		
+<!--end::Header-->
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+	<!--begin::Container-->
+	<div class="container-fluid" id="kt_content_container">
+        <div class="card mb-12 bg-body">
+            <!--begin::Hero body-->
+            <div class="card-body flex-column p-5">
+                <!--begin::Hero content-->
+                <div class="d-flex align-items-center h-lg-150px p-5">
+                    <!--begin::Wrapper-->
+                    <div class="d-flex flex-column align-items-start justift-content-center flex-equal">
+                        <!--begin::Title-->
+                        <h1 class="fw-bolder fs-4 fs-lg-1 text-gray-800"><%= @company_vacancy_list.vacancy_title %></h1>
+                        <!--end::Title-->
+                        <div class="d-flex flex-wrap mb-6">
+                            <!--begin::Item-->
+                            <div class="me-9 my-1">
+                                <!--begin::Icon-->
+                                <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                                <span class="svg-icon svg-icon-primary svg-icon-2 me-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <rect x="2" y="2" width="9" height="9" rx="2" fill="black"></rect>
+                                        <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black"></rect>
+                                        <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black"></rect>
+                                        <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black"></rect>
+                                    </svg>
+                                </span>
+                                <!--end::Svg Icon-->
+                                <!--end::Icon-->
+                                <!--begin::Label-->
+                                <span class="fw-bolder text-gray-400"><%= @company_vacancy_list.industry_name %></span>
+                                <!--end::Label-->
+                            </div>
+                            <!--end::Item-->
+                            <!--begin::Item-->
+                            <div class="me-9 my-1">
+                                <!--begin::Icon-->
+                                <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                                <span class="svg-icon svg-icon-primary svg-icon-2 me-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <rect x="2" y="2" width="9" height="9" rx="2" fill="black"></rect>
+                                        <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black"></rect>
+                                        <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black"></rect>
+                                        <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black"></rect>
+                                    </svg>
+                                </span>
+                                <!--end::Svg Icon-->
+                                <!--end::Icon-->
+                                <!--begin::Label-->
+                                <span class="fw-bolder text-gray-400"><%= number_with_delimiter(@company_vacancy_list.basic_salary) %> <%= t 'unit.money'%></span>
+                                <!--end::Label-->
+                            </div>
+                            <!--end::Item-->
+                            <!--begin::Item-->
+                            <div class="me-9 my-1">
+                                <!--begin::Icon-->
+                                <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                                <span class="svg-icon svg-icon-primary svg-icon-2 me-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <rect x="2" y="2" width="9" height="9" rx="2" fill="black"></rect>
+                                        <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black"></rect>
+                                        <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black"></rect>
+                                        <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black"></rect>
+                                    </svg>
+                                </span>
+                                <!--end::Svg Icon-->
+                                <!--end::Icon-->
+                                <!--begin::Label-->
+                                <span class="fw-bolder text-gray-400"><%= number_with_delimiter(@company_vacancy_list.required_applicants) %> <%= t 'unit.persons'%></span>
+                                <!--end::Label-->
+                            </div>
+                            <!--end::Item-->
+                        </div>
+                    </div>
+                    <!--end::Wrapper-->
+                </div>
+                <!--end::Hero content-->
+                <!--begin::Hero nav-->
+                <div class="card-rounded bg-light d-flex flex-stack flex-wrap p-5 mx-4">
+                    <!--begin::Nav-->
+                    <ul class="nav flex-wrap border-transparent fw-bolder">
+                        <!--begin::Nav item-->
+                        <% if can? :read, @company_vacancy_list %>
+                            <li class="nav-item my-1">
+                                <%= link_to "Overview", kodawarione_vacancy_manage_search_vacancy_detail_path(@company_vacancy_list), class: "btn btn-color-gray-600 btn-active-white btn-active-color-primary fw-boldest fs-8 fs-lg-base nav-link px-3 px-lg-8 mx-1 #{company_active_url?(kodawarione_vacancy_manage_search_vacancy_detail_path(@company_vacancy_list))}" %>
+                            </li>
+                        <% end %>
+                        <!--end::Nav item-->
+                        <!--begin::Nav item-->
+                        <% if can? :vacancy_applied_student_list, @company_vacancy_list %>
+                            <li class="nav-item my-1">
+                                <%= link_to "Apply List", kodawarione_vacancy_manage_vacancy_applied_student_list_path(@company_vacancy_list), class: "btn btn-color-gray-600 btn-active-white btn-active-color-primary fw-boldest fs-8 fs-lg-base nav-link px-3 px-lg-8 mx-1 #{company_active_url?(kodawarione_vacancy_manage_vacancy_applied_student_list_path(@company_vacancy_list))}" %>
+                            </li>
+                        <% end %>
+                        <!--end::Nav item-->
+                    </ul>
+                    <!--end::Nav-->
+                    <!--begin::Action-->
+                    <% if can? :update, @company_vacancy_list %>
+                        <%# link_to (t 'btn.edit'), edit_company_vacancy_path(@company_vacancy_list) , class: "btn btn-primary fw-bolder fs-8 fs-lg-base" %> 
+                    <% end %>
+                    <!--end::Action-->
+                </div>
+                <!--end::Hero nav-->
+            </div>
+            <!--end::Hero body-->
+        </div>
+        <% if @vacancy_applied_student_list.present? %>
+            <!--begin::Event Tables Widget -->
+            <div class="card bg-body d-none d-sm-none d-md-none d-lg-block d-xl-block mb-5 mb-xl-10">
+                <!--begin::Header-->
+                <div class="card-header border-0 pt-5">
+                    <h3 class="card-title align-items-start flex-column">
+                        <span class="card-label fw-bolder fs-3 mb-1"><%= t('common.applied_vacancy') %></span>
+                        <span class="text-muted mt-1 fw-bold fs-7"><%= @vacancy_applied_student_list.size %> <%= t('common.student_total_count') %></span>
+                    </h3>
+                    <!--
+                    <div class="card-toolbar">
+                        <ul class="nav " >
+                            <li class="nav-item">  
+                                <%= link_to company_vacancy_applied_student_list_path,class: "nav-link btn btn-sm btn-color-muted btn-active btn-active-secondary fw-bolder px-4 me-1 text-primary"   do %>  
+                                <%= t('status.all')%>
+                                <% end %>
+                            </li>
+                            <li class="nav-item">
+                                <%= link_to company_vacancy_applied_student_list_path(apply_status: 1) ,class: "nav-link btn btn-sm btn-color-muted btn-active btn-active-secondary fw-bolder px-4 me-1 #{current_page?(company_vacancy_applied_student_list_path(apply_status: 1) ) ? "active" : nil}"   do %> 
+                                    <%= t('status.not_yet')%>
+                                <% end %>
+                            </li>
+                            <li class="nav-item">
+                                <%= link_to company_vacancy_applied_student_list_path(apply_status: 2) ,class: "nav-link btn btn-sm btn-color-muted btn-active btn-active-secondary fw-bolder px-4 me-1 #{current_page?(company_vacancy_applied_student_list_path(apply_status: 2) ) ? "active" : nil}"   do %> 
+                                    <%= t('status.replied')%>
+                                <% end %>
+                            </li>
+                            <li class="nav-item">
+                                <%= link_to company_vacancy_applied_student_list_path(apply_status: 3) ,class: "nav-link btn btn-sm btn-color-muted btn-active btn-active-secondary fw-bolder px-4 me-1 #{current_page?(company_vacancy_applied_student_list_path(apply_status: 3) ) ? "active" : nil}"   do %> 
+                                    <%= t('status.rejected')%>
+                                <% end %>
+                            </li>
+                        </ul>  
+                    </div> -->
+                </div>
+                <!--end::Header-->
+                <!--begin::Body-->
+                <div class="card-body py-3">
+                    <!--begin::Table container-->
+                    <div class="table-responsive  overflow-auto">
+                        <!--begin::Table-->
+                        <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
+                            <!--begin::Table head-->
+                            <thead>
+                                <tr class="fw-bolder text-muted">
+                                    <th class="min-w-140px"><%= t('student.student_show.name')%></th>
+                                    <th class="min-w-120px"><%= Student::Student.human_attribute_name('school_type') %></th>
+                                    <th class="min-w-120px"><%= Student::Student.human_attribute_name('graduation_date') %></th>
+                                    <th class="pe-0 min-w-120px"><%= Company::Vacancy.human_attribute_name('vacancy_title') %></th>
+                                </tr>
+                            </thead>
+                            <!--end::Table head-->
+                            <!--begin::Table body-->
+                            <tbody>
+                                <% @vacancy_applied_student_list.each do |student| %>
+                                    <tr>
+                                        <td class="">
+                                            <div class="d-flex align-items-center">
+                                                <!--begin:: Avatar -->
+                                                <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
+                                                    <% if student.image.attached? %>
+                                                    <%= image_tag (student.image), :class=> "symbol-label" %>
+                                                    <% else %>
+                                                        <% if student.gender == "female" %>
+                                                            <%= image_tag "avatar/female.svg", :class=> "symbol-label" %>                                
+                                                        <% else %>
+                                                            <%= image_tag "avatar/male.svg", :class=> "symbol-label" %>   
+                                                        <% end %>
+                                                    <% end %> 
+                                                </div>
+                                                <!--end::Avatar-->
+                                                <!--begin::User details-->
+                                                <div class="d-flex flex-column w-lg-75px w-xl-250px text-truncate">
+                                                    <span class="text-gray-800 mb-1">
+                                                        <%= student.nick_name %>
+                                                    </span>
+                                                    <span class="text-muted fw-bold text-muted d-block fs-7"><%= student.apply_status == 1 ? '-' : student.user.email %></span>
+                                                </div>
+                                                <!--begin::User details-->
+                                            </div>
+                                        </td>
+                                        <td class="w-lg-120px w-xl-250px">
+                                            <span class="text-muted fw-bold d-block fs-6 w-lg-120px w-xl-100px text-truncate"><%= student.apply_status == 1 ? '-' : get_school_type(student.school_type) %></span>
+                                        </td>
+                                        <td class="w-lg-100px w-xl-250px">
+                                            <span class="text-muted fw-bold d-block fs-6"><%= student.apply_status == 1 ? '-' : get_graduation_date(student.graduation_date) %></span>
+                                        </td>   
+                                        <td class="w-lg-100px w-xl-250px">
+                                            <% unless  student.apply_status == 1 %>
+                                            <span class="text-muted fw-bold d-block fs-6 w-lg-100px w-xl-120px text-truncate"><%= student.vacancy_title.present??  student.vacancy_title : "-" %></span>
+                                            <% end %>
+                                        </td>                                  
+                                    </tr>
+                                <% end %>
+                            </tbody>
+                            <!--end::Table body-->
+                        </table>
+                        <!--end::Table-->
+                    </div>
+                    <!--end::Table container-->
+                </div> 
+                <!--end::Body-->
+            </div>
+            <!--end::Event Tables Widget --> 
+        <% else %>
+            <div class="card bg-body d-none d-sm-none d-md-none d-lg-block d-xl-block mb-5 mb-xl-10">
+                <!--begin::Header-->
+                <div class="card-header border-0 pt-5">
+                    <h3 class="card-title align-items-start flex-column">
+                        <span class="card-label fw-bolder fs-3 mb-1"><%= t('common.applied_vacancy') %></span>
+                        <span class="text-muted mt-1 fw-bold fs-7"><%= @vacancy_applied_student_list.size %> <%= t('common.student_total_count') %></span>
+                    </h3> 
+                    <div class="card-toolbar">
+                        <ul class="nav " >
+                            <li class="nav-item">  
+                                <%= link_to company_vacancy_applied_student_list_path,class: "nav-link btn btn-sm btn-color-muted btn-active btn-active-secondary fw-bolder px-4 me-1 text-primary"   do %>  
+                                <%= t('status.all')%>
+                                <% end %>
+                            </li>
+                            <li class="nav-item">
+                                <%= link_to company_vacancy_applied_student_list_path(apply_status: 1) ,class: "nav-link btn btn-sm btn-color-muted btn-active btn-active-secondary fw-bolder px-4 me-1 #{current_page?(company_vacancy_applied_student_list_path(apply_status: 1) ) ? "active" : nil}"   do %> 
+                                    <%= t('status.not_yet')%>
+                                <% end %>
+                            </li>
+                            <li class="nav-item">
+                                <%= link_to company_vacancy_applied_student_list_path(apply_status: 2) ,class: "nav-link btn btn-sm btn-color-muted btn-active btn-active-secondary fw-bolder px-4 me-1 #{current_page?(company_vacancy_applied_student_list_path(apply_status: 2) ) ? "active" : nil}"   do %> 
+                                    <%= t('status.replied')%>
+                                <% end %>
+                            </li>
+                            <li class="nav-item">
+                                <%= link_to company_vacancy_applied_student_list_path(apply_status: 3) ,class: "nav-link btn btn-sm btn-color-muted btn-active btn-active-secondary fw-bolder px-4 me-1 #{current_page?(company_vacancy_applied_student_list_path(apply_status: 3) ) ? "active" : nil}"   do %> 
+                                    <%= t('status.rejected')%>
+                                <% end %>
+                            </li>
+                        </ul>  
+                    </div>
+                </div>
+                <!--end::Header-->
+                <!--begin::Card body-->
+                <div class="card-body p-0">
+                    <!--begin::Wrapper-->
+                    <div class="card-px text-center py-2 my-5">
+                        <!--begin::Title-->
+                        <h3 class="fs-3 fw-bolder mb-5"><%= t('common.applied_vacancy') %></h3>
+                        <!--end::Title-->
+                        <!--begin::Description-->
+                        <p class="text-gray-400 fs-7 fw-bold mb-10"><%= t('common.applied_company_list_empty') %></p>
+                        <!--end::Description-->
+                    </div>
+                    <!--end::Wrapper-->
+                </div>
+                <!--end::Card body-->
+            </div> 
+        <% end %>
+        <!--begin::Applied Job Approval List Mobile-->
+        <% if @vacancy_applied_student_list.present? %>
+            <div class="card d-lg-none mb-5 mb-xl-10">
+                <!--begin::Header-->
+                    <div class="d-flex flex-stack pt-4">
+                        <div class="d-flex align-items-center">
+                            <h3 class="d-flex card-title align-items-start flex-column">
+                                <span class="card-label fw-bolder fs-3 mb-1"><%= t('common.applied_vacancy') %></span>
+                                <span class="text-muted mt-1 fw-bold fs-7"><%= @vacancy_applied_student_list.size %> <%= t('common.student_total_count') %></span>
+                            </h3>
+                        </div>
+                        <div class="d-flex justify-content-end flex-shrink-0">
+                            <div class="card-toolbar">
+                                <%= form_with(url: company_vacancy_applied_student_list_path, method: :get) do |form| %>
+                                    <div class="d-flex align-items-center my-3 m-8">
+                                        <%= form.select(:apply_status, options_for_select(VacancyApplyFavourite.apply_status_attributes_for_select,params[:apply_status]),{:include_blank => (t'status.all')}, {:class => "form-control form-select form-select-lg form-select-solid bg-body", :id => "select_2_2", :onchange => 'this.form.submit()', :data => { :control => 'select2', 'hide-search' => true } }) %> 
+                                    </div>
+                                <% end %>
+                            </div>
+                        </div>
+                    </div>
+                <!--end::Header-->
+                <!--begin::Body-->
+                <% @vacancy_applied_student_list.each do |student| %>
+                    <div class="col-xxl-4">
+                        <%= link_to (company_vacancy_path(:id => student.company_vacancy_id)) do %>
+                            <div class="card bg-body card-custom gutter-b card-stretch mb-3 mb-xl-10">
+                                <div class="card-body pt-4">
+                                    <div class='row'>
+                                        <div class="col-6">
+                                            <div class="d-flex align-items-center">
+                                                <!--begin:: Avatar -->
+                                                <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
+                                                    <div class="symbol-label">
+                                                        <% if student.image.attached? %>
+                                                        <%= image_tag (student.image), :class=> "w-100" %>
+                                                        <% else %>
+                                                            <% if student.gender == "female" %>
+                                                                <%= image_tag "avatar/female.svg", :class=> "Responsive image" %>                                
+                                                            <% else %>
+                                                                <%= image_tag "avatar/male.svg", :class=> "Responsive image" %>   
+                                                            <% end %>
+                                                        <% end %> 
+                                                    </div>
+                                                </div>
+                                                <!--end::Avatar-->
+                                                <!--begin::User details-->
+                                                <div class="d-flex flex-column" style="flex: 0 0 190%; min-width: 0;">
+                                                    <span class="text-gray-800 mb-1">
+                                                        <%= student.nick_name.truncate(10) %>
+                                                    </span> 
+                                                    <span class="text-gray-500 fw-bold fs-7" style=" overflow: hidden;  text-overflow: ellipsis; white-space: nowrap;"><%= student.vacancy_title %></span>
+                                                </div>
+                                                <!--end::User details-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <% end %>
+                    </div>
+                <% end %>
+                <!--end::Body-->
+            </div>
+        <% else %>
+            <!--begin::Event Tables Widget -->
+            <div class="card bg-body d-lg-none mb-5 mb-xl-10">
+                <!--begin::Header-->
+                <div class="card-header border-0 pt-5">
+                    <h3 class="card-title align-items-start flex-column">
+                        <span class="card-label fw-bolder fs-3 mb-1"><%= t('common.applied_vacancy') %></span>
+                        <span class="text-muted mt-1 fw-bold fs-7"><%= @vacancy_applied_student_list.size %> <%= t('common.student_total_count') %></span>
+                    </h3>
+                    <div class="card-toolbar">
+                        <%= form_with(url: company_vacancy_applied_student_list_path, method: :get) do |form| %>
+                            <div class="d-flex align-items-center my-3">
+                                <%= form.select(:apply_status, options_for_select(VacancyApplyFavourite.apply_status_attributes_for_select,params[:apply_status]),{:include_blank => (t'status.all')}, {:class => "form-control form-select form-select-lg form-select-solid", :id => "select_2_1", :onchange => 'this.form.submit()', :data => { :control => 'select2', 'hide-search' => true }}) %> 
+                            </div>
+                        <% end %>
+                    </div>
+                </div>
+                <!--end::Header-->
+                <!--begin::Card body-->
+                <div class="card-body p-0">
+                    <!--begin::Wrapper-->
+                    <div class="card-px text-center py-2 my-5">
+                        <!--begin::Title-->
+                        <h3 class="fs-3 fw-bolder mb-5"><%= t('common.applied_vacancy') %></h3>
+                        <!--end::Title-->
+                        <!--begin::Description-->
+                        <p class="text-gray-400 fs-7 fw-bold mb-10"><%= t('common.applied_company_list_empty') %></p>
+                        <!--end::Description-->
+                    </div>
+                    <!--end::Wrapper-->
+                </div>
+                <!--end::Card body-->
+            </div>
+            <!--end::Event Tables Widget -->
+        <% end %>  
+        <!--end::Applied Job Approval List Mobile-->  
+        <!--begin:: Pagination-->
+        <div class="d-flex flex-wrap justify-content-between align-items-center">
+            <div class="d-flex flex-wrap py-2 ml-3">
+                <%= paginate @vacancy_applied_student_list %>
+            </div>
+            <div class="d-flex align-items-center py-3">
+                <span class="text-muted">Showing <%= @vacancy_applied_student_list.offset_value + 1 %> - <%=  @vacancy_applied_student_list.offset_value + @vacancy_applied_student_list.count %> of <%= @vacancy_applied_student_list.total_count %></span>
+            </div>
+        </div>	
+        <!--end: Pagination-->
+    </div>
+</div>
+<%= javascript_pack_tag 'common.js'%>

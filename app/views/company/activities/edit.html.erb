@@ -1,0 +1,6 @@
+<!--begin::Breadcrumb-->
+<% breadcrumbs_navigation_add (t ('student_commitment.menu.create_company_page')), '#' %>
+<%= render_company_breadcrumbs_navigation(t('activity.title')) %>
+<!--end::Breadcrumb-->
+<%= render 'form', company_activity: @company_activity %>
+

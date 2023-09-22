@@ -1,0 +1,51 @@
+<%= form_for(@admin_news) do |form| %>
+  <div class="row col-12 event-registration admin-detail px-1 px-sm-4 mt-3">  
+    <section class="col-md-12 mb-5 pl-5">
+      <div class="d-container shadow py-4 bg-white" style="border-radius: 0.8rem">
+        <div class="col-12 pb-4 pt-3">
+          <span class="h4 admin-font-color"><%= t('admin.news.news_information')%></span>
+        </div>
+        <div class="col-12 mb-3">
+          <div class="d-flex">
+            <%= form.label :title, class: "form-label"  %>
+            <label class="ml-auto required-label"> <%= t('common.require') %> </label>
+          </div>
+          <%= form.text_field :title, id: "title",class: "form-control shadow-none errors", maxlength: 255 %>
+          <p class="ms-invalid-feedback mt-1"><%= @admin_news.errors.full_messages_for(:title)[0] %></p>                                  
+        </div>
+
+        <div class="col-12 mb-3">
+          <div class="d-flex">
+            <%= form.label :news_type, class: "form-label"  %>
+            <label class="ml-auto required-label"> <%= t('common.require') %> </label>
+          </div>
+            <%= form.select(:news_type, news_categories,{:include_blank => ( t'select.not_select')}, {:class => "form-control shadow-none errors", :id =>"news-type"}) %>
+            <p class="ms-invalid-feedback mt-1"><%= @admin_news.errors.full_messages_for(:news_type)[0] %></p>                                 
+        </div>
+
+        <div class="col-12 mb-3 news-other-type">
+          <div class="d-flex">
+            <%= form.label :other, class: "form-label"  %>
+            <label class="ml-auto required-label"> <%= t('common.require') %> </label>
+          </div>
+            <%= form.text_area :other, class: "form-control shadow-none errors", rows: 2, maxlength: 255%>
+            <p class="ms-invalid-feedback mt-1"><%= @admin_news.errors.full_messages_for(:other)[0] %></p>                                 
+        </div>
+        
+        <div class="col-12 mb-3">
+          <div class="d-flex">
+            <%= form.label :content, class: "form-label"  %>
+            <label class="ml-auto required-label"> <%= t('common.require') %> </label>
+          </div>
+            <%= form.rich_text_area :content, id: "content",class: "shadow-none errors"%>
+          <p class="ms-invalid-feedback mt-1"><%= @admin_news.errors.full_messages_for(:content)[0] %></p>                                  
+        </div>
+      </div>        
+      <div class="actions d-flex justify-content-center mt-5">
+        <%= form.submit (t "btn.update"), :class => 'custom-btn text-white' %>
+      </div> 
+    </section> 
+  </div>  
+<% end %>
+
+<%= javascript_pack_tag "common.js" %>

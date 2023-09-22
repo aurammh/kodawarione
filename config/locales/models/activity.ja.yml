@@ -1,0 +1,19 @@
+ja:
+  activerecord:
+    models:
+      company/activity: company_activity
+    attributes:
+      company/activity:
+        title: タイトル
+        desc: 動画内容
+        video_clip: 動画アップロード
+        thumbnail: サムネイル
+  activity:
+    title: こだわり動画
+    no_data_text: 該当データはありません。
+    subtitle: あなたの会社の魅力をオリジナルの映像でアピールしましょう。
+    btn:
+      new_activity: 動画アップロード
+      show: 情報
+      accept: 承認
+      deny: 辞退

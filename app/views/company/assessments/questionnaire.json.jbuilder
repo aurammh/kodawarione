@@ -1,0 +1,1 @@
+json.partial! "company/assessments/questionnaires_data", questionnaires_data: @questionnaires_data, company_assessment: @company_assessment, questionnaire_permission: @questionnaire_permission, index_permission: @index_permission, create_permission: @create_permission, update_permission: @update_permission

@@ -1,0 +1,143 @@
+<!--begin::Header-->
+<% breadcrumbs_navigation_add (t('event.title.event_entry_list_tilte')), company_events_path if cookies[:previous_url] == '/company/events' || cookies[:previous_url] == '/company/select_past_events' %>
+<% breadcrumbs_navigation_add (t('event.title.past_event')), company_select_past_events_path if cookies[:previous_url] == '/company/select_past_events' %> 
+<% breadcrumbs_navigation_add (t('event.title.event_information')),'#' %>
+<%= render_company_breadcrumbs_navigation(t("event.title.event_information")) %>
+<!--end::Header-->
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+  <!--begin::Container-->
+  <div class="container-xxl" id="kt_content_container">
+    <%= render "company/shared/events/event_detail_banner" %>    
+    <!--begin::Post card-->
+    <div class="card bg-body rounded-top-0 mb-5 mb-xl-10">
+      <!--begin::Body-->
+      <div class="card-body p-lg-10 py-lg-0">
+        <!--begin::Layout-->
+        <div class="d-flex flex-column flex-xl-row">
+          <!--begin::Content-->
+          <div class="flex-lg-row-fluid">
+            <!--begin::Event Category-->
+            <div class="mb-8">              
+              <!--begin::Container-->
+              <div class="mt-8">
+                <!--begin::Image-->
+                <% if @company_event.event_image.attached? %>
+                  <div class="bgi-no-repeat bgi-position-center bgi-size-cover card-rounded min-h-350px" style="background-image: url(<%= url_for(@company_event.event_image) %>)"></div>
+                <% end %>
+                <!--end::Image-->
+              </div>
+              <!--end::Container-->
+            </div>
+            <!--begin::Event details-->
+            <div class="row">
+              <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 my-3">
+                <div class="text-dark fs-6 fw-bolder"><%= t('event.title.post_date')  %></div>
+                <div class="d-flex flex-wrap my-3">
+                  <!--begin::Due-->
+                  <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-7 mb-3">
+                    <div class="fs-6 text-gray-800 fw-bolder"><%= l @company_event.post_start_date %><span class="text-primary ms-2 fs-8"><%= t('date.day_names')[@company_event.post_end_date.wday] %></span></div>
+                    <div class="fw-bold text-gray-400"><%= Event.human_attribute_name('post_start_date') %></div>
+                  </div>
+                  <!--end::Due-->
+                  <!--begin::Budget-->
+                  <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 mb-3">
+                    <div class="fs-6 text-gray-800 fw-bolder"><%= l @company_event.post_end_date %><span class="text-primary ms-2 fs-8"><%= t('date.day_names')[@company_event.post_end_date.wday] %></span></div>
+                    <div class="fw-bold text-gray-400"><%= Event.human_attribute_name('post_end_date') %></div>
+                  </div>
+                  <!--end::Budget-->
+                </div>
+              </div>
+              <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 my-3">
+                <div class="text-dark fs-6 fw-bolder"><%= t('event.title.event_date')  %></div>
+                <div class="d-flex flex-wrap my-3">
+                  <!--begin::Due-->
+                  <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-7 mb-3">
+                    <div class="fs-6 text-gray-800 fw-bolder"><%= l @company_event.event_start_date %><span class="text-primary ms-2 fs-8"><%= t('date.day_names')[@company_event.event_start_date.wday] %></span></div>
+                    <div class="fw-bold text-gray-400"><%= Event.human_attribute_name('event_start_date') %></div>
+                  </div>
+                  <!--end::Due-->
+                  <!--begin::Budget-->
+                  <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 mb-3">
+                    <div class="fs-6 text-gray-800 fw-bolder"><%= l @company_event.event_end_date %><span class="text-primary ms-2 fs-8"><%= t('date.day_names')[@company_event.event_end_date.wday] %></span></div>
+                    <div class="fw-bold text-gray-400"><%= Event.human_attribute_name('event_end_date') %></div>
+                  </div>
+                  <!--end::Budget-->
+                </div>
+              </div>
+              <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 my-3">
+                <div class="text-dark fs-6 fw-bolder"><%= t('event.title.application_period')  %></div>
+                <!--begin::Due-->
+                <div class="d-flex flex-wrap my-3">
+                  <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-7 mb-3">
+                    <div class="fs-6 text-gray-800 fw-bolder"><%= l @company_event.application_start_date %><span class="text-primary ms-2 fs-8"><%= t('date.day_names')[@company_event.application_start_date.wday] %></span></div>
+                    <div class="fw-bold text-gray-400"><%= Event.human_attribute_name('application_start_date') %></div>
+                  </div>
+                  <!--end::Due-->
+                  <!--begin::Budget-->
+                  <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 mb-3">
+                    <div class="fs-6 text-gray-800 fw-bolder"><%= l @company_event.application_deadline %><span class="text-primary ms-2 fs-8"><%= t('date.day_names')[@company_event.application_deadline.wday] %></span></div>
+                    <div class="fw-bold text-gray-400"><%= Event.human_attribute_name('application_deadline') %></div>
+                  </div>
+                  <!--end::Budget-->
+                </div>
+              </div>
+              <div class="d-flex flex-wrap col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 my-3">
+                <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 my-3">
+                  <div class="text-dark fs-6 fw-bolder"><%= Event.human_attribute_name('apply_event_limit')  %></div>
+                  <div class="d-flex align-items-center flex-wrap mt-3">
+                    <!--begin::Item-->
+                    <div class="d-flex align-items-center flex-lg-fill me-5 mb-2">
+                      <span class="me-4">
+                        <i class="flaticon-users display-6 text-muted font-weight-bold"></i>
+                      </span>
+                      <div class="d-flex flex-column text-dart-75">
+                        <span class="fw-bolder">
+                            <%= number_with_delimiter(@company_event.apply_event_limit) %> <%= t('unit.persons') %>
+                        </span>
+                      </div>
+                    </div>
+                    <!--end::Item-->
+                  </div>
+                </div>
+                <div class="flex-grow-1 col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 my-3 text-left">
+                  <div class="text-dark fs-6 fw-bolder"><%= Event.human_attribute_name('venue')  %></div>
+                  <div class="d-flex align-items-center flex-wrap mt-3">
+                    <!--begin::Item-->
+                    <div class="d-flex align-items-center flex-lg-fill me-5 mb-2">
+                      <span class="me-4">
+                        <i class="flaticon2-location display-6 text-muted font-weight-bold"></i>
+                      </span>
+                      <div class="d-flex flex-column text-dart-75">
+                          <span class="fw-bolder">
+                              <%= @company_event.venue.present? ? @company_event.venue : t("event.venue_types.online") %> 
+                          </span>
+                      </div>
+                    </div>
+                    <!--end::Item-->
+                  </div>
+                </div>
+              </div>
+              <div class="fs-5 fw-bold text-gray-600">
+                <div class="text-dark fs-6 fw-bolder"><%= Event.human_attribute_name('event_content')  %></div>
+                <p><%= @company_event.event_content %></p>
+              </div>
+            </div>
+          </div>
+          <!--end::Content-->
+        </div>
+        <!--end::Layout-->
+      </div>
+      <!--end::Body-->
+      <!--begin::Modal-->
+      <div class="card-footer border-0">
+        
+      </div>
+      <!--end::Modal-->
+    </div>
+    <!--end::Post card-->
+  </div>
+  <!--end::Container-->
+</div>
+<!--end::Content-->
+<%= render "users/shared/toastr" %>

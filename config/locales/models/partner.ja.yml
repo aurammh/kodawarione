@@ -1,0 +1,226 @@
+ja:
+  activerecord:
+    models:
+      partner/partner: partner
+    attributes:
+      partner/partner:
+        name: パートナー名
+        partner_code: コード
+        address: 町/丁目/番地
+        display_address: 現住所
+        website_url: ウェブサイトのURL
+        phone_no: 連絡先
+        postal_code: 郵便番号
+        region_name: エリア
+        m_region_id: エリア
+        m_prefecture_id: 都道府県名
+        prefecture_name: 都道府県名
+        postalcode_city: 市区町村
+        partner_user:
+        first_name: 名（漢字）
+        last_name: 姓（漢字）
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワードの確認
+      partner/news: #add by nla
+        title: タイトル
+        content: お知らせ内容
+        news_type: タイプ
+        show_option: 対象者
+        other: その他内容
+      partner/article:
+        title: タイトル
+        content: 記事内容
+        video_link: 動画リンク
+        show_option: 対象者
+      partner/contract:
+        company_id: 企業名
+        start_date: 開始日
+        end_date: 終了日
+        training_start_date: 研修開始日
+        training_end_date: 研修終了日
+        partner_plan_id: プラン
+        payment_type: 支払い方法
+        training_period: 研修契約期間
+        contract_period: 契約期間
+      partner/partner_plan:
+        name: プラン
+        content: 内容
+        fee: 料金
+        partner_fee_string: 料金
+      partner/partner_recruiter_support:
+        partner_id: 担当者名
+        company_name: 企業
+        student_name: 学生
+        contact_date: 入社年月日
+        support_from_date: サポート期間（開始）
+        support_end_date: サポート期間（終了）
+      partner/partner_recruiter_schedule:
+        content: 内容詳細
+        contact_date: 連絡日
+        contact_type: 連絡手段
+        contact_detail: 連絡内容
+  errors:
+    attributes:
+      category:
+        blank: 'を選択してください。'
+    messages:
+      blank: 'を入力してください。'
+      invalid: '無効です。'
+  partner:
+    message_tab: メッセージ
+    partners_tab: パートナー
+    partners_tab1: パートナー管理
+    super_partners_tab: スーパーパートナー
+    super_partners_tab1: スーパーパートナー管理
+    super_user: ユーザ
+    super_user_created: ユーザ作成
+    partners_entry_search: パートナー作成
+    super_partners_entry_search: スーパーパートナー作成
+    partners_event_search: イベント一覧
+    partners_user_tab: ユーザー
+    partners_user_entry_search: ユーザー作成
+    copy_link_popup: 登録紹介リンクを取得
+    setting:
+      title: パートナー設定
+      basic_info: 基本情報
+    article_show_options:
+      student: "学生"
+      company: "企業"
+      both: "両方"
+    title:
+      event_header: イベント作成
+      partner_information: パートナー情報
+      super_partner_information: スーパーパートナー情報
+      name: パートナー名
+      prefecture_name: 都道府県名
+      website_url: ウェブサイトのURL
+      current_address: 現住所
+      copy_link_popup: 登録紹介リンクを取得
+      student_signup_link: 学生さんの紹介リンクを取得
+      company_signup_link: 企業様の紹介リンクを取得
+    partner_user:
+      btn_goto: 'パートナーのユーザー'
+      title:
+        name: ユーザー名
+        email: メールアドレス
+        partner_user_information: ユーザー情報
+        user_list: ユーザー一覧
+        user_show: ユーザー詳細
+    placeholder:
+    category:
+      com_info_explancation: 企業説明会（単独）
+      related_com_explanation: 合同説明会
+      internship: インターンシップ
+      part_time_job_recruit: アルバイト募集
+      seminar_recruit: セミナー
+      sponsored_recruit: スポンサー募集
+      marketing: マーケティング
+      other_session: その他
+    tooltip:
+      copied_text: コピー済
+    btn:
+      link_copy: リンクをコピー
+  search:
+    event_count_title: イベント検索結果
+    remove_past_event: 募集中のイベントのみ表示
+  partner_news:
+    title:
+      header: メンバー
+      management: 企業メンバー管理
+      news: お知らせ
+      news_list: お知らせ一覧
+      news_show: お知らせ詳細
+      news_dashboard_title: お知らせ情報
+      news_edit: お知らせ情報変更
+      news_type: タイプ
+      news_list_col_title: タイトル
+      news_list_col_content: お知らせ内容
+      news_list_col_creator: クリエーター
+      news_list_col_createdDate: 作成日
+    news_show_options:
+      important: '重要'
+      usually: '普通'
+      others: 'その他'
+      news_type: お知らせ
+      news_types: タイプ
+    news_type_options:
+      important: "重要"
+      usually: "普通"
+      others: "その他"
+    news_show_options:
+      student: "学生"
+      company: "企業"
+      partner: "パートナー"
+      super_partner: "スーパーパートナー"
+      all_users: "all_user"
+  partner_article:
+    title:
+      article_list: メンバー向け記事情報
+      article_show: メンバー向け記事詳細
+  partner_event:
+    event_tab: イベント
+    event_list: イベント一覧
+    event_search: イベント検索
+  partner_contract:
+    contract: 契約
+    contract_information: 契約詳細情報
+    list: 契約一覧
+    create: 契約作成
+    contract_tab: 契約情報
+    contract_function: 契約一覧
+    company_id: 企業名
+    start_date: 開始日
+    end_date: 終了日
+    partner_plan_id: プラン
+    payment_type: 支払い方法
+    updated_user_id: 更新者
+    training_period: 研修契約期間
+    contract_period: 契約期間
+    super_partner_name: スーパーパートナー名
+    partner_name: パートナー名
+  partner_contact:
+    contact_tab: 採用決定者サポート
+    contact_title: 採用決定者サポート一覧
+  partner_schedule:
+    schedule_title: 採用決定者スケジュール情報
+    schedule_list: 採用決定者スケジュール一覧
+  partner_plan:
+    partner_plan_tab: プラン一覧情報
+    plan_info: プラン情報
+    plan_detail: プラン詳細情報
+    plan_new: 新規作成
+    placeholder:
+      plan_name: プラン名を記入してください。
+        例：プランA
+      plan_content: プランの詳細内容を記入してください。
+      plan_fee: 例： 100,000
+  news_show_options:
+      important: "重要"
+      usually: "普通"
+      others: "その他内容"
+  plan:
+    three_month: プランA
+    six_month: プランB
+    one_year: プランC
+    three_year: プランD
+    warning_text: 該当プランより契約データがあるので、削除できません。
+    warning: 警告
+  payment_type:
+    all_in: 一括
+    monthly: 月次
+  dashboard:
+    student: 学生情報
+    company: 企業
+  chart:
+    student_chart: 学生統計データ
+    company_chart: 企業統計データ
+    com_city_count_list: 地域別
+    com_region_count_list: 地域別
+    com_employee_count_list: 従業員規模別
+    com_plan_type_count_list: プラン別
+    partner_city_count_list: 都市より分析情報
+    partner_region_count_list: エリアより分析情報
+    partner_plan_count_list: プラン分析情報
+  both:
+    partner_name_placeholder: 紹介者のお名前を入力してください。

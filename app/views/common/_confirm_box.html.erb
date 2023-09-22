@@ -1,0 +1,53 @@
+<div class="modal" tabindex="-1" role="dialog" id="confirm-modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><%= t "common.modal_confirm_title" %></h5>
+        <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+          <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+          <span class="svg-icon svg-icon-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                  <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+              </svg>
+          </span>
+          <!--end::Svg Icon-->
+        </div>
+      </div>
+      <div class="modal-body">
+        <p><%= t "common.modal_confirm_text" %></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="col-12 col-sm-6 col-md-4 col-lg-3 custom-btn px-4 py-2 mr-1 text-decoration-none text-white" id="modal-btn-yes"><%= t "btn.confirm_yes" %></button>
+        <button type="button" class="col-12 col-sm-6 col-md-4 col-lg-4 custom-btn px-4 py-2 mr-1 text-decoration-none text-white" id="modal-btn-no" data-dismiss="modal"><%= t "btn.confirm_no" %></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade pl-0" tabindex="-1" role="dialog" id="submit-modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><%= t "common.modal_confirm_title" %></h5>
+        <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                  <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                  <span class="svg-icon svg-icon-1">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                          <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                          <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                      </svg>
+                  </span>
+                  <!--end::Svg Icon-->
+          </div>
+      </div>
+      <div class="modal-body">
+        <p><%= t "common.modal_submit_text" %></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-sm btn-light-primary font-weight-bolder text-uppercase" id="modal-btn-no" data-bs-dismiss="modal"><%= t "btn.confirm_no" %></button>
+        <button type="button" class="btn btn-sm btn-primary font-weight-bolder text-uppercase" id="modal-submit-yes"><%= t "btn.confirm_yes" %></button>
+      </div>
+    </div>
+  </div>
+</div>

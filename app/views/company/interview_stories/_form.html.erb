@@ -1,0 +1,86 @@
+<!--begin::Card-->
+<div class="card bg-body mb-5 mb-xl-10">
+  <!--begin::Form-->
+  <%= form_with(model: @company_interview_story) do |form| %>
+    <div class="card-body">
+      <div class="mb-13 text-center">
+        <!--begin::Title-->
+        <h1 class="mb-3"><%= t('interview_story.title.create_interview_story_title') %></h1>
+        <!--end::Title-->                   
+      </div>                
+      <!--begin::Input group-->
+      <div class="row mb-6">
+        <!--begin::Label-->
+        <label class="col-lg-4 col-form-label fw-bold fs-6">
+          <%= form.label :interview_story_create_user %>
+        </label>
+        <!--end::Label-->
+        <div class="col-lg-8 fv-row">
+          <div class="image-input image-input-outline">
+            <label class="image-input-wrapper upload-preview" >
+              <%= image_tag @company_interview_story.image.attached? && @company_interview_story.image.persisted? ? @company_interview_story.image : "avatar/preview.svg", class: "w-100 h-100" %>
+              <span class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow edit-pen">
+                <i class="fa fa-pen icon-sm text-muted "></i>
+              </span>
+              <%= form.hidden_field :image_data, :value => false , id: "image_data" %>
+              <%= form.hidden_field :imageFlag, :value => false , id: "imageFlag" %>
+              <%= form.file_field :image,accept: "image/png,image/gif,image/jpeg,image/jpg", :class=> "d-none input-file", :id => "image", "data-existed": form.object.image.attached?%>
+              <input type="hidden" name="profile_avatar_remove" />
+            </label>
+            <span class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" data-bs-dismiss="click" title="Cancel avatar">
+              <i class="ki ki-bold-close icon-xs text-muted"></i>
+            </span>
+            <span type="button" id="img-remove" class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip"data-bs-dismiss="click" title="Remove avatar">
+              <i class="ki ki-bold-close icon-xs text-muted"></i>
+            </span>
+          </div>
+        </div>
+        <div class="py-4 d-flex justify-content-center">
+          <% if @company_interview_story.image.attached? && @company_interview_story.image.persisted? %>
+            <span class="form-text text-muted chosen-text img-name text-break"><%= @company_interview_story.image.filename %></span>
+          <% else %>
+            <span class="form-text text-muted chosen-text"><%=t('common.profile_upload_text')%></span>
+          <% end %>
+        </div>
+        <%# image crop modal start%>
+        <%= render "common/image_crop" %>
+        <%# image crop modal end%>
+      </div>
+      <!--end::Input group-->
+      <!--begin::Input group-->
+      <div class="row mb-6">
+        <!--begin::Label-->
+        <label class="col-lg-4 col-form-label fw-bold fs-6">
+          <span class="required"><%= form.label :title %></span>
+        </label> 
+        <div class="col-lg-8 fv-row hide-trix-attachment">                
+          <%= form.text_field :title, id: "title_1", class: "form-control form-control-solid", id: "title",  maxlength: 200 %>
+          <p class="text-danger font-size-sm ms-invalid-feedback mt-1"><%= @company_interview_story.errors.full_messages_for(:title)[0] %></p>
+        </div>
+      </div>
+      <!--end::Input group--> 
+      <!--begin::Input group-->
+      <div class="row mb-6">
+        <!--begin::Label-->
+        <label class="col-lg-4 col-form-label fw-bold fs-6">
+          <span class="required"><%= form.label :review %></span>
+        </label>
+        <div class="col-lg-8 fv-row hide-trix-attachment">
+          <%= form.rich_text_area :review, id: "title_1", class: "form-control form-control-solid  h-200px h-lg-300px h-xl-300px overflow-auto", id: "review", rows: 8,  maxlength: 1000 %>
+          <p class="text-danger font-size-sm ms-invalid-feedback mt-1"><%= @company_interview_story.errors.full_messages_for(:review)[0] %></p>
+        </div>
+      </div>
+      <!--end::Input group-->    
+    </div>                
+    <!--begin::Actions-->
+    <div class="card-footer d-flex justify-content-end py-6 px-9">
+      <%= link_to t('btn.cancel'), company_interview_stories_path, class: "btn btn-light btn-active-light-primary me-2" %>
+      <%= form.submit t('btn.submit'), class: "btn btn-primary" %>
+    </div>
+    <!--end::Actions-->
+  <% end %>
+  <!--end::Form-->
+</div>
+<!--end::Card-->
+<%= render "users/shared/toastr" %>
+<%= javascript_pack_tag "common.js" %>

@@ -1,0 +1,307 @@
+<!--begin::Toolbar-->
+<div class="toolbar py-5 py-lg-5" id="kt_toolbar">
+  <!--begin::Container-->
+  <div id="kt_toolbar_container" class="container-xxl py-5">
+    <!--begin::Row-->
+    <div class="row gy-0 gx-10">
+      <div class="col-xl-8">
+        <!--begin::Engage widget 2-->
+        <div class="card card-xl-stretch bg-body border-0 mb-9">
+          <!--begin::Heading-->
+          <div class="card-header border-0 p-5 p-xl-9 p-lg-9">
+            <h3 class="card-title align-items-start flex-column">
+              <span class="card-label fw-bolder text-dark"><%= t("communication.title.scouted_message")%></span>
+              <span class="text-muted mt-1 fw-bold fs-7"><%= t("communication.title.scouted_message_sub_title")%></span>
+            </h3>
+            <!--begin::Card toolbar-->
+            <% if @scotted_conversation.present? %> 
+              <div class="card-toolbar">               
+                <% if @scotted_conversation.size > 3 %>
+                  <!--begin::Filter-->
+                  <%= link_to student_scouted_result_path, class: "btn btn-sm btn-light btn-active-primary" do %>
+                    <%= t 'btn.view_all' %>
+                  <% end %>
+                  <!--end::Filter-->
+                <% end %>            
+              </div>        
+            <% end %>    
+            <!--end::Card toolbar-->
+          </div>
+          <!--end::Heading-->          
+          <!--begin::Body-->
+          <div class="card-body p-5 px-xl-9 px-lg-9">
+            <% if @scotted_conversation.present? %>  
+              <div class="d-none d-sm-none d-md-none d-lg-block d-xl-block">            
+                <table class="table table-row-dashed table-row-gray-300 table-hover custom-table gy-4">
+                  <!--begin::Table head-->
+                  <thead>
+                      <tr class="fw-bolder text-muted">
+                          <th class="min-w-150px w-150px w-sm-175px w-md-250px w-lg-250px"><%= t('status.student_name')%></th> 
+                          <th class=""><%= t('status.mail_description') %></th>
+                          <th class="min-w-75px w-75px w-md-100px w-lg-100px"><%= t('status.approval_status') %></th>
+                          <th class="min-w-75px w-75px w-md-100px w-lg-100px text-center"><%= t('status.send_date')%></th> 
+                          <th class="min-w-50px w-50px"><%= t('event.title.edit_text_title') %></th>
+                      </tr>
+                  </thead>
+                  <!--end::Table head-->
+                  <!--begin::Table body-->
+                  <tbody>
+                    <% @scotted_conversation.each_with_index do |conversation_list,index| %>  
+                      <%  @mail_info, @view_info = scout_mail_sender_and_receiver_info(conversation_list.company_user_id,conversation_list.user_id,conversation_list.company_id,conversation_list.mail_type,conversation_list.sent_type) %>
+                        <tr>
+                          <td class="min-w-150px w-150px w-sm-175px w-md-250px w-lg-250px text-truncate p-0">
+                            <div class="symbol symbol-35px py-1 me-4">
+                              <% if @view_info.image.attached? %>
+                                <%= image_tag @view_info.image %>  
+                              <% else %>
+                                <%= image_tag "student/office-building.png" %>
+                              <% end %>
+                            </div>
+                            <span class="fw-bold text-dark"> 
+                              <%= @mail_info["name"] %>
+                            </span>
+                          </td> 
+                          <td class="p-0">
+                            <div class="text-truncate"> 
+                              <span class="fw-bolder text-dark<%= @new_communication_arr.include?(conversation_list.id) ? '' : '' %>"><%= conversation_list.title %> -</span>
+                              <span class="text-dark<%= @new_communication_arr.include?(conversation_list.id) ? '' : '' %> "> <%= conversation_list.content.to_plain_text  %></span>
+                            </div> 
+                          </td> 
+                          <td class="min-w-75px w-75px w-md-100px w-lg-100px p-0">
+                            <div class="d-flex justify-content-center">
+                              <% if conversation_list.scout_status == 1 %> 
+                                  <span class="badge badge-light-warning badge-lg"><%= t('status.not_yet') %></span> 
+                              <% elsif conversation_list.scout_status == 2 %> 
+                                  <span class="badge badge-icon badge-light-primary badge-sm"><%= t('status.replied') %></span>                                      
+                              <% else %>
+                                  <span class="badge badge-light-danger badge-lg"><%=  t('status.rejected') %></span> 
+                              <% end %>  
+                            </div>
+                          </td>
+                          <td class="min-w-75px w-75px w-md-100px w-lg-100px p-0">
+                            <div class="d-flex justify-content-center">
+                              <span class="font-weight-normal text-dark"><%= time_date( conversation_list.created_at)%></span> 
+                            </div>
+                          </td>
+                          <td class="min-w-50px w-50px p-0">
+                            <%= link_to communication_conversation_forum_path(:id => conversation_list.communication_id), remote: true, class: "btn btn-icon btn-sm btn-light-primary" do %> 
+                              <i class="fas fa-envelope-open-text fs-4 "></i>
+                            <% end %>
+                          
+                          </td>
+                        </tr>  
+                    <% end %>
+                  </tbody>
+                  <!--end::Table body-->
+                </table>
+              </div>
+              <div class="d-block d-sm-block d-md-block d-lg-none d-xl-none">
+                <!--begin::Body-->
+                <% @scotted_conversation.each_with_index do |conversation_list,index| %>
+                  <div class="col-xxl-4">
+                    <div class="card card-custom gutter-b card-stretch my-3">
+                      <div class="card-body p-4">
+                        <div class='row'>
+                          <div class="d-flex align-items-center">
+                            <!--begin:: Avatar -->
+                            <div class="symbol symbol-40px overflow-hidden me-3">
+                              <% if @view_info.image.attached? %>
+                                <%= image_tag @view_info.image %>  
+                              <% else %>
+                                <%= image_tag "student/office-building.png" %>
+                              <% end %>
+                            </div>
+                            <!--end::Avatar-->
+                            <!--begin::User details-->
+                            <div class="d-flex flex-column min-w-100px w-100">
+                              <div class="d-flex justify-content-between">
+                                <div class="d-flex flex-column min-w-100px">
+                                  <span class="text-gray-800 fw-bolder text-truncate pe-1" >
+                                    <%= @mail_info["name"] %>
+                                  </span>
+                                  <span class="font-weight-normal <%= conversation_list.scout_status == 3 ? 'text-danger' : 'text-primary' %>">
+                                    <%= Communication::Communication.scout_status_attributes_for_select[conversation_list.scout_status-1][0] %>
+                                  </span> 
+                                </div>
+                                <p class="badge text-muted fs-9 px-2 mb-1"><%= time_date( conversation_list.created_at) %></p>
+                                <%= link_to communication_conversation_forum_path(:id => conversation_list.communication_id), remote: true, class: "btn btn-icon btn-sm btn-light-primary min-w-30px w-30px" do %> 
+                                  <i class="fas fa-envelope-open-text fs-4 "></i>
+                                <% end %>
+                              </div>
+                            </div>
+                            <!--end::User details-->
+                          </div> 
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+                <!--end::Body-->
+              </div>
+              <div id="communicationModal"></div>
+            <% else %>
+              <!--begin::Wrapper-->
+              <div class="text-center py-2 my-10">
+                <!--begin::Description-->
+                <p class="text-gray-400 fs-7 fw-bold mb-5"><%= t('dashboard.scout_message') %></p>
+                <!--end::Description-->
+              </div>
+              <!--end::Wrapper-->
+            <% end %>
+          </div>
+          <!--end::Body-->
+        </div>
+        <!--end::Engage widget 2-->
+      </div>
+      <div class="col-xl-4">
+        <!--begin::Mixed Widget 16-->
+        <%= render partial: "common/student_progress", locals: {student: @user_student, edit_student_url: edit_student_student_path(@user_student), student_commitment_url: student_commitment_ability_index_path(@user_student), student_questionnarie_url: student_questionnarie_assessments_path} %>  
+        <!--end::Mixed Widget 16-->
+      </div>
+    </div>
+    <!--end::Row-->
+  </div>
+  <!--end::Container-->
+</div>
+<!--end::Toolbar-->
+<!--begin::Container-->
+<div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
+  <!--begin::Content-->
+  <div class="content flex-row-fluid" id="kt_content">
+    <!--begin::News List -->
+    <div class="card mt-5 mt-lg-0 mb-9">
+      <!--begin::Partner News Card header-->
+      <div class="card-header border-0 pt-5">
+        <h3 class="card-title align-items-start flex-column">
+          <span class="card-label fw-bolder fs-3 mb-1"><%= t ('partner_news.title.news_list') %></span>
+        </h3>
+      </div>          
+      <!--end::Card header-->
+      <!--begin::Card body-->
+      <div class="card-body pt-2 pb-5">
+        <% if @partner_news_list.present? %>
+          <div class="d-flex justify-content-end mb-2">
+            <% if @partner_news_list.size > 3 %>
+              <!--begin::Filter-->
+              <%= link_to student_partner_news_index_path, class: "btn btn-sm btn-light btn-active-primary" do %>
+                もっと見る
+              <% end %>
+              <!--end::Filter-->
+            <% end %>            
+           </div>                 
+           <!--begin::Table container-->
+           <div class="table-responsive  d-none d-sm-none d-md-block d-lg-block d-xl-block">
+               <!--begin::Table-->
+               <table class="table table-row-dashed align-middle gs-0 gy-4 my-0">
+               <!--begin::Table head-->
+               <thead class="bg-light">
+                   <tr class="fs-7 fw-bolder text-gray-500 border-bottom-0">
+                       <th class="ps-4 min-w-140px rounded-start"><%= t('partner_news.title.news_list_col_title') %></th>
+                       <th class="text-center min-w-50px"><%= t('partner_news.title.news_type') %></th>
+                       <th class="pe-0 min-w-140px"><%= t('partner_news.title.news_list_col_content') %></th>
+                       <th class="pe-0 text-end min-w-120px"><%= t('partner_news.title.news_list_col_createdDate') %></th>
+                       <th class="rounded-end"></th>
+                   </tr>
+               </thead>
+               <!--end::Table head-->
+               <!--begin::Table body-->
+               <tbody>
+                   <% @partner_news_list.each do |news| %>
+                   <tr>
+                       <td class="ps-0 min-w-100px w-sm-100px w-md-150px w-lg-250px w-xl-300px">
+                           <div class="w-sm-100px w-md-150px w-lg-250px w-xl-300px text-truncate">
+                               <%= link_to student_partner_news_detail_path(id: news.id), class: "text-gray-800 fw-bolder text-hover-primary mb-1 fs-6 text-start pe-0" do %><%= news.title %><% end %>
+                           </div>
+                       </td>
+                       <td class="text-center pe-0">
+                           <span class="badge badge-light-primary"><%= t("partner_news.news_type_options.#{news.news_category}") %></span>
+                       </td>
+                       <td class="ps-0 min-w-150px w-sm-150px w-md-300px w-lg-400px w-xl-550px">
+                           <div class="w-sm-150px w-md-300px w-lg-400px w-xl-550px text-truncate text-muted">
+                               <%= news.content.to_plain_text %>
+                           </div>
+                       </td>
+                       <td class="text-end w-125px">
+                           <span class="text-muted fw-bolder d-block w-125px fs-6"><%= l(news.created_at.strftime('%Y-%m-%d').to_date, default: '-') %></span>
+                       </td>
+                       <td class="pe-0 text-end">
+                           <%= link_to student_partner_news_detail_path(id: news.id), class: "btn btn-icon btn-active-light-primary w-30px h-30px" do %>
+                           <!--begin::Svg Icon | path: icons/duotune/general/gen019.svg-->
+                           <span class="svg-icon svg-icon-3">
+                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                               <path d="M17.5 11H6.5C4 11 2 9 2 6.5C2 4 4 2 6.5 2H17.5C20 2 22 4 22 6.5C22 9 20 11 17.5 11ZM15 6.5C15 7.9 16.1 9 17.5 9C18.9 9 20 7.9 20 6.5C20 5.1 18.9 4 17.5 4C16.1 4 15 5.1 15 6.5Z" fill="currentColor" />
+                               <path opacity="0.3" d="M17.5 22H6.5C4 22 2 20 2 17.5C2 15 4 13 6.5 13H17.5C20 13 22 15 22 17.5C22 20 20 22 17.5 22ZM4 17.5C4 18.9 5.1 20 6.5 20C7.9 20 9 18.9 9 17.5C9 16.1 7.9 15 6.5 15C5.1 15 4 16.1 4 17.5Z" fill="currentColor" />
+                           </svg>
+                           </span>
+                           <!--end::Svg Icon-->
+                       <% end %>                      
+                       <!--end::Menu-->
+                       </td>
+                   </tr>
+                   <% end %>
+               </tbody>
+               <!--end::Table body-->
+               </table>
+           </div>
+           <!--end::Table-->
+           <!--begin::Mobile View-->
+           <div class="d-block d-sm-block d-md-none d-lg-none d-xl-none">
+            <% @partner_news_list.each do |news| %>
+               <%= link_to (student_partner_news_detail_path(id: news.id)), class: "text-decoration-none text-dark" do %>                                 
+                <div class="card border border-primary border-4 border-top-0 border-end-0 border-bottom-0 border-start bg-light card-custom gutter-b mb-3">
+                    <!--begin::Body-->
+                    <div class="card-body p-4">
+                    <div class="d-flex align-items-center"> 
+                        <div>
+                        <div class="d-flex justify-content-between">
+                            <div>
+                            <span class="text-gray-400 text-truncate fs-8 fw-bolder w-150px w-sm-400px w-md-600px text-truncate me-2 d-block lh-1 pb-1"><%= news.title %></span>
+                            <span class="text-gray-800 fs-5 fw-bolder"><%= t("partner_news.news_type_options.#{news.news_category}") %></span>
+                            </div>
+                        </div>                                        
+                        <div class="d-flex flex-wrap">
+                            <!--begin::Text-->
+                            <span class="fw-bolder fs-6 w-150px w-sm-300px w-md-500px text-truncate me-2"><i class="flaticon-shapes me-1 text-primary"></i> <%= news.content.to_plain_text.truncate(100) %> </span>
+                            <span class="fw-bold text-gray-600 fs-7"><i class="flaticon-event-calendar-symbol me-1 text-primary"></i><%= l(news.created_at.strftime('%Y-%m-%d').to_date, default: '-') %></span>
+                            <!--end::Text-->                                 
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                    <!--end::Body-->    
+                </div>
+               <% end %>
+             <% end %>
+           </div>
+           <!--end::Mobile View-->
+        <% else %>	
+          <!--begin::Wrapper-->
+          <div class="text-center py-2 my-10">
+              <!--begin::Title-->
+              <h2 class="fs-5 fw-bolder mb-3"><%= t("partner_news.title.news_list") %></h2>
+              <!--end::Title-->
+              <!--begin::Description-->
+              <p class="text-gray-400 fs-7 fw-bold mb-5"><%= t('common.partner_news_no_data') %></p>
+              <!--end::Description-->
+          </div>
+          <!--end::Wrapper-->				
+        <% end %>
+      </div>
+      <!--end::Card body-->
+    </div>
+    <!--end::News List-->
+    <!--begin::Applied Vacancy List-->
+    <%= render partial: "common/student_apply_job", locals: {apply_jobs: @applied_job, apply_job_index_url: student_applied_vacancy_index_path } %>  
+    <!--end::Applied Vacancy List-->
+    <div class="row my-9">
+      <div class="col-xl-6 mb-10 mb-xl-0">
+        <%= render partial: "common/student_favourite_list", locals: {fav_companies: @favourite_company_list, fav_vacancies: @favourite_vacancy_list, fav_events: @favourite_event_list} %>  
+      </div>
+      <div class="col-xl-6 mb-10 mb-xl-0">
+        <%= render partial: "common/student_join_event_list", locals: {join_events: @join_event_list} %>  
+      </div>
+    </div>
+  </div>
+  <!--end::Content-->
+</div>
+<!--end::Container-->

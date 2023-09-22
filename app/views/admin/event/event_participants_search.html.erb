@@ -1,0 +1,77 @@
+<script type="text/javascript">
+  var BASE_URL = '<%= root_url %>';
+</script>
+<%= form_for('',url: admin_event_participants_search_path, method: :get) do |form| %>
+    <div class="px-sm-4 admin-event-search">
+        <div class="col-12 mt-3 mb-4 mb-lg-5">
+            <div class="row d-lg-flex justify-content-start shadow bg-white py-4 py-lg-3 px-md-2">          
+                <div class="col-12 col-md-6 col-lg-4 px-3">
+                    <%= form.text_field :company_name_keyword, id: "keyword", class: "form-control shadow-none errors", value: (params[:company_name_keyword]), placeholder: Company::Company.human_attribute_name('company_name') %>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4 px-3 d-none">
+                    <%#= form.text_field :event_name_keyword, id: "keyword", class: "form-control shadow-none errors", value: (params[:event_name_keyword]), placeholder: Event.human_attribute_name('event_name') %>
+                </div>
+                <input type="hidden" name="admin_event_id" value= <%= params[:id].nil? ? (params[:admin_event_id]) : params[:id] %>>  
+
+                <div class="col-12 col-md-6 col-lg-2 my-3 my-md-0">
+                    <%= form.submit t( 'btn.student_search'), :class => 'admin-search-btn py-1 w-100 com-bg-color text-white', :id => 'search' %>
+                </div>
+            </div>      
+        </div>
+        <div class="search-result company-dashboard col-12 px-3 pb-5 mb-5">
+            <div class="row shadow bg-white info-box px-2">
+            <%= render partial: "admin_event_navbar", :locals =>{:current_route => "company", :id => params[:id].nil? ? params[:admin_event_id] : params[:id]} %>
+            
+                <% if @event_participants_list.present? %>
+                    <div class="d-none d-md-block w-100 px-3">   
+                        <table class="table table-bordered table-responsive-md">
+                            <thead class="com-bg-color text-white">
+                                <tr>
+                                    <th class="w-12" scope="col"><%= Company::Company.human_attribute_name('company_name') %></th>
+                                    <th class="w-12" scope="col"><%= Event.human_attribute_name('event_name') %></th>
+                                    <th class="w-12" scope="col"><%= t('event.title.participant_count') %></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% @event_participants_list.each_with_index do |event_participants| %>
+                                <tr <%= 'data-link =' + admin_event_participants_details_path(:participants_company_id => event_participants.company_id, :participants_event_id =>event_participants.admin_event_id) %>>
+                                    <td class="text-break"><%= event_participants.company_name %></td>
+                                    <td class="text-break"><%= event_participants.event_name %></td>
+                                    <td class="text-break"><%= event_participants.participants_count %></td>
+                                </tr>
+                                <% end %>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-12 my-2 px-4 d-content d-md-none">
+                        <% @event_participants_list.each_with_index do |event_participants| %>
+                            <div class="mobile-table row std-info-box p-3 my-4 rounded" <%= 'data-link =' + admin_event_participants_details_path(:participants_company_id => event_participants.company_id, :participants_event_id =>event_participants.admin_event_id) %>>                                                   
+                                <span class="h6 com-font-color col-4"><%= Company::Company.human_attribute_name('company_name') %></span>
+                                <span class="col-8 text-muted text-break"><%= event_participants.company_name %></span>
+                                <span class="h6 com-font-color col-4"><%= Event.human_attribute_name('event_name') %></span>
+                                <span class="col-8 text-muted text-break"><%= event_participants.event_name %></span>
+                                <span class="h6 com-font-color col-4"><%= t('event.title.participant_count') %></span>
+                                <span class="col-8 text-muted text-break"><%= event_participants.participants_count %></span>
+                            </div>
+                        <% end %>                          
+                    </div>
+
+                    <%# Hide Excel Download by NL %>
+                    <%# <div class="col-12 d-flex justify-content-center justify-content-md-end py-2 px-3"> %>
+                        <%#= link_to admin_event_participants_search_path(format: :xlsx, admin_event_id: params[:id].nil? ? (params[:admin_event_id]) : params[:id], company_name_keyword: params[:company_name_keyword], event_name_keyword: params[:event_name_keyword]), class: 'd-inline-block btn btn-sm btn-primary shadow-sm' do%>
+                            <%# <i class="fas fa-download fa-sm text-white-50"></i> %>
+                            <%#= t('search.excel_download') %>
+                        <%# end %>
+                    <%# </div> %>
+                    
+                <% else %>
+                    <div class="h3 col-12 mb-3">
+                        <%= t('search.no_result') %>
+                    </div>
+                <% end %> 
+            </div>
+        </div>
+    </div>    
+<% end %>
+<%= javascript_pack_tag 'common.js'%>
+<%= javascript_pack_tag "student/event_search.js" %>

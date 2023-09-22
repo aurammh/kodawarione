@@ -1,0 +1,72 @@
+<!--begin::Header-->
+<% breadcrumbs_navigation_add  (t('partner.steps.partner_member_setup')), '#' %>
+<%= render_partner_breadcrumbs_navigation  (t('partner.steps.partner_member_setup')) %>		
+<!--end::Header-->
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+  <!--begin::Container-->
+  <div class="container-fluid" id="kt_content_container">
+    <!--begin::Layout-->
+		<div class="tab-content">
+			<!--begin::Tab pane-->
+			<div id="kt_project_users_card_pane" class="tab-pane fade show active">
+        <div class="card bg-body">
+          <!--begin::Card body-->
+          <div class="card-body pb-0">
+            <!--begin::Stepper-->
+            <div class="stepper stepper-links d-flex flex-column pt-15" id="kt_create_account_stepper">
+              <div class="mx-auto mw-650px w-100 pt-15 pb-10" novalidate="novalidate" id="kt_create_account_form">
+                <!--begin::Step 1-->
+                <div class="current" data-kt-stepper-element="content">
+                  <!--begin::Wrapper-->
+                  <div class="w-100">
+                    <!--begin::Input group-->
+                    <div class="fv-row">
+                      <!--begin::Form-->
+                      <%= form_with(model: @admin, url: kodawarione_partner_manage_update_partner_member_setup_path(@member), method: :post) do |form| %>
+                        <div class="row">
+                          <div class="col-12 col-md-6 mb-3">
+                            <div class="d-flex">
+                              <%= form.label :last_name, class: "form-label required fw-bolder" %>
+                            </div>
+                            <%= form.text_field :last_name, id: "first_name", class: "form-control shadow-none errors", maxlength: 255 %>
+                            <p class ="text-danger fs-6 ms-invalid-feedback mt-1"><%= @admin.errors.full_messages_for(:last_name)[0] %></p>
+                          </div>
+                          <div class="col-12 col-md-6 mb-3">
+                            <div class="d-flex">
+                              <%= form.label :first_name, class: "form-label required fw-bolder"  %>
+                            </div>
+                            <%= form.text_field :first_name, id: "first_name", class: "form-control shadow-none errors", maxlength: 255 %>
+                            <p class ="text-danger fs-6 ms-invalid-feedback mt-1"><%= @admin.errors.full_messages_for(:first_name)[0] %></p>
+                          </div>
+                          <div class="col-12 mb-3">
+                            <div class="d-flex">
+                              <%= form.label :email, class: "form-label required fw-bolder"  %>
+                            </div>
+                            <%= form.text_field :email, id: "email", class: "form-control shadow-none errors", maxlength: 255 %>
+                            <p class ="text-danger fs-6 ms-invalid-feedback mt-1"><%= @admin.errors.full_messages_for(:email)[0] %></p>
+                          </div>
+                          <!--begin: Actions-->
+                          <div class="d-flex justify-content-end pt-15">
+                            <%= link_to t('btn.cancel'), kodawarione_partner_manage_partner_details_path(@member.partners_id), class: "btn btn-light btn-active-light-primary me-2" %>
+                            <%= form.submit (t "btn.update"), :class => 'btn btn-primary text-white' %>
+                          </div>
+                          <!--end: Actions-->  
+                        </div>   
+                      <% end %>
+                      <!--end::Form-->
+                    </div>
+                    <!--end::Input group-->
+                  </div>
+                  <!--end::Wrapper-->
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--end::Card body-->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%= javascript_pack_tag "user/user.js" %>

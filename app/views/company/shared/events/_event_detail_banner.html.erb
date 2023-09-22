@@ -1,0 +1,84 @@
+<div class="card bg-body rounded-bottom-0">
+      <!--begin::Hero body-->
+      <div class="card-body flex-column p-5">
+        <!--begin::Hero content-->
+        <div class="d-flex align-items-center p-5">
+          <!--begin::Wrapper-->
+          <div class="d-flex flex-column align-items-start justift-content-center flex-equal">
+            <!--begin::Title-->
+            <h1 class="fw-bolder fs-4 fs-lg-1 text-gray-800"><%= @company_event.event_name %></h1>
+            <!--end::Title-->
+            <div class="d-flex flex-wrap">
+              <% unless @company_event.category.nil?%>
+                <!--begin::Info-->
+                <div class="d-flex flex-wrap ">
+                  <% @company_event.category.each do |v| %>
+                    <% if v != nil %>
+                      <!--begin::Item-->
+                      <div class="me-9 my-1">
+                        <!--begin::Icon-->
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                        <span class="svg-icon svg-icon-primary svg-icon-2 me-1">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
+                            <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
+                            <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
+                            <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
+                          </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                        <!--end::Icon-->
+                        <!--begin::Label-->
+                        <span class="fw-bolder text-gray-400"><%= t("event.category.#{Event.event_categories.key(v)}") %></span>
+                        <!--end::Label-->
+                      </div>
+                      <!--end::Item-->
+                    <% end %>
+                  <% end %>
+                </div>
+              <% end %> 
+            </div>
+          </div>
+          <!--end::Wrapper-->
+        </div>
+        <!--end::Hero content-->
+        <!--begin::Hero nav-->
+        <div class="card-rounded bg-light d-flex flex-stack flex-wrap p-5 mx-4">
+          <!--begin::Nav-->
+          <ul class="nav flex-wrap border-transparent fw-bolder">
+              <!--begin::Nav item-->
+              <% if can?(:read, Event) %>
+                <li class="nav-item my-1">
+                  <%= link_to (t"btn.overview"), company_event_path(@company_event), class: "btn btn-color-gray-600 btn-active-white btn-active-color-primary fw-boldest fs-8 fs-lg-base nav-link px-3 px-lg-8 mx-1 #{company_active_url?(company_event_path(@company_event))}" %>
+                </li>
+              <% end %>
+              <!--end::Nav item-->
+              <!--begin::Nav item-->
+              <% if can?(:event_apply_list, Event) %>
+                <li class="nav-item my-1">
+                  <%= link_to (t"btn.apply_list"), company_event_apply_list_path(@company_event), class: "btn btn-color-gray-600 btn-active-white btn-active-color-primary fw-boldest fs-8 fs-lg-base nav-link px-3 px-lg-8 mx-1 #{company_active_url?(company_event_apply_list_path(@company_event))}" %>
+                </li>
+              <% end %>
+              <!--end::Nav item-->
+          </ul>
+          <!--end::Nav-->
+          <!--begin::Action-->
+          <!--begin::HideDeleteAndEdit-->
+          <% if @company_event.application_deadline > Date.today %>
+            <div class="d-flex justify-content-end">
+              <% if can?(:destroy, Event) %>
+                <div>
+                  <%= render 'delete_event' %>
+                </div>
+              <% end %>
+              <% if can?(:update, Event) %>
+                <%= link_to t('event.title.edit_text'), edit_company_event_path(:id => @company_event.id), class: "btn btn-primary" %>
+              <% end %>
+            </div>
+          <% end %>
+          <!--end::Action-->
+        </div>
+        <!--end::Hero nav-->
+      </div>
+      <!--end::Hero body-->
+    </div>

@@ -1,0 +1,134 @@
+<%= form_with(model: @student_assessment, id: "behavioral-form") do |form| %>
+    <!--begin::Breadcrumb-->
+    <div class="toolbar py-5 py-lg-5" id="kt_toolbar">
+        <div id="kt_toolbar_container" class="container-xxl d-flex flex-stack flex-wrap"> 
+            <% breadcrumbs_navigation_add (t('dashboard.assessment_button')), student_assessments_path %>
+            <% breadcrumbs_navigation_add (t('student.assessment.behavioral_trait_type_title')), '#' %>
+            <%= render_student_breadcrumbs_navigation (t('student.assessment.behavioral_trait_type_title')) %>
+        </div>	
+    </div>
+    <!--end::Breadcrumb-->
+    <div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl"> 
+        <!--begin::Container-->
+        <div id="kt_content" class="content flex-row-fluid">
+            <!--begin::Card-->
+            <div class="card mb-5 mb-xl-10">
+                <div class="card-header border-0">
+                    <div class="card-title">
+                        <h3 class="card-label"><%=t('student.assessment.behavioral_trait_type_title')%></h3>
+                    </div>
+                    <div class="card-toolbar">
+                        <div class="example-tools justify-content-center"> 
+                            <%= form.submit t('btn.record') , class: "btn btn-sm btn-primary font-weight-bolder text-uppercase" , :id => "btn-submit" %> 
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body border-top p-9">
+                    <div class="card-scroll" style="height: 444px;">
+                        <div class="col-12 mb-3 text-center"> 
+                            <span class='font-weight-bold text-danger'>
+                                <%=t('student.assessment.behavioral_title_1')%><br>
+                            </span>
+                            <span class='font-weight-bold'>
+                                <%=t('student.assessment.brain_title_2')%><br><br>
+                            </span>
+                            <span class='font-weight-bold'>
+                                <%=t('student.assessment.behavioral_title_2')%>
+                            </span>
+                        </div> <br>
+                        <div class="col-12 mb-3"> 
+                            <div class="student-assessment">
+                                <div class="form-group row">                                
+                                    <%= form.fields_for :self_expression  do |f| %>    
+                                        <% Student::Assessment.self_expression_lists.each_with_index do |(k, v), index| %>
+                                            <!--begin::Desktop view-->
+                                            <label class="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-5 col-form-label text-xl-center text-lg-center text-left pb-0 pt-3 fs-2">
+                                                <i class="flaticon-questions-circular-button text-primary pr-2 me-1 fs-2"></i>
+                                                <b><%= t ('student.assessment.brain_table1_th1') %>   <%= index + 1 %></b>
+                                            </label>
+                                            <div class="col-12 col-sm-9 col-md-9 col-lg-9 col-xl-7 col-form-label "> 
+                                                <div class="form-check form-check-custom form-check-solid form-check-sm"> 
+                                                    <label for=<%= "student_assessment_self_expression_#{k}_1"%> class="radio radio-primary fs-7">
+                                                        <%= f.radio_button "#{k}",1, { :checked => @student_assessment.self_expression.nil?  ? false : @student_assessment.self_expression[index] == 1, :class => "form-check-input" }  %>
+                                                        <span></span>
+                                                        <%= t("student_assessment.self_expression_lists.#{k}.#{v['A']}")  %>
+                                                    </label>   
+                                                </div>
+                                                <div class="form-check form-check-custom form-check-solid form-check-sm py-5"> 
+                                                    <label for=<%= "student_assessment_self_expression_#{k}_2"%> class="radio radio-primary fs-7">
+                                                    <%= f.radio_button "#{k}",2, { :checked =>@student_assessment.self_expression.nil?  ? false : @student_assessment.self_expression[index] == 2, :class => "form-check-input" } %>
+                                                    <span></span>
+                                                    <%= t("student_assessment.self_expression_lists.#{k}.#{v['B']}")  %>
+                                                    </label>   
+                                                </div>
+                                            </div>
+                                            <!--end::Desktop view-->
+                                        <% end %>
+                                    <% end %>
+                                    <%= form.fields_for :self_assertion  do |f| %>    
+                                        <% Student::Assessment.self_assertion_lists.each_with_index do |(k, v), index| %>
+                                            <!--begin::Desktop view-->
+                                            <label class="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-5 col-form-label text-xl-center text-lg-center text-left pb-0 pt-3 fs-2">
+                                                <i class="flaticon-questions-circular-button text-primary pr-2 me-1 fs-2"></i>
+                                                <b><%= t ('student.assessment.brain_table1_th1') %>   <%= index + 10 %></b>
+                                            </label>
+                                            <div class="col-12 col-sm-9 col-md-9 col-lg-9 col-xl-7 col-form-label "> 
+                                                <div class="form-check form-check-custom form-check-solid form-check-sm"> 
+                                                    <label for=<%= "student_assessment_self_assertion_#{k}_1"%> class="radio radio-primary fs-7"> 
+                                                        <%= f.radio_button "#{k}",1, { :checked => @student_assessment.self_assertion.nil?  ? false : @student_assessment.self_assertion[index] == 1, :class => "form-check-input" }  %>
+                                                        <span></span>
+                                                        <%= t("student_assessment.self_assertion_lists.#{k}.#{v['A']}")  %>
+                                                    </label>   
+                                                </div>
+                                                <div class="form-check form-check-custom form-check-solid form-check-sm py-5"> 
+                                                    <label for=<%= "student_assessment_self_assertion_#{k}_2"%> class="radio radio-primary fs-7"> 
+                                                        <%= f.radio_button "#{k}",2, { :checked =>@student_assessment.self_assertion.nil?  ? false : @student_assessment.self_assertion[index] == 2, :class => "form-check-input" } %>
+                                                        <span></span>
+                                                        <%= t("student_assessment.self_assertion_lists.#{k}.#{v['B']}")  %>
+                                                    </label>   
+                                                </div>
+                                            </div>
+                                            <!--end::Desktop view-->
+                                        <% end %>
+                                    <% end %>
+                                    <%= form.fields_for :self_flexibility  do |f| %>    
+                                        <% Student::Assessment.self_flexibility_lists.each_with_index do |(k, v), index| %>
+                                            <!--begin::Desktop view-->
+                                            <label class="col-12 col-sm-3 col-md-3 col-lg-3 col-xl-5 col-form-label text-xl-center text-lg-center text-left pb-0 pt-3 fs-2">
+                                                <i class="flaticon-questions-circular-button text-primary pr-2 me-1 fs-2"></i>
+                                                <b><%= t ('student.assessment.brain_table1_th1') %>   <%= index + 19 %></b>
+                                            </label>
+                                            <div class="col-12 col-sm-9 col-md-9 col-lg-9 col-xl-7 col-form-label "> 
+                                                <div class="form-check form-check-custom form-check-solid form-check-sm"> 
+                                                    <label for=<%= "student_assessment_self_flexibility_#{k}_1"%> class="radio radio-primary fs-7">
+                                                        <%= f.radio_button "#{k}",1, { :checked => @student_assessment.self_flexibility.nil?  ? false : @student_assessment.self_flexibility[index] == 1, :class => "form-check-input" }  %>
+                                                        <span></span>
+                                                        <%= t("student_assessment.self_flexibility_lists.#{k}.#{v['A']}")  %>
+                                                    </label>   
+                                                </div>
+                                                <div class="form-check form-check-custom form-check-solid form-check-sm py-5"> 
+                                                    <label for=<%= "student_assessment_self_flexibility_#{k}_2"%> class="radio radio-primary fs-7"> 
+                                                        <%= f.radio_button "#{k}",2, { :checked =>@student_assessment.self_flexibility.nil?  ? false : @student_assessment.self_flexibility[index] == 2, :class => "form-check-input" } %>
+                                                        <span></span>
+                                                        <%= t("student_assessment.self_flexibility_lists.#{k}.#{v['B']}")  %>
+                                                    </label>   
+                                                </div>
+                                            </div>
+                                            <!--end::Desktop view-->
+                                        <% end %>
+                                    <% end %>                         
+                                </div> 
+                            </div>       
+                        </div>                         
+                    </div>
+                </div>
+            <!--end::Card-->
+            </div>
+        </div>
+        <!--end::Container-->
+        <%# confirm dialoag start%>
+        <%= render "common/confirm_box" %>
+        <%# confirm dialoag end%>
+    </div>
+<%end%>
+<%= javascript_pack_tag 'common.js'%>

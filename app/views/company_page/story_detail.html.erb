@@ -1,0 +1,20 @@
+<!--begin::Body-->
+<body id="kt_body" data-bs-spy="scroll" data-bs-target="#kt_landing_menu" data-bs-offset="200" class="bg-white position-relative">
+    <!--begin::Main-->
+    <div class="d-flex flex-column flex-root">
+        <!--begin::Header Section-->
+        <div class="mb-0">
+            <!--begin::Wrapper-->
+            <%= render partial: "company_page/header", :locals =>{:banner => false} %>
+            <!--end::Wrapper-->
+        </div>
+        <!--end::Header Section-->
+        <!--begin::Container-->
+        <div class="container w-100 w-lg-75 w-xl-1000px mt-10">
+            <%= render partial: "student/shared/search/search_story_detail" %>   
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Main-->
+</body>
+<!--end::Body-->

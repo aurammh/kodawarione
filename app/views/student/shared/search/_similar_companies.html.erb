@@ -1,0 +1,85 @@
+<% if similar_company_list.present?  %>
+<div id="kt_subheader" class="subheader pb-2 pb-lg-6 subheader-transparent">
+    <div class="container d-flex flex-wrap flex-sm-nowrap align-items-center justify-content-between px-0">
+        <!--begin::Info-->
+        <div class="d-flex flex-wrap align-items-center mr-1">
+            <!--begin::Page Heading-->
+            <div class="d-flex flex-wrap align-items-baseline mr-5">
+                <!--begin::Page Title-->
+                <h2 class="text-dark font-weight-bold my-1 mr-5">Similar companies</h2>
+                <!--end::Page Title-->
+            </div>
+            <!--end::Page Heading-->
+        </div>
+        <!--end::Info-->
+        <!--begin::Toolbar-->
+        <div class="d-flex align-items-center">
+            <!--begin::Actions-->
+            <a href="#" class="btn btn-sm btn-light-primary font-weight-bolder">Mores</a>
+            <!--end::Actions-->
+        </div>
+        <!--end::Toolbar-->
+    </div>
+</div>
+<div class="row">
+    <% similar_company_list.each do |company| %>
+        <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+            <!--begin::Card-->
+            <div class="card card-custom gutter-b card-stretch">
+                <!--begin::Body-->
+                <div class="d-flex flex-column card-body justify-content-between pt-4">                                                                                                                            
+                    <!--begin::User-->
+                    <div class="d-flex align-items-center mb-7">
+                        <!--begin::Pic-->
+                        <div class="flex-shrink-0 mr-4 mt-lg-0 mt-3">
+                            <div class="symbol symbol-lg-75">                                                                                    
+                                <% if company.image.attached? %>
+                                    <%= image_tag (company.image) %>
+                                <% else %>        
+                                    <%= image_tag "avatar/building.jpg" %>
+                                <% end %>
+                            </div>
+                            <div class="symbol symbol-lg-75 symbol-primary d-none">
+                                <span class="font-size-h3 font-weight-boldest">JM</span>
+                            </div>
+                        </div>
+                        <!--end::Pic-->
+                        <!--begin::Title-->
+                        <div class="d-flex flex-column mr-auto">
+                            <%= link_to student_company_home_path(company), class: "text-break text-dark font-weight-bold text-hover-primary font-size-h4 mb-0" do%>   
+                                <%= company.company_name %>
+                            <% end %>
+                            <span class="text-muted font-weight-bold"><%= company.industry_name %></span>
+                        </div>
+                        <!--end::Title-->
+                        <div class="d-flex mb-auto"><i class="fa-heart icon-xl pr-1 <%# @student_favourite_arr.include?(company.id) ?  'fa text-danger' : 'far text-muted' %>"></i></div>                                                           
+                    </div>
+                    <!--end::User-->
+                    <!--begin::ProfileText-->
+                    <p class="mb-7"><%= company.company_info.truncate(100) %></p>
+                    <!--end::ProfileText-->
+                    <!--begin::Info-->
+                    <div class="mb-7">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="text-dark-75 font-weight-bolder mr-2"><%= Company::Company.human_attribute_name('employee_count') + ":" %></span>
+                            <span class="text-muted text-hover-primary"><%= company.employee_count %><%= t "unit.persons" %></span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="text-dark-75 font-weight-bolder mr-2"><%= Company::Company.human_attribute_name('display_address')+ ":" %></span>
+                            <span class="text-muted font-weight-bold"><%= company.display_address.present? ? company.display_address.truncate(16) : '-' %></span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center my-1">
+                            <span class="text-dark-75 font-weight-bolder mr-2"><%= Company::Company.human_attribute_name('website_url') + ":" %></span>
+                            <span class="text-muted text-hover-primary"><%= company.website_url %></span>
+                        </div>                                                                    
+                    </div>
+                    <!--end::Info-->
+                    <%= link_to "詳細",student_company_home_path(company), class: "btn btn-block btn-sm btn-light-primary font-weight-bolder text-uppercase py-4" %>                                                                        
+                </div>
+                <!--end::Body-->
+            </div>
+            <!--end::Card-->                                                                 
+        </div>
+    <% end %>
+</div>
+<% end %>

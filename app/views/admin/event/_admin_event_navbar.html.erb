@@ -1,0 +1,24 @@
+<div class="admin-event-participants">
+  <div class="mt-3 mb-5 row ml-2 nav nav-tabs">
+    <div class="admin-search-btn text-white p-1 ml-2">
+      <a class="nav-link">
+        <h3><%= link_to t('event_participant.title.super_partner_event_participant'), admin_super_partner_participants_search_path(id: id), :class=> "nav-link me-6 #{current_route == "super_partner" && 'active'}" %></h3>
+      </a>
+    </div>
+    <div class="admin-search-btn text-white p-1 ml-2">
+      <a class="nav-link">
+        <h3><%= link_to t('event_participant.title.partner_event_participant'), admin_partner_user_event_participants_search_path(id: id), :class=> "nav-link me-6 #{current_route == "partner" && 'active'}" %></h3>
+      </a>
+    </div>
+    <div class="admin-search-btn text-white p-1 ml-3">
+      <a class="nav-link">
+      <h3><%= link_to t('event_participant.title.company_event_participant'), admin_event_participants_search_path(id: id), :class=> "nav-link me-6 #{current_route == "company" && 'active'}" %></h2>
+      </a>
+    </div>
+    <div class="admin-search-btn text-white p-1 ml-3">
+      <a class="nav-link" >
+      <h3><%= link_to t('event_participant.title.user_event_participant'), admin_user_event_participants_search_path(id: id), :class=> "nav-link me-6 #{current_route == "user" && 'active'}" %></h2>    
+      </a>
+    </div>
+  </div>
+</div>

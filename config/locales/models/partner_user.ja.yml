@@ -1,0 +1,114 @@
+ja:
+  activerecord:
+    models:
+      partner_user: PartnerUser
+    attributes:
+      partner_user:
+        email: メールアドレス
+        last_name: 姓（漢字）
+        first_name: 名（漢字）
+        password: パスワード
+        password_confirmation: パスワードの確認
+        current_password: 現在のパスワード
+        reset_password_token: パスワードリセットトークン
+  errors:
+    messages:
+      accepted: 選択されていません
+      blank: "を入力してください。"
+      taken: ", %{value}, すでに使用されている。"
+      too_long: "%{count} 文字以下にする必要があります。"
+      wrong_length: "長さが間違っています (%{count} 桁である必要があります)。"
+      invalid: "無効です。"
+      is_wrong: "間違っている"
+      confirmation: 入力が一致しません。
+  placeholder:
+    last_name: グエン　タン
+  dashboard:
+    textMsg: this is text
+
+  password_setting:
+    new_password: "新しいパスワード"
+    password_confirmation: "パスワードの確認"
+    current_password: "現在のパスワード"
+    change_email: "メールアドレスを変更"
+    change_username: "ログインＩＤを変更する"
+    change_password: "パスワードを変更する"
+    edit_password: パスワードを忘れた方はこちら!
+    login_link: ログイン!
+    register_link: 会員登録（無料）
+    title:
+      change_login_setting: "パスワード変更"
+      change_password_setting: "パスワード再発行のリクエスト"
+      change_email_setting: "メールアドレスの変更"
+  registeration:
+    session:
+      student_title: 学生ログイン
+      company_title: 企業ログイン
+      company_user_title: 企業情報ログイン
+      login_text: アカウントにログインするには、詳細を入力してください。
+      facebook_login: Facebookでログイン
+      google_login: Googleアカウントでログイン
+      line_login: Lineアカウントでログイン
+      facebook_register: Facebookで新規登録
+      google_register: Googleアカウントで新規登録
+      line_register: Lineアカウントで新規登録
+    title:
+      company_registeration: 企業登録
+      company_user_registeration: 企業情報登録
+      student_registeration: ユーザー登録
+      terms_and_conditions_chk_text: 利用規約に同意する
+      privacy_policy_chk_text: 個人情報保護方針に同意する
+  confirmations:
+    welcome_mail: "KODAWARI-ONEへの登録ありがとうございます。<br> ご登録いただいたメールアドレス『［登録メールアドレス］』に<br>自動返信が届きますので、内容をご確認の上、本登録をお願いいたします。<br><br>
+      ※ 迷惑メール対策やキャリアメールでご登録をしている方は「support@kodawarione.com」からのメールを受けとれるように<br>設定をしてください。"
+    welcome_mail_1: "KODAWARI-ONEへの登録ありがとうございます。<br> ご登録いただいたメールアドレス『［登録メールアドレス］』に<br>自動返信が届きますので、内容をご確認の上、こだわり簡易登録をお願いいたします。<br><br>
+      ※ 迷惑メール対策やキャリアメールでご登録をしている方は KODAWARI-ONE からのメールを受けとれるように<br>設定をしてください。"
+    welcome_user: "様"
+    login_id: "ログインＩＤ"
+    thank_u_using_email: "いつも KODAWARI ONEをご利用いただき、誠にありがとうございます。"
+    thank_u_register: "ご登録ありがとうございます。"
+    required_info: "以下手順にてパスワードの設定をお願いします。"
+    login_email: "ログインID（メールアドレス）"
+    new_email: "新しいメールアドレス　: "
+    login_password: "初期パスワード"
+    login_url: "３）詳細情報をご記入の上、本登録を行ってください。"
+    login_link: "確認してログインする"
+    company_login_link: "パスワード設定リンク"
+    password_new_setting: "パスワード設定"
+    reset_password:
+      hello: "こんにちは"
+      reset_password_info: パスワード再設定の依頼を受け付けました。
+      under_follow: "以下の "
+      reset_password_info_1: よりパスワードを登録（再設定）してください。
+      reset_password_info_2: なお、上記のリンクは発行より6時間のみ利用可能です。
+      reset_password_info_3: ご不明な点がございましたら、お気軽にお問い合わせください。
+      reset_password_info_4: また、このメールにお心当たりがない場合は、大変お手数ですが下記メールアドレスにご連絡ください。
+      reset_password_info_5: 今後とも、KODAWARI ONE をよろしくお願いいたします。
+
+      request_link_1: "誰かがあなたのパスワードを変更するためのリンクを要求しました。"
+      request_link_2: "以下のリンクにアクセスして新しいパスワードを作成するまで、パスワードは変更されません。"
+      change_password: "パスワードを変更する"
+      ignore_email: "これをリクエストしなかった場合は、このメールを無視してください。"
+      password_link: "上記のリンクにアクセスして新しいパスワードを作成するまで、パスワードは変更されません。"
+      thank_you_msg: "以上です、よろしくお願い致します。"
+  mailer:
+    password_req_1: よりパスワードの登録をお願いします。
+    password_req_2: 2. パスワード設定後、こだわり情報(簡易登録)の入力をお願いします。
+    password_req_3: 3. すべてのサービスを利用する場合は、「本登録」画面へ必要事項の入力をお願いします。
+    inquary: お問合わせ
+    support_mail: support@kodawarione.com
+    email_change_paragraph_1: メールアドレスの変更が完了しました。
+    email_change_paragraph_2: 新しいメールアドレスは以下のとおりです。
+    confirm_link: "確認するため、以下のリンクを押下してください。"
+    paragraph1: １）以下の「確認してログインする」のリンクをクリックして、メールの認証を行ってください。
+    paragraph2: ２）メールの認証後、ログイン画面にご登録のメールアドレス、初期パスワードを入力の上、ログインしてください。
+    paragraph3: BeeLab.Recruit運営事務局
+    paragraph4: 株式会社STEAM Sports Laboratry（本社）
+    paragraph5: ※まだ登録は完了しておりません。必ず下記リンクからメール認証後に本登録を行ってください。
+    paragraph6: お問合せ：system@steams-jp.com
+    paragraph7: HP：https://pando.life/steamslab
+  genuine_password:
+    title: パスワードの登録
+    save_password: 本登録に進む
+    toast_title: 成功メッセージ
+    toast_body: パスワードが変更されました。

@@ -1,0 +1,31 @@
+<ul class="nav flex-wrap border-transparent fw-bolder">
+    <% if can?(:read, Kodawarione::Event) %>
+        <li class="nav-item my-1">
+        <%= link_to (t"btn.overview"), kodawarione_path(:id => @admin_event.id), class: "btn btn-color-gray-600 btn-active-white btn-active-color-primary fw-boldest fs-8 fs-lg-base nav-link px-3 px-lg-8 mx-1 #{partner_active_url?(kodawarione_path(:id => @admin_event.id))}" %>
+        </li>
+    <% end %>
+
+    <% if can?(:event_joined_by_user, Kodawarione::Event) %>
+        <li class="nav-item my-1">
+            <%= link_to (t"event_participant.title.user_event_participant"), kodawarione_event_joined_by_user_path(:id => @admin_event.id), class: "btn btn-color-gray-600 btn-active-white btn-active-color-primary fw-boldest fs-8 fs-lg-base nav-link px-3 px-lg-8 mx-1 #{partner_active_url?(kodawarione_event_joined_by_user_path(:id => @admin_event.id))} #{event_show_option.eql?("student") || event_show_option.eql?("all_user")  ? " " : "d-none"} " %>
+        </li>
+    <% end %>
+
+    <% if can?(:event_joined_by_company, Kodawarione::Event) %>
+        <li class="nav-item my-1">
+            <%= link_to (t"event_participant.title.company_event_participant"), kodawarione_event_joined_by_company_path(:id => @admin_event.id), class: "btn btn-color-gray-600 btn-active-white btn-active-color-primary fw-boldest fs-8 fs-lg-base nav-link px-3 px-lg-8 mx-1 #{partner_active_url?(kodawarione_event_joined_by_company_path(:id => @admin_event.id))} #{event_show_option.eql?("company") || event_show_option.eql?("all_user")  ? " " : "d-none"}" %>
+        </li> 
+    <% end %>
+
+    <% if can?(:event_joined_by_partner, Kodawarione::Event) %>
+        <li class="nav-item my-1">
+            <%= link_to (t"event_participant.title.partner_event_participant"), kodawarione_event_joined_by_partner_path(:id => @admin_event.id), class: "btn btn-color-gray-600 btn-active-white btn-active-color-primary fw-boldest fs-8 fs-lg-base nav-link px-3 px-lg-8 mx-1 #{partner_active_url?(kodawarione_event_joined_by_partner_path(:id => @admin_event.id))} #{current_admin.super_partner? || current_admin.chief_administrator? ? " " : "d-none"} #{event_show_option.eql?("partner") || event_show_option.eql?("all_user")  ? " " : "d-none"}" %>
+        </li>
+    <% end %>
+
+    <% if can?(:event_joined_by_spu, Kodawarione::Event) %>
+        <li class="nav-item my-1">
+            <%= link_to (t"event_participant.title.super_partner_event_participant"), kodawarione_event_joined_by_spu_path(:id => @admin_event.id), class: "btn btn-color-gray-600 btn-active-white btn-active-color-primary fw-boldest fs-8 fs-lg-base nav-link px-3 px-lg-8 mx-1 #{partner_active_url?(kodawarione_event_joined_by_spu_path(:id => @admin_event.id))} #{!current_admin.chief_administrator? ? "d-none" : " "} #{event_show_option.eql?("super_partner") || event_show_option.eql?("all_user")  ? " " : "d-none"}" %>
+        </li> 
+    <% end %>
+</ul>

@@ -1,0 +1,130 @@
+<!--begin::Main-->
+<div class="d-flex flex-column flex-root">
+	<div class="d-flex flex-column flex-lg-row flex-column-fluid stepper stepper-pills stepper-column" id="kt_create_account_stepper">
+        <%= render partial: "student/shared/commitment_steps/aside", :locals =>{:current_step => 5} %>
+		<!--begin::Body-->
+			<div class="d-flex flex-column flex-lg-row-fluid py-10">
+				<!--begin::Content-->
+					<div class="d-flex flex-center flex-column flex-column-fluid">
+						<!--begin::Wrapper-->
+						<div class="w-100 w-xl-700px w-lg-700px w-md-700px p-10 p-lg-15 mx-auto">
+							<!--begin::Form-->
+							<%= form_for @user_student, url: wizard_path do |form| %>
+								<!--begin::Step 5-->
+								<div class="current" data-kt-stepper-element="content">
+									<!--begin::Wrapper-->
+									<div class="w-100">
+										<!--begin::Input group-->
+										<div class="d-flex flex-column mb-7 fv-row">
+											<%= form.hidden_field :coverImgFlag, :value => true , id: "coverImgFlag" %>
+                                            <label class="fs-6 fw-bold form-label mb-2"><%= form.label :cover_photo %></label>
+                                            <span class="form-check form-switch form-check-custom form-check-solid">
+                                                <label class="mr-2">
+                                                    <%= form.check_box :pr_way, checked: "checked",class: "form-check-input mb-7" %>
+                                                    <span></span>
+                                                </label>
+                                                <%= label_tag(:pr_way, t("student_commitment.title.image_and_color_palette_title"), class: "ms-3 mb-7")%>
+                                            </span>
+											<!--begin::Input wrapper-->
+											<div class="position-relative">
+												<!--begin::Input-->
+												<div class="cover-photo">
+                                                    <div class="d-flex justify-content-center">
+                                                        <div class="image-input image-input-outline w-100">
+															<label class="image-input-wrapper event upload-kodawari-preview student-profile-upload w-100 h-150px">
+																<%= image_tag @user_student.cover_photo.attached? && @user_student.cover_photo.persisted? ? @user_student.cover_photo : "avatar/preview.svg", class: "w-100 h-100" %>
+																<span class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow edit-pen">
+																	<i class="fa fa-pen icon-sm text-muted "></i>
+																</span>
+																<%= form.hidden_field :image_data, :value => false , id: "image_data" %>
+																<%= form.hidden_field :imageFlag, :value => false , id: "imageFlag" %>
+																<%= form.file_field :cover_photo,accept: "image/png,image/gif,image/jpeg,image/jpg", :class=> "d-none kodawari-banner-input-file", :id => "image", "data-existed": form.object.cover_photo.attached?%>
+																<input type="hidden" name="profile_avatar_remove" />
+															</label>
+                                                            <span class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                            data-kt-image-input-action="cancel"
+                                                            data-bs-toggle="tooltip"
+                                                            data-bs-dismiss="click"
+                                                            title="Cancel avatar">
+                                                                <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                                            </span>
+                                                            <span type="button" id="img-remove" class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow"
+                                                            data-kt-image-input-action="remove"
+                                                            data-bs-toggle="tooltip"
+                                                            data-bs-dismiss="click"
+                                                            title="Remove avatar">
+                                                                <i class="ki ki-bold-close icon-xs text-muted"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex justify-content-center py-4">
+                                                        <% if @user_student.cover_photo.attached? && @user_student.cover_photo.persisted? %>
+                                                            <span class="form-text text-muted chosen-text img-name text-break"><%= @user_student.cover_photo.filename %></span>
+                                                        <% else %>
+                                                            <span class="form-text text-muted chosen-text"><%=t('common.profile_upload_text')%></span>
+                                                        <% end %>
+                                                    </div>
+                                                    <%# image upload modal start%>
+                                                    <%= render "common/banner_image_crop" %>
+                                                    <%# image upload modal end%>
+                                                </div>
+												<!--end::Input-->
+											</div>
+											<!--end::Input wrapper-->
+                                            <div class="form-group cover-color">
+												<label class="d-flex fs-6 fw-bold form-label mb-2"><%= form.label :cover_color %></label>
+                                                <%= form.color_field :cover_color %>
+                                            </div>
+										</div>
+										<!--end::Input group-->
+									</div>
+									<!--end::Wrapper-->
+								</div>
+								<!--end::Step 5-->
+								<!--begin: Wizard Actions-->
+								<div class="d-flex justify-content-between pt-3">
+									<div class="mr-2">
+										<%= link_to previous_wizard_url,class: "btn btn-light-primary font-weight-bolder font-size-h6 pl-8 pr-4 py-4 my-3" do %>
+											<span class="svg-icon svg-icon-md mr-1">
+											<!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Left-2.svg-->
+											<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+												<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+													<polygon points="0 0 24 0 24 24 0 24" />
+													<rect fill="#000000" opacity="0.3" transform="translate(15.000000, 12.000000) scale(-1, 1) rotate(-90.000000) translate(-15.000000, -12.000000)" x="14" y="7" width="2" height="10" rx="1" />
+													<path d="M3.7071045,15.7071045 C3.3165802,16.0976288 2.68341522,16.0976288 2.29289093,15.7071045 C1.90236664,15.3165802 1.90236664,14.6834152 2.29289093,14.2928909 L8.29289093,8.29289093 C8.67146987,7.914312 9.28105631,7.90106637 9.67572234,8.26284357 L15.6757223,13.7628436 C16.0828413,14.136036 16.1103443,14.7686034 15.7371519,15.1757223 C15.3639594,15.5828413 14.7313921,15.6103443 14.3242731,15.2371519 L9.03007346,10.3841355 L3.7071045,15.7071045 Z" fill="#000000" fill-rule="nonzero" transform="translate(9.000001, 11.999997) scale(-1, -1) rotate(90.000000) translate(-9.000001, -11.999997)" />
+												</g>
+											</svg>
+											<!--end::Svg Icon-->
+										</span><%= t 'student_commitment.btn.previous' %><% end %>
+									</div>
+									<div>
+										<%= button_tag( :class => "btn btn-primary font-weight-bolder font-size-h6 pl-8 pr-4 py-4 my-3") do %>
+											<%= t 'student_commitment.btn.next' %>
+											<span class="svg-icon svg-icon-md ml-1">
+												<!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Right-2.svg-->
+												<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+													<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+														<polygon points="0 0 24 0 24 24 0 24" />
+														<rect fill="#000000" opacity="0.3" transform="translate(8.500000, 12.000000) rotate(-90.000000) translate(-8.500000, -12.000000)" x="7.5" y="7.5" width="2" height="9" rx="1" />
+														<path d="M9.70710318,15.7071045 C9.31657888,16.0976288 8.68341391,16.0976288 8.29288961,15.7071045 C7.90236532,15.3165802 7.90236532,14.6834152 8.29288961,14.2928909 L14.2928896,8.29289093 C14.6714686,7.914312 15.281055,7.90106637 15.675721,8.26284357 L21.675721,13.7628436 C22.08284,14.136036 22.1103429,14.7686034 21.7371505,15.1757223 C21.3639581,15.5828413 20.7313908,15.6103443 20.3242718,15.2371519 L15.0300721,10.3841355 L9.70710318,15.7071045 Z" fill="#000000" fill-rule="nonzero" transform="translate(14.999999, 11.999997) scale(1, -1) rotate(90.000000) translate(-14.999999, -11.999997)" />
+													</g>
+												</svg>
+												<!--end::Svg Icon-->
+											</span>
+										<% end %>
+									</div>
+								</div>
+								<!--end: Wizard Actions-->
+							<% end %>
+							<!--end::Form-->
+						</div>
+						<!--end::Wrapper-->
+					</div>
+				<!--end::Content-->
+			</div>
+		<!--end::Body-->
+	</div>
+</div>
+<!--end::Main-->
+<%= javascript_pack_tag "student/student_commitment.js" %>
+<%= javascript_pack_tag "common.js" %>

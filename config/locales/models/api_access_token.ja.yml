@@ -1,0 +1,36 @@
+ja:
+  activerecord:
+    models:
+      admin/api_access_token: api_access_token
+    attributes:
+      admin/api_access_token:
+        name: 名前
+        token_type: トークンタイプ
+        token: トークン
+        token_scope: 権限
+        ip_address: IPアドレス
+        last_used_at: 最終更新日時
+  errors:
+    messages:
+      blank: "を入力してください。"
+      invalid: "無効です。"
+  api_access_token:
+    menu_link: イベントAPIデータ
+    first_title: イベントAPIデータ関連情報
+    api_modal_create_title: イベントAPIデータ作成
+    api_modal_edit_title: イベントAPIデータ更新
+    generate_token: トークン作成
+    update_label: Scopes limit access for personal tokens. Personal access tokens function like ordinary OAuth access tokens. They can be used instead of a password for "Bee-lap" over HTTPS, or can be used to authenticate to the API over basic authentication.
+    regenerate_title: Regenerate token
+    regenerate_label: Regenerating tokens requires any associated scripts or applications to be updated.
+    regenerate_btn: 再作成
+    copy_toast: Copied to clipboard
+    copy: コピー
+    read_chk_default: Read Only (Default)
+    delete_confirm: トークンを削除されてもよろしいでしょうか？
+    token_type_options:
+      1: "type_a_yml"
+      2: "type_b_yml"
+      3: "type_c_yml"
+    token_scopes:
+      write: "書きます"

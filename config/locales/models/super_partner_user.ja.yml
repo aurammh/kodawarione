@@ -1,0 +1,56 @@
+ja:
+  activerecord:
+    models:
+      super_partner_user: スーパーパートナーユーザー
+    attributes:
+      super_partner_user:
+        last_name: 姓（漢字）
+        first_name: 名（漢字）
+        password: パスワード
+        password_confirmation: パスワードの確認
+        current_password: 現在のパスワード
+        reset_password_token: パスワードリセットトークン
+        email: メールアドレス
+      super_partner_user/event:
+        event_start_date: 開催日〔開始〕
+        event_end_date: 開催日〔終了〕
+        event_name: イベント名
+        venue: 開催場所
+        category: カテゴリー
+        applicants_count: 募集人数
+        post_start_date: 掲載日〔開始〕
+        post_end_date: 掲載日〔終了〕
+        application_deadline: 申込締切日
+        event_content: イベント内容
+        event_logo: イベント画像
+        region_name: エリア
+        apply_event_limit: 募集人数
+        admin_apply_event_limit_string: 募集人数
+        event_show_option: 対象者
+        application_start_date: 申込開始日
+        apply_event_limit: 募集人数
+        apply_event_limit_string: 募集人数
+      super_partner_user/plan:
+        name: プラン
+        content: 内容
+        fee: 料金
+      super_partner_user/contract:
+        partner_id: パートナー名
+        training_start_date: 研修開始日
+        training_end_date: 研修終了日
+        start_date: 開始日
+        end_date: 終了日
+        super_partner_plan_id: プラン
+        payment_type: 支払い方法
+        training_period: 研修契約期間
+        contract_period: 契約期間
+      super_partner_user/news: #add by nl
+        title: タイトル
+        content: お知らせ内容
+        news_type: タイプ 
+        other: その他内容
+      super_partner_user/article:
+        title: タイトル
+        content: 記事内容
+        video_link: 動画リンク
+        show_option: 対象者

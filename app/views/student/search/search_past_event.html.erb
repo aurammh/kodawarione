@@ -1,0 +1,67 @@
+<section class="search container-fluid d-flex flex-column align-items-center px-0 mt-5 pt-0 pt-lg-5">
+    <div class="px-0 col-11 mb-5">
+        <div class="search-result">
+            <div class="row p-2 mx-0 shadow bg-white info-box">
+                <div class="col-12 col-md-8 col-lg-9">
+                    <h1><%= t('event.title.past_event') %></h1>
+                </div>
+                <div class="col-12 col-md-4 col-lg-3 my-2 ml-auto">
+                    <%= link_to t('event.title.back_to_event_search'), student_search_event_path, class: "px-3 py-1 w-100 std-bg-color custom-btn text-white text-decoration-none" %>
+                </div>
+                <% @past_events.each do |event| %>
+                    <div class="col-xs-12 col-md-6 col-lg-4 col-xl-3 mb-2 p-1">
+                        <%= link_to (student_event_details_path(event)), class: "text-decoration-none" do %>
+                            <div class="row mx-0 info-box shadow">                            
+                                <div class="col-12 px-0 profile-image">
+                                    <div class="profile-name position-absolute std-bg-color col-6 d-flex align-items-center text-truncate">
+                                        <h5 class="text-white wrap-text mb-0"><%= event.event_name %></h5>
+                                    </div>
+                                    <% if event.event_image.attached? %>
+                                        <%= image_tag (event.event_image), :class=> "img-responsive" %>
+                                    <% else %>        
+                                        <%= image_tag "avatar/event.jpg", :class=> "Responsive image" %>
+                                    <% end %>
+                                </div>
+                                <div class="col-12 profile-info my-3 d-flex flex-column">
+                                    <label class="h6 mb-0 std-tile-color"><%= Company::Company.human_attribute_name('company_name') %></label>
+                                    <span class="mb-2 wrap-text"><%= Company::Company.find(event.company_id).company_name %></span>
+                                    <label class="h6 mb-0 std-tile-color"><%= t ('event.title.event_date')%></label>
+                                    <span class="mb-2"><%= event.event_start_date %>～<%= event.event_end_date %></span>
+                                    <label class="h6 mb-0 std-tile-color"><%= Event.human_attribute_name('category') %></label>
+                                    <span class="mb-2">
+                                        <% unless event.category.nil? %>
+                                            <% event.category.each do |v| %>
+                                                <% if v != nil %>
+                                                    <%= t("event.category.#{Event.event_categories.key(v)}") %>
+                                                    <% if event.category.length > 1 && event.category.last != v %>
+                                                        <%= ',' %>
+                                                    <% end %>
+                                                <% end %>
+                                            <% end %>
+                                        <% end %>
+                                    </span>                                    
+                                    <label class="h6 mb-0 std-tile-color"><%= Event.human_attribute_name('venue') %></label>
+                                    <span class="mb-2 wrap-text"><%= event.venue %></span>
+                                    <label class="h6 mb-0 std-tile-color"><%= t('event.title.application_period') %></label>
+                                    <span class="mb-2"><%= event.application_start_date %>～<%= event.application_deadline %></span>
+                                    <label class="h6 mb-0 std-tile-color"><%= t('event.title.publish_status')  %></label>
+                                    <span class="mb-2 text-danger">
+                                        <%=t('event.title.recuirment_closed') %>
+                                     </span>
+                                </div> 
+                            </div>
+                        <% end %>
+                    </div>
+                <% end %>
+                <% unless @past_events.present?  %>
+                    <div class="col-12 m-2">
+                        <h3> <%= (t "search.no_result") %></h3>
+                    </div>
+                <% end %>
+                <div class="col-12 d-flex justify-content-center p-4">
+                    <%= paginate @past_events%>
+                </div>
+            </div>  
+        </div>
+    </div>
+</section>

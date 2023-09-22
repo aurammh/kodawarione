@@ -1,0 +1,97 @@
+<div class="col-12 mb-3">
+  <section id="outside_activity" class="scroll-content-section">
+    <div class="form-field-group">
+      <div class="outside_school_activity">
+        <div class="mb-3 d-flex d-md-block">
+          <button type="button" class="btn btn-primary custom-btn text-white com-bg-color py-2 float-right" data-bs-toggle="modal" data-bs-target="#exampleModal">
+             <%= t('company_vacancy.selection_items') %>
+          </button>
+        </div>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-xl modal-dialog-scrollable">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h2><%= t("company_vacancy.various_systems_and_benefits") %></h2>
+                <div class="btn btn-sm btn-icon btn-active-color-primary cancle-close" data-bs-dismiss="modal">
+                  <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                  <span class="svg-icon svg-icon-1">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                          <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                          <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                      </svg>
+                  </span>
+                  <!--end::Svg Icon-->
+                </div>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-12 col-lg-6">                   
+                    <div class="row">                    
+                      <div class="col-12">
+                        <span class="h5 text-muted" ><%= t('company_vacancy.please_check_what_you_think') %></span>
+                      </div>  
+                      <div class="col-12 mt-3 com-chk">
+                          <div class="col-12 m-0 p-0">
+                            <label  class= "form-check form-check-sm form-check-custom form-check-solid simple-chkbox me-5 mb-5" for="modal1CheckedAll">
+                              <%= check_box_tag 'modal1CheckedAll','', false, class: 'form-check-input'%>
+                              <span class="form-check-label"></span>
+                              <%= t('company_vacancy.check_everything') %>
+                            </label>
+                          </div>
+                      </div>
+                      <div class="col-12 com-chk" id="modal1">  
+                        <%= vancancy_form.fields_for :company_enhancement  do |f| %>  
+                          <% Company::Vacancy.company_vacancy_enhancements.each do |k,v| %>
+                              <div class="col-12 m-0 p-0">
+                                <label class= "form-check form-check-sm form-check-custom form-check-solid simple-chkbox company-enhancement me-5 mb-5">
+                                  <%= f.check_box "#{v}", { :checked => vancancy.company_enhancement.nil?  ? false : vancancy.company_enhancement[v-1] == 1 ,class: 'checkbox-click-enhancement form-check-input' } %>
+                                  <span class="form-check-label"></span>
+                                  <%= f.label "company_enhancement#{v}", t("company_vacancy_enhancement.#{k}"),for: "company_vacancy_company_enhancement_#{v}", class: "my-auto", id: "company-enhancement-#{v}" %>
+                                </label>
+                              </div>
+                          <% end %>
+                        <% end %>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-lg-6 mt-3 mt-sm-0">
+                    <div class="row">
+                      <div class="col-12">
+                        <span class="h5 text-muted"><%= t('company_vacancy.please_check_the_applicable_items') %></span>
+                      </div>
+                      <div class="col-12 mt-3 com-chk">
+                          <div class="col-12 m-0 p-0">
+                            <label  class= "form-check form-check-sm form-check-custom form-check-solid me-5 mb-5" for="modal2CheckedAll">
+                              <%= check_box_tag 'modal2CheckedAll','', false, class: 'form-check-input'%>
+                              <span class="form-check-label"></span>
+                              <%= t('company_vacancy.check_everything') %>
+                            </label>
+                          </div>
+                      </div>
+                      <div class="col-12 com-chk" id="modal2"> 
+                        <%= vancancy_form.fields_for :welfare_list_data  do |f| %>                        
+                          <% welfare_detail_options.each do |wel| %>
+                              <div class="col-12 m-0 p-0">
+                                <label  class= "form-check form-check-sm form-check-custom form-check-solid out-side-acitvity me-5 mb-5">
+                                  <%= f.check_box wel.id,{:checked => vancancy.welfare_list_data.nil?  ? false : vancancy.welfare_list_data[wel.id-1] == 1 , class: 'checkbox-click-welfare form-check-input'} %>
+                                  <span class="form-check-label"></span>
+                                  <%= f.label "#{wel.welfare_type}",for: "company_vacancy_welfare_list_data_#{wel.id}", class: "my-auto", id: "welfare-list-data-#{wel.id}" %>
+                                </label>
+                              </div>
+                          <% end %>
+                        <% end %>
+                      </div>
+                    </div>                    
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <%= link_to (t'student_commitment.title.close'), "#",  {:remote => true, 'data-bs-dismiss' =>  "modal", 'data-bs-target' => '#exampleModal', class: 'btn btn-primary custom-btn py-2 px-3 text-center'}  %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

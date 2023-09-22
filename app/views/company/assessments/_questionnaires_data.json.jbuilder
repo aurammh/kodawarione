@@ -1,0 +1,6 @@
+json.questionnaires_data questionnaires_data
+json.company_assessment company_assessment
+json.questionnaire_permission questionnaire_permission
+json.index_permission index_permission
+json.create_permission create_permission
+json.update_permission update_permission

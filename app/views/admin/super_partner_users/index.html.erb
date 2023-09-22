@@ -1,0 +1,71 @@
+<script type="text/javascript">
+    var BASE_URL = '<%= root_url %>';
+</script>
+<%= form_for('',url: admin_super_partner_users_path, method: :get) do |form| %>
+  <div class="px-sm-4 admin-partners-search">
+      <div class="col-12 mt-3 mb-4 mb-lg-5 ">
+          <div class="row d-lg-flex justify-content-start shadow bg-white py-4 py-lg-3 px-2 px-lg-4"> 
+
+              <div class="col-12 col-md-4 col-lg-2 my-3 my-md-0 pt-0">
+                  <%= link_to t('search.event_create'), new_admin_super_partner_user_path(super_partner_id: @super_partner_id), class: "admin-search-btn pt-1 pb-2 w-100 admin-sidebar-color text-white btn text-white text-decoration-none" %>
+              </div>
+          </div>
+      </div>
+      <div class="search-result company-dashboard admin-detail col-12 px-3 pb-5 mb-5">
+          <div class="row p-2 shadow bg-white info-box">
+              <div class="col-8 col-xl-10 mb-3">
+                  <h1><%= t('search.search_title') %></h1>
+              </div>
+              <div class="col-11 col-md-5 col-xl-2 mb-3 pt-2 border com-border-color admin-font-color text-center mx-3 mx-md-0 shadow-sm">
+                  <h3><%= t('search.total_count') %> <%= @super_partner_users.length %> <%= t('search.event_count') %> </h3>
+              </div>
+              <% if @admin_super_partner_users.present? %>
+                  <div class="d-none d-md-block w-100">
+                      <table class="table table-bordered table-responsive-md">
+                          <thead class="admin-sidebar-color text-white">
+                              <tr>
+                                  <th class="w-12" scope="col"><%= t('partner.partner_user.title.name') %></th>
+                                  <th class="w-20" scope="col"><%= t('partner.partner_user.title.email') %></th>
+                                  <th class="w-12" scope="col"><%= t('admin.news.news_created_date') %></th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <% @admin_super_partner_users.each do |super_partner| %>
+                                  <tr data-link="<%= admin_super_partner_user_path(:id => super_partner.id) %>">
+                                      <td class="text-break"><%= super_partner.last_name+' '+super_partner.first_name %></td>
+                                      <td class="partners-content-wrap"><%= super_partner.email %></td>
+                                      <td><%= l(super_partner.created_at.strftime('%Y-%m-%d').to_date, default: '-') %></td>
+                                  </tr>
+                              <% end %>
+                          </tbody>
+                      </table>
+                  </div>
+                  <div class="col-12 my-2 px-4 d-content d-md-none">
+                      <% @admin_super_partner_users.each do |super_partner| %>
+                          <div class="mobile-table row std-info-box p-3 my-4 rounded">
+                              <div class="row col-12" data-link="<%= admin_super_partner_user_path(:id => super_partner.id) %>" >
+                                  <div class="h6 admin-font-color col-4"><%= t('partner.partner_user.title.name') %></div>
+                                  <div class="col-8 text-muted text-break"><%= super_partner.last_name+' '+super_partner.first_name %></div><br>
+                                  <div class="h6 admin-font-color col-4"><%= t('partner.partner_user.title.email') %></div>
+                                  <div class="col-8 text-muted partnerss-content-wrap"><%= super_partner.email %></div><br>
+                                  <div class="h6 admin-font-color col-4"><%= t('admin.news.news_created_date') %></div>
+                                  <div class="col-8 text-muted text-break"><%= l(super_partner.created_at.strftime('%Y-%m-%d').to_date, default: '-') %></div><br>
+                              </div>
+                          </div>
+                      <% end %>                          
+                  </div>
+                  <div class="col-12 d-flex justify-content-center mt-2 mx-2">
+                  <%= paginate @admin_super_partner_users  %>
+                  </div>
+              <% else %>
+                  <div class="h3 col-12 mb-3">
+                      <%= t('search.no_result') %>
+                  </div>
+              <% end %> 
+          </div>
+      </div>
+  </div>    
+<% end %>
+<%= javascript_pack_tag "admin/admin_search.js" %>
+<%= javascript_pack_tag 'common.js'%>
+<%= javascript_pack_tag "student/event_search.js" %>

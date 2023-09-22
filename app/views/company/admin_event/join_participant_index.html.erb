@@ -1,0 +1,188 @@
+<!--begin::Breadcrumb-->    
+<% breadcrumbs_navigation_add (t'btn.event_search'), company_search_event_path %>
+<% breadcrumbs_navigation_add (t('event.title.joined_event_title')), company_admin_event_detail_search_path(params[:id]) %>
+<% breadcrumbs_navigation_add (t('event.title.join_participant')), '#' %>
+<%= render_company_breadcrumbs_navigation(t'event.title.join_participant') %>
+<!--end::Breadcrumb--> 
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+  <!--begin::Container-->
+  <div class="container-xxl" id="kt_content_container">
+    <!--begin::Layout-->
+    <div class="d-flex flex-column flex-lg-row">
+      <!--begin::Content-->
+      <div class="flex-lg-row-fluid">
+        <!--begin::Card-->
+        <div class="card card-flush bg-body pt-3 mb-5 mb-xl-10">
+          <!--begin::Card header-->
+          <div class="card-header">
+            <!--begin::Card title-->
+            <div class="card-title">
+              <h2 class="fw-bolder"><%= @event_details.event_name %></h2>
+            </div>
+          </div>
+          <!--end::Card header-->
+          <!--begin::Card body-->
+          <div class="card-body pt-3">
+            <!--begin::Section-->
+            <div class="mb-5">
+              <!--begin::Image-->
+              <% if @event_details.event_image.attached? %>
+                <div class="bgi-no-repeat bgi-position-center bgi-size-cover card-rounded min-h-350px mb-5" style="background-image: url(<%= url_for(@event_details.event_image) %>)"></div>
+              <% end %>
+              <!--end::Image-->
+              <!--begin::Event Category-->
+              <% unless @event_details.category.nil?%>
+                <!--begin::Info-->
+                <div class="d-flex flex-wrap">
+                  <% @event_details.category.each do |v| %>
+                    <% if v != nil %>
+                      <!--begin::Item-->
+                      <div class="me-9 my-1">
+                        <!--begin::Icon-->
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                        <span class="svg-icon svg-icon-primary svg-icon-2 me-1">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
+                            <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
+                            <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
+                            <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
+                          </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                        <!--end::Icon-->
+                        <!--begin::Label-->
+                        <span class="fw-bolder text-gray-400"><%= t("event.category.#{Event.event_categories.key(v)}") %></span>
+                        <!--end::Label-->
+                      </div>
+                      <!--end::Item-->
+                    <% end %>      
+                  <% end %>
+                  <!--begin::Item-->
+                  <div>
+                    <!--begin::Title-->
+                    <% if @event_details.event_type == 1 %>
+                      <span class="badge badge-warning"><%= t('welcome.privacy policy.top_page_link.text2') %></span>
+                    <% elsif @event_details.event_type == 2 %>
+                      <span class="badge badge-warning"><%=  t('partner.partners_tab') %></span>
+                    <% else %>
+                      <span class="badge badge-warning"><%=  t('Kodawari One') %></span>
+                    <% end %>
+                    <!--end::Title-->
+                  </div>
+                  <!--end::Item-->
+                </div>
+                <!--end::Info-->
+              <% end %> 
+              <!--end::Event Category-->
+              <div class="col-12">
+                <div class="notice d-flex rounded border border-dashed rounded-3 p-6 mt-7 mb-5 bg-light-warning border-warning">
+                  <!--begin::Wrapper-->
+                  <div class="d-flex flex-stack flex-grow-1">
+                    <!--begin::Content-->
+                    <div class="fw-bold">
+                      <div class="fs-6 text-gray-700">
+                        <%= t('event_participant.title.notice_text') %> 
+                      </div>
+                    </div>
+                    <!--end::Content-->
+                  </div>
+                  <!--end::Wrapper-->
+                </div>
+              </div>
+            </div>
+            <!--end::Section-->
+            <%= form_with(url: company_join_admin_events_path, id: "event-modal-form",method: :post) do |form| %>
+              <%= form.hidden_field :id, value: params[:id] %> 
+              <!--begin::Table container-->
+                <div class="table-responsive">
+                  <!--begin::Table-->
+                  <table class="table table-row-dashed align-middle gs-0 gy-4">
+                    <!--begin::Table head-->
+                    <thead>
+                      <tr class="fw-bolder text-muted">
+                        <th class="w-25px">
+                          <div class="form-check form-check-sm form-check-custom form-check-solid">
+                            <input class="form-check-input" type="checkbox" value="1" data-kt-check="true" data-kt-check-target=".widget-9-check" />
+                          </div>
+                        </th>
+                        <th class="min-w-200px p-3">
+                          <%= Admin::EventParticipant.human_attribute_name('name')  %>
+                        </th>
+                        <th class="min-w-160px"><%= Admin::EventParticipant.human_attribute_name('email') %></th>
+                        <th class="pe-0 min-w-120px"><%= Admin::EventParticipant.human_attribute_name('position') %></th>
+                        <th class="pe-0 min-w-120px"><%= Admin::EventParticipant.human_attribute_name('department') %></th>
+                      </tr>
+                    </thead>
+                    <!--end::Table head-->
+                    <!--begin::Table body-->
+                    <tbody>
+                      <% @company_members.each_with_index do |company_member,index| %>
+                        <tr>
+                          <td>
+                            <% if @admin_event_participant.present? %>
+                              <label  class= "form-check form-check-sm form-check-custom form-check-solid simple-chkbox company-enhancement me-5 mb-5">
+                                <%= form.check_box :user_id, {type: 'checkbox', class: 'checkbox-click-ability form-check-input widget-9-check', id: "checkbox#{company_member.user_id}", multiple: true,  checked: admin_event_check_flag(@admin_event_participant,company_member.user_id)}, company_member.user_id %>
+                                <%= form.label :'', for: "checkbox#{company_member.user_id}",class: 'select-label' %>    
+                              </label>
+                            <% else %>
+                              <label  class= "form-check form-check-sm form-check-custom form-check-solid simple-chkbox company-enhancement me-5 mb-5">
+                                <%= form.check_box :user_id, {type: 'checkbox', class: 'checkbox-click-ability form-check-input widget-9-check', id: "checkbox#{company_member.user_id}", multiple: true}, company_member.user_id %>
+                                <%= form.label :'', for: "checkbox#{company_member.user_id}",class: 'select-label' %>
+                              </label>
+                            <% end %>
+                          </td>
+                          <td class="participant">
+                            <div class="d-flex align-items-center">
+                              <!--begin:: Avatar -->
+                              <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
+                                <% if company_member.image.attached? %>
+                                  <%= image_tag (company_member.image), :class=> "symbol-label" %>
+                                <% else %>
+                                  <%= image_tag "avatar/male.svg", :class=> "symbol-label" %>   
+                                <% end %> 
+                              </div>
+                              <!--end::Avatar-->
+                              <!--begin::User details-->
+                              <div class="d-flex flex-column w-lg-75px w-xl-250px text-truncate">
+                                <span class="text-gray-800 mb-1">
+                                  <%= company_member.last_name %><%= company_member.first_name %>
+                                </span>
+                                <span class="text-muted fw-bold text-muted d-block fs-7"><%= company_member.email %></span>
+                              </div>
+                              <!--begin::User details-->
+                            </div>
+                          </td>
+                          <td class="participant w-sm-100px w-md-150px w-lg-100px w-xl-200px">
+                            <span class="text-dark fw-bolder d-block mb-1 fs-6"><%= company_member.email %></span>
+                          </td>
+                          <td class="participant w-sm-100px w-md-150px w-lg-100px w-xl-200px">
+                            <span class="text-dark fw-bolder d-block mb-1 fs-6"><%= company_member.position %></span>
+                          </td>
+                          <td class="participant w-sm-100px w-md-150px w-lg-100px w-xl-200px">
+                            <span class="text-dark fw-bolder d-block mb-1 fs-6"><%= company_member.department %></span>
+                          </td>
+                        </tr>
+                      <% end %>
+                    </tbody>
+                    <!--end::Table body-->
+                  </table>
+                  <!--end::Table-->
+                </div>
+                <!--end::Table container-->
+              <div class="border-0 d-flex justify-content-center py-6 px-9">
+                <%= form.submit t('event_participant.title.join_evt_btn'), class: "btn btn-primary" %>
+              </div>
+            <% end %>
+          </div>
+          <!--end::Card body-->
+        </div>
+        <!--end::Card-->
+      </div>
+      <!--end::Content-->
+    </div>
+    <!--end::Layout-->
+  </div>
+  <!--end::Container-->
+</div>
+<!--end::Content-->

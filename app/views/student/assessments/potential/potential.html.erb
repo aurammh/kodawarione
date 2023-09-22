@@ -1,0 +1,151 @@
+<%= form_with(model: @student_assessment) do |form| %> 
+    <!--begin::Breadcrumb-->
+    <div class="toolbar py-5 py-lg-5" id="kt_toolbar">
+        <div id="kt_toolbar_container" class="container-xxl d-flex flex-stack flex-wrap"> 
+            <% breadcrumbs_navigation_add (t('dashboard.assessment_button')), student_assessments_path %>
+            <% breadcrumbs_navigation_add (t('student.assessment.potential_desire_input_title')), '#' %>
+            <%= render_student_breadcrumbs_navigation (t('student.assessment.potential_desire_input_title')) %>	
+        </div>	
+    </div>
+    <!--end::Breadcrumb-->
+    <!--begin::Entry-->
+    <div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
+        <!--begin::Container-->
+        <div id="kt_content" class="content flex-row-fluid">
+            <!--begin::Card-->
+            <div class="card mb-5 mb-xl-10">
+                <div class="card-header border-0">
+                    <div class="card-title">
+                        <h3 class="card-label"><%=t('student.assessment.diagnosis_input_title')%></h3>
+                    </div>
+                    <div class="card-toolbar">
+                        <div class="example-tools justify-content-center"> 
+                            <%= form.submit t('btn.record') , class: "btn btn-sm btn-primary font-weight-bolder text-uppercase" %> 
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body border-top p-9">
+                    <div class="card-scroll" style="height: 444px;">
+                        <div class="col-12 mb-3 text-center"> 
+                            <span class='font-weight-bold text-danger'>
+                                <%=t('student.assessment.potential_desire_check_title_1')%><br>
+                            </span>
+                            <span class='font-weight-bold'>
+                                <%=t('student.assessment.potential_desire_check_title_2')%>
+                            </span>
+                        </div> <br>
+                        <div class="col-12 mb-3"> 
+                            <div class="form">
+                                <div class="form-group row">                                
+                                    <%= form.fields_for :love_and_desire_to_belong  do |f| %>   
+                                        <% Student::Assessment.love_and_desires_lists.each_with_index do |(k, v), index| %>
+                                            <!--begin::Desktop view-->
+                                            <label class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-5 col-form-label text-xl-center text-lg-center text-left pb-0 fs-2">
+                                                <i class="flaticon-questions-circular-button text-primary pr-2 me-1 fs-2"></i>
+                                                <b><%= t ('student.assessment.brain_table1_th1') %>   <%= index + 1 %></b>
+                                            </label>
+                                            <div class="col-12 col-sm-12 col-md-9 col-lg-9 col-xl-7 col-form-label">                                
+                                                <div class="checkbox-inline"> 
+                                                    <label for=<%= "student_assessment_love_and_desire_to_belong_#{k}"%>  class= "form-check form-check-sm form-check-custom form-check-solid align-items-start me-5 mb-5">
+                                                        <%= f.check_box "#{k}" ,{ :checked =>@student_assessment.love_and_desire_to_belong.nil?  ? false : @student_assessment.love_and_desire_to_belong[v-1] == 1, class: "form-check-input" } %>
+                                                        <span class="form-check-label"></span> 
+                                                        <%= t("student_assessment.love_and_desires_list.#{k}") %>
+                                                    </label>  
+                                                </div>
+                                            </div>
+                                            <!--end::Desktop view-->
+                                        <% end %>
+                                    <% end %>  
+                                    <%= form.fields_for :desire_for_power_and_value  do |f| %>
+                                        <% Student::Assessment.desire_for_power_and_values_lists.each_with_index do |(k, v), index| %>
+                                            <!--begin::Desktop view-->
+                                            <label class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-5 col-form-label text-xl-center text-lg-center text-left pb-0 fs-2">
+                                                <i class="flaticon-questions-circular-button text-primary pr-2 me-1 fs-2"></i>
+                                                <b><%= t ('student.assessment.brain_table1_th1') %>   <%= index + 11  %></b>
+                                            </label>
+                                            <div class="col-12 col-sm-12 col-md-9 col-lg-9 col-xl-7 col-form-label">                                     
+                                                <div class="checkbox-inline"> 
+                                                    <label for=<%= "student_assessment_desire_for_power_and_value_#{k}"%>  class= "form-check form-check-sm form-check-custom form-check-solid align-items-start me-5 mb-5">
+                                                        <%= f.check_box "#{k}" ,{ :checked =>@student_assessment.desire_for_power_and_value.nil?  ? false : @student_assessment.desire_for_power_and_value[v-1] == 1, class: "form-check-input" } %>
+                                                        <span class="form-check-label"></span> 
+                                                        <%= t("student_assessment.desire_for_power_and_values_lists.#{k}") %>
+                                                    </label>  
+                                                </div>
+                                            </div>
+                                            <!--end::Desktop view-->
+                                        <% end %>
+                                    <% end %>  
+                                    <%= form.fields_for :desire_for_freedom  do |f| %>
+                                        <% Student::Assessment.desire_for_freedoms_lists.each_with_index do |(k, v), index| %>
+                                            <!--begin::Desktop view-->
+                                            <label class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-5 col-form-label text-xl-center text-lg-center text-left pb-0 fs-2">
+                                                <i class="flaticon-questions-circular-button text-primary pr-2 me-1 fs-2"></i>
+                                                <b><%= t ('student.assessment.brain_table1_th1') %>   <%= index + 21 %></b>
+                                                </i>
+                                            </label>
+                                            <div class="col-12 col-sm-12 col-md-9 col-lg-9 col-xl-7 col-form-label">                                     
+                                                <div class="checkbox-inline"> 
+                                                    <label for=<%= "student_assessment_desire_for_freedom_#{k}"%>  class= "form-check form-check-sm form-check-custom form-check-solid align-items-start me-5 mb-5">
+                                                        <%= f.check_box "#{k}" ,{ :checked =>@student_assessment.desire_for_freedom.nil?  ? false : @student_assessment.desire_for_freedom[v-1] == 1, class: "form-check-input" } %>
+                                                        <span class="form-check-label"></span>
+                                                        <%= t("student_assessment.desire_for_freedoms_lists.#{k}") %>
+                                                    </label>  
+                                                </div>
+                                            </div>
+                                            <!--end::Desktop view-->
+                                        <% end %>
+                                    <% end %>  
+                                    <%= form.fields_for :desire_for_fun  do |f| %>
+                                        <% Student::Assessment.desire_for_funs_lists.each_with_index do |(k, v), index| %>
+                                            <!--begin::Desktop view-->
+                                            <label class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-5 col-form-label text-xl-center text-lg-center text-left pb-0 fs-2">
+                                                <i class="flaticon-questions-circular-button text-primary pr-2 me-1 fs-2"></i>
+                                                <b><%= t ('student.assessment.brain_table1_th1') %>   <%= index + 31 %></b>
+                                            </label>
+                                            <div class="col-12 col-sm-12 col-md-9 col-lg-9 col-xl-7 col-form-label">                                     
+                                                <div class="checkbox-inline"> 
+                                                    <label for=<%= "student_assessment_desire_for_fun_#{k}"%>  class= "form-check form-check-sm form-check-custom form-check-solid align-items-start me-5 mb-5">
+                                                        <%= f.check_box "#{k}" ,{ :checked =>@student_assessment.desire_for_fun.nil?  ? false : @student_assessment.desire_for_fun[v-1] == 1, class: "form-check-input" } %>
+                                                        <span class="form-check-label"></span>  
+                                                        <%= t("student_assessment.desire_for_funs_lists.#{k}") %>
+                                                    </label>  
+                                                </div>
+                                            </div>
+                                            <!--end::Desktop view-->
+                                        <% end %>
+                                    <% end %>  
+                                    <%= form.fields_for :desire_for_survival  do |f| %>
+                                        <% Student::Assessment.desire_for_survivals_lists.each_with_index do |(k, v), index| %>
+                                            <!--begin::Desktop view-->
+                                            <label class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-5 col-form-label text-xl-center text-lg-center text-left pb-0 fs-2">
+                                                <i class="flaticon-questions-circular-button text-primary pr-2 me-1 fs-2"></i>
+                                                <b><%= t ('student.assessment.brain_table1_th1') %>   <%= index + 41 %></b>
+                                            </label>
+                                            <div class="col-12 col-sm-12 col-md-9 col-lg-9 col-xl-7 col-form-label">                                     
+                                                <div class="checkbox-inline"> 
+                                                    <label for=<%= "student_assessment_desire_for_survival_#{k}"%>  class= "form-check form-check-sm form-check-custom form-check-solid align-items-start me-5 mb-5">
+                                                        <%= f.check_box "#{k}" ,{ :checked =>@student_assessment.desire_for_survival.nil?  ? false : @student_assessment.desire_for_survival[v-1] == 1, class: "form-check-input" } %>
+                                                        <span class="form-check-label"></span>  
+                                                        <%= t("student_assessment.desire_for_survivals_lists.#{k}") %>
+                                                    </label>  
+                                                </div>
+                                            </div>
+                                            <!--end::Desktop view-->
+                                        <% end %>
+                                    <% end %>                         
+                                </div> 
+                            </div>       
+                        </div>                         
+                    </div>
+                </div>
+            </div>
+            <!--end::Card-->
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Entry-->
+    <%# confirm dialoag start%>
+    <%= render "common/confirm_box" %>
+    <%# confirm dialoag end%>
+<%end%> 
+<%= javascript_pack_tag 'common.js'%>

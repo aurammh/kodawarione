@@ -1,0 +1,149 @@
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+  <!--begin::Container-->
+  <div class="container-xxl" id="kt_content_container">
+    <%= render partial: "company/shared/commitment_profiles/common_banner" %>
+    <!--begin::Card-->
+    <div class="card bg-body mb-5 mb-xl-10">
+      <!--begin::Card body-->
+      <div class="card-body p-lg-17">
+        <%= form_with(model: company_activity) do |form| %>
+          <!--begin::Input group-->
+					<div class="row mb-6">
+						<!--begin::Label-->
+						<label class="col-lg-4 col-form-label required fw-bold fs-6"><%= form.label :title %></label>
+						<!--end::Label-->
+						<!--begin::Col-->
+						<div class="col-lg-8 fv-row">
+              <%= form.text_field :title, id: "title", class: "form-control form-control-lg form-control-solid" %>
+              <p class="text-danger fs-6 ms-invalid-feedback mt-1"><%= company_activity.errors.full_messages_for(:title)[0] %></p>
+						</div>
+						<!--end::Col-->
+					</div>
+					<!--end::Input group-->
+          <!--begin::Input group-->
+					<div class="row mb-6">
+						<!--begin::Label-->
+						<label class="col-lg-4 col-form-label fw-bold fs-6"><%= form.label :desc %></label>
+						<!--end::Label-->
+						<!--begin::Col-->
+						<div class="col-lg-8 fv-row">
+              <%= form.rich_text_area :desc, class: "form-control form-control-lg form-control-solid h-200px h-lg-300px h-xl-300px overflow-auto", id: "desc", rows: 4, maxlength: 1000 %>
+              <p class="text-danger fs-6 ms-invalid-feedback mt-1"><%= company_activity.errors.full_messages_for(:desc)[0] %></p>
+						</div>
+						<!--end::Col-->
+					</div>
+					<!--end::Input group-->
+          <!--begin::Input group-->
+					<div class="row mb-13">
+						<!--begin::Label-->
+						<label class="col-lg-4 col-form-label fw-bold fs-6"><%= form.label :video_clip %></label>
+						<!--end::Label-->
+						<!--begin::Col-->
+						<div class="col-lg-8 fv-row">
+              <%= form.hidden_field :have_video_clip_flag, id: "haveVideoClipFlag", :value => false %> 
+              <div class="">
+                <%= form.file_field :video_clip, :id => "uploadVideoClip", accept: 'video/mp4,video/x-m4v,video/*', :class=> "d-none", "data-existed": form.object.video_clip.attached? %>
+                <label for="uploadVideoClip" class="d-block">              
+                  <div class="dropzone dropzone-default dz-clickable dz-started border-gray-400 bg-light border-dashed">
+                    <% if form.object.video_clip.attached? && form.object.video_clip.persisted? %>                    
+                      <div class="video-clip-choosen dz-preview dz-file-preview dz-error dz-complete">
+                        <div class="mb-2">
+                          <i class="fas fa-video text-gray-600 fs-3x"></i>
+                          <!-- <img data-dz-thumbnail> -->
+                        </div>
+                        <div class="dz-details">
+                          <div class="dz-size">
+                            <span><%= form.object.video_clip.byte_size / (1024*1024) %> MB</span>
+                          </div>
+                          <div class="dz-filename">
+                            <span><%= form.object.video_clip.filename %></span>
+                          </div>                      
+                        </div>                        
+                      </div>                    
+                    <% else %>             
+                      <div class="video-clip-choosen upload-text">
+                        <%= t('student.title.pdf_text') %>
+                      </div>           
+                    <% end %>
+                  </div>
+                  <div class="d-flex flex-column align-items-end mt-3 <%= form.object.video_clip.attached? && form.object.video_clip.persisted? ? 'd-block' : 'd-none' %>" id="remove-video-clip">
+                    <a href="" class="btn btn-bg-light btn-color-muted fs-6">
+                      <i class="fas fa-trash-alt text-muted fs-3 pt-1"></i>
+                      Remove Video
+                    </a>
+                  </div>
+                </label>  
+                <p class="text-danger fs-6 ms-invalid-feedback mt-1"><%= company_activity.errors.full_messages_for(:video_clip)[0] %></p>
+              </div>
+						</div>
+						<!--end::Col-->
+					</div>
+					<!--end::Input group-->
+					<!--begin::Input group-->
+          <div class="row mb-6 cover-photo">
+            <!--begin::Label-->
+            <label class="col-lg-4 col-form-label fw-bold fs-6"><%= form.label :thumbnail %></label>
+            <!--begin::Col-->
+            <div class="col-lg-8">                            
+              <div class="image-input image-input-outline w-50">
+                <label class="image-input-wrapper upload-kodawari-cover-preview  upload-cover-preview w-100 h-150px">
+                  <%= image_tag company_activity.thumbnail.attached? && company_activity.thumbnail.persisted? ? company_activity.thumbnail : "avatar/preview.svg", class: "kodawari-banner-image-file w-100 h-100" %>
+                  <span class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow edit-pen">
+                    <i class="fa fa-pen icon-sm text-muted "></i>
+                  </span>
+                  <%= form.hidden_field :cover_image_data, :value => false , id: "cover_image_data" %>
+                  <%= form.hidden_field :coverImageFlag, :value => false , id: "coverImageFlag" %>
+                  <%= form.file_field :thumbnail, accept: "image/png,image/gif,image/jpeg,image/jpg", :class=> "d-none kodawari-banner-cover-input-file", :id => "cover-image", "data-existed": form.object.thumbnail.attached?%>
+                  <input type="hidden" name="profile_avatar_remove" />   
+                </label>                                                            
+                <span class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow"
+                  data-kt-image-input-action="cancel"
+                  data-bs-toggle="tooltip"
+                  data-bs-dismiss="click"
+                  title="Cancel avatar">
+                  <i class="ki ki-bold-close icon-xs text-muted"></i>
+                </span>
+                <span type="button" id="cover-img-remove" class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow"
+                  data-kt-image-input-action="remove"
+                  data-bs-toggle="tooltip"
+                  data-bs-dismiss="click"
+                  title="Remove avatar">
+                  <i class="ki ki-bold-close icon-xs text-muted"></i>
+                </span>          
+              </div>                            
+              <div class="py-4 d-flex ">
+                <% if company_activity.thumbnail.attached? && company_activity.thumbnail.persisted? %>
+                  <span class="form-text text-muted chosen-text img-name text-break"><%= company_activity.thumbnail.filename %></span>
+                <% else %>
+                  <span class="form-text text-muted chosen-text"><%=t('common.profile_upload_text')%></span>
+                <% end %>
+              </div>     
+              <p class="text-danger fs-6 ms-invalid-feedback mt-1"><%= company_activity.errors.full_messages_for(:thumbnail)[0] %></p> 
+              <%# image crop modal start%>
+              <%= render "common/banner_image_crop" %>
+              <%# image crop modal end%>
+            </div>
+          </div>
+          <!--end::Input group-->
+          <div class="separator mb-8 mt-8"></div>
+          <!--begin::Actions-->
+          <div class="d-flex justify-content-end">
+            <% if !company_activity.new_record? %>
+              <%= link_to t('common.profile_delete'), company_activity, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger me-5" %>
+            <% end %>
+            <%= link_to t('btn.cancel'), company_activities_path, class: "btn btn-light btn-active-light-primary me-2" %>
+            <%= form.submit t('btn.submit'), class: "btn btn-primary" %>
+          </div>
+          <!--end::Actions-->  
+        <% end %>
+      </div>
+      <!--end::Card body-->
+    </div>
+    <!--end::Card-->
+  </div>
+  <!--end::Container-->
+</div>
+<!--end::Content-->
+<%= javascript_pack_tag "common.js" %>
+<%= javascript_pack_tag "company/commitment_profile.js" %>

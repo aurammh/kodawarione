@@ -1,0 +1,29 @@
+ja:
+  activerecord:
+    models:
+      company/company_member: company_member
+    attributes:
+      company/company_member:
+        user_email: ユーザメール
+        company_roles_id: 権限
+        join_date: 参加日
+        department: 所属
+        position: 役職
+        company_member_logo: 顔写真
+  company_member:
+    title:
+      header: メンバー
+      management: 企業メンバー管理
+      member: 企業メンバー
+      member_list: メンバー一覧
+      member_show: 企業メンバー情報
+      member_edit: 企業メンバー編集
+      welcome: メンバー招待
+      confrim_text1: あなたは管理者より企業メンバーとして招待されました。
+      confrim_text2: 「承認」または「辞退」をクリックしてください
+    btn:
+      new_company_member: メンバー追加
+      show: 情報
+      accept: 承認
+      deny: 辞退
+      invite: 招待

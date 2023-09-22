@@ -1,0 +1,71 @@
+<div class="modal api-access-section" tabindex="-1" role="dialog" id="api-access-modal">
+    <%= form_with(model: @admin_api_access_token,id: "api-access-form") do |form| %>
+        <input name="form_status" id = "form_status" type="hidden" value="<%= params[:form_status]%>">
+        <div class="modal-dialog modal-md modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+            <div class="modal-header admin-sidebar-color text-white">
+                <h5 class="modal-title"><%= params[:form_status] === "new" ? t('api_access_token.api_modal_create_title') : t('api_access_token.api_modal_edit_title') %></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">  
+                <div class="col-12 mb-3">
+                    <div class = "error_name">
+                        <div class="d-flex">
+                            <%= form.label :name, class: "form-label" %>
+                            <label class="ml-auto required-label"><%= t('common.require') %> </label>
+                        </div>
+                        <%= form.text_field :name, id: "name",class: "form-control shadow-none errors", maxlength: 60 %>
+                        <p class="ms-invalid-feedback mt-1 ">
+                            <span class ="err_name d-none"><%= Admin::ApiAccessToken.human_attribute_name('name') %>  <%= t('errors.messages.blank') %></span>
+                        </p>
+                    </div>    
+                </div>
+                <div class="col-12 mb-3">
+                    <div class = "error_token_scope">
+                        <div class="d-flex">
+                            <%= form.label :token_scope,class: "form-label" %>
+                            <label class="ml-auto required-label"><%= t('common.require') %> </label>
+                        </div>
+                        <div>
+                            <ul class="stylish-custom-chkbox">
+                                <li> 
+                                    <input name="default_chk" type="hidden" value="0"><input type="checkbox" value="1" name="default_chk" id="default_chk" disabled="disabled" checked="checked">
+                                    <label class="shadow-none errors mb-0 cusor_not_allow" for="default_chk"><%=t("api_access_token.read_chk_default")%></label>
+                                </li>
+                            </ul>
+                        </div>
+                        <p class="ms-invalid-feedback mt-1">
+                            <span class ="err_token_scope d-none"><%= Admin::ApiAccessToken.human_attribute_name('token_scope') %>  <%= t('errors.messages.blank') %></span>
+                        </p>
+                    </div>    
+                </div>
+                <% unless params[:form_status] === "new" %>
+                    <div class="col-12 mb-3">
+                            <%= form.submit (t "btn.btn_submit"),:class => "admin-sidebar-color col-12 custom-btn px-4 py-2 mr-1 text-decoration-none text-white",:id => "btn-api-access" %>              
+                    </div>
+                    <div class="col-12 mb-3">
+                        <label class="form-label"><%= t('api_access_token.update_label') %> </label>
+                    </div>
+                    <hr>
+                    <div class="col-12 mb-3">                    
+                        <%= form.submit (t "api_access_token.regenerate_btn"),:class => "admin-sidebar-color col-12 custom-btn px-4 py-2 mr-1 text-decoration-none text-white",:id => "btn-regenerate-token" %>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <h5 class="modal-title"><%= t('api_access_token.regenerate_title') %></h5>
+                        <label class="form-label"><%= t('api_access_token.regenerate_label') %></label>
+                    </div>
+               <% end %>
+            </div>
+            <div class="modal-footer">
+               <% if params[:form_status] === "new" %>
+                 <%= form.submit (t "btn.btn_submit"),:class => "admin-sidebar-color col-12 col-sm-6 col-md-4 col-lg-4 custom-btn px-4 py-2 mr-1 text-decoration-none text-white",:id => "btn-api-access" %>
+               <% end %>
+                <button type="button" class="admin-sidebar-color col-12 col-sm-6 col-md-4 col-lg-4 custom-btn px-4 py-2 mr-1 text-decoration-none text-white" id="modal-btn-no" data-dismiss="modal"><%= t "btn.confirm_no" %></button>
+            </div>
+            </div>
+        </div>
+    <% end %>
+</div>
+<%= javascript_pack_tag "admin/api_access.js" %>

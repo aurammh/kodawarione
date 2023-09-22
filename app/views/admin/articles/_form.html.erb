@@ -1,0 +1,72 @@
+<%= form_for(@admin_article) do |form| %>
+  <div class="row col-12 event-registration px-1 px-sm-4 mt-3">  
+    <section class="col-md-12 mb-5 pl-5">
+      <div class="d-container shadow py-4 bg-white" style="border-radius: 0.8rem">
+        <div class="col-12 pb-4 pt-3">
+          <span class="h4 admin-font-color"><%= t('admin.article.article_information')%></span>
+        </div>
+        <div class="col-12 mb-3">
+          <div class="d-flex">
+            <%= form.label :title, class: "form-label"  %>
+            <label class="ml-auto required-label"> <%= t('common.require') %> </label>
+          </div>
+          <%= form.text_field :title, id: "title",class: "form-control shadow-none errors", maxlength: 255 %>
+          <p class="ms-invalid-feedback mt-1"><%= @admin_article.errors.full_messages_for(:title)[0] %></p>                                  
+        </div>
+        <div class="col-12 mb-3 hide-trix-toolbar">
+          <div class="d-flex">
+            <%= form.label :content, class: "form-label"  %>
+            <label class="ml-auto required-label"> <%= t('common.require') %> </label>
+          </div>
+            <%= form.rich_text_area :content, id: "content",class: "shadow-none errors"%>
+          <p class="ms-invalid-feedback mt-1"><%= @admin_article.errors.full_messages_for(:content)[0] %></p>                                  
+        </div>
+
+        <div class="col-12 mb-3">
+          <div class="d-flex">
+            <%= form.label :show_option, class: "form-label"  %>
+            <label class="ml-auto required-label"> <%= t('common.require') %> </label>
+          </div>
+            <%= form.select(:show_option, admin_article_options,{:include_blank => ( t'select.not_select')}, {:class => "form-control shadow-none errors", :id =>"show_option"}) %>
+              <p class="ms-invalid-feedback mt-1"><%= @admin_article.errors.full_messages_for(:show_option)[0] %></p>                                 
+        </div>
+
+        <%# Start of add rows by btn%>
+        <div class="col-12 mb-3">
+          <div class="d-flex">
+            <%= form.label :video_link, class: "form-label"  %>
+          </div>
+          <div id ="original-inputs" class="hire-btn">
+            <% unless @admin_article.video_link.nil?%>
+              <% @admin_article.video_link.each_with_index  do |h,i| %>
+                <div class="hire-btn mb-3">
+                  <%= form.text_field :video_link, multiple: true, class: "form-control shadow-none", value: h, :id => "video_link_multi_data_#{i+1}" %>
+                  <% if i == 0 %>
+                    <span class="plus_minus_icon plus_icon" id="add_row"><i class="fas fa-plus-circle"></i></span>
+                  <% else %>
+                    <span class="plus_minus_icon remove_icon" id="add_row"><i class="fas fa-minus-circle"></i></span>
+                  <% end %>
+                </div>
+              <% end %>
+            <%else%>
+              <%= form.text_field :video_link, multiple: true, :class=> "form-control shadow-none",:id => "video_link_multi_data_1" %>
+              <span class="plus_minus_icon plus_icon" id="add_row"><i class="fas fa-plus-circle"></i></span>
+            <%end%>
+          </div>
+        </div>
+
+        <div class="col-12 mb-3">
+          <div id="dynamic-inputs"></div>
+        </div>
+        <%# end of add rows by btn%>
+
+        
+      </div>        
+      <div class="actions d-flex justify-content-center mt-5">
+        <%= form.submit (t "btn.update"), :class => 'custom-btn text-white' %>
+      </div> 
+    </section> 
+  </div>  
+<% end %>
+
+<%= javascript_pack_tag "admin/article.js" %>

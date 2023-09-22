@@ -1,0 +1,64 @@
+<div class="d-flex flex-column flex-root">
+  <!--begin::Registration Form-->
+  <div class="d-flex flex-column flex-column-fluid">
+    <!--begin::Content-->
+    <div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
+      <!--begin::Logo-->
+      <div class="d-flex flex-center text-center mb-15">
+        <%= link_to root_path do %>
+          <%= image_tag "layout/header_logo.png", class: "h-60px" %>      
+        <% end %>  
+      </div>
+      <!--end::Sign Up Header-->
+      <!--begin::Wrapper-->
+      <div class="w-lg-550px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
+        <!--begin::Form-->
+        <div class="form w-100">
+          <!--begin::Heading-->
+          <div class="text-center mb-10">
+            <!--begin::Title-->
+            <h1 class="text-dark mb-3"><%= t('registeration.title.student_registeration') %></h1>
+            <!--end::Title-->
+          </div>
+          <!--begin::Heading-->
+          <div class="login-signin">
+            <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+              <%= render "company_users/shared/error_messages", resource: resource %>
+              <div class="form-group mb-4">
+              <%= f.hidden_field :confirm_member_token, value: @confirm_member_token  %>
+                <%= f.text_field :company_name, class: "form-control h-auto form-control-solid py-3 px-8", placeholder: true , readonly: true%>
+                <p class="d-flex align-items-start text-danger font-size-sm ms-invalid-feedback"><%#= resource.errors.full_messages_for(:company_name)[0] %></p>
+              </div>
+              <div class="form-group mb-4">
+                <%= f.text_field :last_name, class: "form-control h-auto form-control-solid py-3 px-8  text-uppercase", placeholder: t("activerecord.attributes.student/student.last_name") %>
+                <p class="d-flex align-items-start text-danger font-size-sm ms-invalid-feedback"><%#= resource.errors.full_messages_for(:contact_person_last_name)[0] %></p>
+              </div>
+              <div class="form-group mb-4">
+                <%= f.text_field :first_name, class: "form-control h-auto form-control-solid py-3 px-8  text-uppercase", placeholder: t("activerecord.attributes.student/student.first_name") %>
+                <p class="d-flex align-items-start text-danger font-size-sm ms-invalid-feedback"><%#= resource.errors.full_messages_for(:contact_person_first_name)[0] %></p>
+              </div>
+              <div class="form-group mb-4">
+                <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control h-auto form-control-solid py-3 px-8", placeholder: "email", readonly: true %>
+              </div>
+              <div class="text-center">
+                <%= f.submit (t "btn.update"), class: "btn btn-lg btn-primary" %>
+              </div>
+            <% end %>
+          </div>          
+        </div>  
+      </div>
+    </div>
+    <!--end::Content-->
+    <!--begin::Footer-->
+    <div class="d-flex flex-center flex-column-auto p-10">
+      <!--begin::Links-->
+      <div class="d-flex align-items-center fw-bold fs-6">
+        <%= link_to t('welcome.privacy policy.top_page_link.link1'),welcome_privacy_path(user_type: @usertype || @user_type) , class: "text-gray-400 text-decoration-none text-hover-primary px-2", target: '_blank' %>
+        <%= link_to t('welcome.privacy policy.top_page_link.link3'), welcome_contact_path(user_type: @usertype || @user_type), class: "text-gray-400 text-decoration-none text-hover-primary px-2"  %> 						
+      </div>
+      <!--end::Links-->
+    </div>
+    <!--end::Footer-->
+  </div>
+</div>
+<%= javascript_pack_tag "user/user.js" %>

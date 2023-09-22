@@ -1,0 +1,345 @@
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Commitment-->
+    <div class="card bg-body mb-5 mb-xl-10" id="kt_profile_details_view">
+        <!--begin::Card header-->
+        <div class="card-header cursor-pointer">
+            <!--begin::Card title-->
+            <div class="card-title m-0">
+                <h3 class="fw-bolder m-0"><%=t ('student_commitment.title.student_commitment_title1')%></h3>
+            </div>
+            <!--end::Card title-->
+            <% if can?(:edit_commitment, Kodawarione::StudentManage)%>
+            <%= link_to t('btn.edit'), kodawarione_student_manage_edit_student_commitment_path, class: "btn btn-primary align-self-center" %>
+            <% end %>
+        </div>
+        <!--begin::Card header-->
+        <!--begin::Card body-->
+        <div class="card-body p-9">
+            <!--begin::Row-->
+            <% if @student_info.nick_name.present? %>
+                <div class="row mb-7">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 fw-semibold text-gray-600"><%= t'status.student_name' %></label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8">
+                        <span class="fw-bolder fs-6 text-gray-800"><%= @student_info.nick_name %></span>
+                    </div>
+                    <!--end::Col-->
+                </div>
+            <% end %>
+            <!--end::Row-->
+            <!--begin::Input group-->
+            <% if @student_info.current_address.present? %>
+                <div class="row mb-7">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 fw-semibold text-gray-600"><%= Student::Student.human_attribute_name('complete_address') %></label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8 fv-row">
+                        <span class="fw-bolder text-gray-800 fs-6"><%= get_prefecture_name(@student_info.current_address) %></span>
+                    </div>
+                    <!--end::Col-->
+                </div>
+            <% end %>
+            <!--end::Input group-->
+            <!--begin::Input group-->
+            <% unless @student_info.preferred_working_area.nil? || @student_info.preferred_working_area == [nil] %>
+                <div class="row mb-7">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 fw-semibold text-gray-600">
+                        <%= Student::Student.human_attribute_name('complete_desired_location') %>
+                    </label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8 d-flex align-items-center">
+                        <span class="fw-bolder fs-6 text-gray-800 me-2"><%= get_prefecture_name_with_multi_select(@student_info.preferred_working_area) %></span>
+                    </div>
+                    <!--end::Col-->
+                </div>
+            <% end %>
+            <!--end::Input group-->
+            <!--begin::Input group-->
+            <% if @student_info.birthday.present? %>
+                <div class="row mb-7">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 fw-semibold text-gray-600">
+                        <%= Student::Student.human_attribute_name('birthday') %>
+                    </label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8 d-flex align-items-center">
+                        <span class="fw-bolder fs-6 text-gray-800 me-2"><%= l @student_info.birthday %></span>
+                    </div>
+                    <!--end::Col-->
+                </div>
+            <% end %>
+            <!--end::Input group-->            
+            <!--begin::Input group-->
+            <% if @student_info.gender.present? %>
+                <div class="row mb-7">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 fw-semibold text-gray-600"><%= Student::Student.human_attribute_name('gender') %></label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8">
+                        <span class="fw-bolder fs-6 text-gray-800"> <%= t("student.gender.#{@student_info.gender}") %></span>
+                    </div>
+                    <!--end::Col-->
+                </div>
+            <% end %>
+            <!--end::Input group-->
+            <!--begin::Input group-->
+            <% if @student_info.qualification_string.present? %>
+                <div class="row mb-7">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 fw-semibold text-gray-600">
+                        <%= Student::Student.human_attribute_name('qualification_string') %>
+                    </label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8">
+                        <span class="fw-bolder fs-6 text-gray-800">
+                            <%= @student_info.qualification_string %> 
+                        </span>
+                    </div>
+                    <!--end::Col-->
+                </div>
+            <% end %>
+            <!--end::Input group-->
+            <!--begin::Input group-->
+            <% if @student_info.commitment.present? %>
+                <div class="row mb-7">
+                    <!--begin::Label-->
+                    <label class="col-lg-4 fw-semibold text-gray-600">
+                        <%= Student::Student.human_attribute_name('commitment') %>
+                    </label>
+                    <!--end::Label-->
+                    <!--begin::Col-->
+                    <div class="col-lg-8">
+                        <span class="fw-bolder fs-6 text-gray-800">
+                            <%= @student_info.commitment %> 
+                        </span>
+                    </div>
+                    <!--end::Col-->
+                </div>
+            <% end %>
+            <!--end::Input group-->
+        </div>
+        <!--end::Card body-->
+    </div>
+    <!--end::Commitment-->
+    <!--begin::Basic info-->
+    <div class="card bg-body mb-5 mb-xl-10" id="kt_profile_details_view">
+        <!--begin::Card header-->
+        <div class="card-header cursor-pointer">
+            <!--begin::Card title-->
+            <div class="card-title m-0">
+                <h3 class="fw-bolder m-0"><%= (t 'common.registration_confirm_screen1') %></h3>
+            </div>
+            <!--end::Card title-->
+            <% if can?(:edit_student_detail, Kodawarione::StudentManage)%>
+            <%= link_to t('btn.edit'), kodawarione_student_manage_edit_student_detail_path, class: "btn btn-primary align-self-center" %>
+            <% end %>
+        </div>
+        <!--end::Card header-->
+        <!--begin::Card body-->
+        <div class="card-body pt-3">	
+            <!--begin::Section-->
+            <div class="mb-10">																	
+                <!--begin::Details-->
+                <div class="d-flex flex-wrap py-5">
+                    <!--begin::Row-->
+                    <div class="flex-equal me-5">
+                        <!--begin::Details-->
+                        <table class="table fs-6 fw-bold gs-0 gy-2 gx-2 m-0">
+                            <!--begin::Row-->
+                            <% if @student_info.last_name.present? %>
+                                <tr>
+                                    <td class="text-gray-600 min-w-175px w-175px"><%= Student::Student.human_attribute_name('last_name') %>:</td>
+                                    <td class="text-gray-800 min-w-200px">
+                                        <span class="fw-bolder text-gray-800"><%= @student_info.last_name %></span>
+                                    </td>
+                                </tr>
+                            <% end %>
+                            <!--end::Row-->
+                            <!--begin::Row-->
+                            <% if @student_info.first_name.present? %>
+                                <tr>
+                                    <td class="text-gray-600"><%= Student::Student.human_attribute_name('first_name') %>:</td>
+                                    <td class="fw-bolder text-gray-800"><%= @student_info.first_name %></td>
+                                </tr>
+                            <% end %>
+                            <!--end::Row-->
+                            <!--begin::Row-->
+                            <% if @student_info.last_name_kana.present? %>
+                                <tr>
+                                    <td class="text-gray-600"><%= Student::Student.human_attribute_name('last_name_kana') %>:</td>
+                                    <td class="fw-bolder text-gray-800"><%= @student_info.last_name_kana %></td>
+                                </tr>
+                            <% end %>
+                            <!--end::Row-->
+                            <!--begin::Row-->
+                            <% if @student_info.first_name_kana.present? %>
+                                <tr>
+                                    <td class="text-gray-600"><%= Student::Student.human_attribute_name('first_name_kana') %>:</td>
+                                    <td class="fw-bolder text-gray-800"><%= @student_info.first_name_kana %></td>
+                                </tr>
+                            <% end %>
+                            <!--end::Row-->
+                            <!--begin::Row-->
+                            <% if @student_info.gender.present? %>
+                                <tr>
+                                    <td class="text-gray-600"><%= Student::Student.human_attribute_name('gender') %>:</td>
+                                    <td class="fw-bolder text-gray-800"><%= t("student.gender.#{@student_info.gender}") %></td>
+                                </tr>
+                            <% end %>
+                            <!--end::Row-->	
+                        </table>
+                        <!--end::Details-->
+                    </div>
+                    <!--end::Row-->
+                    <!--begin::Row-->
+                    <div class="flex-equal">
+                        <!--begin::Details-->
+                        <table class="table fs-6 fw-bold gs-0 gy-2 gx-2 m-0">
+                            <!--begin::Row-->
+                            <% if @student_info.birthday.present? %>
+                                <tr>
+                                    <td class="text-gray-600 min-w-175px w-175px"><%= Student::Student.human_attribute_name('birthday') %>:</td>
+                                    <td class="text-gray-800 min-w-200px">
+                                        <span class="fw-bolder text-gray-800"><%= l @student_info.birthday %></span>
+                                    </td>
+                                </tr>
+                            <% end %>
+                            <!--end::Row-->
+                            <!--begin::Row-->
+                            <% if @user.email.present? %>
+                                <tr>
+                                    <td class="text-gray-600"><%= Student::Student.human_attribute_name('email') %>:</td>
+                                    <td class="fw-bolder text-gray-800"><%= @user.email %></td>
+                                </tr>
+                            <% end %>
+                            <!--end::Row-->											
+                            <!--begin::Row-->
+                            <% if @student_info.phone_no.present? %>
+                                <tr>
+                                    <td class="text-gray-600"><%= Student::Student.human_attribute_name('phone_no') %>:</td>
+                                    <td class="fw-bolder text-gray-800"><%= @student_info.phone_no %></td>
+                                </tr>
+                            <% end %>
+                            <!--end::Row-->     
+                            <!--begin::Row-->
+                            <% if @student_info.display_address.present? %>
+                                <tr>
+                                    <td class="text-gray-600"><%= Student::Student.human_attribute_name('display_address') %>:</td>
+                                    <td class="fw-bolder text-gray-800">
+                                        <%= get_MPrefecture_by_id(@student_info.postal_prefecture_id) %> 
+                                        <%= @student_info.postalcode_city %>
+                                    </td>
+                                </tr>
+                            <% end %>
+                            <!--end::Row-->                   
+                        </table>
+                        <!--end::Details-->
+                    </div>
+                    <!--end::Row-->
+                </div>
+                <!--end::Row-->
+            </div>
+            <!--end::Section-->
+            <!--begin::Section-->
+            <div class="mb-10">
+                <div class="separator separator-dashed mt-9 mb-6"></div>
+                <!--begin::Title-->
+                <h5 class="mb-4"><%= t('student.title.school_info') %>:</h5>
+                <!--end::Title-->
+                <!--begin::Details-->
+                <div class="d-flex flex-wrap py-5">
+                    <!--begin::Row-->
+                    <div class="flex-equal me-5">
+                        <!--begin::Details-->
+                        <table class="table fs-6 fw-bold gs-0 gy-2 gx-2 m-0">
+                            <!--begin::Row-->
+                            <% if @student_info.school_type.present? %>
+                                <tr>
+                                    <td class="text-gray-600 min-w-175px w-175px"><%= Student::Student.human_attribute_name('school_type') %>:</td>
+                                    <td class="text-gray-800 min-w-200px">
+                                        <span class="fw-bolder text-gray-800">
+                                            <%= t("student.school_type.#{@student_info.school_type}") %>
+                                        </span>
+                                    </td>
+                                </tr>
+                            <% end %>
+                            <!--end::Row-->
+                            <!--begin::Row-->
+                            <% if @student_info.school_name.present? %>
+                                <tr>
+                                    <td class="text-gray-600"><%= Student::Student.human_attribute_name('school_name') %>:</td>
+                                    <td class="fw-bolder text-gray-800"><%= @student_info.school_name %></td>
+                                </tr>
+                            <% end %>
+                            <!--end::Row-->
+                            <!--begin::Row-->
+                            <% if @student_info.department_name.present? %>
+                                <tr>
+                                    <td class="text-gray-600"><%= Student::Student.human_attribute_name('department_name') %>:</td>
+                                    <td class="fw-bolder text-gray-800"><%= @student_info.department_name %></td>
+                                </tr>
+                            <% end %>
+                            <!--end::Row-->
+                            <!--begin::Row-->
+                            <% if @student_info.subject_system.present? %>
+                                <tr>
+                                    <td class="text-gray-600"><%= Student::Student.human_attribute_name('subject_system') %>:</td>
+                                    <td class="fw-bolder text-gray-800"><%= t("student.subject_system.#{@student_info.subject_system}") %></td>
+                                </tr>
+                            <% end %>
+                            <!--end::Row-->
+                        </table>
+                        <!--end::Details-->
+                    </div>
+                    <!--end::Row-->
+                    <!--begin::Row-->
+                    <div class="flex-equal">
+                        <!--begin::Details-->
+                        <table class="table fs-6 fw-bold gs-0 gy-2 gx-2 m-0">
+                            <!--begin::Row-->
+                            <% if @student_info.graduation_date.present? %>
+                                <tr>
+                                    <td class="text-gray-600 min-w-175px w-175px"><%= Student::Student.human_attribute_name('graduation_date') %>:</td>
+                                    <td class="text-gray-800 min-w-200px">
+                                        <span class="fw-bolder text-gray-800"><%= get_graduation_date(@student_info.graduation_date)  %></span>
+                                    </td>
+                                </tr>
+                            <% end %>
+                            <!--end::Row-->
+                            <!--begin::Row-->
+                            <% unless @student_info.qualification_category_id.nil? || @student_info.qualification_category_id == [nil] %>
+                                <tr>
+                                    <td class="text-gray-600"><%= Student::Student.human_attribute_name('qualification_category_id') %>:</td>
+                                    <td class="fw-bolder text-gray-800"><%= get_qualification_category(@student_info.qualification_category_id) %></td>
+                                </tr>
+                            <% end %>
+                            <!--end::Row-->
+                            <!--begin::Row-->
+                            <% unless @student_info.qualification_type_id.nil? || @student_info.qualification_type_id == [nil] %>
+                                <tr>
+                                    <td class="text-gray-600"><%= Student::Student.human_attribute_name('qualification_type_id') %>:</td>
+                                    <td class="fw-bolder text-gray-800"><%= get_qualificaion_type(@student_info.qualification_type_id) %></td>
+                                </tr>
+                            <% end %>
+                            <!--end::Row-->
+                        </table>
+                        <!--end::Details-->
+                    </div>
+                    <!--end::Row-->
+                </div>
+                <!--end::Row-->
+            </div>
+            <!--end::Section-->
+	    </div>
+        <!--end::Card body-->
+    </div>
+    <!--end::Basic info-->
+</div>

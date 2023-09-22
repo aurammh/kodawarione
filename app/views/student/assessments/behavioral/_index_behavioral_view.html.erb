@@ -1,0 +1,114 @@
+ <!--begin::Behavioral trait type-->  
+<div class="card card-custom card-stretch gutter-b">
+    <!--begin::Header-->
+    <div class="card-header h-auto border-0 py-3">
+        <div class="card-title py-5">
+            <h3 class="card-label">
+                <span class="d-block text-dark fw-bolder"><%= t('student.assessment.behavioral_trait_title')%></span>
+            </h3>
+        </div>
+        <div class="card-toolbar py-0 py-md-5 py-xl-5 m-0">
+            <div class="pe-2">
+                <%= render 'student/shared/assessments/behavioral/about_behavioral' %>
+            </div>   
+            <div>
+                <%= render 'student/shared/assessments/behavioral/result_behavioral' %>
+            </div> 
+        </div>
+    </div>
+    <!--end::Header-->
+    <!--begin::Body-->
+    <div class="card-body">
+        <div class="d-flex flex-column flex-lg-row">
+            <div class="flex-lg-row-auto w-100 w-lg-275px w-xxl-350px mb-3 me-0 me-lg-8 me-xl-8">
+                <!--begin::Block-->
+                <div class="card bg-light p-8">
+                    <!--begin::Item-->
+                    <h4 class="text-gray-700 fs-bolder mb-3"><%= t('student.assessment.behavioral_trait_title') %></h4>
+                    <!--end::Item-->
+                    <div class="fs-8 text-dart mb-5">
+                        <span class="svg-icon svg-icon-primary svg-icon-3 me-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black"></rect>
+                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black"></rect>
+                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black"></rect>
+                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black"></rect>
+                            </svg>
+                        </span>
+                        <%= t('student_assessment.std_assessment_chart_date')%>：
+                        <%#if @student_assessment.behavioral_action_date != nil
+                            l(@student_assessment.behavioral_action_date )
+                        else
+                            "-"   
+                        end%>
+                    </div>
+                    <!--begin::Item-->
+                    <% unless current_admin %>
+                        <%= link_to  t('student.assessment.kodawari_assessment_btn') ,student_student_behavioral_trait_type_path, :class => "btn btn-block text-center btn-primary font-weight-bold font-size-lg mt-5" %>
+                    <% end %>
+                    <!--end::Item-->
+                </div>
+                <!--end::Block--> 
+                
+                <div class="text-center mt-3">
+                    
+                </div>
+            </div>
+            <div class="student-assessment flex-lg-row-fluid mt-lg-0 mt-3">
+                <div class= "bahavioralTraitTypeChart px-3">
+                    <%# self_expression chart %>
+                    <div class = "row"><%= t('student_assessment.self_expression')%></div>
+                    <div id ="self_expression_chart" class = "row color-section">
+                        <div class = "col bg-pink"></div>
+                        <div class = "col bg-lightBlue"></div>
+                        <div class = "col bg-green"></div>
+                        <div class = "col bg-blue"></div>
+                        <div class = "col bg-orange"></div>
+                    </div>
+                    <div class = "row mb-4">
+                        <div class = "col text-center"><%= t('student_assessment.self_expression_chart_title_1')%></div>
+                        <div class = "col text-center"><%= t('student_assessment.self_expression_chart_title_2')%></div>
+                        <div class = "col text-center"><%= t('student_assessment.self_expression_chart_title_3')%></div>
+                        <div class = "col text-center"><%= t('student_assessment.self_expression_chart_title_4')%></div>
+                        <div class = "col text-center"><%= t('student_assessment.self_expression_chart_title_5')%></div>
+                    </div>
+                    <%# self_assertion chart %>
+                    <div class = "row"><%= t('student_assessment.self_assertion')%></div>
+                    <div id ="self_assertion_chart" class = "row color-section">
+                        <div class = "col bg-pink"></div>
+                        <div class = "col bg-lightBlue"></div>
+                        <div class = "col bg-green"></div>
+                        <div class = "col bg-blue"></div>
+                        <div class = "col bg-orange"></div>
+                    </div>
+                    <div class = "row mb-4">
+                        <div class = "col text-center"><%= t('student_assessment.self_assertion_chart_title_1')%></div>
+                        <div class = "col text-center"><%= t('student_assessment.self_assertion_chart_title_2')%></div>
+                        <div class = "col text-center"><%= t('student_assessment.self_assertion_chart_title_3')%></div>
+                        <div class = "col text-center"><%= t('student_assessment.self_assertion_chart_title_4')%></div>
+                        <div class = "col text-center"><%= t('student_assessment.self_assertion_chart_title_5')%></div>
+                    </div>
+                    <%# self_flexibility chart %>
+                    <div class = "row"><%= t('student_assessment.self_flexibility')%></div>
+                    <div id ="self_flexibility_chart" class = "row color-section">
+                        <div class = "col bg-pink"></div>
+                        <div class = "col bg-lightBlue"></div>
+                        <div class = "col bg-green"></div>
+                        <div class = "col bg-blue"></div>
+                        <div class = "col bg-orange"></div>
+                    </div>
+                    <div class = "row">
+                        <div class = "col text-center"><%= t('student_assessment.self_flexibility_chart_title_1')%></div>
+                        <div class = "col text-center"><%= t('student_assessment.self_flexibility_chart_title_2')%></div>
+                        <div class = "col text-center"><%= t('student_assessment.self_flexibility_chart_title_3')%></div>
+                        <div class = "col text-center"><%= t('student_assessment.self_flexibility_chart_title_4')%></div>
+                        <div class = "col text-center"><%= t('student_assessment.self_flexibility_chart_title_5')%></div>
+                    </div>
+                </div> 
+            </div>
+            
+        </div>
+    </div>
+    <!--end::Body-->
+</div>
+<!--end::Behavioral trait type-->

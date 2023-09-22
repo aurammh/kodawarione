@@ -1,0 +1,40 @@
+<div class="d-flex flex-row-fluid login login-4 login-signin-on">
+    <div class="d-flex flex-center flex-row-fluid bgi-size-cover bgi-position-top bgi-no-repeat">
+      <div class="login-form text-center position-relative overflow-hidden p-7 p-lg-0">
+        <!--begin:: Header-->
+        <div class="d-flex flex-center mb-15">
+          <%= link_to root_path do %>
+            <%= image_tag "layout/header_logo.png", class: "w-50 w-lg-400px" %>   
+          <% end %>  
+        </div>
+        <!--end:: Header-->
+        <!--begin:: Content-->
+					<div class="text-dark-75">
+						<h3 class="fw-bolder mb-8"><%= t('welcome.reg_complete_text.text1') %></h3>    
+            <p class="text-muted fw-bolder mb-15 mt-3"><%= t('welcome.reg_complete_text.text2') %></p> 
+					</div>
+          <div>
+            <% if (params[:user_type].to_s).eql?"2"%>
+              <p class="text-muted fw-bolder mb-15"><%= t('confirmations.welcome_mail').html_safe  %></p>
+            <% else %>
+              <p class="text-muted fw-bolder mb-15"><%= t('confirmations.welcome_mail_1').html_safe  %></p>
+            <% end %>
+            <p>-----------------------------------------------------------------</p>
+            <% if (params[:user_type].to_s).eql?"2"%>
+              <span class="text-muted fw-bolder"> <%= t('welcome.reg_complete_text.std_text3') %></span><br>
+              <span class="text-muted fw-bolder"><%= t('welcome.reg_complete_text.text5') %></span><br>
+            <% else %>  
+              <span class="text-muted fw-bolder"> <%= t('welcome.reg_complete_text.com_text3') %></span><br>
+              <span class="text-muted fw-bolder"><%= t('welcome.reg_complete_text.text4') %></span><br>
+            <% end %>  
+              <span class="text-muted fw-bolder"><%= t('welcome.reg_complete_text.text6') %></span> 
+          </div>
+          <div class="mt-5">
+            <%= link_to root_path, class: "btn btn-primary fw-bolder w-50 px-8 py-4 my-3" do %>
+              <%= t('welcome.reg_complete_text.btn') %> 
+            <% end %>
+          </div>
+				<!--end:: Content--> 
+      </div>
+    </div>
+</div>

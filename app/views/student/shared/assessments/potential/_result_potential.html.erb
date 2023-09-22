@@ -1,0 +1,144 @@
+<button type="button" class="btn  btn-primary font-weight-bolder text-uppercase" data-bs-toggle="modal" data-bs-target="#exampleModalLong"><%=t('student_assessment.brain.result.btn')%></button>  
+
+<!-- Modal -->
+<div class="modal fade pl-0" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable assessment_popup" role="document">
+    <div class="modal-content">
+    <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLongTitle"><%= t('student_assessment.potentail.result.popup_result_title')%></h3>
+        <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+          <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+          <span class="svg-icon svg-icon-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                  <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+              </svg>
+          </span>
+          <!--end::Svg Icon-->
+        </div>
+      </div>
+      <div class="modal-body potential">
+         <%= image_tag "student/potential.jpg", class: "img-fluid potential-img", alt: "Responsive image" %>   
+        <div class="assessment_popup">
+          <div class="form-card bg-white mt-1 py-1 px-2">
+            <div class="text-justify mt-lg-1 mt-sm-4">
+                 <h5 class="std-border-color mt-2 font-weight-bold sub-title px-2 "><%= t('student_assessment.potentail.result.title1')%></h5>
+                <p class="mt-2"><%= t('student_assessment.potentail.result.paragraph1')%></p>
+                <ul>
+                  <li><%= t('student_assessment.potentail.result.text1_1')%></li>
+                  <li><%= t('student_assessment.potentail.result.text1_2')%></li>
+                  <li><%= t('student_assessment.potentail.result.text1_3')%></li>
+                  <li><%= t('student_assessment.potentail.result.text1_4')%></li>
+                  <li><%= t('student_assessment.potentail.result.text1_5')%></li>
+                </ul>
+              </div>
+              <div class="text-justify mt-lg-5 mt-sm-4">
+                <h5 class="std-border-color sub-title font-weight-bold px-2 "><%= t('student_assessment.potentail.result.title2')%> </h5>
+                <p class="mt-2"><%= t('student_assessment.potentail.result.paragraph2_1')%> </p>
+                <p class="mt-2"><%= t('student_assessment.potentail.result.paragraph2_2')%> </p>
+              </div>
+              <div class="text-justify mt-lg-5 mt-sm-4">
+                <h5 class="std-border-color sub-title font-weight-bold px-2 "><%= t('student_assessment.potentail.result.title3')%> </h5>
+                <p class="mt-2"><%= t('student_assessment.potentail.result.paragraph3_1')%></p>
+                <p class="mt-2"><%= t('student_assessment.potentail.result.paragraph3_2')%></p>
+                <p class="mt-2"><%= t('student_assessment.potentail.result.paragraph3_3')%></p>     
+              </div>
+              <div class="text-justify mt-lg-5 mt-sm-4">
+                <h5 class="std-border-color sub-title font-weight-bold px-2 "><%= t('student_assessment.potentail.result.title4')%></h5>
+                <p class="mt-2"><%= t('student_assessment.potentail.result.paragraph4_1')%></p>
+                <p class="mt-2"><%= t('student_assessment.potentail.result.paragraph4_2')%></p>
+                 <ul>
+                  <li><%= t('student_assessment.potentail.result.text4_1')%></li>
+                  <li><%= t('student_assessment.potentail.result.text4_2')%></li>
+                  <li><%= t('student_assessment.potentail.result.text4_3')%></li>
+                  <li><%= t('student_assessment.potentail.result.text4_4')%></li>
+                  <li><%= t('student_assessment.potentail.result.text4_5')%></li>
+                </ul>
+                <p class="mt-2"><%= t('student_assessment.potentail.result..paragraph4_3')%></p>
+              </div>
+              <div class="text-justify mt-lg-5 mt-sm-4">
+                <h5 class="std-border-color sub-title font-weight-bold px-2 "><%= t('student_assessment.potentail.result.title5')%> </h5>
+                <p class="mt-2"><%= t('student_assessment.potentail.result.paragraph5_1')%></p>
+                <p class="mt-2"><%= t('student_assessment.potentail.result.paragraph5_2')%></p>
+                <p class="mt-2"><%= t('student_assessment.potentail.result.paragraph5_3')%></p>
+              </div>
+               <div class="text-justify mt-lg-5 mt-sm-4">
+                <h5 class="std-border-color sub-title font-weight-bold px-2 "><%= t('student_assessment.potentail.result.title6')%> </h5>
+                <p class="mt-2"><%= t('student_assessment.potentail.result.paragraph6_1')%></p>
+                <p class="mt-2"><%= t('student_assessment.potentail.result.paragraph6_2')%></p>
+                <p class="mt-2"><%= t('student_assessment.potentail.result.paragraph6_3')%></p>
+              </div>
+               <div class="text-justify mt-lg-5 mt-sm-4">
+                <h5 class="std-border-color sub-title font-weight-bold px-2 "><%= t('student_assessment.potentail.result.title7')%> </h5>
+                <p class="mt-2"><%= t('student_assessment.potentail.result.paragraph7_1')%></p>
+                <p class="mt-2"><%= t('student_assessment.potentail.result.paragraph7_2')%></p>
+              </div>
+               <div class="text-justify mt-lg-5 mt-sm-4">
+                <h5 class="std-border-color sub-title font-weight-bold px-2 "><%= t('student_assessment.potentail.result.title8')%> </h5>
+                <p class="mt-2"><%= t('student_assessment.potentail.result.paragraph8_1')%></p>
+                <p class="mt-2"><%= t('student_assessment.potentail.result.paragraph8_2')%></p>
+                <p class="mt-2"><%= t('student_assessment.potentail.result.paragraph8_3')%></p>
+                <p class="mt-2"><%= t('student_assessment.potentail.result.paragraph8_4')%></p>
+              </div>
+              <div class="text-justify mt-lg-5 mt-sm-4">
+                <h5 class="std-border-color sub-title font-weight-bold px-2 "><%= t('student_assessment.potentail.result.title9')%> </h5>
+                <p class="mt-2"><%= t('student_assessment.potentail.result.paragraph9_1')%></p>
+                <p class="mt-2"><%= t('student_assessment.potentail.result.paragraph9_2')%></p>
+                <p class="mt-2"><%= t('student_assessment.potentail.result.paragraph9_3')%></p>
+                <p class="mt-2"><%= t('student_assessment.potentail.result.paragraph9_4')%></p>
+                <p class="mt-2"><%= t('student_assessment.potentail.result.paragraph9_5')%></p>
+              </div>
+              <div class="text-justify mt-lg-5 mt-sm-4">
+                <h5 class="std-border-color sub-title font-weight-bold px-2 "><%= t('student_assessment.potentail.result.title10')%> </h5>
+                <p class="mt-2"><%= t('student_assessment.potentail.result.paragraph10_1')%></p>
+                  <ul>
+                  <li><%= t('student_assessment.potentail.result.text10_1')%></li>
+                  <li><%= t('student_assessment.potentail.result.text10_2')%></li>
+                  <li><%= t('student_assessment.potentail.result.text10_3')%></li>
+                  <li><%= t('student_assessment.potentail.result.text10_4')%></li>
+                  <li><%= t('student_assessment.potentail.result.text10_5')%></li>
+                </ul>
+              </div>
+               <div class="text-justify mt-lg-5 mt-sm-4">
+                <h5 class="std-border-color sub-title font-weight-bold px-2 "><%= t('student_assessment.potentail.result.title11')%> </h5>
+                <p class="mt-2"><%= t('student_assessment.potentail.result.paragraph11_1')%></p>
+                <p class="mt-2"><%= t('student_assessment.potentail.result.paragraph11_2')%></p>
+                <p class="mt-2"><%= t('student_assessment.potentail.result.paragraph11_3')%></p>
+                <p class="mt-2"><%= t('student_assessment.potentail.result.paragraph11_4')%></p>
+              </div>
+               <div class="text-justify mt-lg-5 mt-sm-4">
+                <h5 class="std-border-color sub-title font-weight-bold px-2 "><%= t('student_assessment.potentail.result.title12')%> </h5>
+                <p class="mt-2"><%= t('student_assessment.potentail.result.paragraph12_1')%></p>
+                <p class="mt-2"><%= t('student_assessment.potentail.result.paragraph12_2')%></p>
+              </div>
+               <div class="text-justify mt-lg-5 mt-sm-4">
+                <h5 class="std-border-color sub-title font-weight-bold px-2 "><%= t('student_assessment.potentail.result.title13')%> </h5>
+                <p class="mt-2"><%= t('student_assessment.potentail.result.paragraph13_1')%></p>
+                 <ul>
+                  <li><%= t('student_assessment.potentail.result.text13_1')%></li>
+                  <li><%= t('student_assessment.potentail.result.text13_2')%></li>
+                  <li><%= t('student_assessment.potentail.result.text13_3')%></li>
+                </ul>
+              </div>
+              <div class="text-justify mt-lg-5 mt-sm-4">
+               <h5 class="std-border-color sub-title font-weight-bold px-2 "><%= t('student_assessment.potentail.result.title14')%> </h5>
+               <p class="mt-2"><%= t('student_assessment.potentail.result.paragraph14_1')%></p>
+               <p class="mt-2"><%= t('student_assessment.potentail.result.text14_1')%></p>
+               <p class="mt-2"><%= t('student_assessment.potentail.result.text14_2')%></p>
+               <p class="mt-2"><%= t('student_assessment.potentail.result.text14_3')%></p>
+               <p class="mt-2"><%= t('student_assessment.potentail.result.paragraph14_2')%></p>
+              </div>
+              <div class="text-justify mt-lg-5 mt-sm-4">
+               <h5 class="std-border-color sub-title font-weight-bold px-2 "><%= t('student_assessment.potentail.result.title15')%> </h5>
+               <p class="mt-2"><%= t('student_assessment.potentail.result.paragraph15_1')%></p>
+               <p class="mt-2"><%= t('student_assessment.potentail.result.paragraph15_2')%></p>
+              </div>         
+          </div>
+      </div>
+    </div>
+      <div class="modal-footer">
+        <button type="button" class="btn  btn-primary font-weight-bolder text-uppercase" data-bs-dismiss="modal"><%= t('student_commitment.title.close')%></button>
+      </div>
+    </div>
+  </div>
+</div>

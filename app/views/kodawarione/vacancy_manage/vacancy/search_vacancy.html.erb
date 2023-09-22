@@ -1,0 +1,19 @@
+<!--begin::Header-->
+<% breadcrumbs_navigation_add (t ('vacancy search')), '#' %>
+<%= render_partner_breadcrumbs_navigation(t ('vacancy search')) %>		
+<!--end::Header-->
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+	<!--begin::Container-->
+	<div class="container-fluid" id="kt_content_container">
+		<!--begin::Tab Content-->
+		<div class="tab-content">
+			<!--begin::Tab pane-->
+			<div id="kt_project_users_card_pane" class="tab-pane fade show active">
+				<%= render partial: "kodawarione/shared/vacancy_manage/search_vacancy", locals: {url: kodawarione_vacancy_manage_search_vacancy_path, result: @results_vacancy}  %>  
+            </div>
+        </div>
+    </div>
+</div>
+<%= javascript_pack_tag "admin/admin_search.js" %>
+<%= javascript_pack_tag 'common.js'%>

@@ -1,0 +1,44 @@
+<button type="button" class="btn btn-light-primary font-weight-bolder text-uppercase mr-2" data-bs-toggle="modal" data-bs-target="#about-brain-modal"><%= t('student_assessment.brain.about.btn')%></button>  
+
+<!-- Modal -->
+<div class="modal fade pl-0" id="about-brain-modal" tabindex="-1" role="dialog" aria-labelledby="about-brain-modalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+         <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLongTitle"><%= t('student_assessment.brain.about.modal_title')%></h3>
+        <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+          <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+          <span class="svg-icon svg-icon-1">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+            </svg>
+          </span>
+          <!--end::Svg Icon-->
+        </div>
+    </div>
+    <div class="modal-body">
+        <%= image_tag "student/student_brain_cover.jpg", class: "img-fluid potential-img", alt: "Responsive image" %>   
+        <div class="assessment_popup">
+            <div class="form-card bg-white mt-1 mb-2 py-1 px-2">
+                <div class="text-justify mt-lg-2 mt-sm-4">
+                    <p class = "text-indent"><%= t('student_assessment.brain.about.paragraph1')%></p>
+                    <p class = "text-indent"><%= t('student_assessment.brain.about.paragraph2')%></p>
+                    <p class = "text-indent"><%= t('student_assessment.brain.about.paragraph3')%></p>
+                    <p class = "text-indent"><%= t('student_assessment.brain.about.paragraph4')%></p>
+                </div>
+                <div class="border-box text-justify p-3">
+                    <p><%= t('student_assessment.brain.about.border_box_title') %></p>
+                    <p class="text-indent"><%= t('student_assessment.brain.about.border_box_paragraph1') %></p>
+                    <p><%= t('student_assessment.brain.about.border_box_paragraph2') %></p>
+                    <%= image_tag "student/student_brain_about.jpg", class: "img-fluid px-0 my-3 col-12", alt: "Responsive image" %>   
+                </div>    
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary font-weight-bolder text-uppercase" data-bs-dismiss="modal"><%= t('student_commitment.title.close')%></button>
+    </div>
+        </div>
+    </div>
+</div>

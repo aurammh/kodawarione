@@ -1,0 +1,2 @@
+class PreCalculatedAbilityResults < ApplicationRecord
+end

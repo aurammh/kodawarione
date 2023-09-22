@@ -1,0 +1,192 @@
+<!--begin::Header-->
+<% breadcrumbs_navigation_add (t('title.student_search_detail_title')), kodawarione_company_manage_company_details_overview_path(:company_id => @company_details.id, :status => 1) %>
+<% breadcrumbs_navigation_add (t ('title.basic_registration_title')), '#' %>
+<%= render_partner_breadcrumbs_navigation(t ('title.basic_registration_title')) %>		
+<!--end::Header-->
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+	<!--begin::Container-->
+	<div class="container-fluid" id="kt_content_container">
+		<!--begin::Tab Content-->
+		<div class="tab-content">
+			<!--begin::Tab pane-->
+			<div id="kt_project_users_card_pane" class="tab-pane fade show active">
+            <% if can?(:edit_company, Kodawarione::CompanyManage) %>
+                <!--begin::Content-->
+                <div class="content flex-row-fluid" id="kt_content_container">
+                    <!--begin::Navbar-->
+                    <%= render partial: "kodawarione/shared/company_manage/profile_banner" %>                     <!--end::Navbar-->
+                    <!--end::Navbar-->
+                    <!--begin::Card-->
+                    <div class="card bg-body mb-5 mb-xl-10">
+                        <!--begin::Card header-->
+                        <div class="card-header border-0">
+                            <!--begin::Card title-->
+                            <div class="card-title m-0">
+                                <h3 class="fw-bolder m-0"><%=t('title.main_registration_title')%></h3>
+                            </div>
+                            <!--end::Card title-->
+                        </div>
+                        <!--end::Card header-->
+                        <!--begin::Form-->
+                        <%= form_with(model: @company_details, url: kodawarione_company_manage_update_path, method: "post") do |form| %>
+                            <%= form.hidden_field :not_company_edit, :value => false %>
+                            <!--begin::Card body-->
+                            <div class="card-body border-top p-9">
+                                <!--begin::Company Information-->
+                                <%# First Panel Start %>                 
+                                <!--begin::Input group-->
+                                <div class="row mb-6">
+                                    <!--begin::Label-->
+                                    <label class="col-lg-4 col-form-label fw-bold fs-6">
+                                        <%= form.label :capital_amount %>
+                                        <%= form.label t('common.number_input_remark') %>
+                                        <%= form.label t('common.money_remark') %>
+                                    </label>
+                                    <!--end::Label-->
+                                    <!--begin::Col-->
+                                    <div class="col-lg-8 fv-row">
+                                        <%= form.text_field :capital_amount, value: number_with_delimiter(form.object.capital_amount), id: "capital_amount", class: "form-control form-control-lg form-control-solid number-with-delimeter",  maxlength: 16 %>
+                                        <p class="text-danger fs-6 ms-invalid-feedback mt-1"><%= @company_details.errors.full_messages_for(:capital_amount)[0] %></p>
+                                    </div>
+                                    <!--end::Col-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row mb-6">
+                                    <!--begin::Label-->
+                                    <label class="col-lg-4 col-form-label fw-bold fs-6">
+                                        <%= form.label :sales_amount %>
+                                        <%= form.label t('common.money_remark') %>
+                                    </label>
+                                    <!--end::Label-->
+                                    <!--begin::Col-->
+                                    <div class="col-lg-8 fv-row">
+                                        <%= form.text_field :sales_amount, id: "sales_amount", class: "form-control form-control-lg form-control-solid number-with-delimeter",  maxlength: 16 %>
+                                        <p class="text-danger fs-6 ms-invalid-feedback mt-1"><%= @company_details.errors.full_messages_for(:sales_amount)[0] %></p>
+                                    </div>
+                                    <!--end::Col-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row mb-6">
+                                    <!--begin::Label-->
+                                    <label class="col-lg-4 col-form-label fw-bold fs-6">
+                                        <%= form.label :related_company %>
+                                    </label>
+                                    <!--end::Label-->
+                                    <!--begin::Col-->
+                                    <div class="col-lg-8 fv-row">
+                                        <%= form.text_area :related_company, class: "form-control form-control-lg form-control-solid", id: "related_company", rows: 4, maxlength: 1000 %>
+                                        <p class="text-danger fs-6 ms-invalid-feedback mt-1"><%= @company_details.errors.full_messages_for(:related_company)[0] %></p> 
+                                    </div>
+                                    <!--end::Col-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row mb-6">
+                                    <!--begin::Label-->
+                                    <label class="col-lg-4 col-form-label fw-bold fs-6">
+                                        <%= form.label :main_bank %>
+                                    </label>
+                                    <!--end::Label-->
+                                    <!--begin::Col-->
+                                    <div class="col-lg-8 fv-row">
+                                        <%= form.text_area :main_bank, class: "form-control form-control-lg form-control-solid", id: "main_bank",  rows: 4, maxlength: 1000 %>
+                                        <p class="text-danger fs-6 ms-invalid-feedback mt-1"><%= @company_details.errors.full_messages_for(:main_bank)[0] %></p> 
+                                    </div>
+                                    <!--end::Col-->
+                                </div>
+                                <!--end::Input group-->                    
+                                <!--begin::Input group-->
+                                <div class="row mb-6">
+                                    <!--begin::Label-->
+                                    <label class="col-lg-4 col-form-label fw-bold fs-6">
+                                        <%= form.label :basic_idea %>
+                                    </label>
+                                    <!--end::Label-->
+                                    <!--begin::Col-->
+                                    <div class="col-lg-8 fv-row">
+                                        <%= form.text_area :basic_idea, class: "form-control form-control-lg form-control-solid", id: "basic_idea", rows: 4, maxlength: 1000 %>
+                                        <p class="text-danger fs-6 ms-invalid-feedback mt-1"><%= @company_details.errors.full_messages_for(:basic_idea)[0] %></p> 
+                                    </div>
+                                    <!--end::Col-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row mb-6">
+                                    <!--begin::Label-->
+                                    <label class="col-lg-4 col-form-label required fw-bold fs-6">
+                                        <%= form.label :representative %>
+                                    </label>
+                                    <!--end::Label-->
+                                    <!--begin::Col-->
+                                    <div class="col-lg-8 fv-row">
+                                        <%= form.text_field :representative, class: "form-control form-control-lg form-control-solid", id: "representative", maxlength: 255 %>
+                                        <p class="text-danger fs-6 ms-invalid-feedback mt-1"><%= @company_details.errors.full_messages_for(:representative)[0] %></p> 
+                                    </div>
+                                    <!--end::Col-->
+                                </div>
+                                <!--end::Input group-->
+                                <%# First Panel End %>
+                                <!--end::Company Information-->   
+                                <div class="separator separator-dashed my-10"></div>
+                                <%# Third Panel Start %>
+                                <!--begin::Inquiries Information--> 
+                                <div class="my-2">
+                                    <h3 class="text-dark font-weight-bold mb-10"><%= t('title.company_inquiry_info') %>:</h3>
+                                    <!--begin::Input group-->
+                                    <div class="row mb-6">
+                                        <!--begin::Label-->
+                                        <label class="col-lg-4 col-form-label required fw-bold fs-6">
+                                            <%= form.label :contact %>
+                                            <%= form.label t('common.contact_remark') %>
+                                        </label>
+                                        <!--end::Label-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-8 fv-row">
+                                            <%= form.text_area :contact, id: "contact", class: "form-control form-control-lg form-control-solid", rows: 4, maxlength: 1000 %>
+                                            <p class="text-danger fs-6 ms-invalid-feedback mt-1"><%= @company_details.errors.full_messages_for(:contact)[0] %></p>
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Input group-->
+                                    <!--begin::Input group-->
+                                    <div class="row mb-6">
+                                        <!--begin::Label-->
+                                        <label class="col-lg-4 col-form-label fw-bold fs-6">
+                                        <%= form.label :transportation_facilities %>
+                                        </label>
+                                        <!--end::Label-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-8 fv-row">
+                                            <%= form.text_area :transportation_facilities, id: "transportation_facilities", class: "form-control form-control-lg form-control-solid", rows: 4, maxlength: 255 %>
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Input group-->
+                                    
+                                </div>
+                                <!--end::Inquiries Information--> 
+                            </div>
+                            <!--end::Card body-->
+                            <!--begin::Actions-->
+                            <div class="card-footer d-flex justify-content-end py-6 px-9">
+                                <%# link_to t('btn.cancel'), edit_company_company_path, class: "btn btn-light btn-active-light-primary me-2" %>
+                                <%= form.submit t('btn.submit'), class: "btn btn-primary" %>
+                            </div>
+                            <!--end::Actions-->
+                        <% end %>
+                        <!--end::Form-->
+                    </div>
+                    <!--end::Card-->
+                </div>
+                <!--end::Content-->
+            <% end %>    
+            </div>
+        </div>
+    </div>
+</div>
+<%= render "users/shared/toastr" %>
+<%= javascript_pack_tag "common.js" %>
+<%= javascript_pack_tag "company/company.js" %>

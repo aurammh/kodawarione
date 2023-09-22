@@ -1,0 +1,82 @@
+<div class="modal join-admin-event-section admin-event-detail" tabindex="-1" role="dialog" id="event-participant-modal">
+    <%= form_with(url: company_join_admin_events_path, id: "event-modal-form",method: :post) do |form| %>
+        <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+                <div class="modal-header text-white">
+                    <h5 class="modal-title"><%= @event_name %></h5>
+                    <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                        <span class="svg-icon svg-icon-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                                <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <%= form.hidden_field :id, value: params[:id] %> 
+                    <!--begin::Table container-->
+                    <div class="table-responsive">
+                        <!--begin::Table-->
+                        <table class="table align-middle gs-0 gy-4">
+                            <!--begin::Table head-->
+                            <thead>
+                                <tr class="fw-bolder text-muted bg-light">
+                                    <th class="rounded-start p-3">
+                                        <%= Admin::EventParticipant.human_attribute_name('name')  %>
+                                    </th>
+                                    <th class=""><%= Admin::EventParticipant.human_attribute_name('email') %></th>
+                                    <th class=""><%= Admin::EventParticipant.human_attribute_name('position') %></th>
+                                    <th class=""><%= Admin::EventParticipant.human_attribute_name('department') %></th>
+                                    <th class=""></th>
+                                </tr>
+                            </thead>
+                            <!--end::Table head-->
+                            <!--begin::Table body-->
+                            <tbody>
+                                <% @company_members.each_with_index do |company_member,index| %>
+                                    <tr>
+                                        <td class="participant">
+                                            <span class="text-dark fw-bolder mb-1 fs-6"><%= company_member.last_name %><%= company_member.first_name %></span>
+                                        </td>
+                                        <td class="participant">
+                                            <span class="text-dark fw-bolder d-block mb-1 fs-6"><%= company_member.email %></span>
+                                        </td>
+                                        <td class="participant">
+                                            <span class="text-dark fw-bolder d-block mb-1 fs-6"><%= company_member.position %></span>
+                                        </td>
+                                        <td class="participant">
+                                            <span class="text-dark fw-bolder d-block mb-1 fs-6"><%= company_member.department %></span>
+                                        </td>
+                                        <td>
+                                            <% if @admin_event_participant.present? %>
+                                            <label  class= "form-check form-check-sm form-check-custom form-check-solid simple-chkbox company-enhancement me-5 mb-5">
+                                                <%= form.check_box :user_id, {type: 'checkbox', class: 'checkbox-click-ability form-check-input', id: "checkbox#{company_member.user_id}", multiple: true,  checked: admin_event_check_flag(@admin_event_participant,company_member.user_id)}, company_member.user_id %>
+                                                <%= form.label :'', for: "checkbox#{company_member.user_id}",class: 'select-label' %>    
+                                            </label>
+                                            <% else %>
+                                            <label  class= "form-check form-check-sm form-check-custom form-check-solid simple-chkbox company-enhancement me-5 mb-5">
+                                                <%= form.check_box :user_id, {type: 'checkbox', class: 'checkbox-click-ability form-check-input', id: "checkbox#{company_member.user_id}", multiple: true}, company_member.user_id %>
+                                                <%= form.label :'', for: "checkbox#{company_member.user_id}",class: 'select-label' %>
+                                            </label>
+                                            <% end %>
+                                        </td>
+                                    </tr>
+                                <% end %>
+                            </tbody>
+                            <!--end::Table body-->
+                        </table>
+                        <!--end::Table-->
+                    </div>
+                    <!--end::Table container-->
+                </div>
+                <div class="modal-footer">
+                    <%= form.submit t('event_participant.title.join_evt_btn'),class: "btn btn-primary text-white text-center text-decoration-none px-4 py-2 mr-1" %>
+                </div>
+            </div>
+        </div>
+    <% end %>
+</div>
+<%= javascript_pack_tag "company/admin_event.js" %>

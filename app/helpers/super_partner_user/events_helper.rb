@@ -1,0 +1,3 @@
+module SuperPartnerUser::EventsHelper
+    
+end

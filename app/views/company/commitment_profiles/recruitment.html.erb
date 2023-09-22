@@ -1,0 +1,68 @@
+<!--begin::Header-->
+<% breadcrumbs_navigation_add (t ('student_commitment.menu.create_company_page')), '#' %>
+<%= render_company_breadcrumbs_navigation(t('commitment_profile.title.recruitment_title')) %>		
+<!--end::Header-->
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+  <!--begin::Container-->
+  <div class="container-xxl" id="kt_content_container">
+    <%= render partial: "company/shared/commitment_profiles/common_banner" %>
+    <!--begin::Card-->
+    <div class="card bg-body mb-5 mb-xl-10"> 
+        <% if @company_commitment_profile.experience_requirements.present? || @company_commitment_profile.fresher_requirements.present? || @company_commitment_profile.fresher_second_requirements.present? %>
+            <!--begin::Card title-->
+            <div class="px-9">
+                <% if can?(:recruitment_form, Company::Company) %>
+                    <div class="d-flex justify-content-end align-items-center card-title mt-10">
+                        <%= link_to t('btn.edit'), recruitment_form_company_commitment_profiles_path, class: "btn btn-primary" %>
+                    </div>
+                <% end %>
+            </div>
+            <!--begin::Card title-->
+            <div class="card-body">
+                <% if @company_commitment_profile.experience_requirements.present? %>
+                    <div class="mt-20 pb-10">
+                        <h3 class="text-center fs-2x text-dark fw-bolder w-100 mb-10"><%= Company::Company.human_attribute_name('experience_requirements') %></h3>
+                        <div class="fs-6 fw-bold text-gray-700 px-4">
+                            <%= @company_commitment_profile.experience_requirements %>
+                        </div>
+                    </div>
+                <% end %>
+                <% if @company_commitment_profile.fresher_requirements.present? %>
+                    <div class="mt-20 pb-10">
+                        <h3 class="text-center fs-2x text-dark fw-bolder w-100 mb-10"><%= Company::Company.human_attribute_name('fresher_requirements') %></h3>
+                        <div class="fs-6 fw-bold text-gray-700 px-4">
+                            <%= @company_commitment_profile.fresher_requirements %>
+                        </div>
+                    </div>
+                <% end %>
+                <% if @company_commitment_profile.fresher_second_requirements.present? %>
+                    <div class="mt-20 pb-10">
+                        <h3 class="text-center fs-2x text-dark fw-bolder w-100 mb-10"><%= Company::Company.human_attribute_name('fresher_second_requirements') %></h3>
+                        <div class="fs-6 fw-bold text-gray-700 px-4">
+                            <%= @company_commitment_profile.fresher_second_requirements %>
+                        </div>
+                    </div>
+                <% end %>
+            </div>
+        <% else %>
+            <div class="card-px text-center py-5 my-5">
+                <h2 class="fs-2x fw-bolder mb-10"><%= t('commitment_profile.title.recruitment_title')%></h2>
+                <!--end::Title-->
+                <!--begin::Description-->
+                <p class="text-gray-400 fs-4 fw-bold mb-7"><%= t('commitment_profile.content.recruitment_no_data_content')%></p> 
+                <!--begin::Action-->
+                <% if can?(:recruitment_form, Company::Company) %>
+                    <%= link_to  t('commitment_profile.btn.create_recruitment_content'), recruitment_form_company_commitment_profiles_path, class: "btn btn-primary" %>
+                <% end %>
+                <!--end::Action--> 
+            </div>
+        <% end %>
+    </div>
+    <!--end::Card-->
+  </div>
+  <!--end::Container-->
+</div>
+<!--end::Content-->
+<%= render "users/shared/toastr" %>
+<%= javascript_pack_tag "company/commitment_profile.js" %>

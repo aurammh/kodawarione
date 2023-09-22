@@ -1,0 +1,127 @@
+<div class="px-sm-4" id="api-access-section">
+  <%# Lists start %>
+  <div class="search-result col-12  pb-5 mb-5">
+    <div class="row p-3 shadow bg-white info-box mt-3 mb-4 mb-lg-5 ">
+      <div class="col-12 col-md-6 col-xl-8 mb-3">
+        <h1><%= t('api_access_token.first_title') %></h1>
+      </div>
+      <div class="col-12 col-md-6 col-xl-4 pt-2 text-right">
+         <%= link_to t('api_access_token.generate_token') , new_admin_api_access_token_path,class: "admin-sidebar-color text-white font-weight-bold admin-search-btn px-2 py-2 text-decoration-none",remote: true %>
+      </div>
+      <div  id="apiAccessModal">
+          <%= render 'admin/api_access_tokens/api_access_modal'%>
+      </div>
+      <%= render "admin/api_access_tokens/api_delete" %>
+      <% if @admin_api_access_tokens.present?  %>
+          <div class="d-none d-md-block w-100">
+            <table class="table table-bordered table-responsive-md table-responsive-lg-none">
+                <thead class="admin-sidebar-color text-white">
+                    <tr class="d-flex">
+                        <th class="col-md-2 col-lg-2 col-xl-2"><%= Admin::ApiAccessToken.human_attribute_name('name')%></th>
+                        <th class="col-md-4 col-lg-5 col-xl-5"><%= Admin::ApiAccessToken.human_attribute_name('token') %></th>
+                        <th class="col-md-2 col-lg-2 col-xl-2"><%= Admin::ApiAccessToken.human_attribute_name('token_scope') %></th>
+                        <th class="col-md-2 col-lg-2 col-xl-2"><%= Admin::ApiAccessToken.human_attribute_name('last_used_at') %></th>
+                        <th class="col-md-2 col-lg-2 col-xl-1"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% @admin_api_access_tokens.each_with_index do |access_token,index| %>
+                        <tr class="d-flex">
+                          <td class="col-md-2 col-lg-2 col-xl-2 text-break align-middle"><%= access_token.name %></td>
+                          <td class="col-md-4 col-lg-5 col-xl-5 text-break align-middle"><button  type="button" class="btn admin-sidebar-color text-white btn-sm float-right copy-text ml-1" id="<%=index%>"><%= t('api_access_token.copy')%></button><%= access_token.token %><input type="text" value="<%= access_token.token %>" id="copy_<%=index%>" hidden>
+                          </td>
+                          <td class="col-md-2 col-lg-2 col-xl-2 text-break align-middle">
+                            <%=t("api_access_token.read_chk_default")%>
+                            <%= access_token.token_scope === [ ] ? "" : "," %>
+                            <% unless access_token.token_scope.nil? %>
+                              <% check_val = access_token.token_scope.reject { |i| i.zero? } %>
+                              <% check_val.each_with_index do |v,i| %>
+                                  <%= t("api_access_token.token_scopes.#{Admin::ApiAccessToken.token_scopes.key(i+1)}") %>
+                                  <% if check_val.length > 1 && check_val.length != i+1 %>
+                                      <%= ',' %>
+                                  <% end %>
+                              <% end %>
+                            <% end %>                           
+                          </td>
+                          <td class="col-md-2 col-lg-2 col-xl-2 text-break align-middle"><%=time_date(access_token.last_used_at)%>
+                          <td class="col-md-2 col-lg-2 col-xl-1 text-break align-middle">
+                            <%= link_to ('<i class="fas fa-edit admin-font-color"></i>').html_safe,  edit_admin_api_access_token_path(access_token.id),
+                            :class => 'icon-color mr-2',remote: true%>
+                            <span class="delete_api" id="api_delete_<%=access_token.id%>" style="cursor: pointer;">
+                              <i class="fas fa-trash admin-font-color"></i>
+                            </span>  
+                          </td>
+                        </tr>                       
+                    <% end %>
+                </tbody>
+            </table>  
+          </div>
+          <div class="col-12 my-2 px-4 d-content d-md-none">
+              <% @admin_api_access_tokens.each_with_index do |access_token,index| %>
+                  <div class="mobile-table row com-info-box p-3 my-4 rounded">
+
+                    <span class="h6 admin-font-color col-4"><%= Admin::ApiAccessToken.human_attribute_name('name')%></span>
+                    <span class="col-8 text-muted text-break"><%= access_token.name %></span><br>
+
+                    <span class="h6 admin-font-color col-4"><%= Admin::ApiAccessToken.human_attribute_name('token') %></span>
+                    <span class="col-8 text-muted text-break">   
+                      <span class="d-inline-block text-truncate" style="max-width: 100px;">
+                      <%= access_token.token %>
+                      </span> 
+                      <button  type="button" class="btn admin-sidebar-color text-white btn-sm copy-text" id="<%=index%>"><%= t('api_access_token.copy')%></button><input type="text" value="<%= access_token.token %>" id="copy_<%=index%>" hidden>
+                    </span><br>
+
+                    <span class="h6 admin-font-color col-4"><%= Admin::ApiAccessToken.human_attribute_name('token_scope') %></span>
+                    <span class="col-8 text-muted text-break">
+                      <%=t("api_access_token.read_chk_default")%>
+                      <%= access_token.token_scope === [ ] ? "" : "," %>
+                      <% unless access_token.token_scope.nil? %>
+                        <% check_val = access_token.token_scope.reject { |i| i.zero? } %>
+                        <% check_val.each_with_index do |v,i| %>
+                            <%= t("api_access_token.token_scopes.#{Admin::ApiAccessToken.token_scopes.key(i+1)}") %>
+                            <% if check_val.length > 1 && check_val.length != i+1 %>
+                                <%= ',' %>
+                            <% end %>
+                        <% end %>
+                      <% end %>
+                    </span><br>
+                     
+                    <span class="h6 admin-font-color col-4"><%= Admin::ApiAccessToken.human_attribute_name('last_used_at') %></span>
+                    <span class="col-8 text-muted text-break"><%=time_date(access_token.last_used_at)%></span><br>
+
+                    <span class="h6 admin-font-color col-4">
+                    </span>
+                    <span class="col-8 text-muted text-break">
+                      <%= link_to ('<i class="fas fa-edit admin-font-color"></i>').html_safe,  edit_admin_api_access_token_path(access_token.id),:class => 'icon-color',remote: true%>
+                      <span class="delete_api" id="api_delete_<%=access_token.id%>" style="cursor: pointer;">
+                        <i class="fas fa-trash admin-font-color"></i>
+                      </span> 
+                    </span>
+                    <br>
+                  </div>
+              <% end %>                          
+          </div>
+          <div class="col-12 d-flex justify-content-center mt-2 mx-2">
+            <%= paginate @admin_api_access_tokens  %>
+          </div>
+      <% else %>
+          <div class="col-12 m-2">
+              <h3><%= t('search.no_result') %></h3>
+          </div>
+      <% end %>
+    </div>
+  </div>    
+  <%# Lists end%>
+  <div class="position-fixed top-0 right-0 p-3" style="z-index: 2000; right: 0; top: 0;">
+    <div id="api_access_toast" class="toast border border-4 border-success hide" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
+        <div class="toast-header">
+            <%= favicon_link_tag asset_path('layout/favicon.ico') %>   
+            <strong class="mr-auto"><%= t("api_access_token.copy_toast") %> </strong>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+  </div>
+</div> 
+<%= javascript_pack_tag "admin/api_access.js" %>

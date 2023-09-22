@@ -1,0 +1,188 @@
+<!--begin::Header-->
+<% breadcrumbs_navigation_add (t('common.favourite_users')), '#' %>
+<%= render_company_breadcrumbs_navigation(t('common.favourite_users')) %>
+<!--end::Header-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <% if @favourite_users_list.present? %> 
+        <!--begin::Container-->
+        <div class="container-xxl" id="kt_content_container">
+            <!--begin::Event Tables Widget -->
+            <div class="card bg-body  d-none d-sm-none d-md-block d-lg-block d-xl-block">
+                <!--begin::Header-->
+                <div class="card-header border-0 pt-5">
+                    <h3 class="card-title align-items-start flex-column">
+                        <span class="card-label fw-bolder fs-3 mb-1"><%= t('common.favourite_users') %></span>
+                        <span class="text-muted mt-1 fw-bold fs-7"><%= @favourite_users_list.size %> <%= t('common.student_total_count') %></span>
+                    </h3>
+                </div>
+                <!--end::Header-->
+                <!--begin::Body-->
+                <div class="card-body py-3">
+                    <!--begin::Table container-->
+                    <div class="table-responsive  overflow-auto">
+                        <!--begin::Table-->
+                        <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
+                            <!--begin::Table head-->
+                            <thead>
+                                <tr class="fw-bolder text-muted">                                   
+                                    <th class="min-w-125px"><%= t('student.student_show.name')%></th>
+                                    <th class="min-w-100px"><%= Student::Student.human_attribute_name('school_type') %></th>
+                                    <th class="min-w-100px"><%= Student::Student.human_attribute_name('school_name') %></th>
+                                    <th class="max-w-100px"><%= Student::Student.human_attribute_name('graduation_date') %></th>
+                                    <th class="min-w-100px text-center"><%= t('event.title.edit_text_title') %></th>
+                                </tr>
+                            </thead>
+                            <!--end::Table head-->
+                            <!--begin::Table body-->
+                            <tbody>
+                                <% @favourite_users_list.each do |student| %>
+                                    <tr>
+                                        <td>
+                                            <%= link_to company_student_details_path(:id => student.user_id) do %>
+                                                <div class="d-flex align-items-center">
+                                                    <!--begin:: Avatar -->
+                                                    <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
+                                                        <% if student.image.attached? %>
+                                                        <%= image_tag (student.image), :class=> "symbol-label" %>
+                                                        <% else %>
+                                                            <% if student.gender == "female" %>
+                                                                <%= image_tag "avatar/female.svg", :class=> "symbol-label" %>                                
+                                                            <% else %>
+                                                                <%= image_tag "avatar/male.svg", :class=> "symbol-label" %>   
+                                                            <% end %>
+                                                        <% end %> 
+                                                    </div>
+                                                    <!--end::Avatar-->
+                                                    <!--begin::User details-->
+                                                    <div class="d-flex flex-column w-md-50px w-lg-100px w-xl-150px">
+                                                        <span class="text-gray-800 text-truncate mb-1">
+                                                            <%= student.nick_name %> 
+                                                        </span>
+                                                        <span class="text-muted text-truncate fw-bold text-muted d-block fs-7"><%= student.user.email %></span>
+                                                    </div>
+                                                    <!--begin::User details-->
+                                                </div>
+                                            <% end %>
+                                        </td>
+                                        <td>
+                                            <span class="text-muted fw-bold d-block fs-6"><%= get_school_type(student.school_type) %></span>
+                                        </td>
+                                        <td>
+                                            <span class="text-muted fw-bold d-block fs-6"><%=  get_student_field_name(student.school_name) %></span>
+                                        </td>
+                                        <td>
+                                            <span class="text-muted fw-bold d-block fs-6"><%=  get_graduation_date(student.graduation_date) %></span>
+                                        </td>                                    
+                                        <td class="text-center">                                 
+                                            <%= link_to new_communication_communication_path(:id =>student.id, :forum_id => student.id, :name => "Company"),class: "scout-popup-btn btn btn-primary",remote: true do %>
+                                                <i class="flaticon-chat"></i>
+                                                <span class="label fs-6 fs-lg-6 fs-md-8 fs-sm-8"><%= t 'communication.title.scouted_message' %></span>
+                                            <% end %>                                              
+                                        </td>
+                                    </tr>
+                                <% end %>
+                            </tbody>
+                            <!--end::Table body-->
+                        </table>
+                        <!--end::Table-->                        
+                    </div>
+                    <!--end::Table container-->
+                </div>      
+                <!--end::Body-->
+            </div>
+            <!--end::Event Tables Widget --> 
+            <!--begin::Favourite Users Mobile-->
+            <div class="card d-lg-none d-md-none mb-5 mb-xl-10">                
+                <!--begin::Body-->
+                <% @favourite_users_list.each do |student| %>
+                    <div class="col-xxl-4">
+                        <!--begin::Card-->
+                            <div class="card bg-body card-custom gutter-b card-stretch mb-3 mb-xl-10">
+                                <!--begin::Body-->
+                                <div class="card-body pt-4">
+                                    <!--begin::User-->
+                                    <div class="d-flex flex-stack pt-4">
+                                        <%= link_to company_student_details_path(:id => student.user_id) do %>
+                                            <div class="d-flex align-items-center">
+                                                <!--begin:: Avatar -->
+                                                <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
+                                                    <% if student.image.attached? %>
+                                                    <%= image_tag (student.image), :class=> "symbol-label" %>
+                                                    <% else %>
+                                                        <% if student.gender == "female" %>
+                                                            <%= image_tag "avatar/female.svg", :class=> "symbol-label" %>                                
+                                                        <% else %>
+                                                            <%= image_tag "avatar/male.svg", :class=> "symbol-label" %>   
+                                                        <% end %>
+                                                    <% end %> 
+                                                </div>
+                                                <!--end::Avatar-->
+                                                <!--begin::User details-->
+                                                <div class="d-flex flex-column ">
+                                                    <span class="text-gray-800 text-truncate mb-1">
+                                                        <%= student.nick_name %> 
+                                                    </span>
+                                                    <span class="text-muted text-truncate fw-bold text-muted d-block fs-7"><%= student.user.email %></span>
+                                                </div>
+                                                <!--begin::User details-->
+                                            </div>
+                                        <% end %>
+                                        <% if can?(:student_details, Company::Search) %>
+                                            <div class="d-flex justify-content-end flex-shrink-0">
+                                                <%= link_to new_communication_communication_path(:id =>student.id, :forum_id => student.id, :name => "Company"),class: "scout-popup-btn btn btn-primary",remote: true do %>
+                                                    <i class="flaticon-chat"></i>
+                                                    <span class="label fs-6 fs-lg-6 fs-md-8 fs-sm-8"><%= t 'communication.title.scouted_message' %></span>
+                                                <% end %> 
+                                            </div>
+                                        <% end %>
+                                    </div>
+                                    <!--end::User-->
+                                </div>
+                                <!--end::Body-->
+                            </div>
+                        <!--end:: Card-->
+                    </div>
+                <% end %>
+                <!--begin::Body-->
+            </div>
+            <!--end::Favourite Users Mobile-->
+            <div  id="communicationModal">
+                <%= render 'communication/communications/communication_muti_modal'%>
+            </div> 
+            <!--begin:: Pagination-->
+            <div class="d-flex flex-wrap justify-content-between align-items-center pt-10">
+                <div class="d-flex flex-wrap">
+                    <%= paginate @favourite_users_list %>
+                </div>
+                <div class="d-flex align-items-center py-3">
+                    <span class="text-muted"><%=  t('common.list_display')  %><%= @favourite_users_list.total_count %> <%=  t('common.to')  %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%= @favourite_users_list.offset_value + 1 %> ~ <%= @favourite_users_list.offset_value + @favourite_users_list.count %> <%=  t('common.search_result')  %> </span>
+                </div>
+            </div>	
+            <!--end: Pagination-->
+        </div>
+        <!--end::Container--> 
+    <% else %>
+        <!--begin::Container-->
+        <div class="container-xxl" id="kt_content_container">
+            <!--begin::Card-->
+            <div class="card bg-body">
+                <!--begin::Card body-->
+                <div class="card-body p-0">
+                    <!--begin::Wrapper-->
+                    <div class="card-px py-5 my-5">
+                        <!--begin::Description-->
+                        <div class="d-flex align-items-center flex-column">
+                            <span class="text-muted m-1 fw-bold"><%= t('common.favourite_company_list_empty') %></span>
+                        </div>
+                        <!--end::Description-->
+                    </div>
+                    <!--end::Wrapper-->
+                </div>
+                <!--end::Card body-->
+            </div>
+            <!--end::Card-->
+        </div>
+        <!--end::Container-->
+    <% end %>
+</div>
+<%= javascript_pack_tag 'common.js'%>

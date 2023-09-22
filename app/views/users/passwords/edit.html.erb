@@ -1,0 +1,99 @@
+<div class="d-flex flex-column flex-root">
+	<!--begin::Authentication - New password -->
+		<div class="d-flex flex-column flex-column-fluid">
+				<div class="w-lg-500px mx-auto mt-10">
+						<% if resource.errors.any? %>
+							<div id="flash"  class="flash-container">
+								<div class="noti">
+									<div class="alert alert-danger alert-dismissible fade show" role="alert">
+										<% resource.errors.full_messages.each do |message| %>
+											<%= message %>
+										<% end %>
+										<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+									</div>
+								</div>
+							</div>
+						<% end %>
+					</div>
+				<!--begin::Content-->
+				<div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
+					<!--begin::Logo-->
+					<%= link_to root_path do %>
+                        <%= image_tag "layout/header_logo.png", class: "h-40px mb-12" %>   
+                    <% end %> 
+					<!--end::Logo-->
+					<!--begin::Wrapper-->
+					<div class="w-lg-550px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
+						<!--begin::Form-->
+						<div class="form w-100 fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate" id="kt_new_password_form">
+							<!--begin::Heading-->
+							<div class="text-center mb-10">
+								<!--begin::Title-->
+								<h1 class="text-dark mb-3"><%= t('password_setting.edit_password') %></h1>
+								<!--end::Title-->
+								<!--begin::Link-->
+								<div class="text-gray-400 fw-bold fs-4"></div>
+								<!--end::Link-->
+							</div>
+							<!--begin::Heading-->
+							<!--begin::Input group-->
+							<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+                <%= f.hidden_field :reset_password_token %>						 
+								<div class="mb-10 fv-row fv-plugins-icon-container">
+									<label class="form-label fw-bolder text-dark fs-6"><%= t("パスワード") %></label>
+									<%= f.password_field :password, class: "form-control h-auto form-control-solid py-4 px-8" ,:id=>"password" %>
+										<span toggle="#password-field" class="toggle-password cursor-pointer text-muted float-end mt-n10 me-5">
+												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye-slash" viewBox="0 0 16 16">
+													<path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"/>
+													<path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z"/>
+													<path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z"/>
+												</svg>
+												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye d-none" viewBox="0 0 16 16">
+													<path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+													<path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+												</svg>	
+										</span>
+									<p class="d-flex align-items-start text-danger font-size-sm ms-invalid-feedback"><%= resource.errors.full_messages_for(:password)[0] %></p>
+								</div>
+								<div class="mb-10 fv-row fv-plugins-icon-container">
+									<label class="form-label fw-bolder text-dark fs-6"><%= t("パスワードの確認") %></label>
+									<%= f.password_field :password_confirmation, class: "form-control h-auto form-control-solid py-4 px-8" ,:id=>"user_password_confirmation"  %>
+									<span toggle="#password-field" class="conf-toggle-password cursor-pointer text-muted float-end mt-n10 me-5">
+												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye-slash" viewBox="0 0 16 16">
+													<path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"/>
+													<path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z"/>
+													<path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z"/>
+												</svg>
+												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye d-none" viewBox="0 0 16 16">
+													<path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+													<path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+												</svg>	
+									</span>
+									<p class="d-flex align-items-start text-danger font-size-sm ms-invalid-feedback"><%= resource.errors.full_messages_for(:password_confirmation)[0] %></p> 
+								</div>
+							<!--begin::Action-->
+							<div class="text-center">
+								<%= f.submit "ログイン", class: "btn btn-lg btn-primary fw-bolder" %>  
+							</div>
+							<!--end::Action-->
+							<% end %>
+						<div></div></div>
+						<!--end::Form-->
+					</div>
+					<!--end::Wrapper-->
+				</div>
+				<!--end::Content-->
+				<!--begin::Footer-->
+				<div class="d-flex flex-center flex-column-auto p-10">
+					<!--begin::Links-->
+					<div class="d-flex align-items-center fw-bold fs-6">
+					<%= link_to t('welcome.privacy policy.top_page_link.link1'),welcome_privacy_path(user_type: @usertype || @user_type) , class: "text-muted text-hover-primary px-2", target: '_blank' %>
+					<%= link_to t('welcome.privacy policy.top_page_link.link3'), welcome_contact_path(user_type: @usertype || @user_type), class: "text-muted text-hover-primary px-2"  %> 
+					</div>
+					<!--end::Links-->
+				</div>
+				<!--end::Footer-->
+		</div>
+	<!--end::Authentication - New password-->
+</div>
+<%= javascript_pack_tag "user/user.js" %>

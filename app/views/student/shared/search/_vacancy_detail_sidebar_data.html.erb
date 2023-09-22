@@ -1,0 +1,84 @@
+<div class="mb-6">
+    <div class="fw-bold text-gray-600 fs-7"><%= Company::Vacancy.human_attribute_name('basic_salary') %>:</div>
+    <div class="fw-bolder fs-6 text-gray-800 d-flex align-items-center"><%= number_with_delimiter(@company_vacancy_list.basic_salary) %> <%= t 'unit.money'%></div>
+</div>
+<div class="separator separator-dashed mb-7"></div>
+<!--begin::Title-->
+<h4 class="text-gray-700 w-bolder mb-0"><%= t("benefit.title") %></h4>
+<!--end::Title-->
+<!--begin::Section-->
+<div class="my-5 ">
+    <!--begin::Row-->
+    <% if @company_vacancy_list.probation? %>
+        <div class="d-flex align-items-center mb-3">
+            <!--begin::Bullet-->
+            <span class="bullet me-3"></span>
+            <!--end::Bullet-->
+            <!--begin::Label-->
+            <div class="text-gray-600 fw-bold fs-6"><%= Company::Vacancy.human_attribute_name('probation') %></div>
+            <!--end::Label-->
+        </div>
+    <% end %>
+    <!--end::Row-->
+    <!--begin::Row-->
+    <% if @company_vacancy_list.dormitory? %>
+        <div class="d-flex align-items-center mb-3">
+            <!--begin::Bullet-->
+            <span class="bullet me-3"></span>
+            <!--end::Bullet-->
+            <!--begin::Label-->
+            <div class="text-gray-600 fw-bold fs-6"><%= Company::Vacancy.human_attribute_name('dormitory') %></div>
+            <!--end::Label-->
+        </div>
+    <% end %>
+    <!--end::Row-->
+    <!--begin::Row-->
+    <% if @company_vacancy_list.insurance? %>
+        <div class="d-flex align-items-center mb-3">
+            <!--begin::Bullet-->
+            <span class="bullet me-3"></span>
+            <!--end::Bullet-->
+            <!--begin::Label-->
+            <div class="text-gray-600 fw-bold fs-6"><%= Company::Vacancy.human_attribute_name('insurance') %></div>
+            <!--end::Label-->
+        </div>
+        <!--end::Row-->
+    <% end %>
+    <!--begin::Row-->
+    <% if @company_vacancy_list.severance_pay? %>
+        <div class="d-flex align-items-center mb-3">
+            <!--begin::Bullet-->
+            <span class="bullet me-3"></span>
+            <!--end::Bullet-->
+            <!--begin::Label-->
+            <div class="text-gray-600 fw-bold fs-6"><%= Company::Vacancy.human_attribute_name('severance_pay') %></div>
+            <!--end::Label-->
+        </div>
+    <% end %>
+    <!--end::Row-->
+    <!--begin::Row-->
+    <% if @company_vacancy_list.promotion? %>
+        <div class="d-flex align-items-center mb-3">
+            <!--begin::Bullet-->
+            <span class="bullet me-3"></span>
+            <!--end::Bullet-->
+            <!--begin::Label-->
+            <div class="text-gray-600 fw-bold fs-6"><%= Company::Vacancy.human_attribute_name('promotion') %></div>
+            <!--end::Label-->
+        </div>
+    <% end %>
+    <!--end::Row-->
+    <!--begin::Row-->
+    <% if @company_vacancy_list.transportation_allowance? %>
+        <div class="d-flex align-items-center mb-3">
+            <!--begin::Bullet-->
+            <span class="bullet me-3"></span>
+            <!--end::Bullet-->
+            <!--begin::Label-->
+            <div class="text-gray-600 fw-bold fs-6"><%= Company::Vacancy.human_attribute_name('transportation_allowance') %></div>
+            <!--end::Label-->
+        </div>
+    <% end %>
+    <!--end::Row-->
+</div>
+<!--end::Section-->

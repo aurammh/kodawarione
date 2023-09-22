@@ -1,0 +1,8 @@
+ja:
+  company_commitment:
+    title:
+      company_commitment_title: こだわりプロフィール    
+    placeholder:
+      name: 企業名
+      address_pref: 住所１（都道府県）
+      address_city: 住所２（市区町村）

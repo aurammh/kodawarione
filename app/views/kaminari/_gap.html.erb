@@ -1,0 +1,13 @@
+<% if current_user %>
+  <li class='page-item btn-bg-blue disabled'>
+    <%= link_to '#',  class: 'page-link btn-bg-blue' do %>
+      ...
+    <% end %>
+  </li>
+<% else %>
+    <li class='page-item btn-bg-blue disabled'>
+      <%= link_to '#', class: 'page-link btn-bg-blue' do %>
+        ...
+      <% end %>
+    </li>
+<% end %>

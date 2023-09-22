@@ -1,0 +1,17 @@
+
+<div class="toolbar py-5 py-lg-5" id="kt_toolbar">
+  <!--begin::Container-->
+  <div id="kt_toolbar_container" class="container-xxl d-flex flex-stack flex-wrap">    
+    <!--begin::Breadcrumb-->          
+    <% breadcrumbs_navigation_add (t('dashboard.search_button.button3')), student_search_event_path if cookies[:previous_url] == "/student/search_event" %>
+    <% breadcrumbs_navigation_add (t('common.join_event')), student_join_event_index_path if cookies[:previous_url] == "/student/join_event_index" %>
+    <% breadcrumbs_navigation_add (t('common.favourite_event')), student_favourite_event_index_path if cookies[:previous_url] == "/student/favourite_event_index" %>
+    <% breadcrumbs_navigation_add (t('interview_story.title.story_information')),'#' %>
+    <%= render_student_breadcrumbs_navigation(t("interview_story.title.story_information")) %>                 
+    <!--end::Breadcrumb-->
+  </div>
+</div>
+<!--end::Breadcrumb-->  
+
+<%= render partial: "student/shared/search/search_story_detail" %>
+

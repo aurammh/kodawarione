@@ -1,0 +1,11 @@
+<!--begin::Header-->
+<% breadcrumbs_navigation_add (t ('title.vacancy_list')), company_vacancies_path if cookies[:previous_url] == '/company/vacancies' %>
+<% breadcrumbs_navigation_add (t('common.applied_vacancy')), company_vacancy_applied_student_list_path(@company_vacancy_list) %>
+<% breadcrumbs_navigation_add (t('title.student_search_detail_title')), '#' %>
+<%= render_company_breadcrumbs_navigation(t('common.applied_vacancy')) %>
+<!--end::Header-->
+<% if @student_apply_status.size > 0 %>
+    <%= render partial: "company/shared/student_detail" %>  
+<% else %>
+    <%= render partial: "company/shared/student_commitment" %>
+<% end %>

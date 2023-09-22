@@ -1,0 +1,211 @@
+<!--begin::Header Section-->
+<div class="mb-0" id="home">
+    <% if @usertype == "1" %>
+        <!--begin::Wrapper-->
+        <div class="bgi-no-repeat bgi-size-cover bgi-position-y-top" style="background-image:url(<%= asset_path 'welcome/new-landing/hero-company.jpg' %>);background-attachment: fixed;">
+            <!--begin::Header-->
+            <div class="landing-header" data-kt-sticky="true" data-kt-sticky-name="landing-header" data-kt-sticky-offset="{default: '200px', lg: '300px'}">
+                <!--begin::Container-->
+                <div class="container">
+                    <!--begin::Wrapper-->
+                    <div class="d-flex align-items-center justify-content-between">
+                        <!--begin::Logo-->
+                        <div class="d-flex align-items-center flex-equal">
+                            <!--begin::Logo image-->
+                            <%= link_to root_path ,class: "" do %>
+                                <%= image_tag "layout/header_logo.png", class: "logo-default h-25px h-lg-40px" %>   
+                                <%= image_tag "layout/header_logo.png", class: "logo-sticky h-25px h-lg-40px" %>      
+                            <% end %>
+                            <!--end::Logo image-->
+                        </div>
+                        <!--end::Logo-->
+                        <!--begin::Menu wrapper-->
+                        <div class="d-lg-block" id="kt_header_nav_wrapper">
+                            <div class="d-lg-block p-5 p-lg-0" data-kt-drawer="true" data-kt-drawer-name="landing-menu" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="200px" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_landing_menu_toggle" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_body', lg: '#kt_header_nav_wrapper'}">
+                                <!--begin::Menu-->
+                                <div class="menu menu-column flex-nowrap menu-rounded menu-lg-row menu-title-gray-500 menu-state-title-primary nav nav-flush fs-5 fw-bold" id="kt_landing_menu">
+                                    <!--begin::Menu item-->
+                                    <div class="menu-item">
+                                        <!--begin::Menu link-->
+                                         <%= link_to t('welcome.company.new.nav.link1'), welcome_contact_path, class: "menu-link nav-link py-3 px-4 px-xxl-6 text-dark fw-bold" %>
+                                        <!--end::Menu link-->
+                                    </div>
+                                    <!--end::Menu item-->
+                                    <!--begin::Menu item-->
+                                    <div class="menu-item">
+                                        <!--begin::Menu link-->
+                                       <%= link_to t('welcome.company.new.nav.link2'), new_company_user_session_path, class: "menu-link nav-link py-3 px-4 px-xxl-6 text-dark fw-bold" %>
+                                        <!--end::Menu link-->
+                                    </div>
+                                    <!--end::Menu item-->
+                                </div>
+                                <!--end::Menu-->
+                            </div>
+                        </div>
+                        <!--begin::Mobile menu toggle-->
+                        <button class="btn btn-icon btn-active-color-primary me-3 d-flex d-lg-none" id="kt_landing_menu_toggle">
+                            <!--begin::Svg Icon | path: icons/duotune/abstract/abs015.svg-->
+                            <span class="svg-icon svg-icon-2hx">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M21 7H3C2.4 7 2 6.6 2 6V4C2 3.4 2.4 3 3 3H21C21.6 3 22 3.4 22 4V6C22 6.6 21.6 7 21 7Z" fill="black" />
+                                    <path opacity="0.3" d="M21 14H3C2.4 14 2 13.6 2 13V11C2 10.4 2.4 10 3 10H21C21.6 10 22 10.4 22 11V13C22 13.6 21.6 14 21 14ZM22 20V18C22 17.4 21.6 17 21 17H3C2.4 17 2 17.4 2 18V20C2 20.6 2.4 21 3 21H21C21.6 21 22 20.6 22 20Z" fill="black" />
+                                </svg>
+                            </span>
+                            <!--end::Svg Icon-->
+                        </button>
+                        <!--end::Mobile menu toggle-->
+                        <!--end::Menu wrapper-->
+                    </div>
+                    <!--end::Wrapper-->
+                </div>
+                <!--end::Container-->
+            </div>
+            <!--end::Header-->
+            <!--begin::Landing hero-->
+            <section id="hero" class="hero d-flex align-items-center position-relative">
+                <div class="container text-center">
+                    <div class="row">
+                        <div class="col-12 d-flex flex-column justify-content-center">
+                            <h1 class="fs-4x fs-md-5tx mb-10 fw-bolder">
+                                <%= t('welcome.company.new.hero.text1_start') %><span id="kt_landing_hero_text" class=" py-2 px-3" style="color: #bf9001"><%= t('welcome.company.new.hero.text1_highligh') %></span><%= t('welcome.company.new.hero.text1_middle') %><br /><%= t('welcome.company.new.hero.text1_end') %>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="position-absolute bottom-0 end-0 w-100 px-lg-5">
+                    <p class="fs-1 fs-md-2tx fw-bolder text-gray-800 mb-20 text-center text-lg-end ">
+                        <%= t('welcome.company.new.hero.text2').html_safe %><br />
+                    </p>
+                </div>
+            </section>
+            <!--end::Landing hero-->
+        </div>
+        <!--end::Wrapper-->
+    <% elsif @usertype == "2" %>
+        <!--begin::Wrapper-->
+        <div class="bgi-no-repeat bgi-position-center bgi-size-cover bgi-position-y-bottom landing-dark-bg" style="background-image:url(<%= asset_path 'welcome/new-landing/hero-student.jpg' %>);background-attachment: fixed;">
+            <!--begin::Header-->
+            <div class="landing-header" data-kt-sticky="true" data-kt-sticky-name="landing-header" data-kt-sticky-offset="{default: '200px', lg: '300px'}">
+                <!--begin::Container-->
+                <div class="container">
+                    <!--begin::Wrapper-->
+                    <div class="d-flex align-items-center justify-content-between">
+                        <!--begin::Logo-->
+                        <div class="d-flex align-items-center flex-equal">
+                            <!--begin::Logo image-->
+                            <div class="card">
+                                <div class="card-body p-3">
+                                    <%= link_to root_path ,class: "" do %>
+                                        <%= image_tag "layout/header_logo.png", class: "logo-default h-25px h-lg-40px" %>   
+                                        <%= image_tag "layout/header_logo.png", class: "logo-sticky h-25px h-lg-40px" %>   
+                                    <% end %>
+                                </div>
+                            </div>
+                            <!--end::Logo image-->
+                        </div>
+                        <!--end::Logo-->
+                        <!--begin::Toolbar-->
+                        <div class="flex-equal text-end ms-1 d-none d-sm-block">
+                            <%= link_to t('welcome.student.new.nav.link1'), welcome_company_path ,class: "btn btn-active-white fs-2 fw-bolder" %>
+                        </div>
+                        <div class="flex-equal text-end ms-1 d-block d-sm-none">
+                            <%= link_to t('welcome.student.new.nav.link1_mobile'), welcome_company_path ,class: "btn btn-active-white fs-2 fw-bolder" %>
+                        </div>
+                        <!--end::Toolbar-->
+                    </div>
+                    <!--end::Wrapper-->
+                </div>
+                <!--end::Container-->
+            </div>
+            <!--end::Header-->
+            <!--begin::Landing hero-->
+            <section id="hero" class="hero d-flex align-items-center">
+                <div class="container-xl">
+                    <div class="row">
+                        <div class="col-12 col-lg-8 d-flex flex-column justify-content-center">
+                            <h1 class="fs-5tx mb-10 fw-bolder text-white">
+                                <%= t('welcome.student.new.hero.text1_start') %><br />
+                                 <span id="kt_landing_hero_text" class=" py-2 px-3" style="background: #feff00;color: #61c1be;"><%= t('welcome.student.new.hero.text1_highligh') %></span>
+                                <%= t('welcome.student.new.hero.text1_end') %>
+                            </h1>
+                            <p class="fs-2x fs-lg-1 fw-bolder text-white mt-10">
+                                <%= t('welcome.student.new.hero.text2_1') %><br />
+                                <%= t('welcome.student.new.hero.text2_2') %><br />
+                                <%= t('welcome.student.new.hero.text2_3') %><br />
+                                <%= t('welcome.student.new.hero.text2_4') %>
+                            </p>
+                        </div>
+                        <div class="col-12 col-sm-12 offset-md-2 col-md-8 offset-lg-0 col-lg-4 mt-5 mt-lg-0">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-12 text-center">
+                                            <h1 class="fs-2 fw-bolder  mb-3 mb-md-3 mb-lg-7 text-white">
+                                                <%= t('welcome.student.new.hero.login_title') %>
+                                            </h1>
+                                            <div class="d-none d-sm-none d-md-none d-lg-block">
+                                                <%= link_to user_facebook_omniauth_authorize_path, method: :post ,data: { turbolinks: false }, class: "btn position-relative facebook-bg opacity-75-hover btn-lg w-100 py-3 mb-4" do %>
+                                                    <span class="position-absolute top-50 start-0 translate-middle-y mt-n1 ms-7"> 
+                                                    <img alt="Logo" src="../../../assets/media/svg/brand-logos/facebook-4.svg" class="h-20px me-2">
+                                                    </span>
+                                                    <span class="text-white fw-bolder w-100"><%= t('registeration.session.facebook_login') %></span>
+                                                <% end %> 
+                                                <%= link_to user_google_oauth2_omniauth_authorize_path, method: :post ,data: { turbolinks: false }, class: "btn position-relative bg-secondary opacity-75-hover btn-lg w-100 py-3 mb-4" do %>
+                                                    <span class="position-absolute top-50 start-0 translate-middle-y ms-7"> 
+                                                    <img alt="Logo" src="../../../assets/media/svg/brand-logos/google-icon.svg" class="h-20px me-2">
+                                                    </span>
+                                                    <span class="text-dark fw-bolder w-100"><%= t('registeration.session.google_login') %></span>
+                                                <% end %> 
+                                                <%= link_to user_line_omniauth_authorize_path , method: :post ,data: { turbolinks: false }, class: "btn position-relative line-bg opacity-75-hover btn-lg w-100 py-3 mb-4" do %>
+                                                    <span class="position-absolute top-50 start-0 translate-middle-y ms-5"> 
+                                                    <img alt="Logo" src="../../../assets/media/svg/brand-logos/line.svg" class="h-30px me-2">
+                                                    </span>
+                                                    <span class="text-white fw-bolder w-100"><%= t('registeration.session.line_login') %></span>
+                                                <% end %>
+                                            </div>
+                                            <div>
+                                                <%= form_for(@user, url: check_user_mail_path, :method => "post" ) do |f| %>
+                                                    <div class="input-group mb-3">
+                                                        <%= f.email_field :email, class: "form-control form-control-lg form-control-solid",placeholder: t("student.placeholder.email1") %>
+                                                        <%= f.button class: "btn btn-light fw-bolder" do %>
+                                                            <i class="far fa-arrow-alt-circle-right fs-1"></i>
+                                                        <% end %>
+                                                    </div>
+                                                <% end %>
+                                            </div>
+                                            <div class="d-block d-lg-none">
+                                                <%= link_to user_facebook_omniauth_authorize_path, method: :post ,data: { turbolinks: false }, class: "btn btn-icon facebook-bg me-3" do %>
+                                                    <img alt="Logo" src="../../../assets/media/svg/brand-logos/facebook-4.svg" class="h-20px">
+                                                <% end %>
+                                                <%= link_to user_google_oauth2_omniauth_authorize_path, method: :post ,data: { turbolinks: false }, class: "btn btn-icon btn-bg-light me-3" do %>
+                                                     <img alt="Logo" src="../../../assets/media/svg/brand-logos/google-icon.svg" class="h-20px">
+                                                <% end %>
+                                                <%= link_to user_line_omniauth_authorize_path , method: :post ,data: { turbolinks: false }, class: "btn btn-icon line-bg me-3" do %>
+                                                    <img alt="Logo" src="../../../assets/media/svg/brand-logos/line.svg" class="h-30px">
+                                                <% end %>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 text-center mt-10 mt-md-7 ">
+                                            <h1 class="fs-2 fw-bolder mb-3 mb-md-3 mb-lg-7 text-white">
+                                                <%= t('welcome.student.new.hero.signup_title') %>
+                                            </h1>
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <%= link_to t('welcome.company.new.nav.link2'), welcome_student_login_path, class: "btn btn-primary btn-lg fw-bolder w-100 px-3  mb-4" %>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!--end::Landing hero-->
+        </div>
+        <!--end::Wrapper-->
+    
+    <% end %>
+</div>
+<!--end::Header Section-->

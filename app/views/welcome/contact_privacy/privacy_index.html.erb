@@ -1,0 +1,139 @@
+<% if user_signed_in? %>
+  <!--begin::Toolbar-->
+  <div class="toolbar py-5 py-lg-5" id="kt_toolbar">
+    <!--begin::Container-->
+    <div id="kt_toolbar_container" class="container-xxl d-flex flex-stack flex-wrap">
+      <!--begin::Page title-->
+      <div class="page-title d-flex flex-column me-3">
+        <!--begin::Breadcrumb-->
+        <% breadcrumbs_navigation_add (t('welcome.privacy policy.title2')), '#' %>
+        <%= render_student_breadcrumbs_navigation(t('welcome.privacy policy.title2')) %>	
+        <!--end::Breadcrumb-->
+      </div>
+      <!--end::Page title-->
+    </div>
+    <!--end::Container-->
+  </div>
+  <!--end::Toolbar-->
+<% end %>
+<% if company_user_signed_in? %>
+	<!--begin::Header-->
+	<% breadcrumbs_navigation_add (t('welcome.privacy policy.title2')), '#' %>
+	<%= render_company_breadcrumbs_navigation(t('welcome.privacy policy.title2')) %>
+	<!--end::Header-->
+<% end %>
+<!--begin::Container-->
+<div id="kt_content" class="d-flex flex-column-fluid align-items-start container-xxl">
+	<!--begin::Post-->
+	<div class="content flex-row-fluid" id="kt_content_container">
+		<!--begin::Hero card-->
+		<div class="<%= user_signed_in? ? "d-none" : super_partner_user_signed_in? ? "d-none" : "d-block" %>  <%= (company_user_signed_in?) || (super_partner_user_signed_in?) ? "d-none" : "d-block" %>">
+			<div class="d-flex justify-content-center my-10 ">
+				<!--begin::Logo image-->
+				<%= link_to root_path ,class: "" do %>
+					<%= image_tag "layout/header_logo.png", class: "h-30px h-lg-50px" %>
+				<% end %>
+				<!--end::Logo image-->
+			</div>
+		</div>
+        <!--end::Hero card-->
+        <!--begin::Hero card-->
+        <%= render partial: 'welcome/contact_privacy/hero_card', :locals =>{:current_route => "privacy", :hero_text => t('welcome.privacy policy.title2')} %>
+        <!--end::Hero card-->
+		<!--begin::About card-->
+		<div class="card <%= 'bg-body' if company_user_signed_in? %>">
+			<!--begin::Body-->
+			<div class="card-body p-5 p-lg-15">
+				<!--begin::Content main-->
+				<div class="mb-14">
+					<!--begin::Heading-->
+					<div class="mb-5 mb-lg-10"> 
+						<!--begin::Text-->
+						<div class="fs-6 fw-bold text-gray-700"><%= t('welcome.privacy policy.paragraph1') %></div>
+						<!--end::Text-->
+					</div>
+					<!--end::Heading-->
+					<!--begin::Body-->
+						<!--begin::Block-->
+						<div>							
+							<!--begin::List-->
+							<ol class="fs-6 fw-bold mb-6 li_number">
+								<li class="mb-5 mb-lg-8 fs-4">
+									<!--`begin::Title-->
+									<h4 class="fw-bolder text-gray-800 cursor-pointer fs-4 mb-lg-5 mb-3"><%= t('welcome.privacy policy.section2.title') %></h4>
+									<!--end::Title--> 
+									<span class="text-gray-700 fs-6"><%= t('welcome.privacy policy.section2.paragraph1') %></span>
+								</li> 
+								<li class="mb-5 mb-lg-8 fs-4">
+									<!--begin::Title-->
+									<h4 class="fw-bolder text-gray-800 cursor-pointer fs-4 mb-lg-5 mb-3"><%= t('welcome.privacy policy.section3.title') %></h4>
+									<!--end::Title--> 
+									<span class="text-gray-700 fs-6"><%= t('welcome.privacy policy.section3.paragraph1') %></span>
+								</li> 
+								<li class="mb-5 mb-lg-8 fs-4">
+									<!--begin::Title-->
+									<h4 class="fw-bolder text-gray-800 cursor-pointer fs-4 mb-lg-5 mb-3"><%= t('welcome.privacy policy.section4.title') %></h4>
+									<!--end::Title--> 
+									<span class="text-gray-700 fs-6"><%= t('welcome.privacy policy.section4.paragraph') %></span>
+								</li> 
+								<li class="mb-5 mb-lg-8 fs-4">
+									<!--begin::Title-->
+									<h4 class="fw-bolder text-gray-800 cursor-pointer fs-4 mb-lg-5 mb-3"><%= t('welcome.privacy policy.section5.title') %></h4>
+									<!--end::Title--> 
+									<span class="text-gray-700 fs-6"><%= t('welcome.privacy policy.section5.paragraph') %></span>
+								</li> 
+								<li class="mb-5 mb-lg-8 fs-4">
+									<!--begin::Title-->
+									<h4 class="fw-bolder text-gray-800 cursor-pointer fs-4 mb-lg-5 mb-3"><%= t('welcome.privacy policy.section6.title') %></h4>
+									<!--end::Title--> 
+									<span class="text-gray-700 fs-6"><%= t('welcome.privacy policy.section6.paragraph') %></span>
+								</li> 
+								<li class="mb-5 mb-lg-8 fs-4">
+									<!--begin::Title-->
+									<h4 class="fw-bolder text-gray-800 cursor-pointer fs-4 mb-lg-5 mb-3"><%= t('welcome.privacy policy.section7.title') %></h4>
+									<!--end::Title--> 
+									<span class="text-gray-700 fs-6"><%= t('welcome.privacy policy.section7.paragraph') %></span>
+								</li> 
+								<li class="mb-5 mb-lg-8 fs-4 py-3">
+									<!--begin::Title-->
+									<span class="text-gray-700 fs-6"><%= t('welcome.privacy policy.section8.paragraph1') %></span><br>
+									<!--end::Title--> 
+									<span class="text-gray-700 fs-6"><%= t('welcome.privacy policy.section8.paragraph2') %></span>
+								</li> 
+							</ol>
+							<!--end::List-->   
+							
+							<h4 class="fw-bolder text-gray-800 cursor-pointer fs-4 mb-5"><%= t('welcome.privacy policy.section9.text1') %></h4>
+							<div class="text-gray-700 fs-6"><%= t('welcome.privacy policy.section9.link1') %></div>
+							<h4 class="fw-bolder text-gray-800 cursor-pointer fs-4 my-5"><%= t('welcome.privacy policy.section9.text2') %></h4>
+							<div class="text-gray-700 fs-6"><%= t('welcome.privacy policy.section9.link2') %></div> 
+
+                            
+							<!--begin::Section-->
+							<div class="mb-17">
+								<!--begin::Content-->
+								<div class="d-flex flex-column mb-5">
+									<!--begin::Title-->
+									<h5 class="text-muted">
+										<%= t('welcome.privacy policy.top_page_link.text4') %>
+									</h5>
+									<h5 class="text-muted">
+										<%= t('welcome.privacy policy.top_page_link.text11') %>
+									</h5>
+									<!--end::Title-->
+								</div>
+								<!--end::Content-->
+							</div>
+							<!--end::Section-->
+						</div>
+						<!--end::Block-->
+					<!--end::Body-->
+				</div>
+				<!--end::Content main-->
+			</div>
+			<!--end::Body-->
+		</div>
+		<!--end::About card-->
+	</div>
+	<!--end::Post-->
+</div>

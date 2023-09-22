@@ -1,0 +1,62 @@
+<!--begin::Input group-->
+<div class="d-flex flex-column mb-5 fv-row">
+    <!--begin::Label-->
+    <label class="fs-6 fw-bold required mb-2"><%= f.label :classification %></label>
+    <!--end::Label-->
+    <!--begin::Input-->
+    <%= f.select(:classification, [t('welcome.privacy policy.top_page_link.text1'), t('welcome.privacy policy.top_page_link.text2'), t('welcome.privacy policy.top_page_link.text_partner'), t('welcome.privacy policy.top_page_link.text_super_partner')], {:include_blank => ( t'select.not_select'), selected: f.object.classification}, { :class => 'form-select form-select-solid shadow-none errors'}) %>
+    <p class ="text-danger fs-6 ms-invalid-feedback mt-1"><%= @contact.errors.full_messages_for(:classification)[0] %></p> 
+    <!--end::Input-->
+</div>
+<!--end::Input group-->
+<!--begin::Input group-->
+<div class="row mb-5">
+    <!--begin::Col-->
+    <div class="col-md-6 fv-row">
+        <!--begin::Label-->
+        <label class="fs-6 fw-bold required mb-2"><%= f.label :name %></label>
+        <!--end::Label-->
+        <!--begin::Input-->
+        <%= f.text_field :name, class: "form-control form-control-solid shadow-none errors" %>
+        <p class ="text-danger fs-6 ms-invalid-feedback mt-1"><%= @contact.errors.full_messages_for(:name)[0] %></p>     
+        <!--end::Input-->
+    </div>
+    <!--end::Col-->
+    <!--begin::Col-->
+    <div class="col-md-6 fv-row">
+        <!--begin::Label-->
+        <label class="fs-6 fw-bold mb-2"><%= f.label :company_name %></label>
+        <!--end::Label-->
+        <!--begin::Input-->
+        <%= f.text_field :company_name, class: "form-control form-control-solid shadow-none" %>
+        <p class ="text-danger fs-6 ms-invalid-feedback mt-1"><%= @contact.errors.full_messages_for(:company_name)[0] %></p>
+        <!--end::Input-->
+    </div>
+    <!--end::Col-->
+</div>
+<!--end::Input group-->
+<!--begin::Input group-->
+<div class="row mb-5">
+<!--begin::Col-->
+    <div class="col-md-6 fv-row">
+        <!--begin::Label-->
+        <label class="fs-6 fw-bold required mb-2"><%= f.label :email %></label>
+        <!--end::Label-->
+        <!--end::Input-->
+        <%= f.email_field :email, class: "form-control form-control-solid shadow-none errors" %>
+        <p class ="text-danger fs-6 ms-invalid-feedback mt-1"><%= @contact.errors.full_messages_for(:email)[0] %></p>
+        <!--end::Input-->
+    </div>
+    <!--end::Col-->
+    <!--begin::Col-->
+    <div class="col-md-6 fv-row">
+        <!--begin::Label-->
+        <label class="fs-6 fw-bold mb-2"><%= f.label :contact %></label>
+        <!--end::Label-->
+        <!--begin::Input-->
+        <%= f.text_field :contact, class: "form-control form-control-solid shadow-none" %> 
+        <!--end::Input-->
+    </div>
+    <!--end::Col-->
+</div>
+<!--end::Input group-->

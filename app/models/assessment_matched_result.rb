@@ -1,0 +1,2 @@
+class AssessmentMatchedResult < ApplicationRecord
+end

@@ -1,0 +1,41 @@
+<!--begin::Header-->
+<% breadcrumbs_navigation_add (t('role.title.list')), kodawarione_admin_roles_path %>
+<% breadcrumbs_navigation_add (t ('role.title.list')), '#' %>
+<%= render_partner_breadcrumbs_navigation(t ('role.title.list')) %>		
+<!--end::Header-->
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+	<!--begin::Container-->
+	<div class="container-fluid" id="kt_content_container">
+		<!--begin::Tab Content-->
+		<div class="tab-content">
+			<!--begin::Tab pane-->
+			<div id="kt_project_users_card_pane" class="tab-pane fade show active">
+        <div class="card bg-body">
+            <div class="card-body">
+                <div class="d-flex justify-content-end mb-10">
+                    <div class="card-toolbar">
+                        <%= link_to kodawarione_admin_roles_path, class: "btn btn-light-primary font-weight-bolder me-2" do %> 
+                            <i class="ki ki-long-arrow-back icon-sm"></i><%= t("role.title.return") %>
+                        <% end %>
+                        <%= button_tag( :class => "btn btn-primary font-weight-bolder") do %>
+                        <i class="ki ki-check icon-sm"></i> <%= link_to t('btn.edit'), edit_kodawarione_admin_role_path(@kodawarione_admin_role), class: "text-white" %>
+                        <% end %>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-12 col-sm-6 col-md-3 col-lg-3 my-3 d-flex flex-column">
+                        <span class="h6 com-font-color mb-2"><%= t('role.title.role_type') %></span>
+                        <span><%= @kodawarione_admin_role.role_type %></span>
+                    </div> 
+                    <div class="col-12 col-sm-6 col-md-3 col-lg-3 my-3 d-flex flex-column">
+                      <span class="h6 com-font-color mb-2"><%= t('Delete flg:') %></span>
+                      <span><%= @kodawarione_admin_role.delete_flg %></span>
+                    </div>  
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

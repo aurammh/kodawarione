@@ -1,0 +1,83 @@
+<!--begin::Header-->
+<% breadcrumbs_navigation_add (t('kodawarione.sidebar.function_authority_permission')), kodawarione_admin_roles_path %>
+<% breadcrumbs_navigation_add (t('role.title.list')), kodawarione_permission_categories_path(:com_role_id => params[:com_role_id]) %>
+<% breadcrumbs_navigation_add (t ('role.title.list')), '#' %>
+<%= render_partner_breadcrumbs_navigation(t ('role.title.list')) %>		
+<!--end::Header-->
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+	<!--begin::Container-->
+	<div class="container-fluid" id="kt_content_container"> 
+		<div class="tab-content">
+			<!--begin::Tab pane-->
+			<div id="kt_project_users_card_pane" class="tab-pane fade show active">
+        <%= form_for('',url: kodawarione_save_role_permission_path, method: :post) do |form| %>
+          <div class = "card bg-body">
+            <div class="card-header border-0">
+              <!--begin::Card title-->
+              <div class="card-title m-0">
+                <h3 class="fw-bolder m-0"><%= t ("permission_groups.#{params[:group_name]}") %></h3>
+              </div>
+              <!--end::Card title-->
+            </div>
+            <div class="card-body pb-3">
+              <div class="form-check form-check-custom form-check-solid me-3 mb-5">
+                <input class="form-check-input me-3" type="checkbox" data-kt-check="true" data-kt-check-target=".form-check-input" value="1" />
+                <label class="fw-bolder"> <%= t('common.check_all') %> </label>
+              </div>
+              <div class = "row">
+                <%= form.collection_check_boxes :permission_id, @permissions, :id, :permission_name do |permission| %>
+                  <!--begin::Item-->
+                  <div class = "col-12 col-md-6 col-lg-6 col-xl-6">
+                    <div class="d-flex align-items-center position-relative mb-7">
+                      <!--begin::Label-->
+                      <div class="position-absolute top-0 start-0 rounded h-100 bg-secondary w-4px"></div>
+                      <!--end::Label-->
+                      <!--begin::Checkbox-->
+                      <div class="form-check form-check-custom form-check-solid ms-6 me-4">
+                        <%= permission.check_box(checked: get_permission_can_access(@role_permission, permission.object.id), class: 'form-check-input') %> 
+                      </div>
+                      <!--end::Checkbox-->
+                      <!--begin::Details-->
+                      <div class="fw-bold">
+                        <%= form.label t("permission_name.#{permission.object.permission_name}"), class: "fs-6 fw-bolder text-gray-900", for: "permission_id_#{permission.object.id}" %>
+                        <!--begin::Info-->
+                        <div class="text-gray-400">
+                          <%= permission.object.remark %>
+                        </div>
+                        <!--end::Info-->
+                      </div>
+                      <!--end::Details-->
+                      <!--begin::Menu-->
+                      <!--begin::Svg Icon | path: icons/duotune/general/gen024.svg-->
+                        <span class="svg-icon svg-icon-1 svg-icon-primary ms-auto">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24">
+                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                              <rect x="5" y="5" width="5" height="5" rx="1" fill="#000000"></rect>
+                              <rect x="14" y="5" width="5" height="5" rx="1" fill="#000000" opacity="0.3"></rect>
+                              <rect x="5" y="14" width="5" height="5" rx="1" fill="#000000" opacity="0.3"></rect>
+                              <rect x="14" y="14" width="5" height="5" rx="1" fill="#000000" opacity="0.3"></rect>
+                            </g>
+                          </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                      <!--end::Menu-->
+                    </div>
+                  </div>
+                  <!--end::Item-->
+                <% end %>
+              </div>
+            </div>
+            <div class="card-footer d-flex justify-content-center py-6 px-9">
+              <%= link_to t('btn.cancel'), kodawarione_permission_categories_path(:com_role_id => params[:com_role_id]), class: "btn btn-light btn-active-light-primary me-2" %>
+              <%= form.submit t('btn.submit'), class: "btn btn-primary" %>
+            </div>
+          </div>
+          <%= form.hidden_field :role_id,value: params[:com_role_id] %>  
+          <%= form.hidden_field :role_group_name,value: params[:group_name] %>  
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<%= javascript_pack_tag 'common.js'%>

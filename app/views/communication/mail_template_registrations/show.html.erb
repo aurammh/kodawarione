@@ -1,0 +1,60 @@
+<!--begin::Breadcrumb-->
+<% breadcrumbs_navigation_add (t('mail_template_registration.title.mail_template_list')), communication_mail_template_registrations_path %>
+<% breadcrumbs_navigation_add t('mail_template_registration.title.mail_template_show'), '#' %>
+<%= render_company_breadcrumbs_navigation(t('mail_template_registration.title.mail_template_show')) %>
+<!--end::Breadcrumb-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+	<!--begin::Container-->
+	<div class="container-xxl" id="kt_content_container">
+		<!--begin::Tab Content-->
+		<div class="tab-content">
+			<!--begin::Tab pane-->
+			<div id="kt_project_users_card_pane" class="tab-pane fade show active">
+				<!--begin::Table-->
+				<div class="card bg-body">
+					<!--begin::Header-->
+					<div class="card-header border-0 pt-5">
+						<h3 class="card-title align-items-start flex-column">
+							<span class="card-label fw-bolder fs-3 mb-1"><%= t('mail_template_registration.title.mail_template_show') %></span> 
+						</h3>
+						<div class="card-toolbar">
+							<%= link_to communication_mail_template_registrations_path, class: "btn btn-sm btn-primary" do %>
+                				<i class="ki ki-long-arrow-back icon-sm"></i><%= t("btn.return") %>
+							<% end %>
+						</div>
+					</div>
+					<!--end::Header-->
+					<!--begin::Body-->
+					<div class="card-body py-3">
+						<!--begin::Table container-->
+						<div class="table-responsive  overflow-auto">
+							<table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_users"> 
+								<thead>
+								<!--begin::Table row-->
+								<tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0"> 
+									<th class="max-w-50px"><%= Communication::MailTemplateRegistration.human_attribute_name('template_name') %></th>
+									<th class="min-w-125px"><%= Communication::MailTemplateRegistration.human_attribute_name('subject') %></th>
+									<th class="min-w-125px"><%= Communication::MailTemplateRegistration.human_attribute_name('content') %></th> 
+								</tr>
+								<!--end::Table row-->
+								</thead> 
+								<tbody class="text-gray-600 fw-bold">   
+								<tr>
+									<td><%= @communication_mail_template_registration.template_name %></td>
+									<td><%= @communication_mail_template_registration.subject %></td> 
+									<td><%=  @communication_mail_template_registration.content %></td>
+								</tr> 
+								</tbody> 
+							</table>
+						</div>
+						<!--end::Table container-->
+					</div>
+					<!--begin::Body-->
+				</div>
+				<!--end::Table--> 				
+			</div>
+		</div>
+		<!--end::Tab Content-->
+	</div>
+	<!--end::Container-->
+</div>

@@ -1,0 +1,111 @@
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %> 
+  <div class="d-flex flex-column flex-root">
+    <!--begin::Authentication - Sign-in -->
+    <div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed">
+      <!--begin::Content-->
+      <div class="w-lg-500px mx-auto mt-10">
+        <%= render "users/shared/flash", resource: resource %>
+      </div>
+      <div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
+        <!--begin::Logo-->
+        <%= link_to root_path do %>
+          <%= image_tag "layout/header_logo.png", class: "h-40px mb-12" %>   
+        <% end %>  
+        <!--end::Logo-->
+        <!--begin::Wrapper-->
+        <div class="w-lg-500px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
+          <!--begin::Form-->
+          <div class="form w-100 fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate" id="kt_sign_in_form">
+            <!--begin::Heading-->
+            <div class="text-center mb-10">
+              <!--begin::Title-->
+              <h1 class="text-dark mb-3"><%= t('welcome.company.new.nav.link2') %></h1> 
+              <!--end::Title-->
+              <!--begin::Link-->  
+              <div class="text-gray-400 fw-bold fs-4"><%= t('registeration.session.sign_in_text') %>
+                <% if can?(:create, Company::Company) %>
+                  <%= link_to(t('btn.update'),new_company_company_path , class: "link-primary fw-bolder") %>   
+                <% end %>
+              </div>  
+              <!--end::Link-->
+            </div>
+            <!--begin::Heading-->
+            <!--begin::Input group-->
+            <div class="fv-row mb-10 fv-plugins-icon-container">
+              <!--begin::Label-->
+              <label class="form-label fs-6 fw-bolder text-dark"><%= t("student.placeholder.email1") %></label>
+              <!--end::Label-->
+              <!--begin::Input-->
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control form-control-lg form-control-solid" %> 
+              <!--end::Input-->
+            <div class="fv-plugins-message-container invalid-feedback"></div></div>
+            <!--end::Input group-->
+            <!--begin::Input group-->
+            <div class="fv-row mb-10 fv-plugins-icon-container">
+              <!--begin::Wrapper-->
+              <div class="d-flex flex-stack mb-2">
+                <!--begin::Label-->
+                <label class="form-label fw-bolder text-dark fs-6 mb-0"><%= CompanyUser.human_attribute_name('password') %></label>
+                <!--end::Label-->
+                <!--begin::Link-->
+                <%= link_to  t('password_setting.edit_password'), new_company_user_password_path(resource_name, user_type: @user_type), class: "link-primary fs-6 fw-bolder" %> 
+                <!--end::Link-->
+              </div>
+              <!--end::Wrapper-->
+              <!--begin::Input-->
+              <%= f.password_field :password, autocomplete: "current-password", class: "form-control form-control-lg form-control-solid" %> 
+                <span toggle="#password-field" class="company-toggle-password cursor-pointer text-muted float-end mt-n10 me-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye-slash" viewBox="0 0 16 16">
+                      <path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"/>
+                      <path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z"/>
+                      <path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z"/>
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye d-none" viewBox="0 0 16 16">
+                      <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+                      <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+                    </svg>	
+                </span>
+              <!--end::Input-->
+            <div class="fv-plugins-message-container invalid-feedback"></div></div>
+            <!--end::Input group-->
+            <div class="fv-row mb-10 fv-plugins-icon-container">  
+                <label class="form-check form-check-custom form-check-solid form-check-inline">                 
+                  <% if devise_mapping.rememberable? %>
+                    <span class="justify-content-start me-5">
+                      <%= f.check_box :remember_me,   class: "form-check-input"  ,:name=>"toc"  %>   
+                      <label class="form-check-label fw-bold text-gray-700 fs-6" for="company_user_remember_me"><%= t("confirmations.remember_me") %></label> 
+                    </span> 
+                  <% end %>
+                </label>
+              </div>
+            <!--begin::Actions-->
+            <div class="text-center">
+              <!--begin::Submit button-->
+              <%= f.submit t('welcome.company.new.nav.link2'), class: "btn btn-lg btn-primary w-100 mb-5" %>
+              <!--end::Submit button-->
+            </div>
+            <!--end::Actions-->
+            <div>
+            </div>
+          </div>    
+          <!--end::Form-->
+        </div>
+        <!--end::Wrapper-->
+      </div>
+      <!--end::Content-->
+      <!--begin::Footer-->
+      <div class="d-flex flex-center flex-column-auto p-10">
+        <!--begin::Links-->
+        <div class="d-flex align-items-center fw-bold fs-6">
+          <%= link_to t('welcome.privacy policy.top_page_link.link1'), welcome_privacy_path(user_type: @usertype || @user_type) , class: "text-muted text-hover-primary px-2", target: '_blank' %>/
+          <%= link_to t('welcome.privacy policy.top_page_link.link2'), welcome_term_condition_path, class: "text-muted text-hover-primary mx-3", target: '_blank'%>/
+          <%= link_to t('welcome.privacy policy.top_page_link.link3'), welcome_contact_path(user_type: @usertype || @user_type), class: "text-muted text-hover-primary px-2"  %> 	
+        </div>
+        <!--end::Links-->
+      </div>
+      <!--end::Footer-->
+    </div>
+    <!--end::Authentication - Sign-in-->
+  </div> 
+<% end %>
+<%= javascript_pack_tag "user/user.js" %>

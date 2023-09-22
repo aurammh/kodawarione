@@ -1,0 +1,104 @@
+ <!--begin::Aside-->
+	<div class="d-none d-xl-block d-lg-block d-md-block d-flex flex-column flex-lg-row-auto w-xl-500px bg-lighten shadow-sm">
+		<!--begin::Wrapper-->
+			<div class="d-flex flex-column position-xl-fixed top-0 bottom-0 w-xl-500px scroll-y">
+				<!--begin::Header-->
+					<div class="d-flex flex-row-fluid flex-column flex-center p-10 pt-lg-20">
+							<!--begin::Logo-->
+                            <%= link_to root_path ,class: "mb-10 mb-lg-20" do %>
+                                <%= image_tag "layout/header_logo.png", class: "h-40px" %>   
+                            <% end %>
+							<!--end::Logo-->
+							<!--begin::Nav-->
+							<div class="stepper-nav">
+								<!--begin::Step 1-->
+                                <%= link_to student_commitment_step_path('step1'), :class=> "btn btn-link p-0 #{'disabled opacity-100' unless current_step > 1 }" do %>
+                                    <div class="stepper-item">
+                                        <!--begin::Line-->
+                                        <div class="stepper-line w-40px"></div>
+                                        <!--end::Line-->
+                                        <!--begin::Icon-->
+                                        <div class="<%= 'bg-primary' if current_step == 1 %> stepper-icon w-40px h-40px">
+                                            <i class="<%= 'd-none' unless current_step > 1 %> text-primary fas fa-check"></i>
+                                            <span class="text-white fs-4 <%= 'd-none' unless current_step == 1 %>">1</span>
+                                        </div>
+                                        <!--end::Icon-->
+                                        <!--begin::Label-->
+                                        <div class="stepper-label">
+                                            <h3 class="<%= 'opacity-75' if current_step > 1 %> stepper-title"><%= t 'student_commitment.steps.title.step1' %></h3>
+                                        </div>
+                                        <!--end::Label-->
+                                    </div>
+                                <% end %>
+								<!--end::Step 1-->
+								<!--begin::Step 2-->
+                                <%= link_to student_commitment_step_path('step2'), :class=> "btn btn-link p-0 #{'disabled opacity-100' unless current_step > 2 }" do %>
+                                    <div class="stepper-item">
+                                        <!--begin::Line-->
+                                        <div class="stepper-line w-40px"></div>
+                                        <!--end::Line-->
+                                        <!--begin::Icon-->
+                                        <div class="<%= 'bg-primary' if current_step == 2 %> stepper-icon w-40px h-40px">
+                                            <i class="<%= 'd-none' unless current_step > 2 %> text-primary fas fa-check"></i>
+                                            <span class=" fs-4 <%= current_step == 2 ? 'text-white' : 'text-primary' %> <%= 'd-none' if current_step > 2   %>">2</span>
+                                        </div>
+                                        <!--end::Icon-->
+                                        <!--begin::Label-->
+                                        <div class="stepper-label">
+                                            <h3 class="<%= 'opacity-75' if current_step > 2 %> stepper-title"><%= t 'student_commitment.steps.title.step2' %></h3>
+                                        </div>
+                                        <!--end::Label-->
+                                    </div>
+                                <% end %>
+								<!--end::Step 2-->
+								<!--begin::Step 5-->
+                                <%= link_to student_commitment_step_path('step3'), :class=> "btn btn-link p-0 #{'disabled opacity-100' unless current_step > 5 }" do %>
+                                    <div class="stepper-item">
+                                        <!--begin::Line-->
+                                        <div class="stepper-line w-40px"></div>
+                                        <!--end::Line-->
+                                        <!--begin::Icon-->
+                                        <div class="<%= 'bg-primary' if current_step == 5 %> stepper-icon w-40px h-40px">
+                                            <i class="<%= 'd-none' unless current_step > 5 %> text-primary fas fa-check"></i>
+                                            <span class="fs-4 <%= current_step == 5 ? 'text-white' : 'text-primary' %> <%= 'd-none' if current_step > 5   %>">3</span>
+                                        </div>
+                                        <!--end::Icon-->
+                                        <!--begin::Label-->
+                                        <div class="stepper-label">
+                                            <h3 class="<%= 'opacity-75' if current_step > 5 %> stepper-title"><%= t 'student_commitment.steps.title.step5' %></h3>
+                                        </div>
+                                        <!--end::Label-->
+                                    </div>
+                                <% end %>
+								<!--end::Step 5-->
+                                <!--begin::Step 6-->
+                                <%= link_to student_commitment_step_path('complete'), :class=> "btn btn-link p-0 #{'disabled opacity-100' unless current_step > 6 }" do %>
+                                    <div class="stepper-item">
+                                        <!--begin::Line-->
+                                        <div class="stepper-line w-40px"></div>
+                                        <!--end::Line-->
+                                        <!--begin::Icon-->
+                                        <div class="<%= 'bg-primary' if current_step == 6 %> stepper-icon w-40px h-40px">
+                                            <i class="<%= 'd-none' unless current_step > 6 %> text-primary fas fa-check"></i>
+                                            <span class="fs-4 <%= current_step == 6 ? 'text-white' : 'text-primary' %> <%= 'd-none' if current_step > 6   %>">4</span>
+                                        </div>
+                                        <!--end::Icon-->
+                                        <!--begin::Label-->
+                                        <div class="stepper-label">
+                                            <h3 class="stepper-title"><%= t 'student_commitment.steps.title.complete' %></h3>
+                                        </div>
+                                        <!--end::Label-->
+                                    </div>
+                                <% end %>
+								<!--end::Step 6-->
+							</div>
+							<!--end::Nav-->
+					</div>
+				<!--end::Header-->
+				<!--begin::Illustration-->
+				<div class="d-flex flex-row-auto bgi-no-repeat bgi-position-x-center bgi-size-contain bgi-position-y-bottom min-h-150px min-h-lg-300px"  style="background-image:url(<%= asset_path 'media/illustrations/dozzy-1/16.png' %>)"></div>
+				<!--end::Illustration-->
+			</div>
+		<!--end::Wrapper-->
+	</div>
+<!--begin::Aside-->

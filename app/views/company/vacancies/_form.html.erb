@@ -1,0 +1,517 @@
+<!--begin::Header-->
+<% breadcrumbs_navigation_add (t ('title.detail_title')), company_vacancy_path(params[:id]) if params[:id].present? %>
+<% breadcrumbs_navigation_add (t ('common.vacancy_registration_confirm_screen')), '#' %>
+<%= render_company_breadcrumbs_navigation(t ('common.vacancy_registration_confirm_screen')) %>
+<!--end::Header-->
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Container-->
+    <div class="container-xxl" id="kt_content_container">
+        <!--begin::Layout-->
+        <div class="d-flex flex-column flex-lg-row">
+            <!--begin::Content-->
+            <div class="flex-lg-row-fluid mb-10 mb-lg-0">
+                <!--begin::Card-->
+                <div class="card bg-body mb-5 mb-xl-10">
+                    <!--begin::Form-->
+                    <%= form_with(model: company_vacancy) do |form| %>
+                        <!--begin::Card body-->
+                        <div class="card-body">
+                            <!--begin::Wrapper-->
+                            <div class="d-flex flex-column align-items-start flex-xxl-row">
+                                <!--begin::Input group-->
+                                <div class="d-flex flex-center flex-equal fw-row text-nowrap order-1 order-xxl-2 me-4">
+                                    <span class="fs-2x fw-bolder text-gray-800"><%= t ('common.vacancy_registration_confirm_screen') %></span>
+                                </div>
+                                <!--end::Input group-->
+                            </div>
+                            <!--end::Top-->
+                            <!--begin::Separator-->
+                            <div class="separator separator-dashed my-10"></div>
+                            <!--end::Separator-->
+                            <!--begin::Wrapper-->
+                            <div class="mb-0">
+                                <!--begin::Row-->
+                                <div class="row mb-6">
+                                    <div class="col-lg-4 col-form-label fw-bold fs-6" >
+                                        <%= form.label :vacancy_title, class: "col-form-label required" %>
+                                    </div>
+                                    <div class="col-lg-8 fv-row">
+                                        <%= form.text_area :vacancy_title, id: "vacancy_title", class: "form-control form-control-solid",placeholder: t("placeholder.vacancy_title1"), rows: 4 %>
+                                        <p class ="text-danger font-size-sm ms-invalid-feedback mt-1"><%= company_vacancy.errors.full_messages_for(:vacancy_title)[0] %></p>
+                                    </div>
+                                </div>
+                                 <!--end::Row-->
+                                <div class="row mb-6">
+                                    <div class="col-lg-4 col-form-label fw-bold fs-6" >
+                                        <%= form.label :vacancy_description, class: "col-form-label required" %>
+                                    </div>  
+                                    <div class="col-lg-8 fv-row hide-trix-attachment">
+                                        <%= form.rich_text_area :vacancy_description, id: "vacancy_description", class: "form-control form-control-lg form-control-solid h-200px h-lg-300px h-xl-300px overflow-auto errors", rows: 4, maxlength: 3000  %>
+                                        <p class ="text-danger font-size-sm ms-invalid-feedback mt-1"><%= company_vacancy.errors.full_messages_for(:vacancy_description)[0] %></p>
+                                    </div>
+                                </div> 
+                                <div class="row mb-6">
+                                    <div class="col-lg-4 col-form-label fw-bold fs-6" >
+                                        <%= form.label :postal_code, class: "form-label " %><%= form.label t("common.ph_no_remark"), class: "form-label fs-6 fw-bold text-gray-700 required"%>
+                                    </div>                                    
+                                    <div class="col-lg-8 fv-row">
+                                        <%= form.text_field :postal_code, class: "form-control form-control-solid", placeholder: t("placeholder.postal_code"), autocomplete: "off", maxlength: 7,id: "postalcode" %>
+                                        <p class ="text-danger font-size-sm ms-invalid-feedback mt-1"><%= company_vacancy.errors.full_messages_for(:postal_code)[0] %></p>
+                                        <% if @copy_postal_address_btn %>
+                                            <div class="row form-group">                                
+                                                <div class="col-12">
+                                                    <div class="form-check form-check-custom form-check-solid form-check-inline">
+                                                        <input type="hidden" id = "copy_postal_code" value="<%= @company_postal_address.postal_code %>">
+                                                        <input type="hidden" id = "copy_address" value="<%= @company_postal_address.address %>"> 
+                                                        <%= form.check_box :copy_address_check_box, checked: false, class: "form-check-input" ,id: "address-copy" %>
+                                                        <%= form.label :copy_address_check_box, t('btn.copy_address'), class: "form-check-label flex-grow-1 fw-bold link-primary fs-6", for: "address-copy" %>
+                                                    </div> 
+                                                </div>  
+                                            </div> 
+                                        <% end %>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="col-lg-8 fv-row">
+                                        <%= form.hidden_field :m_region_id,value: company_vacancy.m_region_id ,id: "region_id" %>
+                                        <%= form.hidden_field :region_name, class: "form-control form-control-solid",placeholder: t("placeholder.region_name"), id: "region",readonly: true %>
+                                        <!--<p class="text-danger font-size-sm ms-invalid-feedback mt-1"><%= company_vacancy.errors.full_messages_for(:region_name)[0] %></p>-->
+                                    </div>
+                                </div>
+                                <div class="row mb-6">
+                                    <div class="col-lg-4 col-form-label fw-bold" >
+                                        <%= form.label :prefecture_name, class: "form-label fs-6 fw-bold text-gray-700 required" %>
+                                    </div>
+                                    <div class="col-lg-8 fv-row">
+                                        <%= form.hidden_field :m_prefecture_id,value: company_vacancy.m_prefecture_id ,id: "prefecture_id" %>
+                                        <%= form.text_field :prefecture_name, class: "form-control form-control-solid",placeholder: t("placeholder.prefecture_name"), id: "prefecture",readonly: true %>
+                                        <p class="text-danger font-size-sm ms-invalid-feedback mt-1"><%= company_vacancy.errors.full_messages_for(:prefecture_name)[0] %></p>
+                                    </div>
+                                </div>
+                                <div class="row mb-6">
+                                    <div class="col-lg-4 col-form-label fw-bold fs-6" >
+                                        <%= form.label :postalcode_city, class: "form-label fs-6 fw-bold text-gray-700 required" %>
+                                    </div>
+                                    <div class="col-lg-8 fv-row">
+                                        <%= form.text_field :postalcode_city, class: "form-control form-control-solid",placeholder: t("placeholder.postalcode_city"), id: "city", readonly: true%>
+                                        <p class="text-danger font-size-sm ms-invalid-feedback mt-1"><%= company_vacancy.errors.full_messages_for(:postalcode_city)[0] %></p>
+                                    </div>
+                                </div>
+                                <div class="row mb-6">
+                                    <div class="col-lg-4 col-form-label fw-bold fs-6" >
+                                        <%= form.label :address, class: "form-label fs-6 fw-bold text-gray-700" %><label class="form-label fs-6 fw-bold text-gray-700"> <%= t("common.building_address") %> </label><span class="ms-1 text-danger">*</span>
+                                    </div>
+                                    <div class="col-lg-8 fv-row">
+                                        <%= form.text_area :address, id: "vacancy_description", class: "form-control form-control-solid", placeholder: t("placeholder.address"),rows: 4, maxlength: 255, id: "address" %>
+                                        <p class="text-danger font-size-sm ms-invalid-feedback mt-1"><%= company_vacancy.errors.full_messages_for(:address)[0] %></p>
+                                    </div>
+                                </div>
+                                <div class="row mb-6 display_address">
+                                    <div class="col-lg-4 col-form-label fw-bold fs-6" >
+                                        <%= form.label :display_address, class: "form-label fs-6 fw-bold text-gray-700 required" %>
+                                    </div>
+                                    <div class="col-lg-8 fv-row">
+                                        <%= form.text_area :display_address, class: "form-control form-control-solid",rows: 4, maxlength: 255 ,id: "display_address" ,readonly: true%>
+                                        <p class="text-danger font-size-sm ms-invalid-feedback mt-1"><%= company_vacancy.errors.full_messages_for(:display_address)[0] %></p>
+                                    </div>
+                                </div>
+                                <div class="row mb-6">
+                                    <div class="col-lg-4 col-form-label fw-bold fs-6" >
+                                        <%= form.label :recruit_industry_type, class: "form-label fs-6 fw-bold text-gray-700 required" %>
+                                    </div>
+                                    <div class="col-lg-8 fv-row">
+                                        <%= form.collection_select(:recruit_industry_type,industry_type_options , :id ,:industry_name, { :include_blank => "未選択"}, id: "recruit_industry_type", :class=> "form-control form-select errors ", :data => { :control => 'select2', 'hide-search' => true }) %>
+                                        <p class="text-danger font-size-sm ms-invalid-feedback mt-1"><%= company_vacancy.errors.full_messages_for(:recruit_industry_type)[0] %></p>
+                                    </div>
+                                </div>
+                                <div class="row mb-6">
+                                    <div class="col-lg-4 col-form-label fw-bold fs-6" >
+                                        <%= form.label :recruit_job_type, class: "form-label fs-6 fw-bold text-gray-700 required" %>
+                                    </div>
+                                    <div class="col-lg-8 fv-row">
+                                        <%= form.collection_select(:recruit_job_type,occupation_options , :id ,:occupation_name, { :include_blank => "未選択"}, id: "recruit_job_type", :class=> "form-control form-select errors ", :data => { :control => 'select2', 'hide-search' => true }) %> 
+                                        <p class="text-danger font-size-sm ms-invalid-feedback mt-1"><%= company_vacancy.errors.full_messages_for(:recruit_job_type)[0] %></p>
+                                    </div>
+                                </div>
+                                <div class="row mb-6">
+                                    <div class="col-lg-4 col-form-label fw-bold fs-6" >
+                                        <%= form.label :required_applicants, class: "form-label fs-6 fw-bold text-gray-700 required" %>
+                                    </div>
+                                    <div class="col-lg-8 fv-row">
+                                        <%= form.text_field :required_applicants_string, id: "required_applicants", class: "form-control number-with-delimeter errors",value: number_with_delimiter(form.object.required_applicants), maxlength: 8 %>
+                                        <p class="text-danger font-size-sm ms-invalid-feedback mt-1"><%= company_vacancy.errors.full_messages_for(:required_applicants_string)[0] %></p>
+                                    </div>
+                                </div>
+                                <div class="row mb-6">
+                                    <div class="col-lg-4 col-form-label fw-bold fs-6" >
+                                        <%= form.label :basic_salary, class: "form-label fs-6 fw-bold text-gray-700" %><%= form.label t("common.ph_no_remark"), class: "form-label fs-6 fw-bold text-gray-700 required"%>
+                                    </div>
+                                    <div class="col-lg-8 fv-row">
+                                        <%= form.text_field :basic_salary_string, id: "basic_salary", class: "form-control number-with-delimeter only-num-stud errors",value: number_with_delimiter(form.object.basic_salary),placeholder: t("placeholder.basic_salary"), maxlength: 8 %>
+                                        <p class="text-danger font-size-sm ms-invalid-feedback mt-1"><%= company_vacancy.errors.full_messages_for(:basic_salary_string)[0] %></p>
+                                    </div>
+                                </div> 
+                                <div class="row mb-6">
+                                    <div class="col-lg-4 col-form-label fw-bold fs-6" >
+                                        <%= form.label :allowance, class: "form-label fs-6 fw-bold text-gray-700 required" %>
+                                    </div>
+                                    <div class="col-lg-8 fv-row">
+                                        <%= form.text_area :allowance, id: "allowance", rows: 4, class: "form-control form-control-solid", placeholder: t("placeholder.allowance") %>
+                                        <p class="text-danger font-size-sm ms-invalid-feedback mt-1"><%= company_vacancy.errors.full_messages_for(:allowance)[0] %></p>
+                                    </div>
+                                </div>
+                                <div class="row mb-6">
+                                    <div class="col-lg-4 col-form-label fw-bold fs-6" >
+                                        <%= form.label :bonus, class: "form-label fs-6 fw-bold text-gray-700 required" %>
+                                    </div>
+                                    <div class="col-lg-8 fv-row">
+                                        <%= form.text_area :bonus, id: "bonus", rows: 4, class: "form-control form-control-solid", placeholder: t("placeholder.bonus") %>
+                                        <p class="text-danger font-size-sm ms-invalid-feedback mt-1"><%= company_vacancy.errors.full_messages_for(:bonus)[0] %></p>
+                                    </div>
+                                </div>
+                                <div class="row mb-6">
+                                    <div class="col-lg-4 col-form-label fw-bold fs-6" >
+                                        <%= form.label :promotion, class: "form-label fs-6 fw-bold text-gray-700" %>
+                                    </div>
+                                    <div class="col-lg-8 fv-row">
+                                        <div class="d-flex radio-inline pt-3">
+                                            <div class="form-check form-check-custom form-check-solid form-check-sm">
+                                                <label class="form-check-label">
+                                                    <%= form.radio_button :promotion, 1, { :checked => company_vacancy.promotion.nil? || company_vacancy.promotion == true, :class => "form-check-input" }%>
+                                                    <%= t("common.a_yes") %>
+                                                </label>
+                                            </div>
+                                            <div class="form-check form-check-custom form-check-solid form-check-sm">
+                                                <label class="form-check-label">
+                                                    <%= form.radio_button :promotion, 0, { :checked => company_vacancy.promotion == false, :class => "form-check-input" }%> 
+                                                    <%= t("common.a_no")%>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-6">
+                                    <div class="col-lg-4 col-form-label fw-bold fs-6" >
+                                        <%= form.label :probation, class: "form-label fs-6 fw-bold text-gray-700" %>
+                                    </div>
+                                    <div class="col-lg-8 fv-row">
+                                        <div class="d-flex radio-inline pt-3">
+                                            <div class="form-check form-check-custom form-check-solid form-check-sm">
+                                                <label class="form-check-label">
+                                                    <%= form.radio_button :probation, 1, { :checked => company_vacancy.probation.nil?  ||  company_vacancy.probation == true, :class => "form-check-input" }%>
+                                                    <%= t("common.a_yes") %>
+                                                </label>
+                                            </div>
+                                            <div class="form-check form-check-custom form-check-solid form-check-sm">
+                                                <label class="form-check-label">
+                                                    <%= form.radio_button :probation, 0, { :checked => company_vacancy.probation == false, :class => "form-check-input" }%> 
+                                                    <%= t("common.a_no")%>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-6">
+                                    <div class="col-lg-4 col-form-label fw-bold fs-6" >
+                                        <%= form.label :transportation_allowance, class: "form-label fs-6 fw-bold text-gray-700" %>
+                                    </div>
+                                    <div class="col-lg-8 fv-row">
+                                        <div class="d-flex radio-inline pt-3">
+                                            <div class="form-check form-check-custom form-check-solid form-check-sm">
+                                                <label class="form-check-label">
+                                                    <%= form.radio_button :transportation_allowance, 1, { :checked => company_vacancy.transportation_allowance.nil?  ||  company_vacancy.transportation_allowance == true, :class => "form-check-input" }%>
+                                                    <%= t("common.a_yes") %>
+                                                </label>
+                                            </div>
+                                            <div class="form-check form-check-custom form-check-solid form-check-sm">
+                                                <label class="form-check-label">
+                                                    <%= form.radio_button :transportation_allowance, 0, { :checked => company_vacancy.transportation_allowance == false, :class => "form-check-input" }%>
+                                                    <%= t("common.a_no")%>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-6">
+                                    <div class="col-lg-4 col-form-label fw-bold fs-6" >
+                                        <%= form.label :dormitory, class: "form-label fs-6 fw-bold text-gray-700" %>
+                                    </div>
+                                    <div class="col-lg-8 fv-row">
+                                        <div class="d-flex radio-inline pt-3">
+                                            <div class="form-check form-check-custom form-check-solid form-check-sm">
+                                                <label class="form-check-label">
+                                                     <%= form.radio_button :dormitory, 1, { :checked => company_vacancy.dormitory.nil?  ||  company_vacancy.dormitory == true, :class => "form-check-input" }%>
+                                                    <%= t("common.a_yes") %>
+                                                </label>
+                                            </div>
+                                            <div class="form-check form-check-custom form-check-solid form-check-sm">
+                                                <label class="form-check-label">
+                                                    <%= form.radio_button :dormitory, 0, { :checked => company_vacancy.dormitory == false, :class => "form-check-input" }%> 
+                                                    <%= t("common.a_no")%>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-6">
+                                    <div class="col-lg-4 col-form-label fw-bold fs-6" >
+                                        <%= form.label :insurance, class: "form-label fs-6 fw-bold text-gray-700" %>
+                                    </div>
+                                    <div class="col-lg-8 fv-row">
+                                        <div class="d-flex radio-inline pt-3">
+                                            <div class="form-check form-check-custom form-check-solid form-check-sm">
+                                                <label class="form-check-label">
+                                                    <%= form.radio_button :insurance, 1, { :checked => company_vacancy.insurance.nil?  ||  company_vacancy.insurance == true, :class => "form-check-input" }%>
+                                                    <%= t("common.a_yes") %>
+                                                </label>
+                                            </div>
+                                            <div class="form-check form-check-custom form-check-solid form-check-sm">
+                                                <label class="form-check-label">
+                                                    <%= form.radio_button :insurance, 0, { :checked => company_vacancy.insurance == false, :class => "form-check-input" }%> 
+                                                    <%= t("common.a_no")%>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-6">
+                                    <div class="col-lg-4 col-form-label fw-bold fs-6" >
+                                        <%= form.label :severance_pay, class: "form-label fs-6 fw-bold text-gray-700" %>
+                                    </div>
+                                    <div class="col-lg-8 fv-row">
+                                        <div class="d-flex radio-inline pt-3">
+                                            <div class="form-check form-check-custom form-check-solid form-check-sm">
+                                                <label class="form-check-label">
+                                                     <%= form.radio_button :severance_pay, 1, { :checked => company_vacancy.severance_pay.nil?  ||  company_vacancy.severance_pay == true, :class => "form-check-input" }%>
+                                                    <%= t("common.a_yes") %>
+                                                </label>
+                                            </div>
+                                            <div class="form-check form-check-custom form-check-solid form-check-sm">
+                                                <label class="form-check-label">
+                                                     <%= form.radio_button :severance_pay, 0, { :checked => company_vacancy.severance_pay == false, :class => "form-check-input" }%> 
+                                                    <%= t("common.a_no")%>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-6">
+                                    <div class="col-lg-4 col-form-label fw-bold fs-6" >
+                                        <%= form.label :working_hours, class: "form-label fs-6 fw-bold text-gray-700 required" %>
+                                    </div>
+                                    <div class="col-lg-8 fv-row">
+                                        <%= form.text_area :working_hours, id: "working_hours", rows: 4, class: "form-control form-control-solid",placeholder: t("placeholder.working_hours")%>
+                                        <p class="text-danger font-size-sm ms-invalid-feedback mt-1"><%= company_vacancy.errors.full_messages_for(:working_hours)[0] %></p>
+                                    </div>
+                                </div>
+                                <div class="row mb-6">
+                                    <div class="col-lg-4 col-form-label fw-bold fs-6" >
+                                        <%= form.label :break_time, class: "form-label fs-6 fw-bold text-gray-700 required" %>
+                                    </div>
+                                    <div class="col-lg-8 fv-row">
+                                        <%= form.text_area :break_time, id: "break_time", rows: 4, class: "form-control form-control-solid", placeholder: t("placeholder.break_time")%>
+                                        <p class="text-danger font-size-sm ms-invalid-feedback mt-1"><%= company_vacancy.errors.full_messages_for(:break_time)[0] %></p>
+                                    </div>
+                                </div>
+                                <div class="row mb-6">
+                                    <div class="col-lg-4 col-form-label fw-bold fs-6" >
+                                        <%= form.label :over_time, class: "form-label fs-6 fw-bold text-gray-700" %>
+                                    </div>
+                                    <div class="col-lg-8 fv-row">
+                                        <div class="d-flex radio-inline pt-3">
+                                            <div class="form-check form-check-custom form-check-solid form-check-sm">
+                                                <label class="form-check-label">
+                                                    <%= form.radio_button :over_time, 1, { :checked => company_vacancy.over_time.nil?  ||  company_vacancy.over_time == true, :class => "form-check-input" }%>
+                                                    <%= t("common.a_yes") %>
+                                                </label>
+                                            </div>
+                                            <div class="form-check form-check-custom form-check-solid form-check-sm">
+                                                <label class="form-check-label">
+                                                   <%= form.radio_button :over_time, 0, { :checked => company_vacancy.over_time == false, :class => "form-check-input" }%> 
+                                                    <%= t("common.a_no")%>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-6">
+                                    <div class="col-lg-4 col-form-label fw-bold fs-6" >
+                                        <%= form.label :holiday, class: "form-label fs-6 fw-bold text-gray-700 required" %>
+                                    </div>
+                                    <div class="col-lg-8 fv-row">
+                                        <%= form.text_area :holiday, id:"holiday", rows: 4, class: "form-control form-control-solid", placeholder: t("placeholder.holiday")%>
+                                        <p class="text-danger font-size-sm ms-invalid-feedback mt-1"><%= company_vacancy.errors.full_messages_for(:holiday)[0] %></p>
+                                    </div>
+                                </div>
+                                <div class="row mb-6">
+                                    <div class="col-lg-4 col-form-label fw-bold fs-6" >
+                                        <label class="form-label fs-6 fw-bold text-gray-700"><%=  t("placeholder.welfare") %></label> 
+                                    </div>
+                                    <div class="col-12 col-sm-12 col-md-6 col-lg-5 col-xl-5 p-0 ms-5">
+                                        <%# Start of Modal%>
+                                        <%= render 'company/shared/vacancies/modal',vancancy_form: form, vancancy: company_vacancy %>
+                                    </div>
+                                </div>
+                                <div class="row mb-6">
+                                    <div class="col-lg-4 py-0 my-0 pr-0" > 
+                                    </div>
+                                    <div class="col-lg-8 fv-row scroll-content-section" id="outside_activity">
+                                        <div id="welfare">
+                                            <%= form.text_area :append_data_modal, rows: 4, class: "form-control form-control-solid",:id => "displayed_text", placeholder: t("placeholder.append_data_modal"), readonly: true%>
+                                        </div>
+                                    </div>
+                                </div>
+                                <%# End of Modal%>
+                                <div class="row form-group gx-10 mb-5 hire_info">
+                                    <div class="col-lg-4 col-form-label fw-bold fs-6" >
+                                        <%= form.label :other, class: "form-label fs-6 fw-bold text-gray-700" %>
+                                    </div>
+                                    <div class="col-lg-8 fv-row">
+                                        <%= form.text_area :other, class: "form-control form-control-solid", rows: 4, maxlength: 255%>
+                                        <p class="text-danger font-size-sm ms-invalid-feedback mt-1"><%= company_vacancy.errors.full_messages_for(:other)[0] %></p> 
+                                    </div>
+                                </div>
+                                <div class="row form-group gx-10 mb-5 hire_info">
+                                    <div class="col-lg-4 col-form-label fw-bold fs-6" >
+                                        <%= form.label :hiring_flow_data, class: "form-label fs-6 fw-bold text-gray-700" %>
+                                    </div>
+                                    <div class="col-lg-8 fv-row hire-btn" id ="original-inputs">
+                                        <% unless company_vacancy.hiring_flow_data.nil?%>
+                                            <% company_vacancy.hiring_flow_data.each_with_index  do |h,i| %>
+                                                <div class="d-flex hire-btn mb-3">
+                                                    <%= form.text_field :hiring_flow_data, multiple: true, class: "form-control shadow-none", value: h, :id => "company_vacancy_hiring_flow_data_#{i+1}" %>
+                                                <% if i == 0 %>
+                                                    <span id="add_row" class="svg-icon svg-icon-1 plus_minus_icon plus_icon my-auto" style="padding-left: 5px;">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="currentColor" />
+                                                        <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+                                                        <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                                        </svg>
+                                                    </span>
+                                                <% else %>
+                                                    <span  id="add_row" class="plus_minus_icon remove_icon mt-3"  style="font-size: 20px !important; color: #e3e2de; padding-left: 5px;">
+                                                        <i class="fas fa-minus-circle"></i>
+                                                    </span>
+                                                <% end %>
+                                                </div>
+                                            <% end %>
+                                        <%else%>
+                                            <div class="d-flex justify-content-center">
+                                                <%= form.text_field :hiring_flow_data, multiple: true, :class=> "form-control shadow-none", placeholder: t("placeholder.hiring_flow_data"),:id => "company_vacancy_hiring_flow_data_1" %>
+                                                <span id="add_row" class="svg-icon svg-icon-1 plus_minus_icon plus_icon my-auto ml-5"  style="padding-left: 5px;">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="currentColor" />
+                                                    <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+                                                    <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                                    </svg>
+                                                </span>
+                                            </div>
+                                        <%end%>
+                                    </div>
+                                </div>
+                                <div class="row form-group gx-10 mb-5 hire_info">
+                                    <div class="col-lg-4" >
+                                    </div>
+                                    <div class="col-lg-8 fv-row">
+                                        <div id="dynamic-inputs"></div>
+                                    </div>
+                                </div>
+                                <%# end of add rows by btn%>
+                                <div class="row form-group gx-10 mb-5">
+                                    <div class="col-lg-4 col-form-label fw-bold fs-6" >
+                                        <%= form.label :other_skill, class: "form-label fs-6 fw-bold text-gray-700" %>
+                                    </div>
+                                    <div class="col-lg-8 fv-row">
+                                        <%= form.text_area :other_skill, class: "form-control shadow-none errors", placeholder: t("placeholder.other_skill"), rows: 4, maxlength: 255%>
+                                        <p class="text-danger font-size-sm ms-invalid-feedback mt-1"><%= company_vacancy.errors.full_messages_for(:other_skill)[0] %></p> 
+                                    </div>
+                                </div>
+                                <div class="row form-group gx-10 mb-5">
+                                    <div class="col-lg-4 col-form-label fw-bold fs-6" >
+                                        <%= form.label :display_from, class: "form-label fs-6 fw-bold text-gray-700 required" %>
+                                    </div>
+                                    <div class="col-lg-8 fv-row">
+                                        <!--begin::Input group-->
+                                        <div class="position-relative d-flex align-items-center datepicker display-from">
+                                            <!--begin::Icon-->
+                                            <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
+                                            <span class="svg-icon svg-icon-2 position-absolute mx-4">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                    <path opacity="0.3" d="M21 22H3C2.4 22 2 21.6 2 21V5C2 4.4 2.4 4 3 4H21C21.6 4 22 4.4 22 5V21C22 21.6 21.6 22 21 22Z" fill="black"></path>
+                                                    <path d="M6 6C5.4 6 5 5.6 5 5V3C5 2.4 5.4 2 6 2C6.6 2 7 2.4 7 3V5C7 5.6 6.6 6 6 6ZM11 5V3C11 2.4 10.6 2 10 2C9.4 2 9 2.4 9 3V5C9 5.6 9.4 6 10 6C10.6 6 11 5.6 11 5ZM15 5V3C15 2.4 14.6 2 14 2C13.4 2 13 2.4 13 3V5C13 5.6 13.4 6 14 6C14.6 6 15 5.6 15 5ZM19 5V3C19 2.4 18.6 2 18 2C17.4 2 17 2.4 17 3V5C17 5.6 17.4 6 18 6C18.6 6 19 5.6 19 5Z" fill="black"></path>
+                                                    <path d="M8.8 13.1C9.2 13.1 9.5 13 9.7 12.8C9.9 12.6 10.1 12.3 10.1 11.9C10.1 11.6 10 11.3 9.8 11.1C9.6 10.9 9.3 10.8 9 10.8C8.8 10.8 8.59999 10.8 8.39999 10.9C8.19999 11 8.1 11.1 8 11.2C7.9 11.3 7.8 11.4 7.7 11.6C7.6 11.8 7.5 11.9 7.5 12.1C7.5 12.2 7.4 12.2 7.3 12.3C7.2 12.4 7.09999 12.4 6.89999 12.4C6.69999 12.4 6.6 12.3 6.5 12.2C6.4 12.1 6.3 11.9 6.3 11.7C6.3 11.5 6.4 11.3 6.5 11.1C6.6 10.9 6.8 10.7 7 10.5C7.2 10.3 7.49999 10.1 7.89999 10C8.29999 9.90003 8.60001 9.80003 9.10001 9.80003C9.50001 9.80003 9.80001 9.90003 10.1 10C10.4 10.1 10.7 10.3 10.9 10.4C11.1 10.5 11.3 10.8 11.4 11.1C11.5 11.4 11.6 11.6 11.6 11.9C11.6 12.3 11.5 12.6 11.3 12.9C11.1 13.2 10.9 13.5 10.6 13.7C10.9 13.9 11.2 14.1 11.4 14.3C11.6 14.5 11.8 14.7 11.9 15C12 15.3 12.1 15.5 12.1 15.8C12.1 16.2 12 16.5 11.9 16.8C11.8 17.1 11.5 17.4 11.3 17.7C11.1 18 10.7 18.2 10.3 18.3C9.9 18.4 9.5 18.5 9 18.5C8.5 18.5 8.1 18.4 7.7 18.2C7.3 18 7 17.8 6.8 17.6C6.6 17.4 6.4 17.1 6.3 16.8C6.2 16.5 6.10001 16.3 6.10001 16.1C6.10001 15.9 6.2 15.7 6.3 15.6C6.4 15.5 6.6 15.4 6.8 15.4C6.9 15.4 7.00001 15.4 7.10001 15.5C7.20001 15.6 7.3 15.6 7.3 15.7C7.5 16.2 7.7 16.6 8 16.9C8.3 17.2 8.6 17.3 9 17.3C9.2 17.3 9.5 17.2 9.7 17.1C9.9 17 10.1 16.8 10.3 16.6C10.5 16.4 10.5 16.1 10.5 15.8C10.5 15.3 10.4 15 10.1 14.7C9.80001 14.4 9.50001 14.3 9.10001 14.3C9.00001 14.3 8.9 14.3 8.7 14.3C8.5 14.3 8.39999 14.3 8.39999 14.3C8.19999 14.3 7.99999 14.2 7.89999 14.1C7.79999 14 7.7 13.8 7.7 13.7C7.7 13.5 7.79999 13.4 7.89999 13.2C7.99999 13 8.2 13 8.5 13H8.8V13.1ZM15.3 17.5V12.2C14.3 13 13.6 13.3 13.3 13.3C13.1 13.3 13 13.2 12.9 13.1C12.8 13 12.7 12.8 12.7 12.6C12.7 12.4 12.8 12.3 12.9 12.2C13 12.1 13.2 12 13.6 11.8C14.1 11.6 14.5 11.3 14.7 11.1C14.9 10.9 15.2 10.6 15.5 10.3C15.8 10 15.9 9.80003 15.9 9.70003C15.9 9.60003 16.1 9.60004 16.3 9.60004C16.5 9.60004 16.7 9.70003 16.8 9.80003C16.9 9.90003 17 10.2 17 10.5V17.2C17 18 16.7 18.4 16.2 18.4C16 18.4 15.8 18.3 15.6 18.2C15.4 18.1 15.3 17.8 15.3 17.5Z" fill="black"></path>
+                                                </svg>
+                                            </span>
+                                            <!--end::Svg Icon-->
+                                            <!--end::Icon-->
+                                            <!--begin::Datepicker-->
+                                            <%= form.text_field :display_from, class: "form-control form-control-solid ps-12 flatpickr-input active", id: "display_from", "data-input": "", data: { :placeholder => t("placeholder.display_from") } %>
+                                            <!--end::Datepicker-->
+                                        </div>
+                                        <!--end::Input group-->
+                                        <p class="text-danger font-size-sm ms-invalid-feedback mt-1"><%= company_vacancy.errors.full_messages_for(:display_from)[0] %></p> 
+                                    </div>
+                                </div>
+                                <div class="row form-group gx-10 mb-5">
+                                    <div class="col-lg-4 col-form-label fw-bold fs-6" >
+                                        <%= form.label :display_to, class: "form-label fs-6 fw-bold text-gray-700 required" %>
+                                    </div>
+                                    <div class="col-lg-8 fv-row">
+                                        <!--begin::Input group-->
+                                        <div class="position-relative d-flex align-items-center datepicker display-from">
+                                            <!--begin::Icon-->
+                                            <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
+                                            <span class="svg-icon svg-icon-2 position-absolute mx-4">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                    <path opacity="0.3" d="M21 22H3C2.4 22 2 21.6 2 21V5C2 4.4 2.4 4 3 4H21C21.6 4 22 4.4 22 5V21C22 21.6 21.6 22 21 22Z" fill="black"></path>
+                                                    <path d="M6 6C5.4 6 5 5.6 5 5V3C5 2.4 5.4 2 6 2C6.6 2 7 2.4 7 3V5C7 5.6 6.6 6 6 6ZM11 5V3C11 2.4 10.6 2 10 2C9.4 2 9 2.4 9 3V5C9 5.6 9.4 6 10 6C10.6 6 11 5.6 11 5ZM15 5V3C15 2.4 14.6 2 14 2C13.4 2 13 2.4 13 3V5C13 5.6 13.4 6 14 6C14.6 6 15 5.6 15 5ZM19 5V3C19 2.4 18.6 2 18 2C17.4 2 17 2.4 17 3V5C17 5.6 17.4 6 18 6C18.6 6 19 5.6 19 5Z" fill="black"></path>
+                                                    <path d="M8.8 13.1C9.2 13.1 9.5 13 9.7 12.8C9.9 12.6 10.1 12.3 10.1 11.9C10.1 11.6 10 11.3 9.8 11.1C9.6 10.9 9.3 10.8 9 10.8C8.8 10.8 8.59999 10.8 8.39999 10.9C8.19999 11 8.1 11.1 8 11.2C7.9 11.3 7.8 11.4 7.7 11.6C7.6 11.8 7.5 11.9 7.5 12.1C7.5 12.2 7.4 12.2 7.3 12.3C7.2 12.4 7.09999 12.4 6.89999 12.4C6.69999 12.4 6.6 12.3 6.5 12.2C6.4 12.1 6.3 11.9 6.3 11.7C6.3 11.5 6.4 11.3 6.5 11.1C6.6 10.9 6.8 10.7 7 10.5C7.2 10.3 7.49999 10.1 7.89999 10C8.29999 9.90003 8.60001 9.80003 9.10001 9.80003C9.50001 9.80003 9.80001 9.90003 10.1 10C10.4 10.1 10.7 10.3 10.9 10.4C11.1 10.5 11.3 10.8 11.4 11.1C11.5 11.4 11.6 11.6 11.6 11.9C11.6 12.3 11.5 12.6 11.3 12.9C11.1 13.2 10.9 13.5 10.6 13.7C10.9 13.9 11.2 14.1 11.4 14.3C11.6 14.5 11.8 14.7 11.9 15C12 15.3 12.1 15.5 12.1 15.8C12.1 16.2 12 16.5 11.9 16.8C11.8 17.1 11.5 17.4 11.3 17.7C11.1 18 10.7 18.2 10.3 18.3C9.9 18.4 9.5 18.5 9 18.5C8.5 18.5 8.1 18.4 7.7 18.2C7.3 18 7 17.8 6.8 17.6C6.6 17.4 6.4 17.1 6.3 16.8C6.2 16.5 6.10001 16.3 6.10001 16.1C6.10001 15.9 6.2 15.7 6.3 15.6C6.4 15.5 6.6 15.4 6.8 15.4C6.9 15.4 7.00001 15.4 7.10001 15.5C7.20001 15.6 7.3 15.6 7.3 15.7C7.5 16.2 7.7 16.6 8 16.9C8.3 17.2 8.6 17.3 9 17.3C9.2 17.3 9.5 17.2 9.7 17.1C9.9 17 10.1 16.8 10.3 16.6C10.5 16.4 10.5 16.1 10.5 15.8C10.5 15.3 10.4 15 10.1 14.7C9.80001 14.4 9.50001 14.3 9.10001 14.3C9.00001 14.3 8.9 14.3 8.7 14.3C8.5 14.3 8.39999 14.3 8.39999 14.3C8.19999 14.3 7.99999 14.2 7.89999 14.1C7.79999 14 7.7 13.8 7.7 13.7C7.7 13.5 7.79999 13.4 7.89999 13.2C7.99999 13 8.2 13 8.5 13H8.8V13.1ZM15.3 17.5V12.2C14.3 13 13.6 13.3 13.3 13.3C13.1 13.3 13 13.2 12.9 13.1C12.8 13 12.7 12.8 12.7 12.6C12.7 12.4 12.8 12.3 12.9 12.2C13 12.1 13.2 12 13.6 11.8C14.1 11.6 14.5 11.3 14.7 11.1C14.9 10.9 15.2 10.6 15.5 10.3C15.8 10 15.9 9.80003 15.9 9.70003C15.9 9.60003 16.1 9.60004 16.3 9.60004C16.5 9.60004 16.7 9.70003 16.8 9.80003C16.9 9.90003 17 10.2 17 10.5V17.2C17 18 16.7 18.4 16.2 18.4C16 18.4 15.8 18.3 15.6 18.2C15.4 18.1 15.3 17.8 15.3 17.5Z" fill="black"></path>
+                                                </svg>
+                                            </span>
+                                            <!--end::Svg Icon-->
+                                            <!--end::Icon-->
+                                            <!--begin::Datepicker-->
+                                             <%= form.text_field :display_to, class: "form-control form-control-solid ps-12 flatpickr-input active", id: "display_to","data-input": "", data: { :placeholder => t("placeholder.display_to") } %>
+                                            <!--end::Datepicker-->
+                                        </div>
+                                        <!--end::Input group-->
+                                        <p class="text-danger font-size-sm ms-invalid-feedback mt-1"><%= company_vacancy.errors.full_messages_for(:display_to)[0] %></p> 
+                                    </div>
+                                </div>
+                                <div class="row form-group gx-10 mb-5">
+                                    <div class="col-lg-4 col-form-label fw-bold fs-6" >
+                                        <%= form.label :published_flg, class: "form-label fs-6 fw-bold text-gray-700" %>
+                                    </div>
+                                    <div class="col-lg-8 fv-row">
+                                        <div class="form-check form-switch form-check-custom form-check-solid">
+                                            <%= form.check_box :published_flg,id: "published-flg",class: "form-check-input" %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::Wrapper-->
+                        </div>
+                        <!--end::Card body-->
+                        <!--begin::Card footer-->
+                        <div class="card-footer d-flex justify-content-center py-6 px-9">
+                            <%= link_to t('btn.return'), company_vacancies_path, class: "btn btn-light btn-active-light-primary me-2" %>
+                            <%= form.submit t('btn.submit'), class: "btn btn-primary" %>
+                        </div>
+                        <!--end::Card footer-->
+                    <% end %>
+                    <!--end::Form-->
+                </div>
+                <!--end::Card-->
+            </div>
+            <!--end::Content-->
+        </div>
+        <!--end::Layout-->
+    </div>
+    <!--end::Container-->
+</div>
+<!--end::Content-->
+<%# render "users/shared/toastr" %>
+<%= javascript_pack_tag "common.js" %>
+<%= javascript_pack_tag "company/vacancy.js" %>
+<%= javascript_pack_tag "postalcode.js" %>

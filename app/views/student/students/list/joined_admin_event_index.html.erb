@@ -1,0 +1,174 @@
+<!--begin::Toolbar-->
+<div class="toolbar py-5 py-lg-5" id="kt_toolbar">
+    <!--begin::Container-->
+    <div id="kt_toolbar_container" class="container-xxl d-flex flex-stack flex-wrap">
+        <!--begin::Page title-->
+        <% breadcrumbs_navigation_add ( t ('event.title.admin_event_entry_list_tilte')),'#' %>
+        <%= render_student_breadcrumbs_navigation( t ('event.title.admin_event_entry_list_tilte')) %>
+        <!--end::Page title-->
+    </div>
+    <!--end::Container-->
+</div>
+<!--end::Toolbar-->
+<div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">            
+	<div class="content flex-row-fluid" id="kt_content">
+		<!--begin::Admin Joined Event Card-->
+		<% if @all_join_event_list.present? %>
+			<!--begin::Admin Joined Event Desktop-->
+			<div class="card d-none d-sm-none d-md-none d-lg-block d-xl-block my-5">
+				<!--begin::Joined Event Card header-->
+				<div class="card-header border-0">
+					<!--begin::Card title-->
+					<div class="card-title">
+						<h2><%= t ('event.title.admin_event_entry_list_tilte') %></h2>
+					</div>
+					<!--end::Card title-->
+				</div>          
+				<!--end::Card header-->
+				<!--begin::Card body-->
+				<div class="card-body pt-0 pb-5">
+					<!--begin::Table-->
+					<div class="table-responsive">
+						<table class="table table-row-dashed align-middle gy-5" id="kt_table_customers_payment">
+							<!--begin::Table head-->
+							<thead class="border-bottom border-gray-200 fs-7 fw-bolder">
+								<!--begin::Table row-->
+								<tr class="fs-7 fw-bolder text-gray-500 border-bottom-0">
+									<th class="ps-4 min-w-140px rounded-start"><%= Event.human_attribute_name('event_name') %></th>
+									<th class="min-w-140px"><%= t('activerecord.attributes.admin/event.applicants_count') %></th>
+									<th class="pe-0 text-end min-w-140px"><%= t('event.title.event_date') %></th>
+									<th class="pe-0 text-end min-w-120px rounded-start"><%= t('event.title.edit_text_title') %></th> 
+								</tr>  
+								<!--end::Table row-->
+							</thead>
+							<!--end::Table head-->         
+							<!--begin::Table body-->
+							<tbody class="fs-6 fw-bold text-gray-600">
+								<% @all_join_event_list.each do |event| %>
+									<!--begin::Table row-->
+									<tr>
+										<td class="ps-0 min-w-150px w-sm-200px w-md-350px w-lg-450px w-xl-600px">
+											<div class="d-flex align-items-center">
+												<div class="symbol symbol-45px me-5">
+													<div class="d-flex flex-column justify-content-center text-dark symbol-label bg-primary bg-opacity-75">
+														<span class="fs-5 text-white fw-bolder"><%= event.event_start_date.strftime('%d') %><%= t('date.prompts.day') %></span>
+														<span class="fs-7 text-white"><%= t('date.abbr_month_names')[event.event_start_date.month] %></span>
+													</div>
+												</div>
+												<div class=" w-sm-200px w-md-350px w-lg-450px w-xl-600px text-truncate">
+													<span class="text-gray-800 fw-bolder text-hover-primary mb-1 fs-6 text-start pe-0"><%= event.event_name  %></span>
+													<span class="text-gray-400 fw-bold fs-8 d-block text-start ps-0 w-sm-200px w-md-350px w-lg-450px w-xl-600px text-truncate"><i class="flaticon2-pin me-1"></i> <%= event.venue  %></span> 
+												</div>
+											</div>
+										</td>  
+										<td class=" w-sm-75px w-md-100px w-lg-175px w-xl-100px">
+											<span class="badge badge-light-success fs-6 px-3 text-truncate"><%= event.join_count == nil ? '0' : event.join_count %> 名</span>
+										</td>  
+										<td class="text-end pe-0">
+											<span class="text-muted fw-bolder d-block fs-6"><%= l(event.event_start_date.strftime('%Y-%m-%d').to_date, default: '-') %>～<%=  l(event.event_end_date.strftime('%Y-%m-%d').to_date, default: '-') %></span>
+										</td>   
+										<td>
+											<div class="d-flex justify-content-end flex-shrink-0">
+												<%= link_to student_admin_event_detail_search_path(event), :class=>"btn btn-icon btn-bg-light btn-active-color-primary btn-sm" do %>
+													<!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
+														<span class="svg-icon svg-icon-3">
+															<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+																<path d="M17.5 11H6.5C4 11 2 9 2 6.5C2 4 4 2 6.5 2H17.5C20 2 22 4 22 6.5C22 9 20 11 17.5 11ZM15 6.5C15 7.9 16.1 9 17.5 9C18.9 9 20 7.9 20 6.5C20 5.1 18.9 4 17.5 4C16.1 4 15 5.1 15 6.5Z" fill="black" />
+																<path opacity="0.3" d="M17.5 22H6.5C4 22 2 20 2 17.5C2 15 4 13 6.5 13H17.5C20 13 22 15 22 17.5C22 20 20 22 17.5 22ZM4 17.5C4 18.9 5.1 20 6.5 20C7.9 20 9 18.9 9 17.5C9 16.1 7.9 15 6.5 15C5.1 15 4 16.1 4 17.5Z" fill="black" />
+															</svg>
+														</span>
+													<!--end::Svg Icon-->
+												<% end %>
+												<div id="communicationModal"></div>
+											</div>
+										</td>  
+									</tr>                        
+									<!--end::Table row-->        
+								<% end %>             
+							</tbody>
+							<!--end::Table body-->
+						</table>
+						<!--end::Table-->
+					</div>
+				</div>
+				<!--end::Card body-->
+			</div>
+			<!--end::Admin Joined Event Desktop-->
+			<!--begin::Admin Joined Event Mobile-->
+			<div class="d-block d-sm-block d-md-block d-lg-none d-xl-none mb-5">
+				<!--begin::Body-->
+				<% @all_join_event_list.each do |event| %>
+					<div class="col-xxl-4">
+						<%= link_to student_event_details_path(event) do %>
+							<div class="card card-custom gutter-b card-stretch mb-3">
+								<div class="card-body p-4">
+									<div class='row'>
+										<div class="d-flex align-items-center">
+											<!--begin:: Avatar -->
+											<div class="symbol symbol-40px overflow-hidden me-3">
+												<div class="d-flex flex-column justify-content-center text-dark symbol-label bg-primary bg-opacity-75">
+													<span class="fs-5 text-white fw-bolder"><%= event.event_start_date.strftime('%d') %><%= t('date.prompts.day') %></span>
+													<span class="fs-7 text-white"><%= t('date.abbr_month_names')[event.event_start_date.month] %></span>
+												</div>
+											</div>
+											<!--end::Avatar-->
+											<!--begin::User details-->
+											<div class="d-flex flex-column min-w-100px w-100">
+												<div class="d-flex justify-content-between">
+													<span class="text-gray-800 fw-bolder text-truncate pe-1" >
+														<%= event.event_name  %>
+													</span> 
+													<p class="badge text-danger fs-9 px-0 mb-1"><%=  l(event.event_end_date.strftime('%Y-%m-%d').to_date, default: '-') %></p>
+												</div>
+												<span class="text-truncate text-gray-500 fw-bold fs-7"><i class="flaticon2-pin me-1"></i> <%= event.venue  %></span>
+											</div>
+											<!--end::User details-->
+										</div>
+									</div>
+								</div>
+							</div>
+						<% end %>
+					</div>
+				<% end %>
+				<!--end::Body-->
+			</div>
+			<!--end::Admin Joined Event Mobile-->
+			<!--begin:: Pagination-->
+			<div class="d-flex flex-wrap justify-content-between align-items-center">
+				<div class="d-flex flex-wrap py-2 ms-3">
+					<%= paginate @all_join_event_list %>
+				</div>
+				<div class="d-flex align-items-center py-3">
+					<span class="text-muted"><%=  t('common.list_display')  %> <%= @all_join_event_list.total_count %> <%=  t('common.to')  %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%= @all_join_event_list.offset_value + 1 %> ~ <%=  @all_join_event_list.offset_value + @all_join_event_list.count %> <%=  t('common.search_result')  %></span>
+				</div>
+			</div>	
+			<!--end: Pagination-->
+			<!--end::Admin Joined Event Card--> 
+		<% else %>
+			<!--begin::Card-->
+			<div class="card my-5">
+				<!--begin::Card body-->
+				<div class="card-body p-0">
+					<!--begin::Wrapper-->
+					<div class="card-px text-center py-2 my-10">
+						<!--begin::Title-->
+						<h2 class="fs-2x fw-bolder mb-10"><%= t ('common.join_event') %></h2>
+						<!--end::Title-->
+						<!--begin::Description-->
+						<p class="text-gray-400 fs-4 fw-bold mb-10">
+							<%= t ('dashboard.notice.event_list_text') %>
+						</p>
+						<!--end::Description-->
+						<!--begin::Action-->
+						<%= link_to student_search_event_path, class: "btn btn-primary" do %><%= t 'btn.join-text' %><% end %>
+						<!--end::Action-->
+					</div>
+					<!--end::Wrapper-->
+				</div>
+				<!--end::Card body-->
+			</div>
+			<!--end::Card-->							
+		<% end %>
+		<!--end::Joined Event List-->
+	</div>
+</div>

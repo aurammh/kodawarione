@@ -1,0 +1,155 @@
+<% breadcrumbs_navigation_add (t ('partner_news.title.news_list')), '#' %>
+<%= render_company_breadcrumbs_navigation(t ('partner_news.title.news_list')) %>
+
+<!--end::Toolbar-->
+<div class="container content d-flex flex-column flex-column-fluid" id="kt_content">
+    <% if @all_partner_news_list.present? %>
+        <div class="card bg-body my-5">
+            <!--begin::Favourite Company Card header-->
+            <div class="card-header border-0">
+                <!--begin::Card title-->
+                <div class="card-title">
+                        <h2><%= t ('partner_news.title.news_list') %></h2>
+                </div>
+                <!--end::Card title-->
+            </div>          
+            <!--end::Card header-->
+            <!--begin::Card body-->
+            <div class="card-body pt-0 pb-5">
+                <!--begin::Table-->
+                    <div class="table-responsive d-none d-sm-none d-md-none d-lg-block d-xl-block mb-5 mb-xl-10">
+                        <table class="table table-row-dashed align-middle gy-5" id="kt_table_customers_payment">
+                        <!--begin::Table head-->
+                        <thead class="border-bottom border-gray-200 fs-7 fw-bolder">
+                            <!--begin::Table row-->
+                            <tr class="fw-bolder text-muted">
+                                <th class="min-w-140px"><%= t('partner_news.title.news_list_col_title') %></th>
+                                <th class="min-w-140px"><%= t('partner_news.title.news_type') %></th>                  
+                                <th class="pe-0 min-w-120px"><%= t('partner_news.title.news_list_col_content') %></th>                  
+                                <th class="pe-0 min-w-120px"><%= t('partner_news.title.news_list_col_createdDate') %></th> 
+                                <th></th>
+                            </tr>
+                            <!--end::Table row-->
+                        </thead>
+                        <!--end::Table head-->         
+                        <!--begin::Table body-->
+                        <tbody class="fs-6 fw-bold text-gray-600">
+                            <% @all_partner_news_list.each do |news| %>
+                            <!--begin::Table row-->
+                            <tr>
+                                <!--Title-->
+                                <td>
+                                <div class="d-flex align-items-center">
+                                    
+                                    <div class="d-flex justify-content-start flex-column w-sm-75px w-md-100px w-lg-100px w-xl-150px">
+                                        <span class="d-block fs-6 w-sm-75px w-md-100px w-lg-50px w-xl-150px text-truncate"><%= news.title %></span>
+                                    </div>
+                                </div>
+                                </td>
+
+                                <!--NewsType-->
+                                <td class="w-sm-75px w-md-100px w-lg-50px w-xl-100px"><span class="badge badge-light-primary"><%= t("partner_news.news_type_options.#{news.news_category}") %></span></td>
+
+                                <!--Content-->
+                                <td class="w-sm-150px w-md-200px w-lg-180px w-xl-300px">
+                                    <span class="d-block fs-6 w-sm-80px w-md-100px w-lg-180px w-xl-300px text-truncate"><%= news.content.to_plain_text %></span>
+                                </td>
+
+                                <!--CreatedDate-->
+                                <td class="w-lg-150px w-xl-200px fs-6"><%= l(news.created_at.strftime('%Y-%m-%d').to_date, default: '-') %></td>
+
+                                <!--begin::Action=-->
+                                <% if can?(:partner_news_detail, Company::Company) %>
+                                    <td class="pe-0 text-end">
+                                        <%= link_to company_partner_news_company_detail_path(id: news.id), class: "btn btn-icon btn-active-light-primary w-30px h-30px" do %>
+                                            <!--begin::Svg Icon | path: icons/duotune/general/gen019.svg-->
+                                            <span class="svg-icon svg-icon-3">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path d="M17.5 11H6.5C4 11 2 9 2 6.5C2 4 4 2 6.5 2H17.5C20 2 22 4 22 6.5C22 9 20 11 17.5 11ZM15 6.5C15 7.9 16.1 9 17.5 9C18.9 9 20 7.9 20 6.5C20 5.1 18.9 4 17.5 4C16.1 4 15 5.1 15 6.5Z" fill="currentColor" />
+                                                <path opacity="0.3" d="M17.5 22H6.5C4 22 2 20 2 17.5C2 15 4 13 6.5 13H17.5C20 13 22 15 22 17.5C22 20 20 22 17.5 22ZM4 17.5C4 18.9 5.1 20 6.5 20C7.9 20 9 18.9 9 17.5C9 16.1 7.9 15 6.5 15C5.1 15 4 16.1 4 17.5Z" fill="currentColor" />
+                                            </svg>
+                                            </span>
+                                            <!--end::Svg Icon-->
+                                        <% end %>                      
+                                        <!--end::Menu-->
+                                    </td>
+                                <% end %>                      
+                                <!--end::Action=-->
+                            </tr>                        
+                            <!--end::Table row-->        
+                            <% end %>             
+                        </tbody>
+                        <!--end::Table body-->
+                        </table>
+                        <!--end::Table-->
+                    </div>
+                <!--end::Table-->
+                <!--begin::Mobile View-->
+                <div class="d-lg-none  mb-5 mb-xl-10">
+                    <% @all_partner_news_list.each do |news| %>
+                        <%= link_to company_partner_news_company_detail_path(id: news.id), class: "text-decoration-none text-dark" do %>                                 
+                            <div class="card border border-primary border-4 border-top-0 border-end-0 border-bottom-0 border-start bg-light card-custom gutter-b mb-3">
+                                <!--begin::Body-->
+                                <div class="card-body p-4">
+                                <div class="d-flex align-items-center"> 
+                                    <div>
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                        <span class="text-gray-400 fs-8 fw-bolder me-2 d-block w-150px w-sm-400px w-md-600px text-truncate lh-1 pb-1"><%= news.title %></span>
+                                        <span class="text-gray-800 fs-5 fw-bolder"><%= t("partner_news.news_type_options.#{news.news_category}") %></span>
+                                        </div>
+                                    </div>                                        
+                                    <div class="d-flex flex-wrap">
+                                        <!--begin::Text-->
+                                        <span class="fw-bolder fs-6 me-2 w-150px w-sm-300px w-md-500px text-truncate"><i class="flaticon-shapes me-1 text-primary"></i> <%= news.content.to_plain_text.truncate(80)  %> </span>
+                                        <span class="fw-bold text-gray-600 fs-7"><i class="flaticon-event-calendar-symbol me-1 text-primary"></i><%= l(news.created_at.strftime('%Y-%m-%d').to_date, default: '-') %></span>
+                                        <!--end::Text-->                                 
+                                    </div>
+                                    </div>
+                                </div>
+                                </div>
+                                <!--end::Body-->    
+                            </div>
+                        <% end %>
+                    <% end %>
+                </div>
+                <!--end::Mobile View-->
+            </div>
+            <!--end::Card body-->
+        </div>
+        <!--begin:: Pagination-->
+        <div class="d-flex flex-wrap justify-content-between align-items-center">
+            <div class="d-flex flex-wrap py-2 ml-3">
+                <%= paginate @all_partner_news_list %>
+            </div>
+            <div class="d-flex align-items-center py-3">
+                <span class="text-muted"><%=  t('common.list_display')  %> <%= @all_partner_news_list.total_count %> <%=  t('common.to')  %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%= @all_partner_news_list.offset_value + 1 %> ~ <%=  @all_partner_news_list.offset_value + @all_partner_news_list.count %> <%=  t('common.search_result')  %></span>
+            </div>
+        </div>	
+        <!--end: Pagination-->
+    <% else %>
+        <!--begin::Card-->
+        <div class="card my-5">
+            <!--begin::Card body-->
+            <div class="card-body p-0">
+              <!--begin::Wrapper-->
+              <div class="card-px text-center py-2 my-10">
+                 <!--begin::Title-->
+                 <h2 class="fs-2x fw-bolder mb-10"> <%= t("partner_news.title.news_list")%></h2>
+                 <!--end::Title-->
+                 <!--begin::Description-->
+                 <p class="text-gray-400 fs-4 fw-bold mb-10"><%= t('common.partner_news_no_data') %></p>
+                 <!--end::Description-->
+
+                <!--begin::Action-->
+                <!-- <%= link_to student_companies_search_path, class: "btn btn-primary" do %><%= t 'btn.fav-text' %><% end %>                 -->
+                <!--end::Action-->
+              </div>
+              <!--end::Wrapper-->
+            </div>
+            <!--end::Card body-->
+        </div>
+        <!--end::Card-->
+    <% end %> 
+</div>
+<%= javascript_pack_tag 'common.js'%>

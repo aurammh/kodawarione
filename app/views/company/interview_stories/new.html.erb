@@ -1,0 +1,22 @@
+<!--begin::Header-->
+<% breadcrumbs_navigation_add (t ('student_commitment.menu.create_company_page')), '#' %>
+<%= render_company_breadcrumbs_navigation(t('interview_story.title.interview_story_title')) %>		
+<!--end::Header-->
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+  <!--begin::Container-->
+  <div class="container-xxl" id="kt_content_container">
+    <%= render partial: "company/shared/commitment_profiles/common_banner" %>
+    <!--begin::Layout-->
+    <div class="d-flex flex-column flex-lg-row">
+      <!--begin::Content-->
+      <div class="flex-lg-row-fluid mb-10 mb-lg-0">
+        <%= render 'form', company_interview_story: @company_interview_story, card_header_title: t('interview_story.title.create_interview_story_title')%>
+      </div>
+      <!--end::Content-->
+    </div>
+    <!--end::Content-->
+  </div>
+  <!--end::Content-->
+</div>
+<!--end::Content-->

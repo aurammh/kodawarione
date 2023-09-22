@@ -1,0 +1,2 @@
+module Kodawarione::CompanyRolesHelper
+end

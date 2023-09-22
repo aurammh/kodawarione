@@ -1,0 +1,379 @@
+<!--begin::Body-->
+<body id="kt_body" data-bs-spy="scroll" data-bs-target="#kt_landing_menu" data-bs-offset="200" class="bg-white position-relative">
+    <!--begin::Main-->
+    <div class="d-flex flex-column flex-root">
+        <!--begin::Header Section-->
+        <div class="mb-3 mb-md-5 mb-lg-10">
+            <!--begin::Wrapper-->
+            <%= render partial: "company_page/header", :locals =>{:banner => true} %>
+            <!--end::Wrapper-->
+        </div>
+        <!--end::Header Section-->
+        <!--begin::Container-->
+        <div class="container w-100 w-lg-75 w-xl-1000px">
+            <!--begin::Company Intro-->
+            <% if @company_commitment_profile.company_intro.present? %>
+                <div class="mt-4 mt-md-5 mt-lg-10 pb-4 pb-md-5 pb-lg-10">
+                    <h3 class="text-center fs-2x text-dark fw-bolder w-100 mb-10"><%= Company::Company.human_attribute_name('company_intro') %></h3>
+                    <div class="fs-6 fw-bold text-gray-700 px-4">
+                        <%= @company_commitment_profile.company_intro %>
+                    </div>
+                </div>
+            <% end %>
+            <!--end::Company Intro-->
+            <!--begin::Company Facts-->
+            <div class="mt-4 mt-md-5 mt-lg-20 pb-4 pb-md-5 pb-lg-10">
+                <!--begin::Seperator-->
+                <div class="separator separator-dashed border-gray-400"></div>
+                <!--end::Seperator-->
+                <!--begin::Company Name-->
+                <div class="row my-7 px-20">
+                    <div class="col-12 col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <h3 class="text-gray-600 fw-bolder mb-0 fs-3"><i class="fa fa-genderless text-primary fs-2 me-2"></i><%= Company::Company.human_attribute_name('company_name') %></h3>
+                    </div>
+                    <div class="col-12 col-xs-8 col-sm-8 ol-md-8 col-lg-8">
+                        <p class="fw-normal text-gray-600 mb-0"><%= @company_commitment_profile.company_name %></p>
+                    </div>
+                </div>
+                <!--end::Company Name-->
+                <!--begin::Seperator-->
+                <div class="separator separator-dashed border-gray-400"></div>
+                <!--end::Seperator-->
+                <!--begin::Company Name Kana-->
+                <div class="row my-7 px-20">
+                    <div class="col-12 col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <h3 class="text-gray-600 fw-bolder mb-0 fs-3"><i class="fa fa-genderless text-info fs-2 me-2"></i><%= Company::Company.human_attribute_name('company_name_kana') %></h3>
+                    </div>
+                    <div class="col-12 col-xs-8 col-sm-8 ol-md-8 col-lg-8">
+                        <p class="fw-normal text-gray-600 mb-0"><%= @company_commitment_profile.company_name_kana %></p>
+                    </div>
+                </div>
+                <!--end::Company Name Kana-->
+                <!--begin::Seperator-->
+                <div class="separator separator-dashed border-gray-400"></div>
+                <!--end::Seperator-->
+                <!--begin::Company Industry-->
+                <div class="row my-7 px-20">
+                    <div class="col-12 col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <h3 class="text-gray-600 fw-bolder mb-0 fs-3"><i class="fa fa-genderless text-success fs-2 me-2"></i><%= Company::Company.human_attribute_name('m_industry_id') %></h3>
+                    </div>
+                    <div class="col-12 col-xs-8 col-sm-8 ol-md-8 col-lg-8">
+                        <p class="fw-normal text-gray-600 mb-0"><%= get_industry_name_by_ID(@company_commitment_profile.m_industry_id) %></p>
+                    </div>
+                </div>
+                <!--end::Company Industry-->
+                <!--begin::Seperator-->
+                <div class="separator separator-dashed border-gray-400"></div>
+                <!--end::Seperator-->
+                <!--begin::Company Employee-->
+                <div class="row my-7 px-20">
+                    <div class="col-12 col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <h3 class="text-gray-600 fw-bolder mb-0 fs-3"><i class="fa fa-genderless text-danger fs-2 me-2"></i><%= Company::Company.human_attribute_name('employee_count') %></h3>
+                    </div>
+                    <div class="col-12 col-xs-8 col-sm-8 ol-md-8 col-lg-8">
+                        <p class="fw-normal text-gray-600 mb-0"><%= number_with_delimiter(@company_commitment_profile.employee_count) %> <%= t('unit.persons')%></p>
+                    </div>
+                </div>
+                <!--end::Company Employee-->
+                <!--begin::Seperator-->
+                <div class="separator separator-dashed border-gray-400"></div>
+                <!--end::Seperator-->
+            </div>
+            <!--end::Company Facts-->
+            <!--begin::Activities--> 
+            <% if @company_activities.present? %>
+                <div class="mt-4 mt-md-5 mt-lg-20 pb-4 pb-md-5 pb-lg-10">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h3 class="fs-2x text-gray-600 fw-bolder p-4"><%= t('activity.title') %></h3>
+                        <%= link_to t('activity.title'), company_page_activity_path, class: "fw-bolder" %>
+                    </div>
+                    <!--begin::Row-->
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-4">
+                        <% @company_activities.each do |company_activity| %>
+                            <!--begin::Col-->
+                            <div class="col-lg-6 col-xl-4">
+                            <!--begin::Publications post-->
+                            <div class="card-xl-stretch me-md-6">
+                                <!--begin::Video-->
+                                <% if company_activity.video_clip.attached? && company_activity.video_clip.persisted? && company_activity.thumbnail.attached? && company_activity.thumbnail.persisted? %>
+                                    <div class="position-relative">
+                                        <button data-bs-toggle="modal" data-bs-target="#video-play-modal<%= company_activity.video_clip.id %>" class="vdo-play-btn position-absolute top-50 start-50 translate-middle btn bg-dark bg-opacity-50 bg-hover-lighten bg-hover-opacity-75 px-12 py-5 rounded border border-white border-1 d-flex flex-center" style="z-index: 1"><i class="fas fa-play text-white fs-3 opacity-100"></i></button>
+                                        <video
+                                            id="my-video-poster"
+                                            class="video-js vjs-default-skin vjs-big-play-centered w-100 h-175px mb-4 cursor-pointer"
+                                            preload="auto"
+                                            width="400"
+                                            height="175"
+                                            poster="<%= url_for(company_activity.thumbnail) %>"
+                                            data-setup="{}"
+                                            data-bs-toggle="modal" data-bs-target="#video-play-modal<%= company_activity.video_clip.id %>"
+                                        > 
+                                        </video>
+                                        <%= hidden_field_tag(:video_id,'',id: "#{company_activity.video_clip.id}") %>
+                                        <%= render partial: 'video_play_modal', locals: { activity_var: company_activity.video_clip, id: company_activity.video_clip.id }%>
+                                    </div>
+                                <% end %>
+                                <!--end::Video-->
+                                <!--begin::Body-->
+                                <div class="m-0">
+                                <!--begin::Title-->
+                                <%= link_to activity_details_path(activity_id: company_activity), class: "fs-4 text-dark fw-bolder text-hover-primary text-dark lh-base" do %> 
+                                    <%=  company_activity.title.truncate(40) %> 
+                                <% end %>
+                                <!--end::Title-->
+                                <!--begin::Text-->
+                                <div class="fw-bold fs-5 text-gray-600 text-dark mt-3 mb-5"><%= company_activity.desc.to_plain_text.truncate(120) %></div>
+                                <!--end::Text-->
+                                <!--begin::Content-->
+                                <div class="fs-6 fw-bolder">
+                                    <!--begin::Author-->
+                                    <span class="text-gray-700 text-hover-primary">作成日 : </span>
+                                    <!--end::Author-->
+                                    <!--begin::Date-->
+                                    <span class="text-muted"><%= l company_activity.created_at.to_date %></span>
+                                    <!--end::Date-->
+                                </div> 
+                                <!--end::Content-->
+                                </div>
+                                <!--end::Body-->
+                            </div>
+                            <!--end::Publications post-->
+                            </div>
+                            <!--end::Col-->
+                        <% end %>
+                    </div>
+                    <!--end::Row--> 
+                </div>
+            <% end %>
+            <!--end::Activities-->            
+            <!--begin::Member-->
+            <% if @company_company_members.present? %>
+                <div class="mt-4 mt-md-5 mt-lg-20 pb-4 pb-md-5 pb-lg-10">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h3 class="fs-2x text-gray-600 fw-bolder p-4"><%= t('company_member.title.header') %></h3>
+                        <%= link_to t('company_member.title.header'), company_page_members_path, class: "fw-bolder" %>
+                    </div>
+                    <!--begin::Row-->
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-4">
+                        <% @company_company_members.each do |member|%>
+                            <!--begin::Item-->
+                            <div class="col text-center">
+                                <!--begin::Photo-->
+                                <% if member.image.attached? && member.image.persisted? %>
+                                    <div class="octagon mx-auto mb-2 d-flex w-150px h-150px bgi-no-repeat bgi-size-contain bgi-position-center bg-secondary"  style="background-image: url(<%= url_for(member.image) %>)"></div>
+                                <% else %>
+                                    <div class="octagon mx-auto mb-2 d-flex w-150px h-150px bgi-no-repeat bgi-size-contain bgi-position-center bg-secondary" style="background-image:url('<%= asset_path 'avatar/male.svg' %>')"></div>
+                                <% end %>
+                                <!--end::Photo-->
+                                <!--begin::Person-->
+                                <div class="mb-0">
+                                    <!--begin::Name-->
+                                    <a href="#" class="text-dark fw-bolder text-hover-primary fs-3"><%= member.position %></a>
+                                    <!--end::Name-->
+                                    <!--begin::Position-->
+                                    <div class="text-muted fs-6 fw-bold"><%= member.department %></div>
+                                    <!--begin::Position-->
+                                </div>
+                                <!--end::Person-->
+                                <%= link_to t('communication.title.send_message'), new_communication_communication_path(:id => member.company_id, :forum_id => member.user_id, :name => "Member"),class: "btn btn-light-primary fw-bolder mt-7",remote: true %>
+                            </div>
+                            <!--end::Item-->
+                        <% end %>
+                        <div  id="communicationModal">
+                            <%= render 'communication/communications/communication_modal'%>
+                        </div>
+                    </div>
+                    <!--end::Row--> 
+                </div>
+            <% end %>
+            <!--end::Member-->
+            <!--begin::Job Info-->
+            <% if @company_commitment_profile.job_info.present? %>
+                <div class="mt-4 mt-md-5 mt-lg-20 pb-4 pb-md-5 pb-lg-10">
+                    <h3 class="fs-2x text-dark fw-bolder text-center w-100 rounded mb-10"><%= Company::Company.human_attribute_name('job_info') %></h3>
+                    <div class="fs-6 fw-bold text-gray-700 px-4">
+                        <%= @company_commitment_profile.job_info %>
+                    </div>
+                </div>
+            <% end %>
+            <!--end::Job Info-->
+            <!--begin::Latest stories-->
+            <% if  @company_interview_story_hightlight.present? %> 
+                <div class="mt-4 mt-md-5 mt-lg-20 pb-4 pb-md-5 pb-lg-10">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h3 class="fs-2x text-gray-600 fw-bolder p-4"><%= t("interview_story.title.latest_stories")%></h3>
+                        <%= link_to t('interview_story.title.all_stories'), company_page_stories_path(@company_details.id), class: "fw-bolder" %>
+                    </div>
+                    <!--begin::Row-->
+                    <div class="row g-10">
+                        <% @company_interview_story_hightlight.each do |story|%>
+                            <!--begin::Col-->
+                            <div class="col-12 col-lg-4 col-xl-4">
+                                <%= link_to story_details_path(story_id: story), class: "" do %>
+                                    <div class="shadow-sm p-3">
+                                        <!--begin::Card--> 
+                                        <div class="card bg-body">
+                                            <!--begin::Card body-->
+                                            <div class="card-body p-5">
+                                                <!--begin::Item-->
+                                                <h5 class="fs-5 text-truncate text-dark fw-bolder text-hover-primary text-break"><%= story.title.truncate(30) %></h5>
+                                                <span class="text-muted fs-7 d-block fw-bold mt-5"><%= strip_tags(story.review.to_s).truncate(70)  %></span>
+                                                <div class="mt-3">
+                                                    <!--begin::Avatar-->
+                                                    <div class="symbol symbol-circle symbol-30px me-3">
+                                                        <% if story.image.attached? %>
+                                                            <%= image_tag (story.image), :class=> "" %>
+                                                        <% else %>
+                                                            <%= image_tag "avatar/preview.svg", :class=> "" %>
+                                                        <% end %>
+                                                    </div>
+                                                    <!--end::Avatar-->
+                                                    <span class="text-muted fw-bolder fs-7"><%= l story.created_at.to_date %></span>
+                                                </div>
+                                                <!--end::Item-->
+                                            </div>
+                                            <!--end::Card body-->
+                                        </div> 
+                                        <!--end::Card-->
+                                    </div>    
+                                <% end %>         
+                            </div> 
+                            <!--end::Col-->
+                        <% end %>
+                    </div>
+                    <!--end::Row-->
+                </div>
+            <% end %>
+            <!--end::Latest stories-->
+            <!--begin::Latest events-->
+            <% if  @company_events_hightlight.present? %>
+                <div class="mt-4 mt-md-5 mt-lg-20 pb-4 pb-md-5 pb-lg-10">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h3 class="fs-2x text-gray-600 fw-bolder p-4"><%= t("event.title.latest_events")%></h3>
+                        <%# link_to t('company_member.title.member_list'), company_page_members_path, class: "fw-bolder" %>
+                    </div>
+                    <div class="row g-10">
+                        <% @company_events_hightlight.each do |event|%>
+                            <div class="col-12 col-lg-12 col-xl-6">
+                                <!--begin::Card-->    
+                                <div class="shadow-sm p-3">
+                                    <div class="card border-0 bg-body">                           
+                                        <!--begin::Body-->
+                                        <%= link_to (event_details_path(event_id: event)), class: "card-body p-3" do %>
+                                            <div class="d-flex">
+                                                <div class="min-w-50px text-white me-5 d-none d-sm-block d-md-block">  
+                                                    <div class="symbol symbol-75px w-100">
+                                                        <div class="d-flex flex-column justify-content-center text-white symbol-label bg-primary bg-opacity-75 w-100">
+                                                            <span class="fs-5 fw-bold"><%= t('date.abbr_month_names')[event.event_start_date.month] %></span>
+                                                            <span class="fs-2 fw-bolder"><%= event.event_start_date.strftime('%d') %><%= t('date.prompts.day') %></span>
+                                                        </div> 
+                                                    </div>                
+                                                </div>
+                                                <div class="flex-grow-1 text-break">
+                                                    <div class="d-flex flex-column pl-5">
+                                                        <div class="text-decoration-none text-dark" %>
+                                                            <h5 class="card-title fs-5 fw-bolder mb-2">
+                                                                <%= event.event_name.truncate(30) %>
+                                                            </h5>
+                                                        </div>
+                                                        <% unless event.category.nil?%>
+                                                            <!--begin::Info-->
+                                                            <div class="d-flex flex-wrap mb-2">
+                                                                <% event.category.each do |v| %>
+                                                                <% if v != nil %>
+                                                                    <!--begin::Item-->
+                                                                    <div class="me-5">
+                                                                    <!--begin::Icon-->
+                                                                    <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                                                                    <span class="svg-icon svg-icon-primary svg-icon-6 me-1">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                        <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
+                                                                        <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
+                                                                        <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
+                                                                        <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
+                                                                        </svg>
+                                                                    </span>
+                                                                    <!--end::Svg Icon-->
+                                                                    <!--end::Icon-->
+                                                                    <!--begin::Label-->
+                                                                    <span class="fw-bolder fs-8 text-gray-400"><%= t("event.category.#{Event.event_categories.key(v)}") %></span>
+                                                                    <!--end::Label-->
+                                                                    </div>
+                                                                    <!--end::Item-->
+                                                                <% end %>
+                                                                <% end %>
+                                                            </div>
+                                                        <% end %>
+                                                        <!--begin::Item-->
+                                                        <div class="d-flex me-5 mb-2">
+                                                            <!--begin::Title-->
+                                                            <div>
+                                                                <% if event.event_type == 1 %>
+                                                                    <span class="badge badge-warning fs-7"><%= t('welcome.privacy policy.top_page_link.text2') %></span>
+                                                                <% elsif event.event_type == 2 %>
+                                                                    <span class="badge badge-warning fs-7"><%=  t('partner.partners_tab') %></span>
+                                                                <% else %>
+                                                                    <span class="badge badge-warning fs-7"><%=  t('Kodawari One') %></span>
+                                                                <% end %>
+                                                            </div>
+                                                            <!--end::Title-->
+                                                            <span class="badge font-weight-lighter fs-8 ms-5 <%= event_status_color(event, @admin_event_participants) ? "badge-light-success" : "badge-light-danger" %>">
+                                                                <%=event_status_text(event, @admin_event_participants) == '1'  ? t('event.title.new_event_recuirment'): event_status_text(event, @admin_event_participants) == '2' ? t('event.title.event_in_progress') : 
+                                                                event_status_text(event, @admin_event_participants) == '3' ? t('event.title.recuirment_full') : t('event.title.recuirment_closed') %>
+                                                            </span>
+                                                        </div>
+                                                        <!--end::Item-->
+                                                        <p class="card-title fw-bolder mt-3 fs-7">
+                                                            <i class="fas fa-map-marker-alt text-primary mr-2"></i> <%= event.venue.present? ? event.venue.truncate(60) : t("event.venue_types.online") %>                     
+                                                        </p>                                             
+                                                    </div>
+                                                    <div class="d-flex mt-3">
+                                                        <!--begin::Due-->
+                                                        <div class="border border-gray-300 border-dashed rounded min-w-100px p-2 me-lg-3 me-1 me-lg-3">
+                                                            <div class="fs-7 text-gray-800 fw-bolder"><%= l event.event_start_date %></div>
+                                                            <div class="fs-7 fw-bold text-gray-400"><%= Event.human_attribute_name('event_start_date') %></div>
+                                                        </div>
+                                                        <!--end::Due-->
+                                                        <!--begin::Budget-->
+                                                        <div class="border border-gray-300 border-dashed rounded min-w-100px p-2">
+                                                            <div class="fs-7 text-gray-800 fw-bolder"><%= l event.event_end_date %></div>
+                                                            <div class="fs-7 fw-bold text-gray-400"><%= Event.human_attribute_name('event_end_date') %></div>
+                                                        </div>
+                                                        <!--end::Budget-->
+                                                    </div>  
+                                                </div>
+                                            </div>
+                                        <% end %>
+                                        <!--end::Body-->
+                                    </div>
+                                </div>
+                                <!--end::Card-->
+                            </div> 
+                        <% end %>
+                    </div>
+                </div>
+            <% end %>
+            <!--end::Latest events-->
+            <!--begin::Latest vacancies-->
+            <%= render partial: "company_page/vacancies_list", :locals =>{company_vacancies: @company_vacancies} %>
+            <!--end::Latest vacancies-->
+        </div>
+        <!--end::Container-->
+        <!--begin::Scrolltop-->
+        <div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
+            <!--begin::Svg Icon | path: icons/duotune/arrows/arr066.svg-->
+            <span class="svg-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <rect opacity="0.5" x="13" y="6" width="13" height="2" rx="1" transform="rotate(90 13 6)" fill="black" />
+                    <path d="M12.5657 8.56569L16.75 12.75C17.1642 13.1642 17.8358 13.1642 18.25 12.75C18.6642 12.3358 18.6642 11.6642 18.25 11.25L12.7071 5.70711C12.3166 5.31658 11.6834 5.31658 11.2929 5.70711L5.75 11.25C5.33579 11.6642 5.33579 12.3358 5.75 12.75C6.16421 13.1642 6.83579 13.1642 7.25 12.75L11.4343 8.56569C11.7467 8.25327 12.2533 8.25327 12.5657 8.56569Z" fill="black" />
+                </svg>
+            </span>
+            <!--end::Svg Icon-->
+        </div>
+        <!--end::Scrolltop-->
+    </div>
+    <!--end::Main--> 
+</body>
+<!--end::Body-->  
+<%= hidden_field_tag(:fav_company_id, @company_details.id) %>
+<%= javascript_pack_tag "common.js" %>

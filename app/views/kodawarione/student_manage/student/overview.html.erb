@@ -1,0 +1,159 @@
+<!--begin::Header-->
+<% breadcrumbs_navigation_add (t('dashboard.job_seeker')), kodawarione_student_manage_search_student_path %>
+<% breadcrumbs_navigation_add (t ('student.title.header_link1')), '#' %>
+<%= render_partner_breadcrumbs_navigation(t ('student.title.header_link1')) %>		
+<!--end::Header-->
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+	<!--begin::Container-->
+	<div class="container-fluid" id="kt_content_container">
+		<!--begin::Tab Content-->
+		<div class="tab-content">
+			<!--begin::Tab pane-->
+			<div id="kt_project_users_card_pane" class="tab-pane fade show active">
+            	<%= render partial: "kodawarione/shared/student_manage/student_banner", locals: {student: @student_info, fav_company_count: @favourite_company_list.length, fav_vacancy_count: @favourite_vacancy.length, fav_event_count: @favourite_event_list.length} %>  
+				<!--begin::Row-->
+				<div class="row g-xxl-9">
+					<!--begin::Col-->
+					<div class="col-xxl-6">
+						<!--begin::Mixed Widget 6-->
+						<div class="card card-xxl-stretch bg-secondary mb-5 mb-xl-8">
+							<!--begin::Body-->
+							<div class="card-body d-flex flex-column">
+								<!--begin::Wrapper-->
+								<div class="d-flex flex-column mb-7">
+									<!--begin::Title-->
+									<a href="#" class="text-dark text-hover-primary fw-bolder fs-3">Summary</a>
+									<!--end::Title-->
+								</div>
+								<!--end::Wrapper-->
+								<!--begin::Row-->
+								<div class="row g-0">
+									<!--begin::Col-->
+									<div class="col-6">
+										<div class="d-flex align-items-center mb-10 me-2">
+											<!--begin::Symbol-->
+											<div class="symbol symbol-40px me-3">
+												<div class="symbol-label bg-light">
+													<!--begin::Svg Icon | path: icons/duotune/art/art007.svg-->
+													<span class="svg-icon svg-icon-1 svg-icon-primary">
+														<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+															<rect x="8" y="9" width="3" height="10" rx="1.5" fill="black" />
+															<rect opacity="0.5" x="13" y="5" width="3" height="14" rx="1.5" fill="black" />
+															<rect x="18" y="11" width="3" height="8" rx="1.5" fill="black" />
+															<rect x="3" y="13" width="3" height="6" rx="1.5" fill="black" />
+														</svg>
+													</span>
+													<!--end::Svg Icon-->
+												</div>
+											</div>
+											<!--end::Symbol-->
+											<!--begin::Title-->
+											<div class="fs-5 fw-bolder">
+												<span class="fs-5 text-dark fw-bolder lh-1" data-kt-countup="true" data-kt-countup-value="<%= @join_event_count.size %>">0</span> <%= t'search.event_count' %>
+												<div class="fs-7 text-gray-600 fw-bolder"><%= t'admin.count.joined_events' %></div>
+											</div>
+											<!--end::Title-->
+										</div>
+									</div>
+									<!--end::Col-->
+									<!--begin::Col-->
+									<div class="col-6">
+										<div class="d-flex align-items-center mb-10 me-2">
+											<!--begin::Symbol-->
+											<div class="symbol symbol-40px me-3">
+												<div class="symbol-label bg-light">
+													<!--begin::Svg Icon | path: icons/duotune/abstract/abs027.svg-->
+													<span class="svg-icon svg-icon-1 svg-icon-primary">
+													<i class="flaticon-black fs-3 text-danger"></i>
+													</span>
+													<!--end::Svg Icon-->
+												</div>
+											</div>
+											<!--begin::Svg Icon | path: icons/duotune/arrows/arr066.svg-->
+											<!--end::Symbol-->
+											<!--begin::Title-->
+											<div class="fs-5 fw-bolder">
+												<span class="fs-5 text-dark fw-bolder lh-1" data-kt-countup="true" data-kt-countup-value="<%= @favourite_event_list.size %>">0</span> <%= t'search.event_count' %>
+												<div class="fs-7 text-gray-600 fw-bolder"><%= t'admin.count.favourite_events' %></div>
+											</div>
+											<!--end::Title-->
+										</div>
+									</div>
+									<!--end::Col-->
+									<!--begin::Col-->
+									<div class="col-6">
+										<div class="d-flex align-items-center me-2">
+											<!--begin::Symbol-->
+											<div class="symbol symbol-40px me-3">
+												<div class="symbol-label bg-light">
+													<!--begin::Svg Icon | path: icons/duotune/art/art007.svg-->
+													<span class="svg-icon svg-icon-1 svg-icon-primary">
+														<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+															<path opacity="0.3" d="M20 15H4C2.9 15 2 14.1 2 13V7C2 6.4 2.4 6 3 6H21C21.6 6 22 6.4 22 7V13C22 14.1 21.1 15 20 15ZM13 12H11C10.5 12 10 12.4 10 13V16C10 16.5 10.4 17 11 17H13C13.6 17 14 16.6 14 16V13C14 12.4 13.6 12 13 12Z" fill="black" />
+															<path d="M14 6V5H10V6H8V5C8 3.9 8.9 3 10 3H14C15.1 3 16 3.9 16 5V6H14ZM20 15H14V16C14 16.6 13.5 17 13 17H11C10.5 17 10 16.6 10 16V15H4C3.6 15 3.3 14.9 3 14.7V18C3 19.1 3.9 20 5 20H19C20.1 20 21 19.1 21 18V14.7C20.7 14.9 20.4 15 20 15Z" fill="black" />
+														</svg>
+													</span>
+													<!--end::Svg Icon-->
+												</div>
+											</div>
+											<!--end::Symbol-->
+											<!--begin::Title-->
+											<div class="fs-5 fw-bolder">
+												<span class="fs-5 text-dark fw-bolder lh-1" data-kt-countup="true" data-kt-countup-value="<%= @apply_vacancies.size %>">0</span> <%= t'search.event_count' %>
+												<div class="fs-7 text-gray-600 fw-bolder"><%= t'admin.count.applied_vacancies' %></div>
+											</div>
+											<!--end::Title-->
+										</div>
+									</div>
+									<!--end::Col-->
+									<!--begin::Col-->
+									<div class="col">
+										<div class="d-flex align-items-center me-2">
+											<!--begin::Symbol-->
+											<div class="symbol symbol-40px me-3">
+												<div class="symbol-label bg-light-danger">
+													<!--begin::Svg Icon | path: icons/duotune/abstract/abs027.svg-->
+													<span class="svg-icon svg-icon-1 svg-icon-danger">
+													<i class="flaticon-black fs-3 text-danger"></i>
+													</span>
+													<!--end::Svg Icon-->
+												</div>
+											</div>
+											<!--end::Symbol-->
+											<!--begin::Title-->
+											<div class="fs-5 fw-bolder">
+												<span class="fs-5 text-dark fw-bolder lh-1" data-kt-countup="true" data-kt-countup-value="<%= @favourite_vacancy.size %>">0</span> <%= t'search.event_count' %>
+												<div class="fs-7 text-gray-600 fw-bolder"><%= t'admin.count.favourite_vacancies' %></div>
+											</div>
+											<!--end::Title-->
+										</div>
+									</div>
+									<!--end::Col-->
+								</div>
+								<!--end::Row-->
+							</div>
+						</div>
+						<!--end::Mixed Widget 6-->
+					</div>
+					<!--end::Col-->
+					<!--begin::Col-->
+					<div class="col-xxl-6">
+						<!--begin::Progress-->
+						<%= render partial: "common/student_progress", locals: {student: @student_info, edit_student_url: "", student_commitment_url: "", student_questionnarie_url: ""} %>  
+						<!--end::Progress-->
+					</div>
+					<!--end::Col-->
+				</div>
+				<!--end::Row-->
+				<%= render partial: "common/student_apply_job", locals: {apply_jobs:  @apply_vacancies.limit(4), apply_job_index_url: ''} %>  		
+				<%= render partial: "common/student_join_event_list", locals: { join_events: @join_event_list} %>  
+				<%= render partial: "common/student_favourite_list", locals: {fav_companies: @favourite_company_list.limit(4), fav_vacancies: @favourite_vacancy.limit(4), fav_events: @favourite_event_list.limit(4)} %>  
+			</div>
+			<!--end::Tab pane-->
+		</div>
+		<!--end::Tab Content-->
+	</div>
+	<!--end::Container-->
+</div>  
+<!--end::Content-->       

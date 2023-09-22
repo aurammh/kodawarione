@@ -1,0 +1,101 @@
+<!--begin::Breadcrumb-->
+<% breadcrumbs_navigation_add t('partner_plan.plan_detail'), '#' %>
+<%= render_partner_breadcrumbs_navigation(t ('partner_plan.plan_detail')) %>  
+<!--end::Breadcrumb-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+	<!--begin::Container-->
+	<div class="container-xxl" id="kt_content_container">
+		<!--begin::Tab Content-->
+		<div class="tab-content">
+			<!--begin::Tab pane-->
+			<div id="kt_project_users_card_pane" class="tab-pane fade show active">
+				<!--begin::Table-->
+				<div class="card bg-body">
+					<!--begin::Header-->
+					<div class="card-header border-0 pt-5">
+						<h3 class="card-title align-items-start flex-column">
+							<span class="card-label fw-bolder fs-3 mb-1"><%= t('partner_plan.plan_detail') %></span> 
+						</h3>
+						<div class="card-toolbar">
+              <% if can?(:read, Kodawarione::Plan) %>
+                <%= link_to kodawarione_plans_path, class: "btn btn-sm btn-primary mx-3" do %>
+                  <i class="ki ki-long-arrow-back icon-sm"></i><%= t("btn.return") %>
+                <% end %>
+							<% end %>
+              <%# start %>
+              <% if @plan_contract.present? == true %>
+                <%= render 'warning' %>
+              <% else %>
+                 <button type="button" class="btn-danger custom-btn px-4 pb-2 pt-1 text-decoration-none" data-bs-toggle="modal" data-bs-target="#delete_news">
+                  <%= t('common.profile_delete')%>
+                </button>
+                                          <div class="modal fade pl-0" id="delete_news" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg">
+                                              <div class="modal-content ">
+                                                <div class="modal-header">
+                                                  <h3 class="modal-title" id="exampleModalLongTitle"><%= t('common.modal_confirm_title') %></h3>
+                                                  <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                                                      <span class="svg-icon svg-icon-1">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                          <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                                                          <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                                                        </svg>
+                                                      </span>
+                                                    <!--end::Svg Icon-->
+                                                  </div>
+                                                </div>
+                                                <div class="modal-body company_type">
+                                                  <section>
+                                                    <div class="text-start py-3">
+                                                      <h5 class="text-dark font-weight-bold pl-1"><%= t('search.admin_delete_msg') %></h5>
+                                                    </div>
+                                                    <div class="mt-3 d-flex justify-content-end">
+                                                      <%= link_to t('btn.confirm_yes'),{:controller => "plans", :action => 'destroy', :id => @plan.id},:method => :delete, class: "btn btn-danger text-white font-weight-bold col-sm-6 col-md-4 col-lg-2 custom-btn px-2 py-2 text-decoration-none ml-4 me-3" %>
+                                                      <button type="button" class="btn btn-dark text-white font-weight-bold col-sm-6 col-md-4 col-lg-2 px-2 py-2 ml-3" data-bs-dismiss="modal"><%= t('btn.cancel') %></button>
+                                                    </div>
+                                                  </section>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+              <% end %> 
+              <%# end %>
+            </div>
+					</div>
+					<!--end::Header-->
+					<!--begin::Body-->
+                    <div class="row px-2 px-lg-4">
+                        <div class="col-12 col-md-12 col-lg-12">
+                            <div class="row">
+                                <div class="col-12 col-sm-6 col-md-3 col-lg-6 my-3 d-flex flex-column">
+                                    <span class="h6 admin-font-color mb-2"><%= Partner::PartnerPlan.human_attribute_name('name') %></span>
+                                    <span class="text-break fw-bold text-gray-600"><%= @plan.name %></span>
+                                </div>
+            
+                                <div class="col-12 col-sm-6 col-md-3 col-lg-6 my-3 d-flex flex-column">
+                                    <span class="h6 admin-font-color mb-2"><%= Partner::PartnerPlan.human_attribute_name('fee') %></span>
+                                    <span class="text-break fw-bold text-gray-600"><%= number_with_delimiter(@plan.fee) %> 円 </span>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="row px-2 px-lg-4">
+                        <div class="col-12 col-md-12 col-lg-12">
+                            <div class="row">
+                                <div class="col-12 col-lg-12 my-3 d-flex flex-column">
+                                    <span class="h6 admin-font-color mb-2"><%= Partner::PartnerPlan.human_attribute_name('content') %></span>
+                                    <span class="fw-bold text-gray-600 text-break"><%= @plan.content %></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+					<!--begin::Body-->
+				</div>
+				<!--end::Table--> 				
+			</div>
+		</div>
+		<!--end::Tab Content-->
+	</div>
+	<!--end::Container-->
+</div>
+</div>

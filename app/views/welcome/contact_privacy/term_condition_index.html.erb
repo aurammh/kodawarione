@@ -1,0 +1,1216 @@
+<% if user_signed_in? %>
+    <div class="toolbar py-5 py-lg-5" id="kt_toolbar">
+        <!--begin::Container-->
+        <div id="kt_toolbar_container" class="container-xxl d-flex flex-stack flex-wrap">
+        <!--begin::Page title-->
+        <div class="page-title d-flex flex-column me-3">
+            <!--begin::Breadcrumb-->
+            <% breadcrumbs_navigation_add (t('welcome.term_and_condition.title')), '#' %>
+            <%= render_student_breadcrumbs_navigation(t('welcome.term_and_condition.title')) %>	
+            <!--end::Breadcrumb-->
+        </div>
+        <!--end::Page title-->
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Toolbar-->
+<% end %>
+<% if company_user_signed_in? %>
+	<!--begin::Header-->
+	<% breadcrumbs_navigation_add (t('welcome.term_and_condition.title')), '#' %>
+    <%= render_company_breadcrumbs_navigation(t('welcome.term_and_condition.title')) %>
+	<!--end::Header-->
+<% end %>
+<div id="kt_content" class="d-flex flex-column-fluid align-items-start container-xxl">
+    <!--begin::Post-->
+    <div class="content flex-row-fluid" id="kt_content_container">
+		<!--begin::Hero card-->
+        <div class="<%= user_signed_in? ? "d-none" : super_partner_user_signed_in? ? "d-none" : "d-block" %>  <%= (company_user_signed_in?) || (super_partner_user_signed_in?) ? "d-none" : "d-block" %>">
+            <div class="d-flex justify-content-center my-10">
+                <!--begin::Logo image-->
+                <%= link_to root_path ,class: "" do %>
+                    <%= image_tag "layout/header_logo.png", class: "h-30px h-lg-50px" %>
+                <% end %>
+                <!--end::Logo image-->
+            </div>
+        </div>
+        <!--end::Hero card-->
+        <!--begin::Hero card-->
+        <%= render partial: 'welcome/contact_privacy/hero_card', :locals =>{:current_route => "tnc", :hero_text => t('welcome.term_and_condition.title')} %>
+        <!--end::Hero card-->
+        <div class="card mb-5 <%= 'bg-body' if company_user_signed_in? %>">
+		    <!--begin::Body-->
+            <div class="card-body p-5 p-lg-15">
+                <!--begin::Classic content-->
+                <div class="mb-13">
+                    <!--begin::Intro-->
+                    <div class="mb-lg-10">
+                        <!--begin::Text-->
+                        <div class="fs-6 fw-bold text-gray-700"><%= t'welcome.term_and_condition.paragraph1' %></div>
+                        <!--end::Text-->
+                    </div>
+                    <!--end::Intro-->
+                    <!--begin::Row-->
+                    <div class="row mb-12">
+                        <!--begin::Col-->
+                        <div class="col-md-12 pe-md-10 mb-10 mb-md-0">
+                            <!--begin::Accordion-->
+                            <!--begin::Section 1-->
+                            <div class="m-0">
+                                <!--begin::Heading-->
+                                <div class="d-flex align-items-center collapsible py-lg-3 toggle mb-0" data-bs-toggle="collapse" data-bs-target="#kt_job_4_2">
+                                    <!--begin::Icon-->
+                                    <div class="btn btn-sm btn-icon mw-lg-20px mw-10px btn-active-color-primary me-lg-5 me-sm-4 me-3">
+                                        <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
+                                        <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                                <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                        <!--end::Svg Icon-->
+                                        <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
+                                        <span class="svg-icon toggle-off svg-icon-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                                <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+                                                <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                        <!--end::Svg Icon-->
+                                    </div>
+                                    <!--end::Icon-->
+                                    <!--begin::Title-->                                           
+                                    <h4 class="text-gray-800 fw-bolder cursor-pointer fs-4 mb-0">
+                                        <%= t'welcome.term_and_condition.section1.title' %>                                 
+                                    </h4>
+                                    <!--end::Title-->
+                                </div>
+                                <!--end::Heading-->
+                                <!--begin::Body-->
+                                <div id="kt_job_4_2" class="collapse show fs-6 ms-lg-1">
+                                    <!--begin::Text-->
+                                    <div class="mb-4 text-gray-700 fw-bold fs-6 ps-lg-13 ps-6">                                    
+                                        <ol class="p-lg-1 mb-2 ps-5">
+                                            <li class="ps-lg-3">
+                                                <%= t'welcome.term_and_condition.section1.text1_1' %> 
+                                                <p class="text-justify">
+                                                    <%= t'welcome.term_and_condition.section1.text1_2' %>
+                                                </p>
+                                            </li>
+                                            <li class="ps-lg-3"> 
+                                                <p class="text-justify">
+                                                    <%= t'welcome.term_and_condition.section1.text2' %>
+                                                </p>
+                                            </li>
+                                            <li class="ps-lg-3"> 
+                                                <p class="text-justify">
+                                                    <%= t'welcome.term_and_condition.section1.text3' %>
+                                                </p>
+                                            </li>
+                                            <li class="ps-lg-3"> 
+                                                <p class="text-justify">
+                                                    <%= t'welcome.term_and_condition.section1.text4' %>
+                                                </p>
+                                            </li>                                 
+                                        </ol> 
+                                    </div>
+                                    <!--end::Text-->
+                                </div>
+                                <!--end::Content-->
+                                <!--begin::Separator-->
+                                <div class="separator separator-dashed"></div>
+                                <!--end::Separator-->
+                            </div>
+                            <!--end::Section 1-->
+                            <!--begin::Section 2-->
+                            <div class="m-0">
+                                <!--begin::Heading-->
+                                <div class="d-flex align-items-center collapsible py-lg-3 py-2 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#kt_job_4_3">
+                                    <!--begin::Icon-->
+                                    <div class="btn btn-sm btn-icon mw-lg-20px mw-10px btn-active-color-primary me-lg-5 me-sm-4 me-3">
+                                        <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
+                                        <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                                <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                        <!--end::Svg Icon-->
+                                        <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
+                                        <span class="svg-icon toggle-off svg-icon-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                                <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+                                                <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                        <!--end::Svg Icon-->
+                                    </div>
+                                    <!--end::Icon-->
+                                    <!--begin::Title-->
+                                    <h4 class="text-gray-800 fw-bolder cursor-pointer fs-4 mb-0">
+                                        <%= t'welcome.term_and_condition.section2.title' %>
+                                    </h4>
+                                    <!--end::Title-->
+                                </div>
+                                <!--end::Heading-->
+                                <!--begin::Body-->
+                                <div id="kt_job_4_3" class="collapse fs-6 ms-lg-1">
+                                    <!--begin::Text-->
+                                    <div class="mb-4 text-gray-700 fw-bold fs-6 ps-lg-13 ps-6">                                    
+                                        <ol class="p-lg-1 mb-2 ps-5">
+                                            <li class="ps-lg-3">
+                                                <p class="text-justify">
+                                                    <%= t'welcome.term_and_condition.section2.text1' %>
+                                                </p>
+                                            </li>
+                                            <li class="ps-lg-3"> 
+                                                <p class="text-justify">
+                                                    <%= t'welcome.term_and_condition.section2.text2' %>
+                                                </p>
+                                            </li>
+                                            <li class="ps-lg-3"> 
+                                                <p class="text-justify mb-0">
+                                                    <%= t'welcome.term_and_condition.section2.text3' %>
+                                                    <ol class="ol-parentheses ps-lg-5">
+                                                        <li class="ps-lg-3">
+                                                            <%= t'welcome.term_and_condition.section2.text3_1' %>
+                                                        </li>
+                                                        <li class="ps-lg-3">
+                                                            <%= t'welcome.term_and_condition.section2.text3_2' %>
+                                                        </li>
+                                                        <li class="ps-lg-3">
+                                                            <%= t'welcome.term_and_condition.section2.text3_3' %>
+                                                        </li>
+                                                        <li class="ps-lg-3">
+                                                            <%= t'welcome.term_and_condition.section2.text3_4' %>
+                                                        </li>
+                                                        <li class="ps-lg-3">
+                                                            <%= t'welcome.term_and_condition.section2.text3_5' %>
+                                                        </li>
+                                                        <li class="ps-lg-3">
+                                                            <%= t'welcome.term_and_condition.section2.text3_6' %>
+                                                        </li>
+                                                        <li class="ps-lg-3">
+                                                            <%= t'welcome.term_and_condition.section2.text3_7' %>
+                                                        </li>
+                                                        <li class="ps-lg-3">
+                                                            <%= t'welcome.term_and_condition.section2.text3_8' %>
+                                                        </li>
+                                                    </ol>
+                                                </p>
+                                            </li>
+                                            <li class="ps-lg-3"> 
+                                                <p class="text-justify">
+                                                    <%= t'welcome.term_and_condition.section2.text4' %>
+                                                </p>
+                                            </li>                                 
+                                        </ol> 
+                                    </div>
+                                    <!--end::Text-->
+                                </div>
+                                <!--end::Content-->
+                                <!--begin::Separator-->
+                                <div class="separator separator-dashed"></div>
+                                <!--end::Separator-->
+                            </div>
+                            <!--end::Section 2-->
+                            <!--begin::Section3-->
+                            <div class="m-0">
+                                <!--begin::Heading-->
+                                <div class="d-flex align-items-center collapsible py-lg-3 py-sm-2 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#kt_job_4_4">
+                                    <!--begin::Icon-->
+                                    <div class="btn btn-sm btn-icon mw-lg-20px mw-10px btn-active-color-primary me-lg-5 me-sm-4 me-3">
+                                        <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
+                                        <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                                <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                        <!--end::Svg Icon-->
+                                        <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
+                                        <span class="svg-icon toggle-off svg-icon-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                                <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+                                                <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                        <!--end::Svg Icon-->
+                                    </div>
+                                    <!--end::Icon-->
+                                    <!--begin::Title-->
+                                    <h4 class="text-gray-800 fw-bolder cursor-pointer fs-4 mb-0">
+                                        <%= t'welcome.term_and_condition.section3.title' %>
+                                    </h4>                    
+                                    <!--end::Title-->
+                                </div>
+                                <!--end::Heading-->
+                                <!--begin::Body-->
+                                <div id="kt_job_4_4" class="collapse fs-6 ms-lg-1">
+                                    <!--begin::Text-->
+                                    <div class="mb-4 text-gray-700 fw-bold fs-6 ps-lg-13 ps-6">
+                                        <p class="p-lg-1 mb-2">
+                                            <%= t'welcome.term_and_condition.section3.text1' %>
+                                        </p>
+                                    </div>
+                                    <!--end::Text-->
+                                </div>
+                                <!--end::Content-->
+                                <!--begin::Separator-->
+                                <div class="separator separator-dashed"></div>
+                                <!--end::Separator-->
+                            </div>
+                            <!--end::Section3-->
+                            <!--begin::Section 4-->
+                            <div class="m-0">
+                                <!--begin::Heading-->
+                                <div class="d-flex align-items-center collapsible py-lg-3 py-2 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#kt_job_5_5">
+                                    <!--begin::Icon-->
+                                    <div class="btn btn-sm btn-icon mw-lg-20px mw-10px btn-active-color-primary me-lg-5 me-sm-4 me-3">
+                                        <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
+                                        <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                                <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                        <!--end::Svg Icon-->
+                                        <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
+                                        <span class="svg-icon toggle-off svg-icon-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                                <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+                                                <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                        <!--end::Svg Icon-->
+                                    </div>
+                                    <!--end::Icon-->
+                                    <!--begin::Title-->
+                                    <h4 class="text-gray-800 fw-bolder cursor-pointer fs-4 mb-0">
+                                        <%= t'welcome.term_and_condition.section4.title' %>
+                                    </h4>                    
+                                    <!--end::Title-->
+                                </div>
+                                <!--end::Heading-->
+                                <!--begin::Body-->
+                                <div id="kt_job_5_5" class="collapse fs-6 ms-lg-1">
+                                    <!--begin::Text-->
+                                    <div class="mb-4 text-gray-700 fw-bold fs-6 ps-lg-13 ps-6">                                    
+                                        <ol class="p-lg-1 mb-2 ps-5">
+                                            <li class="ps-lg-3">
+                                                <p class="text-justify">
+                                                    <%= t'welcome.term_and_condition.section4.text1' %>
+                                                </p>
+                                            </li>
+                                            <li class="ps-lg-3"> 
+                                                <p class="text-justify">
+                                                    <%= t'welcome.term_and_condition.section4.text2' %>
+                                                </p>
+                                            </li>
+                                            <li class="ps-lg-3"> 
+                                                <p class="text-justify">
+                                                    <%= t'welcome.term_and_condition.section4.text3' %>
+                                                </p>
+                                            </li> 
+                                            <li class="ps-lg-3"> 
+                                                <p class="text-justify">
+                                                    <%= t'welcome.term_and_condition.section4.text4' %>
+                                                </p>
+                                            </li>
+                                            <li class="ps-lg-3"> 
+                                                <p class="text-justify">
+                                                    <%= t'welcome.term_and_condition.section4.text5' %>
+                                                </p>
+                                            </li>                                
+                                        </ol> 
+                                    </div>
+                                    <!--end::Text-->
+                                </div>
+                                <!--end::Content-->
+                                <!--begin::Separator-->
+                                <div class="separator separator-dashed"></div>
+                                <!--end::Separator-->
+                            </div>
+                            <!--end::Section 4-->
+                            <!--begin::Section 5-->
+                            <div class="m-0">
+                                <!--begin::Heading-->
+                                <div class="d-flex align-items-center collapsible py-lg-3 py-2 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#kt_job_5_6">
+                                    <!--begin::Icon-->
+                                    <div class="btn btn-sm btn-icon mw-lg-20px mw-10px btn-active-color-primary me-lg-5 me-sm-4 me-3">
+                                        <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
+                                        <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                                <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                        <!--end::Svg Icon-->
+                                        <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
+                                        <span class="svg-icon toggle-off svg-icon-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                                <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+                                                <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                        <!--end::Svg Icon-->
+                                    </div>
+                                    <!--end::Icon-->
+                                    <!--begin::Title-->
+                                    <h4 class="text-gray-800 fw-bolder cursor-pointer fs-4 mb-0">
+                                        <%= t'welcome.term_and_condition.section5.title' %>
+                                    </h4>                    
+                                    <!--end::Title-->
+                                </div>
+                                <!--end::Heading-->
+                                <!--begin::Body-->
+                                <div id="kt_job_5_6" class="collapse fs-6 ms-lg-1">
+                                    <!--begin::Text-->
+                                    <div class="mb-4 text-gray-700 fw-bold fs-6 ps-lg-13 ps-6">                                    
+                                        <ol class="p-lg-1 mb-2 ps-5">
+                                            <li class="ps-lg-3">
+                                                <p class="text-justify">
+                                                    <%= t'welcome.term_and_condition.section5.text1' %>
+                                                </p>
+                                            </li>
+                                            <li class="ps-lg-3"> 
+                                                <p class="text-justify">
+                                                    <%= t'welcome.term_and_condition.section5.text2' %>
+                                                </p>
+                                            </li>
+                                            <li class="ps-lg-3"> 
+                                                <p class="text-justify">
+                                                    <%= t'welcome.term_and_condition.section5.text3' %>
+                                                </p>
+                                            </li> 
+                                            <li class="ps-lg-3"> 
+                                                <p class="text-justify">
+                                                    <%= t'welcome.term_and_condition.section5.text4' %>
+                                                </p>
+                                            </li>
+                                        </ol> 
+                                    </div>
+                                    <!--end::Text-->
+                                </div>
+                                <!--end::Content-->
+                                <!--begin::Separator-->
+                                <div class="separator separator-dashed"></div>
+                                <!--end::Separator-->
+                            </div>
+                            <!--end::Section 5-->
+                            <!--begin::Section 6-->
+                            <div class="m-0">
+                                <!--begin::Heading-->
+                                <div class="d-flex align-items-center collapsible py-lg-3 py-sm-2 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#kt_job_5_7">
+                                    <!--begin::Icon-->
+                                    <div class="btn btn-sm btn-icon mw-lg-20px mw-10px btn-active-color-primary me-lg-5 me-sm-4 me-3">
+                                        <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
+                                        <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                                <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                        <!--end::Svg Icon-->
+                                        <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
+                                        <span class="svg-icon toggle-off svg-icon-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                                <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+                                                <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                        <!--end::Svg Icon-->
+                                    </div>
+                                    <!--end::Icon-->
+                                    <!--begin::Title-->
+                                    <h4 class="text-gray-800 fw-bolder cursor-pointer fs-4 mb-0">
+                                        <%= t'welcome.term_and_condition.section6.title' %>
+                                    </h4>                    
+                                    <!--end::Title-->
+                                </div>
+                                <!--end::Heading-->
+                                <!--begin::Body-->
+                                <div id="kt_job_5_7" class="collapse fs-6 ms-lg-1">
+                                    <!--begin::Text-->
+                                    <div class="mb-4 text-gray-700 fw-bold fs-6 ps-lg-13 ps-6">                                    
+                                        <ol class="p-lg-1 mb-2 ps-5">
+                                            <li class="ps-lg-3">
+                                                <p class="text-justify">
+                                                    <%= t'welcome.term_and_condition.section6.text1' %>
+                                                </p>
+                                            </li>
+                                            <li class="ps-lg-3"> 
+                                                <p class="text-justify">
+                                                    <%= t'welcome.term_and_condition.section6.text2' %>
+                                                </p>
+                                            </li>
+                                        </ol> 
+                                    </div>
+                                    <!--end::Text-->
+                                </div>
+                                <!--end::Content-->
+                                <!--begin::Separator-->
+                                <div class="separator separator-dashed"></div>
+                                <!--end::Separator-->
+                            </div>
+                            <!--end::Section 6-->
+                            <!--begin::Section 7-->
+                            <div class="m-0">
+                                <!--begin::Heading-->
+                                <div class="d-flex align-items-center collapsible py-lg-3 py-2 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#kt_job_5_8">
+                                    <!--begin::Icon-->
+                                    <div class="btn btn-sm btn-icon mw-lg-20px mw-10px btn-active-color-primary me-lg-5 me-sm-4 me-3">
+                                        <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
+                                        <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                                <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                        <!--end::Svg Icon-->
+                                        <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
+                                        <span class="svg-icon toggle-off svg-icon-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                                <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+                                                <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                        <!--end::Svg Icon-->
+                                    </div>
+                                    <!--end::Icon-->
+                                    <!--begin::Title-->
+                                    <h4 class="text-gray-800 fw-bolder cursor-pointer fs-4 mb-0">
+                                        <%= t'welcome.term_and_condition.section7.title' %>
+                                    </h4>                    
+                                    <!--end::Title-->
+                                </div>
+                                <!--end::Heading-->
+                                <!--begin::Body-->
+                                <div id="kt_job_5_8" class="collapse fs-6 ms-lg-1">
+                                    <!--begin::Text-->
+                                    <div class="mb-4 text-gray-700 fw-bold fs-6 ps-lg-13 ps-6">                                    
+                                        <ol class="p-lg-1 mb-2 ps-5">
+                                            <li class="ps-lg-3">
+                                                <p class="text-justify">
+                                                    <%= t'welcome.term_and_condition.section7.text1' %>
+                                                </p>
+                                            </li>
+                                            <li class="ps-lg-3"> 
+                                                <p class="text-justify">
+                                                    <%= t'welcome.term_and_condition.section7.text2' %>
+                                                </p>
+                                            </li>
+                                        </ol> 
+                                    </div>
+                                    <!--end::Text-->
+                                </div>
+                                <!--end::Content-->
+                                <!--begin::Separator-->
+                                <div class="separator separator-dashed"></div>
+                                <!--end::Separator-->
+                            </div>
+                            <!--end::Section 7-->
+                            <!--begin::Section 8-->
+                            <div class="m-0">
+                                <!--begin::Heading-->
+                                <div class="d-flex align-items-center collapsible py-lg-3 py-2 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#kt_job_5_9">
+                                    <!--begin::Icon-->
+                                    <div class="btn btn-sm btn-icon mw-lg-20px mw-10px btn-active-color-primary me-lg-5 me-sm-4 me-3">
+                                        <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
+                                        <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                                <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                        <!--end::Svg Icon-->
+                                        <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
+                                        <span class="svg-icon toggle-off svg-icon-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                                <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+                                                <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                        <!--end::Svg Icon-->
+                                    </div>
+                                    <!--end::Icon-->
+                                    <!--begin::Title-->
+                                    <h4 class="text-gray-800 fw-bolder cursor-pointer fs-4 mb-0">
+                                        <%= t'welcome.term_and_condition.section8.title' %>
+                                    </h4>                    
+                                    <!--end::Title-->
+                                </div>
+                                <!--end::Heading-->
+                                <!--begin::Body-->
+                                <div id="kt_job_5_9" class="collapse fs-6 ms-lg-1">
+                                    <!--begin::Text-->
+                                    <div class="mb-4 text-gray-700 fw-bold fs-6 ps-lg-13 ps-6">                                    
+                                        <ol class="p-lg-1 mb-2 ps-5">
+                                            <li class="ps-lg-3">
+                                                <p class="text-justify">
+                                                    <%= t'welcome.term_and_condition.section8.text1' %>
+                                                </p>
+                                            </li>
+                                            <li class="ps-lg-3"> 
+                                                <p class="text-justify">
+                                                    <%= t'welcome.term_and_condition.section8.text2' %>
+                                                </p>
+                                            </li>
+                                            <li class="ps-lg-3"> 
+                                                <p class="text-justify mb-0">
+                                                    <%= t'welcome.term_and_condition.section8.text3' %>
+                                                    <ol class="ol-parentheses ps-5">
+                                                        <li class="ps-3">
+                                                            <%= t'welcome.term_and_condition.section8.text3_1' %>
+                                                        </li>
+                                                        <li class="ps-3">
+                                                            <%= t'welcome.term_and_condition.section8.text3_2' %>
+                                                        </li>
+                                                        <li class="ps-3">
+                                                            <%= t'welcome.term_and_condition.section8.text3_3' %>
+                                                        </li>
+                                                        <li class="ps-3">
+                                                            <%= t'welcome.term_and_condition.section8.text3_4' %>
+                                                        </li>
+                                                        <li class="ps-3">
+                                                            <%= t'welcome.term_and_condition.section8.text3_5' %>
+                                                        </li>
+                                                    </ol>
+                                                </p>
+                                            </li>
+                                        </ol> 
+                                    </div>
+                                    <!--end::Text-->
+                                </div>
+                                <!--end::Content-->
+                                <!--begin::Separator-->
+                                <div class="separator separator-dashed"></div>
+                                <!--end::Separator-->
+                            </div>
+                            <!--end::Section 8-->
+                            <!--begin::Section 9-->
+                            <div class="m-0">
+                                <!--begin::Heading-->
+                                <div class="d-flex align-items-center collapsible py-lg-3 py-2 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#kt_job_9">
+                                    <!--begin::Icon-->
+                                    <div class="btn btn-sm btn-icon mw-lg-20px mw-10px btn-active-color-primary me-lg-5 me-sm-4 me-3">
+                                        <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
+                                        <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                                <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                        <!--end::Svg Icon-->
+                                        <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
+                                        <span class="svg-icon toggle-off svg-icon-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                                <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+                                                <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                        <!--end::Svg Icon-->
+                                    </div>
+                                    <!--end::Icon-->
+                                    <!--begin::Title-->
+                                    <h4 class="text-gray-800 fw-bolder cursor-pointer fs-4 mb-0">
+                                        <%= t'welcome.term_and_condition.section9.title' %>
+                                    </h4>
+                                    <!--end::Title-->
+                                </div>
+                                <!--end::Heading-->
+                                <!--begin::Body-->
+                                <div id="kt_job_9" class="collapse fs-6 ms-lg-1">
+                                    <!--begin::Text-->
+                                    <div class="mb-4 text-gray-700 fw-bold fs-6 ps-lg-13 ps-6">                                    
+                                        <ol class="p-lg-1 mb-2 ps-5">
+                                            <li class="ps-lg-3"> 
+                                                <p class="text-justify mb-0">
+                                                    <%= t'welcome.term_and_condition.section9.text1' %>
+                                                    <ol class="ol-parentheses ps-5">
+                                                        <li class="ps-lg-3">
+                                                            <%= t'welcome.term_and_condition.section9.text1_1' %>
+                                                        </li>
+                                                        <li class="ps-lg-3">
+                                                            <%= t'welcome.term_and_condition.section9.text1_2' %>
+                                                        </li>
+                                                        <li class="ps-lg-3">
+                                                            <%= t'welcome.term_and_condition.section9.text1_3' %>
+                                                        </li>
+                                                        <li class="ps-lg-3">
+                                                            <%= t'welcome.term_and_condition.section9.text1_4' %>
+                                                        </li>
+                                                        <li class="ps-lg-3">
+                                                            <%= t'welcome.term_and_condition.section9.text1_5' %>
+                                                        </li>
+                                                        <li class="ps-lg-3">
+                                                            <%= t'welcome.term_and_condition.section9.text1_6' %>
+                                                        </li>
+                                                        <li class="ps-lg-3">
+                                                            <%= t'welcome.term_and_condition.section9.text1_7' %>
+                                                        </li>
+                                                        <li class="ps-lg-3">
+                                                            <%= t'welcome.term_and_condition.section9.text1_8' %>
+                                                        </li>
+                                                        <li class="ps-lg-3">
+                                                            <%= t'welcome.term_and_condition.section9.text1_9' %>
+                                                        </li>
+                                                        <li class="ps-lg-3">
+                                                            <%= t'welcome.term_and_condition.section9.text1_10' %>
+                                                        </li>
+                                                        <li class="ps-lg-3">
+                                                            <%= t'welcome.term_and_condition.section9.text1_11' %>
+                                                        </li>
+                                                    </ol>
+                                                </p>
+                                            </li>
+                                            <li class="ps-lg-3">
+                                                <p class="text-justify">
+                                                    <%= t'welcome.term_and_condition.section9.text2' %>
+                                                </p>
+                                            </li>
+                                            <li class="ps-lg-3"> 
+                                                <p class="text-justify">
+                                                    <%= t'welcome.term_and_condition.section9.text3' %>
+                                                </p>
+                                            </li>
+                                            <li class="ps-lg-3"> 
+                                                <p class="text-justify">
+                                                    <%= t'welcome.term_and_condition.section9.text4' %>
+                                                </p>
+                                            </li>
+                                            <li class="ps-lg-3"> 
+                                                <p class="text-justify">
+                                                    <%= t'welcome.term_and_condition.section9.text5' %>
+                                                </p>
+                                            </li>
+                                        </ol> 
+                                    </div>
+                                    <!--end::Text-->
+                                </div>
+                                <!--end::Content-->
+                                <!--begin::Separator-->
+                                <div class="separator separator-dashed"></div>
+                                <!--end::Separator-->
+                            </div>
+                            <!--end::Section 9-->
+                            <!--begin::Section 10-->
+                            <div class="m-0">
+                                <!--begin::Heading-->
+                                <div class="d-flex align-items-center collapsible py-lg-3 py-sm-2 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#kt_job_10">
+                                    <!--begin::Icon-->
+                                    <div class="btn btn-sm btn-icon mw-lg-20px mw-10px btn-active-color-primary me-lg-5 me-sm-4 me-3">
+                                        <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
+                                        <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                                <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                        <!--end::Svg Icon-->
+                                        <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
+                                        <span class="svg-icon toggle-off svg-icon-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                                <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+                                                <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                        <!--end::Svg Icon-->
+                                    </div>
+                                    <!--end::Icon-->
+                                    <!--begin::Title-->
+                                    <h4 class="text-gray-800 fw-bolder cursor-pointer fs-4 mb-0">
+                                        <%= t'welcome.term_and_condition.section10.title' %>
+                                    </h4>
+                                    <!--end::Title-->
+                                </div>
+                                <!--end::Heading-->
+                                <!--begin::Body-->
+                                <div id="kt_job_10" class="collapse fs-6 ms-lg-1">
+                                    <!--begin::Text-->
+                                    <div class="mb-4 text-gray-700 fw-bold fs-6 ps-lg-13 ps-6">                                    
+                                        <ol class="p-lg-1 mb-2 ps-5">
+                                            <li class="ps-lg-3"> 
+                                                <p class="text-justify mb-0">
+                                                    <%= t'welcome.term_and_condition.section10.text1' %>
+                                                    <ol class="ol-parentheses ps-5">
+                                                        <li class="ps-lg-3">
+                                                            <%= t'welcome.term_and_condition.section10.text1_1' %>
+                                                        </li>
+                                                        <li class="ps-lg-3">
+                                                            <%= t'welcome.term_and_condition.section10.text1_2' %>
+                                                        </li>
+                                                        <li class="ps-lg-3">
+                                                            <%= t'welcome.term_and_condition.section10.text1_3' %>
+                                                        </li>
+                                                        <li class="ps-lg-3">
+                                                            <%= t'welcome.term_and_condition.section10.text1_4' %>
+                                                        </li>
+                                                        <li class="ps-lg-3">
+                                                            <%= t'welcome.term_and_condition.section10.text1_5' %>
+                                                        </li>
+                                                    </ol>
+                                                </p>
+                                            </li>
+                                            <li class="ps-lg-3">
+                                                <p class="text-justify">
+                                                    <%= t'welcome.term_and_condition.section10.text2' %>
+                                                </p>
+                                            </li>
+                                        </ol> 
+                                    </div>
+                                    <!--end::Text-->
+                                </div>
+                                <!--end::Content-->
+                                <!--begin::Separator-->
+                                <div class="separator separator-dashed"></div>
+                                <!--end::Separator-->
+                            </div>
+                            <!--end::Section 10-->
+                            <!--begin::Section 11-->
+                            <div class="m-0">
+                                <!--begin::Heading-->
+                                <div class="d-flex align-items-center collapsible py-lg-3 py-2 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#kt_job_11">
+                                    <!--begin::Icon-->
+                                    <div class="btn btn-sm btn-icon  mw-lg-20px mw-10px btn-active-color-primary me-lg-5 me-sm-4 me-3">
+                                        <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
+                                        <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                                <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                        <!--end::Svg Icon-->
+                                        <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
+                                        <span class="svg-icon toggle-off svg-icon-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                                <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+                                                <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                        <!--end::Svg Icon-->
+                                    </div>
+                                    <!--end::Icon-->
+                                    <!--begin::Title-->
+                                    <h4 class="text-gray-800 fw-bolder cursor-pointer fs-4 mb-0">
+                                        <%= t'welcome.term_and_condition.section11.title' %>
+                                    </h4>
+                                    <!--end::Title-->
+                                </div>
+                                <!--end::Heading-->
+                                <!--begin::Body-->
+                                <div id="kt_job_11" class="collapse fs-6 ms-lg-1">
+                                <!--begin::Text-->
+                                <div class="mb-4 text-gray-700 fw-bold fs-6 ps-lg-13 ps-6">                                    
+                                    <ol class="p-lg-1 mb-2 ps-5">
+                                        <li class="ps-lg-3">
+                                            <p class="text-justify">
+                                                <%= t'welcome.term_and_condition.section11.text1' %>
+                                            </p>
+                                        </li>
+                                        <li class="ps-lg-3">
+                                            <p class="text-justify">
+                                                <%= t'welcome.term_and_condition.section11.text2' %>
+                                            </p>
+                                        </li>
+                                    </ol> 
+                                </div>
+                                <!--end::Text-->
+                                </div>
+                                <!--end::Content-->
+                                <!--begin::Separator-->
+                                <div class="separator separator-dashed"></div>
+                                <!--end::Separator-->
+                            </div>
+                            <!--end::Section 11-->
+                            <!--begin::Section 12-->
+                            <div class="m-0">
+                                <!--begin::Heading-->
+                                <div class="d-flex align-items-center collapsible py-lg-3 py-2 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#kt_job_12">
+                                    <!--begin::Icon-->
+                                    <div class="btn btn-sm btn-icon  mw-lg-20px mw-10px btn-active-color-primary me-lg-5 me-sm-4 me-3">
+                                        <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
+                                        <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                                <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                        <!--end::Svg Icon-->
+                                        <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
+                                        <span class="svg-icon toggle-off svg-icon-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                                <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+                                                <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                        <!--end::Svg Icon-->
+                                    </div>
+                                    <!--end::Icon-->
+                                    <!--begin::Title-->
+                                    <h4 class="text-gray-800 fw-bolder cursor-pointer fs-4 mb-0">
+                                        <%= t'welcome.term_and_condition.section12.title' %>
+                                    </h4>
+                                    <!--end::Title-->
+                                </div>
+                                <!--end::Heading-->
+                                <!--begin::Body-->
+                                <div id="kt_job_12" class="collapse fs-6 ms-lg-1">
+                                    <!--begin::Text-->
+                                    <div class="mb-4 text-gray-700 fw-bold fs-6 ps-lg-13 ps-6">                                    
+                                        <ol class="p-lg-1 mb-2 ps-5">
+                                            <li class="ps-lg-3"> 
+                                                <p class="text-justify mb-0">
+                                                    <%= t'welcome.term_and_condition.section12.text1' %>
+                                                    <ol class="ol-parentheses ps-5">
+                                                        <li class="ps-lg-3">
+                                                            <%= t'welcome.term_and_condition.section12.text1_1' %>
+                                                        </li>
+                                                        <li class="ps-lg-3">
+                                                            <%= t'welcome.term_and_condition.section12.text1_2' %>
+                                                        </li>
+                                                        <li class="ps-lg-3">
+                                                            <%= t'welcome.term_and_condition.section12.text1_3' %>
+                                                        </li>
+                                                        <li class="ps-lg-3">
+                                                            <%= t'welcome.term_and_condition.section12.text1_4' %>
+                                                        </li>
+                                                        <li class="ps-lg-3">
+                                                            <%= t'welcome.term_and_condition.section12.text1_5' %>
+                                                        </li>
+                                                        <li class="ps-lg-3">
+                                                            <%= t'welcome.term_and_condition.section12.text1_6' %>
+                                                        </li>
+                                                        <li class="ps-lg-3">
+                                                            <%= t'welcome.term_and_condition.section12.text1_7' %>
+                                                        </li>
+                                                        <li class="ps-lg-3">
+                                                            <%= t'welcome.term_and_condition.section12.text1_8' %>
+                                                        </li>
+                                                    </ol>
+                                                </p>
+                                            </li>
+                                            <li class="ps-lg-3">
+                                                <p class="text-justify">
+                                                    <%= t'welcome.term_and_condition.section12.text2' %>
+                                                </p>
+                                            </li>
+                                            <li class="ps-lg-3"> 
+                                                <p class="text-justify">
+                                                    <%= t'welcome.term_and_condition.section12.text3' %>
+                                                </p>
+                                            </li>                                 
+                                        </ol> 
+                                    </div>
+                                    <!--end::Text-->
+                                </div>
+                                <!--end::Content-->
+                                <!--begin::Separator-->
+                                <div class="separator separator-dashed"></div>
+                                <!--end::Separator-->
+                            </div>
+                            <!--end::Section 12-->
+                            <!--begin::Section 13-->
+                            <div class="m-0">
+                                <!--begin::Heading-->
+                                <div class="d-flex align-items-center collapsible py-lg-3 py-sm-2 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#kt_job_13">
+                                    <!--begin::Icon-->
+                                    <div class="btn btn-sm btn-icon  mw-lg-20px mw-10px btn-active-color-primary me-lg-5 me-sm-4 me-3">
+                                        <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
+                                        <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                                <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                        <!--end::Svg Icon-->
+                                        <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
+                                        <span class="svg-icon toggle-off svg-icon-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                                <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+                                                <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                        <!--end::Svg Icon-->
+                                    </div>
+                                    <!--end::Icon-->
+                                    <!--begin::Title-->
+                                    <h4 class="text-gray-800 fw-bolder cursor-pointer fs-4 mb-0">
+                                        <%= t'welcome.term_and_condition.section13.title' %>
+                                    </h4>
+                                    <!--end::Title-->
+                                </div>
+                                <!--end::Heading-->
+                                <!--begin::Body-->
+                                <div id="kt_job_13" class="collapse fs-6 ms-lg-1">
+                                <!--begin::Text-->
+                                <div class="mb-4 text-gray-700 fw-bold fs-6 ps-lg-13 ps-6">                                    
+                                    <ol class="p-lg-1 mb-2 ps-5">
+                                        <li class="ps-lg-3">
+                                            <p class="text-justify">
+                                                <%= t'welcome.term_and_condition.section13.text1' %>
+                                            </p>
+                                        </li>
+                                        <li class="ps-lg-3">
+                                            <p class="text-justify">
+                                                <%= t'welcome.term_and_condition.section13.text2' %>
+                                            </p>
+                                        </li>
+                                        <li class="ps-lg-3"> 
+                                            <p class="text-justify">
+                                                <%= t'welcome.term_and_condition.section13.text3' %>
+                                            </p>
+                                        </li>                                 
+                                    </ol> 
+                                </div>
+                                <!--end::Text-->
+                                </div>
+                                <!--end::Content-->
+                                <!--begin::Separator-->
+                                <div class="separator separator-dashed"></div>
+                                <!--end::Separator-->
+                            </div>
+                            <!--end::Section 13-->
+                            <!--begin::Section 14-->
+                            <div class="m-0">
+                                <!--begin::Heading-->
+                                <div class="d-flex align-items-center collapsible py-lg-3 py-sm-2 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#kt_job_14">
+                                    <!--begin::Icon-->
+                                    <div class="btn btn-sm btn-icon mw-lg-20px mw-10px btn-active-color-primary me-lg-5 me-sm-4 me-3">
+                                        <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
+                                        <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                                <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                        <!--end::Svg Icon-->
+                                        <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
+                                        <span class="svg-icon toggle-off svg-icon-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                                <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+                                                <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                        <!--end::Svg Icon-->
+                                    </div>
+                                    <!--end::Icon-->
+                                    <!--begin::Title-->
+                                    <h4 class="text-gray-800 fw-bolder cursor-pointer fs-4 mb-0">
+                                        <%= t'welcome.term_and_condition.section14.title' %>
+                                    </h4>
+                                    <!--end::Title-->
+                                </div>
+                                <!--end::Heading-->
+                                <!--begin::Body-->
+                                <div id="kt_job_14" class="collapse fs-6 ms-lg-1">
+                                    <!--begin::Text-->
+                                    <div class="mb-4 text-gray-700 fw-bold fs-6 ps-lg-13 ps-6">
+                                        <p class="p-lg-1 mb-2">
+                                            <%= t'welcome.term_and_condition.section14.text1' %>
+                                        </p>
+                                    </div>
+                                    <!--end::Text-->
+                                </div>
+                                <!--end::Content-->
+                                <!--begin::Separator-->
+                                <div class="separator separator-dashed"></div>
+                                <!--end::Separator-->
+                            </div>
+                            <!--end::Section 14-->
+                            <!--begin::Section 15-->
+                            <div class="m-0">
+                                <!--begin::Heading-->
+                                <div class="d-flex align-items-center collapsible py-lg-3 py-sm-2 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#kt_job_15">
+                                    <!--begin::Icon-->
+                                    <div class="btn btn-sm btn-icon mw-lg-20px mw-10px btn-active-color-primary me-lg-5 me-sm-4 me-3">
+                                        <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
+                                        <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                                <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                        <!--end::Svg Icon-->
+                                        <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
+                                        <span class="svg-icon toggle-off svg-icon-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                                <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+                                                <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                        <!--end::Svg Icon-->
+                                    </div>
+                                    <!--end::Icon-->
+                                    <!--begin::Title-->
+                                    <h4 class="text-gray-800 fw-bolder cursor-pointer fs-4 mb-0">
+                                        <%= t'welcome.term_and_condition.section15.title' %>
+                                    </h4>
+                                    <!--end::Title-->
+                                </div>
+                                <!--end::Heading-->
+                                <!--begin::Body-->
+                                <div id="kt_job_15" class="collapse fs-6 ms-lg-1">
+                                <!--begin::Text-->
+                                <div class="mb-4 text-gray-700 fw-bold fs-6 ps-lg-13 ps-6">                                    
+                                    <ol class="p-lg-1 mb-2 ps-5">
+                                        <li class="ps-lg-3">
+                                            <p class="text-justify">
+                                                <%= t'welcome.term_and_condition.section15.text1' %>
+                                            </p>
+                                        </li>
+                                        <li class="ps-lg-3"> 
+                                            <p class="text-justify">
+                                                <%= t'welcome.term_and_condition.section15.text2' %>
+                                            </p>
+                                        </li>                                 
+                                    </ol> 
+                                </div>
+                                <!--end::Text-->
+                                </div>
+                                <!--end::Content-->
+                                <!--begin::Separator-->
+                                <div class="separator separator-dashed"></div>
+                                <!--end::Separator-->
+                            </div>
+                            <!--end::Section 15-->
+                            <!--begin::Section 16-->
+                            <div class="m-0">
+                                <!--begin::Heading-->
+                                <div class="d-flex align-items-center collapsible py-lg-3 py-sm-2 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#kt_job_16">
+                                    <!--begin::Icon-->
+                                    <div class="btn btn-sm btn-icon mw-lg-20px mw-10px btn-active-color-primary me-lg-5 me-sm-4 me-3">
+                                        <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
+                                        <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                                <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                        <!--end::Svg Icon-->
+                                        <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
+                                        <span class="svg-icon toggle-off svg-icon-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                                <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+                                                <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                        <!--end::Svg Icon-->
+                                    </div>
+                                    <!--end::Icon-->
+                                    <!--begin::Title-->
+                                    <h4 class="text-gray-800 fw-bolder cursor-pointer fs-4 mb-0">
+                                        <%= t'welcome.term_and_condition.section16.title' %>
+                                    </h4>
+                                    <!--end::Title-->
+                                </div>
+                                <!--end::Heading-->
+                                <!--begin::Body-->
+                                <div id="kt_job_16" class="collapse fs-6 ms-lg-1">
+                                    <!--begin::Text-->
+                                    <div class="mb-4 text-gray-700 fw-bold fs-6 ps-lg-13 ps-6">
+                                        <p class="p-lg-1 mb-2">
+                                            <%= t'welcome.term_and_condition.section16.text1' %>
+                                        </p>
+                                    </div>
+                                    <!--end::Text-->
+                                </div>
+                                <!--end::Content-->
+                                <!--begin::Separator-->
+                                <div class="separator separator-dashed"></div>
+                                <!--end::Separator-->
+                            </div>
+                            <!--end::Section 16-->
+                            <!--begin::Section 17-->
+                            <div class="m-0">
+                                <!--begin::Heading-->
+                                <div class="d-flex align-items-center collapsible py-lg-3 py-sm-2 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#kt_job_17">
+                                    <!--begin::Icon-->
+                                    <div class="btn btn-sm btn-icon mw-lg-20px mw-10px btn-active-color-primary me-lg-5 me-sm-4 me-3">
+                                        <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
+                                        <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                                <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                        <!--end::Svg Icon-->
+                                        <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
+                                        <span class="svg-icon toggle-off svg-icon-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor" />
+                                                <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor" />
+                                                <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor" />
+                                            </svg>
+                                        </span>
+                                        <!--end::Svg Icon-->
+                                    </div>
+                                    <!--end::Icon-->
+                                    <!--begin::Title-->
+                                    <h4 class="text-gray-800 fw-bolder cursor-pointer fs-4 mb-0">
+                                        <%= t'welcome.term_and_condition.section17.title' %>
+                                    </h4>
+                                    <!--end::Title-->
+                                </div>
+                                <!--end::Heading-->
+                                <!--begin::Body-->
+                                <div id="kt_job_17" class="collapse fs-6 ms-lg-1">
+                                    <!--begin::Text-->
+                                    <div class="mb-4 text-gray-700 fw-bold fs-6 ps-lg-13 ps-6">
+                                        <p class="p-lg-1 mb-2">
+                                            <%= t'welcome.term_and_condition.section17.text1' %>
+                                        </p>
+                                    </div>
+                                    <!--end::Text-->
+                                </div>
+                                <!--end::Content-->
+                                <!--begin::Separator-->
+                                <div class="separator separator-dashed"></div>
+                                <!--end::Separator-->
+                            </div>
+                            <!--end::Section 17-->
+                            <!--end::Accordion-->
+                        </div>
+                        <!--end::Col-->
+                    </div>
+                    <!--end::Row-->                    
+                </div>
+                <!--end::Classic content-->
+                <!--begin::Section-->
+                <div class="mb-17">
+                    <!--begin::Content-->
+                    <div class="d-flex flex-column mb-5">
+                        <!--begin::Title-->
+                        <h5 class="text-muted">
+                            <%= t('welcome.privacy policy.top_page_link.text4') %>
+                        </h5>
+                        <h5 class="text-muted">
+                            <%= t('welcome.privacy policy.top_page_link.text11') %>
+                        </h5>
+                        <!--end::Title-->
+                    </div>
+                    <!--end::Content-->
+                </div>
+                <!--end::Section-->
+            </div>
+            <!--end::Body-->					
+	    </div>
+	    <!--end::FAQ card-->
+    </div>
+</div>

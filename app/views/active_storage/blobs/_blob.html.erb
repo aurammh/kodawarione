@@ -1,0 +1,25 @@
+<figure style="border:0" class="attachment attachment--<%= blob.representable? ? "preview" : "file" %> attachment--<%= blob.filename.extension %>">
+  <% if blob.video? %>
+    <video controls="false" width="100%">
+      <source src= <%= rails_blob_url(blob) %>, type=<%= blob.content_type %> >
+    </video>
+  <% elsif blob.audio? %>
+    <audio controls="true" width="100%" preload="metadata">
+      <source src= <%= rails_blob_url(blob) %>, type=<%= blob.content_type %> >
+    </audio>   
+  <% elsif blob.representable? %>    
+    <%= image_tag blob.representation(resize_to_limit: local_assigns[:in_gallery] ? [ 800, 600 ] : [ 1024, 768 ]) %>   
+  <% end %>
+  <figcaption class="attachment__caption px-3 py-1 admin-sidebar-color custom-btn text-white text-decoration-none text-center mb-2">
+    <% if caption = blob.try(:caption) %>
+      <%= caption %>
+    <% else %>
+      <%= link_to rails_blob_path(blob, disposition: "attachment")  do%>
+        <span class="attachment__size truncate">
+          <%= blob.filename %> <%= number_to_human_size blob.byte_size %>
+        </span>
+        <i class="fas fa-download fa-sm text-white-50"></i>
+      <% end %>
+    <% end %>
+  </figcaption>
+</figure>

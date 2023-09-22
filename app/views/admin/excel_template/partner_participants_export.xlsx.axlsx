@@ -1,0 +1,29 @@
+wb = xlsx_package.workbook
+
+wb.styles do |style|
+  project_heading = style.add_style(b: true, sz: 14)
+  heading = style.add_style(b: true)
+
+  wb.add_worksheet(name: "Users") do |sheet|
+    # Add a title row
+    sheet.add_row [t('event_participant.title.user_event_participant')], style: project_heading
+    # Add the date this was downloaded
+    sheet.add_row ["Downloaded at", Time.now.strftime("%Y年%-m月%-d日")]
+    # Add a blank row
+    sheet.add_row []
+    # Create the header row
+    sheet.add_row [
+      Company::Company.human_attribute_name('partner_name'),
+      Event.human_attribute_name('event_name'),
+       t('event.title.participant_count'),
+      ], style: heading
+    # Create entries for each item
+    @partner_event_participants_lists.each do |user_event_participants|
+      sheet.add_row [
+      user_event_participants.name, 
+      user_event_participants.event_name,
+      user_event_participants.participants_count,
+      ]
+    end
+  end
+end

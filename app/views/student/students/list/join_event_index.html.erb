@@ -1,0 +1,17 @@
+<!--begin::Toolbar-->
+<div class="toolbar py-5 py-lg-5" id="kt_toolbar">
+    <!--begin::Container-->
+    <div id="kt_toolbar_container" class="container-xxl d-flex flex-stack flex-wrap">
+        <!--begin::Page title-->
+        <% breadcrumbs_navigation_add ( t ('common.join_event')),'#' %>
+        <%= render_student_breadcrumbs_navigation( t ('common.join_event')) %>
+        <!--end::Page title-->
+    </div>
+    <!--end::Container-->
+</div>
+<!--end::Toolbar-->
+<div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">            
+	<div class="content flex-row-fluid" id="kt_content">
+		<%= render partial: "common/join_event_list", locals: { join_events:  @all_join_event_list  } %>  
+	</div>
+</div>

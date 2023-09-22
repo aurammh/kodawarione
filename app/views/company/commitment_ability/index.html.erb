@@ -1,0 +1,175 @@
+<!--begin::Header-->
+<% breadcrumbs_navigation_add (t ('student_commitment.menu.discerning_registration')), '#' %>
+<%= render_company_breadcrumbs_navigation(t ('student_commitment.menu.discerning_registration')) %>			
+<!--end::Header-->
+
+<% flash.each do |key, value| %>
+    <% if value != nil %>
+        <% if key == 'email_change' %>
+            <div class="container">
+                <div class="alert alert-success d-flex justify-content-between align-items-center" role="alert">
+                <%= value %>
+                <button type="button" class="close btn btn-outline-none fw-bold fs-2 p-0" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+            </div>
+        <% end %>
+    <% end %>
+<% end %>
+<!--begin::Container-->
+<div id="kt_content" class="d-flex flex-column-fluid align-items-start container-xxl">
+    <!--begin::Content-->
+    <div class="content flex-row-fluid" id="kt_content_container" style="padding-top: 0;">
+        <div class="row">
+          <div class="col-xl-12">
+              
+              <!--begin::Tab Cotent-->
+              <div class="tab-content">
+                
+                <ul class="nav row mt-0 mb-10">
+                    <% if can?(:index, Company::CompanyCommitmentAbility) %>
+                        <li class="nav-item col-12 col-lg-4">
+                            <%= link_to company_commitment_ability_index_path, class: "nav-link btn btn-flex btn-color-gray-400 btn-outline btn-outline-default btn-active-primary d-flex flex-grow-1 flex-column flex-center py-3 active", :data => { :'bs-toggle' => 'tooltip', :'bs-trigger' => 'hover', :'bs-dismiss' => 'click', :'bs-placement' => 'right' } do %> 
+                                <!--begin::Svg Icon | path: icons/duotune/general/gen008.svg-->
+                                <span class="svg-icon svg-icon-2x mb-5 mx-0">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <rect x="0" y="0" width="24" height="24" />
+                                            <path d="M5,3 L6,3 C6.55228475,3 7,3.44771525 7,4 L7,20 C7,20.5522847 6.55228475,21 6,21 L5,21 C4.44771525,21 4,20.5522847 4,20 L4,4 C4,3.44771525 4.44771525,3 5,3 Z M10,3 L11,3 C11.5522847,3 12,3.44771525 12,4 L12,20 C12,20.5522847 11.5522847,21 11,21 L10,21 C9.44771525,21 9,20.5522847 9,20 L9,4 C9,3.44771525 9.44771525,3 10,3 Z" fill="#000000" />
+                                            <rect fill="#000000" opacity="0.3" transform="translate(17.825568, 11.945519) rotate(-19.000000) translate(-17.825568, -11.945519)" x="16.3255682" y="2.94551858" width="3" height="18" rx="1" />
+                                        </g>
+                                    </svg>
+                                </span>
+                                <!--end::Svg Icon-->
+                                <span class="fs-6 fw-bolder">学生に求めるこだわり</span>
+                            <% end %>
+                        </li>
+                    <% end %>
+                    <% if can?(:index, Company::MCompanyQuestionnaire) %>
+                        <li class="nav-item col-12 col-lg-4">
+                            <%= link_to company_assessments_path, class: "nav-link btn btn-flex btn-color-gray-400 btn-outline btn-outline-default btn-active-primary d-flex flex-grow-1 flex-column flex-center py-3",:data => { :'bs-toggle' => 'tooltip', :'bs-trigger' => 'hover', :'bs-dismiss' => 'click', :'bs-placement' => 'right' } do %> 
+                                <!--begin::Svg Icon | path: icons/duotune/finance/fin006.svg-->
+                                <span class="svg-icon svg-icon-2x mb-5 mx-0">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <rect x="0" y="0" width="24" height="24" />
+                                                <rect fill="#000000" opacity="0.3" x="13" y="4" width="3" height="16" rx="1.5" />
+                                                <rect fill="#000000" x="8" y="9" width="3" height="11" rx="1.5" />
+                                                <rect fill="#000000" x="18" y="11" width="3" height="9" rx="1.5" />
+                                                <rect fill="#000000" x="3" y="13" width="3" height="7" rx="1.5" />
+                                            </g>
+                                        </svg>
+                                    </span>
+                                <!--end::Svg Icon-->
+                                <span class="fs-6 fw-bolder">自社のこだわり</span>
+                            <% end %>
+                        </li>
+                    <% end %>
+                </ul>
+
+                <div id="" class="card card-custom card-stretch gutter-b bg-white">
+                    <div class="d-flex flex-row-fluid" style="justify-content:space-between">
+                        <div class="card-header h-auto border-0 py-3 bg-transparent">
+                            <div class="card-title pt-5 pb-2">
+                                <h3 class="card-label">
+                                <span class="d-block text-dark fw-bolder">
+                                    <%= t('title.company_commitment_ability_title') %>
+                                </span>
+                                </h3>
+                            </div>
+                        </div>
+    
+                        <span class="label pt-9 pb-3 px-10 hoverable fs-3 fw-bolder"  style="color: blue; text-decoration: none;">
+                            <a href="/company/company_student_matched_result">
+                            こだわリマッチ度検索画面へ
+                            </a>
+                        </span>
+                    </div>
+                    
+
+                    <div class="card-body">
+                        <div class="d-flex flex-column flex-lg-row">
+                            <div class="flex-lg-row-auto w-100 w-lg-275px w-xxl-350px mb-3">
+                                <!--begin::Block-->
+                                <div class="card bg-light p-8">
+                                    <!--begin::Item-->
+                                    <!-- <h4 class="text-gray-700 fs-bolder mb-3"><%= t('student.assessment.kodawari_assessment_title')%></h4> -->
+                                    <!--end::Item-->
+                                    <div class="fs-8 text-dart mb-5">
+                                        <span class="svg-icon svg-icon-primary svg-icon-3 me-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black"></rect>
+                                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black"></rect>
+                                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black"></rect>
+                                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black"></rect>
+                                            </svg>
+                                        </span>
+                                         <%= t('student_assessment.std_assessment_chart_date')%>：
+                                            <%=if @commitment_ability_detail_results.length > 0
+                                                l @commitment_ability_detail_results[0].updated_at.to_date
+                                            else
+                                                "-"   
+                                            end%>
+                                    </div>
+                                    
+                                    <% if @commitment_ability_detail_results.present? %>
+                                        <% @commitment_ability_detail_results.each_with_index do |ability, ind|%>
+                                        
+                                            <div class="my-2">
+                                                <div class="d-flex align-items-center mb-2">
+                                                    <span class="bullet me-3"></span>
+                                                    <div class="d-flex text-gray-600 fw-bold fs-6">
+                                                        <div style="align-self: center;" >
+                                                            <%= @chart_commitment_label[ind] %>：　
+                                                        </div>
+                            
+                                                        <div><%= ability.name %></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <%end%>
+                                    <% else %>
+                                        <% @chart_commitment_label.each do |label|%>
+                                            <div class="my-2">
+                                                <div class="d-flex align-items-center mb-2">
+                                                    <span class="bullet me-3"></span>
+                                                    <div class="text-gray-600 fw-bold fs-6"><%= label %>：　</div>
+                                                </div>
+                                            </div>
+                                        <%end%>
+                                    <% end %> 
+                                    <% if can?(:update, Company::CompanyCommitmentAbility) %>
+                                        <%= link_to t('student.assessment.kodawari_assessment_btn'),company_commitment_ability_start_path, :class => "btn btn-block text-center btn-primary fs-bolder font-size-lg mt-5" %>
+                                    <% end %>
+                                    <!--end::Item-->
+                                </div>
+                                <!--end::Block-->
+                            </div>
+                            <div class="flex-lg-row-fluid mt-lg-0 mt-3">
+                                <div id="kodawariAssessmentChart"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 
+              </div>
+              <!--end::Tab Cotent-->
+          </div>
+      </div>
+        
+    </div>
+</div>
+<!--end::Container-->
+<%# render "users/shared/toastr" %>
+<script> 
+    var chartSelfEevaluation= <%= @chartOne.inspect.html_safe %>; 
+    var chartPotentialDesire = <%= @chartTwo.inspect.html_safe %>; 
+    var chartThree = <%= @chartThree.inspect.html_safe %>; 
+    var chartKodawari = <%= @chart_commitment_range.inspect.html_safe %>; 
+    var chartKodawariLabel = <%= @chart_commitment_label.inspect.html_safe %>; 
+    var chartColor = "student_color";
+</script>
+<%= javascript_pack_tag "student/assessment.js" %>
+<%= javascript_pack_tag 'common.js'%>
+

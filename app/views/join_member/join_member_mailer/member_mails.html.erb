@@ -1,0 +1,5 @@
+<p>メンバー招待メールです。</p>
+<p><%= @company_name %> から招待されました。</p>
+<p>以下のリンクより確認お願い致します。</p>
+<p>URL : <%= link_to "メンバー招待", company_company_member_confirmation_url(confirmation_token: @company_company_member.confirmation_token, email: @company_company_member.user_email) %></p>
+<p>よろしくお願い致します。</p><br>

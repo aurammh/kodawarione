@@ -1,0 +1,20 @@
+@import "variable";
+.admin-content {
+  .student-registration .date-wrapper .icon {
+    color: $adminSidebarBgColor;
+  }
+  .student-registration [type="radio"]:checked + label:after,
+  .student-registration [type="radio"]:not(:checked) + label:after {
+    background: $adminSidebarBgColor;
+  }
+  .student-registration
+    ul.stylish-custom-chkbox
+    li
+    input[type="checkbox"]:checked
+    + label {
+    background-color: $adminSidebarBgColor;
+  }
+  .student-registration .custom-btn {
+    background-color: $adminSidebarBgColor !important;
+  }
+}

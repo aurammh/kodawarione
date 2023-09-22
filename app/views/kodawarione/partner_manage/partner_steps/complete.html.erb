@@ -1,0 +1,188 @@
+<!--begin::Header-->
+<% breadcrumbs_navigation_add (t('partner.banner.partner_setup')), '#' %>
+<%= render_partner_breadcrumbs_navigation (t('partner.banner.partner_setup')) %>		
+<!--end::Header-->
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Container-->
+    <div class="container-fluid" id="kt_content_container">
+		<!--begin::Tab Content-->
+		<div class="tab-content">
+			<!--begin::Tab pane-->
+			<div id="kt_project_users_card_pane" class="tab-pane fade show active">
+                <div class="card bg-body">
+                    <!--begin::Card body-->
+                    <div class="card-body pb-0">
+                        <!--begin::Stepper-->
+                        <div class="stepper stepper-links d-flex flex-column pt-15" id="kt_create_account_stepper">
+                            <%= render partial: 'kodawarione/partner_manage/partner_steps/steps_links', :locals =>{:current_step => 3} %>
+                            <!--begin::Form-->
+                            <div class="mx-auto mw-650px w-100 pt-15 pb-10" novalidate="novalidate" id="kt_create_account_form">
+                                <!--begin::Step 1-->
+                                <div class="current" data-kt-stepper-element="content">
+                                    <!--begin::Wrapper-->
+                                    <div class="w-100">
+                                        <!--begin::Input group-->
+                                        <div class="fv-row">
+                                            <!--begin::Row-->
+                                            <div class="row">
+                                                <!--begin::Col-->
+                                                <div class="col-lg-12">
+														<!--begin::Heading-->
+														<div class="pb-8 pb-lg-10">
+															<!--begin::Title-->
+															<h2 class="fw-bolder text-dark">
+                                                                <%= t('partner.steps.complete.title_1', current_partner_name: @partner.name).html_safe %>    
+                                                            </h2>
+															<!--end::Title-->
+															<!--begin::Notice-->
+															<div class="text-muted fw-bold fs-6">
+                                                                <%= t 'partner.steps.complete.text_1' %>
+                                                            </div>
+															<!--end::Notice-->
+														</div>
+														<!--end::Heading-->
+														<!--begin::Body-->
+														<div class="mb-0">
+															<!--begin::Text-->
+															<div class="fs-6 text-gray-600">
+                                                                <%= t 'partner.steps.complete.text_2' %>
+                                                            </div>
+															<!--end::Text-->
+                                                            <div class="separator separator-dashed border-gray-400 my-10"></div>
+                                                            <!--begin::Section-->
+                                                            <div class="mb-10">
+                                                                <!--begin::Title-->
+                                                                <h5 class="mb-4"><%= t('partner.steps.complete.title_2', current_partner_name: @partner.name).html_safe %></h5>
+                                                                <!--end::Title-->
+                                                                <!--begin::Details-->
+                                                                <div class="d-flex flex-wrap">
+                                                                    <!--begin::Details-->
+                                                                    <table class="table fs-6 fw-bold gs-0 gy-2 gx-2 m-0">
+                                                                        <!--begin::Row-->
+                                                                        <tr>
+                                                                            <td class="text-gray-500"><%= Kodawarione::SuperPartner.human_attribute_name('display_address') %>:</td>
+                                                                            <td class="text-gray-800 fw-bolder"><%= @partner.display_address %></td>
+                                                                        </tr>
+                                                                        <!--end::Row-->
+                                                                        <!--begin::Row-->
+                                                                        <tr>
+                                                                            <td class="text-gray-500"><%= Kodawarione::SuperPartner.human_attribute_name('phone_no') %>:</td>
+                                                                            <td class="text-gray-800 fw-bolder"><%= @partner.phone_no %></td>
+                                                                        </tr>
+                                                                        <!--end::Row-->
+                                                                        <!--begin::Row-->
+                                                                        <tr>
+                                                                            <td class="text-gray-500"><%= Kodawarione::SuperPartner.human_attribute_name('website_url') %>:</td>
+                                                                            <td class="text-gray-800 fw-bolder"><%= @partner.website_url %></td>
+                                                                        </tr>
+                                                                        <!--end::Row-->
+                                                                    </table>
+                                                                    <!--end::Details-->
+                                                                </div>
+                                                                <!--end::Details-->
+                                                            </div>
+                                                            <div class="separator separator-dashed border-gray-400 my-10"></div>
+                                                            <div class="my-10">
+                                                                <!--begin::Title-->
+                                                                <h5 class="mb-4"><%= t('partner.steps.complete.title_3', current_partner_name: @partner.name).html_safe %></h5>
+                                                                <!--end::Title-->
+                                                                <!--begin::Details-->
+                                                                <div class="d-flex align-items-center">
+                                                                    <!--begin::Avatar-->
+                                                                    <div class="symbol symbol-60px symbol-circle me-3">
+                                                                        <%= image_tag "avatar/male.svg", :class=> "" %>    
+                                                                    </div>
+                                                                    <!--end::Avatar-->
+                                                                    <!--begin::Info-->
+                                                                    <div class="d-flex flex-column">
+                                                                        <!--begin::Name-->
+                                                                        <a href="#" class="fs-4 fw-bolder text-gray-900 text-hover-primary me-2"><%= @admin.last_name %> <%= @admin.first_name %></a>
+                                                                        <!--end::Name-->
+                                                                        <!--begin::Email-->
+                                                                        <a href="#" class="fw-bold text-gray-600 text-hover-primary"><%= @admin.email %></a>
+                                                                        <!--end::Email-->
+                                                                    </div>
+                                                                    <!--end::Info-->
+                                                                </div>
+                                                                <!--end::Details-->
+                                                            </div>
+                                                            <!--end::Section-->
+															<!--begin::Alert-->
+															<!--begin::Notice-->
+															<div class="notice d-flex bg-light-warning rounded border-warning border border-dashed p-6">
+																<!--begin::Icon-->
+																<!--begin::Svg Icon | path: icons/duotune/general/gen044.svg-->
+																<span class="svg-icon svg-icon-2tx svg-icon-warning me-4">
+																	<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+																		<rect opacity="0.3" x="2" y="2" width="20" height="20" rx="10" fill="black" />
+																		<rect x="11" y="14" width="7" height="2" rx="1" transform="rotate(-90 11 14)" fill="black" />
+																		<rect x="11" y="17" width="2" height="2" rx="1" transform="rotate(-90 11 17)" fill="black" />
+																	</svg>
+																</span>
+																<!--end::Svg Icon-->
+																<!--end::Icon-->
+																<!--begin::Wrapper-->
+																<div class="d-flex flex-stack flex-grow-1">
+																	<!--begin::Content-->
+																	<div class="fw-bold">
+																		<h4 class="text-gray-900 fw-bolder">
+                                                                            <%= t('partner.steps.complete.notice.title', current_partner_name: @partner.name).html_safe %></h4>
+																		<div class="fs-6 text-gray-700">
+                                                                            <%= t('partner.steps.complete.notice.text_1', current_partner_name: @partner.name).html_safe %></h4>
+                                                                        </div>
+																	</div>
+																	<!--end::Content-->
+																</div>
+																<!--end::Wrapper-->
+															</div>
+															<!--end::Notice-->
+															<!--end::Alert-->
+														</div>
+														<!--end::Body-->
+                                                    	<!--begin: Wizard Actions-->
+                                                        <div class="d-flex justify-content-between pt-15">
+                                                            <div class="mr-2">
+                                                                <%= link_to previous_wizard_url,class: "btn btn-light-primary font-weight-bolder font-size-h6 pl-8 pr-4 py-4 my-3" do %>
+                                                                    <span class="svg-icon svg-icon-md mr-1">
+                                                                        <!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Left-2.svg-->
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                                <polygon points="0 0 24 0 24 24 0 24" />
+                                                                                <rect fill="#000000" opacity="0.3" transform="translate(15.000000, 12.000000) scale(-1, 1) rotate(-90.000000) translate(-15.000000, -12.000000)" x="14" y="7" width="2" height="10" rx="1" />
+                                                                                <path d="M3.7071045,15.7071045 C3.3165802,16.0976288 2.68341522,16.0976288 2.29289093,15.7071045 C1.90236664,15.3165802 1.90236664,14.6834152 2.29289093,14.2928909 L8.29289093,8.29289093 C8.67146987,7.914312 9.28105631,7.90106637 9.67572234,8.26284357 L15.6757223,13.7628436 C16.0828413,14.136036 16.1103443,14.7686034 15.7371519,15.1757223 C15.3639594,15.5828413 14.7313921,15.6103443 14.3242731,15.2371519 L9.03007346,10.3841355 L3.7071045,15.7071045 Z" fill="#000000" fill-rule="nonzero" transform="translate(9.000001, 11.999997) scale(-1, -1) rotate(90.000000) translate(-9.000001, -11.999997)" />
+                                                                            </g>
+                                                                        </svg>
+                                                                        <!--end::Svg Icon-->
+                                                                    </span>
+                                                                    <%= t 'partner.steps.buttons.back' %>  
+                                                                <% end %>
+                                                            </div>
+                                                            <% if can?(:read, Kodawarione::Partner) %>
+                                                                <div>
+                                                                    <%= link_to (kodawarione_partner_manage_index_path), class: "btn btn-primary font-weight-bolder font-size-h6 pl-8 pr-4 py-4 my-3" do %>
+                                                                        <%= t 'partner.steps.buttons.finish' %>                                           
+                                                                    <% end %>
+                                                                </div>
+                                                            <% end %>
+                                                        </div>
+                                                        <!--end: Wizard Actions-->
+                                                </div>
+                                                <!--end::Col-->
+                                            </div>
+                                            <!--end::Row-->
+                                        </div>
+                                        <!--end::Input group-->
+                                    </div>
+                                    <!--end::Wrapper-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end::Card body-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

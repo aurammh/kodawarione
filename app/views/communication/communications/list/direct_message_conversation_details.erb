@@ -1,0 +1,124 @@
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <div class="toolbar py-5 py-lg-5" id="kt_toolbar">
+        <!--begin::Container-->
+        <div id="kt_toolbar_container" class="container-xxl d-flex flex-stack flex-wrap">
+            <!--begin::Page title-->
+            <% breadcrumbs_navigation_add (t('common.communication_dashboard_title')), '#' %>
+            <%= render_student_breadcrumbs_navigation(t('common.communication_dashboard_title')) %>	
+            <!--end::Page title-->
+        </div>
+        <!--end::Container-->
+    </div>    
+    <!--begin::Container-->
+    <div class="container-xxl" id="kt_content_container">
+    <!--begin::Inbox App - Messages -->
+    <div class="d-flex flex-column flex-lg-row"> 
+        <!--begin::Content-->
+        <div class="flex-lg-row-fluid">
+            <!--begin::Card--> 
+          <div class= "card bg-body mb-5 mb-xl-10">
+            <!--begin::Card Header-->
+            <div class="card-header border-0 pt-5">
+              <!--begin::Card title-->
+              <div class="card-title align-items-start flex-column">
+                <h2><%= t("communication.title.direct_message")%></h2>
+              </div>
+              <!--end::Card title-->
+              <!--begin::Card toolbar--> 
+            </div>          
+            <!--end::Card header-->
+            <!--begin::Body-->
+            <div class="card-body py-3">
+              <!--begin::Container-->            
+              <div>
+                <!-- Mail_type => 1 [Scotted Type] && Student <=> Company [start] -->  
+                <!--begin::Table container-->
+                <div class="table-responsive">
+                  <!--begin::Table-->
+                  <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4"> 
+                    <!--begin::Table body-->
+                    <tbody>
+                      <% @conversation_list.each_with_index do |conversation_list,index| %>  
+                          <tr>
+                            <td>
+                              <div class="">
+                                <% if conversation_list.category == "Event" %>
+                                  <span class="badge badge-light-primary"><%= t("communication.title.#{conversation_list.category}")%></span> 
+                                <% else %>
+                                  <span class="badge badge-light-success"><%= t("communication.title.#{conversation_list.category}")%></span> 
+                                <% end %>
+                              </div>
+                            </td>
+                            <td>
+                              <div class="d-flex align-items-center flex-wrap" data-toggle="view"> 
+                                  <div class="symbol symbol-45px me-4">
+                                      <span class="symbol-label bg-light-primary">
+                                      <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
+                                      <span class="svg-icon svg-icon-2x svg-icon-primary">
+                                          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                              <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                  <polygon points="0 0 24 0 24 24 0 24"/>
+                                                  <path d="M18,14 C16.3431458,14 15,12.6568542 15,11 C15,9.34314575 16.3431458,8 18,8 C19.6568542,8 21,9.34314575 21,11 C21,12.6568542 19.6568542,14 18,14 Z M9,11 C6.790861,11 5,9.209139 5,7 C5,4.790861 6.790861,3 9,3 C11.209139,3 13,4.790861 13,7 C13,9.209139 11.209139,11 9,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
+                                                  <path d="M17.6011961,15.0006174 C21.0077043,15.0378534 23.7891749,16.7601418 23.9984937,20.4 C24.0069246,20.5466056 23.9984937,21 23.4559499,21 L19.6,21 C19.6,18.7490654 18.8562935,16.6718327 17.6011961,15.0006174 Z M0.00065168429,20.1992055 C0.388258525,15.4265159 4.26191235,13 8.98334134,13 C13.7712164,13 17.7048837,15.2931929 17.9979143,20.2 C18.0095879,20.3954741 17.9979143,21 17.2466999,21 C13.541124,21 8.03472472,21 0.727502227,21 C0.476712155,21 -0.0204617505,20.45918 0.00065168429,20.1992055 Z" fill="#000000" fill-rule="nonzero"/>
+                                              </g>
+                                          </svg>
+                                      </span>
+                                      <!--end::Svg Icon-->
+                                      </span>
+                                  </div>
+                                  <span class="fw-bold  text-dark"> 
+                                      <%= get_sender_communication_info(conversation_list.sender_id,conversation_list.company_id,conversation_list.mail_type,conversation_list.sent_type)["name"].truncate(10) %>,
+                                      <%= get_receiver_communication_info(conversation_list.receiver_id,conversation_list.company_id,conversation_list.mail_type,conversation_list.sent_type)["name"].truncate(10) %>
+                                      <% unless @conversationDetailListCount.nil? %>
+                                          <%= @conversationDetailListCount[conversation_list.communication_id].nil? ? "" : '('+(@conversationDetailListCount[conversation_list.communication_id]+1).to_s+')' %> 
+                                      <% end %>
+                                  </span>
+                              </div>
+                            </td> 
+                            <td class="text-start">
+                              <div class="flex-grow-1 my-3 me-2 " data-toggle="view">
+                                <div class="w-200px"> 
+                                  <span class="fw-bolder text-dark<%= @new_communication_arr.include?(conversation_list.communication_id) ? '' : '' %>"><%= conversation_list.title %> -</span>
+                                  <span class="text-dark<%= @new_communication_arr.include?(conversation_list.communication_id) ? '' : '' %>"><%= t("communication.title.#{conversation_list.category}")%></span>
+                                  <span class="text-dark<%= @new_communication_arr.include?(conversation_list.communication_id) ? '' : '' %> "> <%= conversation_list.content.to_plain_text.truncate(65)  %></span>
+                                </div> 
+                              </div> 
+                            </td>
+                            <td>
+                              <div class="d-flex align-items-center">
+                                <span class="font-weight-normal text-dark mt-2 me-5"><%= time_date( conversation_list.created_at)%></span> 
+                              </div>
+                            </td>
+                            <td>
+                            <%= link_to t("btn.reply"),communication_conversation_forum_path(:id => conversation_list.communication_id), class: "btn btn-sm btn-flex btn-light-primary" %> 
+                            </td>
+                          </tr>   
+                      <% end %>
+                    </tbody>
+                    <!--end::Table body-->
+                  </table>
+                </div>
+                <!--end::Table container-->
+                <!--start::Pagination-->
+                <div class="col-12 d-flex justify-content-end mt-2 mx-2">
+                  <%= paginate @all_conversation_list  %>
+                </div>
+                <!--end::Pagination-->
+                <!--begin::Actions-->
+                <div class="card-footer d-flex justify-content-center py-6 px-9 mt-3">
+                  <%= link_to t('student_commitment.btn.previous'), (current_company_user.present? ? company_companies_path : student_students_path ), class: "btn btn-light btn-active-light-primary me-2" %>
+                </div>
+                <!--end::Actions-->
+              </div>
+              <!--end::Body-->
+            </div>
+            <!--end::Container-->
+          </div>    
+            <!--end::Card-->
+        </div>
+        <!--end::Content-->
+    </div>
+    <!--end::Inbox App - Messages -->
+</div>
+    <!--end::Container-->
+</div>

@@ -1,0 +1,55 @@
+<div class="">
+  <button  id="ability-btn" type="button" class="btn btn-primary custom-btn text-white com-bg-color py-2 float-right" data-bs-toggle="modal" data-bs-target="#abilityModal">
+    <%= t('company_vacancy.selection_items') %>
+  </button>
+  <div id="abilityModal" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2><%=t('student.assessment.kodawari_assessment_title')%></h2>
+          <div class="btn btn-sm btn-icon btn-active-color-primary cancle-close" data-bs-dismiss="modal">
+            <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+            <span class="svg-icon svg-icon-1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                    <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                </svg>
+            </span>
+            <!--end::Svg Icon-->
+          </div>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-12">                   
+              <div class="row">                    
+                <div class="col-12 mb-15">
+                  <span class="h5 text-muted" ><%= Student::Student.human_attribute_name('ability') %></span>
+                </div>  
+                <div class="col-12" id="modal1">  
+                  <%= commitment_form.fields_for :ability  do |f| %>  
+                    <% ability_options.each do |data| %>
+                      <div class="col-12 col-xl-6 col-lg-6 col-md-6  m-0 p-0">
+                        <label  class= "form-check form-check-sm form-check-custom form-check-solid simple-chkbox company-enhancement me-5 mb-5">
+                          <%= f.check_box data.id,{:checked => user_commitment.ability.nil?  ? false : user_commitment.ability[data.id-1] == 1 , class: 'checkbox-click-ability form-check-input'} %>
+                          <span class="form-check-label"></span>
+                           <% if  company_user_signed_in? %>
+                            <%= f.label "#{data.name}",class: "ml-3", for: "company_company_commitment_ability_#{data.id}", id: "commitment-ability-data-#{data.id}" %>
+                          <%else%>
+                            <%= f.label "#{data.name}",class: "ml-3", for: "student_student_commitment_ability_#{data.id}", id: "commitment-ability-data-#{data.id}" %>
+                          <% end %>
+                        </label>
+                      </div>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+            </div> 
+          </div>
+        </div>
+        <div class="modal-footer">
+          <%= link_to t('btn.submit') , "#",  {:remote => true, 'data-bs-dismiss' =>  "modal", 'data-bs-target' => '#abilityModal', class: 'btn btn-primary custom-btn py-2 px-3 text-center cancle-close'}  %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

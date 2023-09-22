@@ -1,0 +1,87 @@
+<!--begin::Header-->
+<% breadcrumbs_navigation_add (t('partner_plan.plan_info')), '#'%>
+<%= render_partner_breadcrumbs_navigation(t ('partner_plan.plan_info')) %>  
+<!--end::Header-->
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+  <!--begin::Container-->
+  <div class="container-fluid" id="kt_content_container">
+    <!--begin::Layout-->
+    <div class="d-flex flex-column flex-lg-row">
+      <!--begin::Content-->
+      <div class="flex-lg-row-fluid mb-10 mb-lg-0">
+        <!--begin::Card-->
+        <div class="card bg-body">
+          <!--begin::Form-->
+          <%= form_with(model: @plan) do |form| %>
+            <!--begin::Card body-->
+            <div class="card-body">
+              <!--begin::Wrapper-->
+              <div class="d-flex flex-column align-items-start flex-xxl-row">
+                <!--begin::Input group-->
+                <div class="d-flex flex-center flex-equal fw-row text-nowrap order-1 order-xxl-2 me-4">
+                  <span class="fs-2x fw-bolder text-gray-800"><%=t('partner_plan.plan_info') %></span>
+                </div>
+                <!--end::Input group-->
+              </div>
+              <!--end::Top-->
+              <!--begin::Separator-->
+              <div class="separator separator-dashed my-10"></div>
+              <!--end::Separator-->
+              <!--begin::Wrapper-->
+              <div class="mb-0">
+                <!--begin::Row-->
+                <div class="row form-group gx-10 mb-5">
+                    <div class="col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 text-left text-sm-left text-md-end text-lg-end text-xl-end col-form-label font-weight-bold pr-0" >
+                        <%= form.label :name, class: "form-label fs-6 fw-bolder text-gray-700" %><span class="ms-1 text-danger">*</span>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-5 col-xl-5">
+                      <%= form.text_field :name, id: "name", class: "form-control form-control-solid", placeholder: t("partner_plan.placeholder.plan_name"), rows: 4 %>
+                        <p class ="text-danger font-size-sm ms-invalid-feedback mt-1"><%= @plan.errors.full_messages_for(:name)[0] %></p>
+                    </div>
+                </div>
+                <!--end::Row-->
+                <!--begin::Row-->
+                <div class="row form-group gx-10 mb-5">
+                    <div class="col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 text-left text-sm-left text-md-end text-lg-end text-xl-end col-form-label font-weight-bold pr-0" >
+                        <%= form.label :content, class: "form-label fs-6 fw-bolder text-gray-700" %><span class="ms-1 text-danger">*</span>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-5 col-xl-5">
+                      <%= form.text_area :content, id: "content", class: "form-control form-control-solid", placeholder: t("partner_plan.placeholder.plan_content"), rows: 4 %>
+                        <p class ="text-danger font-size-sm ms-invalid-feedback mt-1"><%= @plan.errors.full_messages_for(:content)[0] %></p>
+                    </div>
+                </div>
+                <!--end::Row-->
+                <!--begin::Row-->
+                <div class="row form-group gx-10 mb-5">
+                    <div class="col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 text-left text-sm-left text-md-end text-lg-end text-xl-end col-form-label font-weight-bold pr-0" >
+                        <%= form.label :fee, class: "form-label fs-6 fw-bolder text-gray-700" %><span class="ms-1 text-danger">*</span>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-5 col-xl-5">
+                      <%= form.text_field :fee, id: "fee", class: "form-control form-control-solid", placeholder: t("partner_plan.placeholder.plan_fee"),maxlength: 7, rows: 4 %>
+                        <p class ="text-danger font-size-sm ms-invalid-feedback mt-1"><%= @plan.errors.full_messages_for(:fee)[0] %></p>
+                    </div>
+                </div>
+                <!--end::Row-->
+              </div>
+            </div>
+            <!--begin::Card footer-->
+            <div class="card-footer d-flex justify-content-center py-6 px-9">
+                <%= link_to t('btn.return'), kodawarione_plans_path, class: "btn btn-light btn-active-light-primary me-2" %>
+                <%= form.submit t('btn.update'), class: "btn btn-primary" %>
+            </div>
+            <!--end::Card footer-->
+          <% end %>
+          <!--end::Form-->
+        </div>
+        <!--end::Card-->
+      </div>
+      <!--end::Content-->
+    </div>
+    <!--end::Layout-->
+  </div>
+  <!--end::Container-->
+</div>
+<!--end::Content-->
+<%= javascript_pack_tag "company/event.js" %>
+<%= javascript_pack_tag "common.js" %>

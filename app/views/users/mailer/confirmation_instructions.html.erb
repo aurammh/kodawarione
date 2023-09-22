@@ -1,0 +1,20 @@
+
+<br>
+<% if @resource.unconfirmed_email.present? %>
+    <p><%= t('confirmations.thank_u_using_email') %><p>
+    <p><%= t('mailer.email_change_paragraph_1')%></p>
+    <p><%= t('mailer.email_change_paragraph_2')%></p>
+    <p><%= t('confirmations.new_email') %> <u><%= @resource.unconfirmed_email %> </u>
+      「 <%= link_to t('confirmations.login_link'), confirmation_url(@resource, confirmation_token: @token) %>」
+    </p>
+ <% else %>
+    <p>
+       <%= t('confirmations.thank_u_register') %><br>
+       <%= t('confirmations.required_info') %>
+       <br>
+    </p>
+    <p> 1.「 <%= link_to t('confirmations.password_new_setting'), confirmation_url(@resource, confirmation_token: @token) %>」 <%= t('mailer.password_req_1') %></p>
+    <p><%= t('mailer.password_req_2') %></p>
+    <p><%= t('mailer.password_req_3') %><br></p>
+<% end %>
+<p><%= t('mailer.inquary') %>:  <u class = "text-primary"><%= t('mailer.support_mail') %></u></p>

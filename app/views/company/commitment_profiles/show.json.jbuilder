@@ -1,0 +1,1 @@
+json.partial! "company_commitment_profiles/company_commitment_profile", company_commitment_profile: @company_commitment_profile

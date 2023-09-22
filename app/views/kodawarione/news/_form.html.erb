@@ -1,0 +1,122 @@
+<!--begin::Header-->
+<% breadcrumbs_navigation_add (t('partner_news.title.news_list')), kodawarione_news_index_path %>
+<% breadcrumbs_navigation_add (t('admin.news.news_information')), '#' %>
+<%= render_partner_breadcrumbs_navigation(t('admin.news.news_information')) %>		
+<!--end::Header-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+  <!--begin::Container-->
+  <div class="container-fluid" id="kt_content_container">
+    <!--begin::Layout-->
+    <div class="d-flex flex-column flex-lg-row">
+      <!--begin::Content-->
+      <div class="flex-lg-row-fluid mb-10 mb-lg-0">
+        <!--begin::Card-->
+        <div class="card bg-body">
+          <!--begin::Form-->
+          <%= form_for(@news) do |form| %>
+            <!--begin::Card body-->
+            <div class="card-body">
+              <!--begin::Header-->
+              <div class="d-flex flex-column align-items-start flex-xxl-row">
+                <div class="d-flex flex-center flex-equal fw-row text-nowrap order-1 order-xxl-2 me-4">
+                  <span class="fs-2x fw-bolder text-gray-800"><%= t('admin.news.news_information') %></span>
+                </div>
+              </div>
+              <!--end::Header-->
+
+
+              <!--begin::Separator-->
+              <div class="separator separator-dashed my-10">
+              </div>
+              <!--end::Separator-->
+
+              <!--begin::Body-->
+              <div class="mb-0">
+                <!--begin::Row-->
+                <div class="row mb-6">
+                  <div class="col-lg-3 offset-lg-1 col-form-label fw-bold fs-6 " >
+                    <%= form.label :title, class: "form-label fs-6 fw-bolder text-gray-700" %><span class="ms-1 text-danger">*</span>
+                  </div>
+                  <div class="col-lg-6 fv-row">
+                    <%= form.text_field :title, id: "title", class: "form-control form-control-solid", maxlength: 255 %>
+                    <p class="text-danger font-size-sm ms-invalid-feedback mt-1"><%= @news.errors.full_messages_for(:title)[0] %></p>
+                  </div>
+                </div>
+                <!--end::Row-->
+
+                <!--begin::Row-->
+                <div class="row mb-6">
+                  <div class="col-lg-3 offset-lg-1 col-form-label fw-bold fs-6 " >
+                    <%= form.label :news_category, class: "form-label fs-6 fw-bolder text-gray-700" %><span class="ms-1 text-danger">*</span>
+                  </div>
+                  <div class="col-lg-6 fv-row">
+                    <%= form.select(:news_category, news_categories,{:include_blank => ( t'select.not_select')}, {:class => "form-control form-control-solid", :id =>"news-type"}) %>
+                    <p class="text-danger font-size-sm ms-invalid-feedback mt-1"><%= @news.errors.full_messages_for(:news_category)[0] %></p>
+                  </div>
+                </div>
+                <!--end::Row-->
+
+
+                <!--begin::Row-->
+              <div class="row mb-6 news-other-type">
+                  <div class="col-lg-3 offset-lg-1 col-form-label fw-bold fs-6 " >
+                    <%= form.label :other, class: "form-label fs-6 fw-bolder text-gray-700" %><span class="ms-1 text-danger">*</span>
+                  </div>
+                  <div class="col-lg-6 fv-row">
+                    <%= form.text_area :other, class: "form-control form-control-solid", rows: 2, maxlength: 255%>
+                    <p class="text-danger font-size-sm ms-invalid-feedback mt-1"><%= @news.errors.full_messages_for(:other)[0] %></p>
+                  </div>
+                </div>
+                <!--end::Row-->
+
+                <!--begin::Row-->
+                <div class="row mb-6">
+                  <div class="col-lg-3 offset-lg-1 col-form-label fw-bold fs-6 " >
+                    <%= form.label :show_option, class: "form-label fs-6 fw-bolder text-gray-700" %>
+                    <span class="ms-1 text-danger">*</span>
+                  </div>
+                  <div class="col-lg-6 fv-row">
+                    <%= form.select :show_option, kodawarione_news_show_options, {}, {:multiple => true, :class => "form-select form-select-solid",:id => "event_category",data: {:placeholder => '', :control => 'select2', 'hide-search' => true, 'close-on-select' => false} } %>
+
+                    <%#= form.select(:show_option, kodawarione_news_show_options,{:include_blank => ( t'select.not_select')}, {:class => "form-control form-control-solid"}) %>
+                    <p class="text-danger font-size-sm ms-invalid-feedback mt-1">
+                    <%= @news.errors.full_messages_for(:show_option)[0] %>
+                    </p>
+                  </div>
+                </div>
+                <!--end::Row-->
+
+                <!--begin::Row-->
+                <div class="row mb-6">
+                  <div class="col-lg-3 offset-lg-1 col-form-label fw-bold fs-6 " >
+                    <%= form.label :content, class: "form-label fs-6 fw-bolder text-gray-700" %><span class="ms-1 text-danger">*</span>
+                  </div>
+                  <div class="col-lg-6 fv-row hide-trix-attachment">
+                    <%= form.rich_text_area :content, id: "content", class: "form-control form-control-solid h-200px h-lg-300px h-xl-300px overflow-auto errors" %>
+                    <p class="text-danger font-size-sm ms-invalid-feedback mt-1"><%= @news.errors.full_messages_for(:content)[0] %></p>
+                  </div>
+                </div>
+                <!--end::Row-->
+              </div>
+              <!--end::Body-->
+            </div>
+            <!--begin::Card footer-->
+            <div class="card-footer d-flex justify-content-center py-6 px-9">
+                <%= form.submit t('btn.update'), class: "btn btn-primary" %>
+            </div>
+            <!--end::Card footer-->
+          <% end %>
+          <!--end::Form-->
+        </div>
+        <!--end::Card-->
+      </div>
+      <!--end::Content-->
+    </div>
+    <!--end::Layout-->
+  </div>
+  <!--end::Container-->
+</div>
+<!--end::Content-->
+<%= javascript_pack_tag "partner/article.js" %>
+<%= javascript_pack_tag "company/event.js" %>
+<%= javascript_pack_tag "common.js" %>

@@ -1,0 +1,117 @@
+<!--begin::Header-->
+<% breadcrumbs_navigation_add (t('event.title.joined_event_list')), '#' %>
+<%= render_company_breadcrumbs_navigation(t('event.title.joined_event_list')) %>
+<!--end::Header-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Container-->
+    <div class="container-xxl" id="kt_content_container">
+    <% if @admin_event_result.present? %>
+        <!--begin::Event Tables Widget -->
+        <div class="card bg-body">
+            <!--begin::Header-->
+            <div class="card-header border-0 pt-5">
+                <h3 class="card-title align-items-start flex-column">
+                    <span class="card-label fw-bolder fs-3 mb-1"><%= t('event.title.joined_event_list') %></span>
+                </h3>
+            </div>
+            <!--end::Header-->
+            <!--begin::Body-->
+            <div class="card-body py-3">
+                <!--begin::Table container-->
+                <div class="table-responsive  overflow-auto">
+                    <!--begin::Table-->
+                    <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
+                        <!--begin::Table head-->
+                        <thead>
+                            <tr class="fw-bolder text-muted">
+                                <th class="min-w-400px"><%= Event.human_attribute_name('event_name') %></th>
+                                <th class="min-w-100px"><%= t('activerecord.attributes.admin/event.applicants_count') %></th>
+                                <th class="min-w-250px"><%= t('event.title.event_date') %></th>
+                                <th class="min-w-150px text-end"><%= t('event.title.edit_text_title') %></th>
+                            </tr>
+                        </thead>
+                        <!--end::Table head-->
+                        <!--begin::Table body-->
+                        <tbody>
+                            <% @admin_event_result.each do |event| %>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="symbol symbol-45px me-5">
+                                                <div class="d-flex flex-column justify-content-center text-dark symbol-label bg-primary bg-opacity-75">
+                                                    <span class="fs-7 text-white"><%= t('date.abbr_month_names')[event.event_start_date.month] %></span>
+                                                    <span class="fs-5 fw-boldest text-white"><%= event.event_start_date.strftime('%d') %><%= t('date.prompts.day') %></span>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-start flex-column">
+                                                <span class="text-dark fw-bolder fs-6"><%= event.event_name.truncate(45) %></span>
+                                                <span class="text-muted fw-bold text-muted d-block fs-7"><i class="flaticon2-pin me-1"></i> <%= event.venue.present? ? event.venue.truncate(45) : t("event.venue_types.online") %></span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="text-muted fw-bolder d-block fs-6"><%= event.join_count == nil ? '0' : event.join_count %> 名</span>
+                                    </td>
+                                    <td>
+                                        <span class="text-muted fw-bold d-block fs-6"><%= l event.event_start_date.to_date %>～<%= l event.event_end_date.to_date %></span>
+                                    </td>
+                                    <td>
+                                        <% if can?(:admin_event_detail_search, Company::Search) %>
+                                            <div class="d-flex justify-content-end flex-shrink-0">
+                                                <%= link_to company_admin_event_detail_search_path(:id => event.id), :class=>"btn btn-icon btn-bg-light btn-active-color-primary btn-sm" do %>
+                                                    <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
+                                                    <span class="svg-icon svg-icon-3">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                            <path d="M17.5 11H6.5C4 11 2 9 2 6.5C2 4 4 2 6.5 2H17.5C20 2 22 4 22 6.5C22 9 20 11 17.5 11ZM15 6.5C15 7.9 16.1 9 17.5 9C18.9 9 20 7.9 20 6.5C20 5.1 18.9 4 17.5 4C16.1 4 15 5.1 15 6.5Z" fill="black" />
+                                                            <path opacity="0.3" d="M17.5 22H6.5C4 22 2 20 2 17.5C2 15 4 13 6.5 13H17.5C20 13 22 15 22 17.5C22 20 20 22 17.5 22ZM4 17.5C4 18.9 5.1 20 6.5 20C7.9 20 9 18.9 9 17.5C9 16.1 7.9 15 6.5 15C5.1 15 4 16.1 4 17.5Z" fill="black" />
+                                                        </svg>
+                                                    </span>
+                                                    <!--end::Svg Icon-->
+                                                <% end %>
+                                            </div>
+                                        <% end %>
+                                    </td>
+                                </tr>
+                            <% end %>
+                        </tbody>
+                        <!--end::Table body-->
+                    </table>
+                    <!--end::Table-->
+                </div>
+                <!--end::Table container-->
+            </div>
+            <!--begin::Body-->
+        </div>
+        <!--end::Event Tables Widget -->
+        <!--begin::pagination-->
+        <div class="d-flex flex-wrap justify-content-between align-items-center mt-10">
+            <div class="d-flex flex-wrap">
+                <%= paginate @admin_event_result %>
+            </div>
+            <div class="d-flex align-items-center py-3">
+                <span class="text-muted"><%=  t('common.list_display')  %><%= @admin_event_result.total_count %> <%=  t('common.to')  %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%= @admin_event_result.offset_value + 1 %> ~ <%=  @admin_event_result.offset_value + @admin_event_result.count %> <%=  t('common.search_result')  %> </span>
+            </div>
+        </div>
+        <!--end::pagination-->
+    <% else %> 
+        <!--begin::Card-->
+        <div class="card bg-body">
+            <!--begin::Card body-->
+            <div class="card-body p-0">
+                <!--begin::Wrapper-->
+                <div class="card-px py-5 my-5">
+                    <!--begin::Description-->
+                    <div class="d-flex align-items-center flex-column">
+                        <span class="text-muted m-1 fw-bold"><%= t('event.title.admin_event_participant_list_text') %></span>
+                    </div>
+                    <!--end::Description-->
+                </div>
+                <!--end::Wrapper-->
+            </div>
+            <!--end::Card body-->
+        </div>
+        <!--end::Card-->
+    <% end %>					
+    </div>
+</div>
+<%= javascript_pack_tag 'common.js'%>

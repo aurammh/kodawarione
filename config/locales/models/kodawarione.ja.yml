@@ -1,0 +1,31 @@
+ja:
+  kodawarione:
+    sidebar:
+      super_partner_management: スパーパートナー管理
+      super_partner_list: スーパーパートナー一覧
+      create_new: 新規作成
+      partner_management: パートナー管理
+      partner_list: パートナー一覧
+      student_management: 学生管理
+      student_list: 学生一覧
+      communication_list: メッセージ
+      company_management: 企業管理
+      company_list: 企業一覧
+      event_management: イベント管理
+      event_list: 全体イベント検索
+      job_management: 求人管理
+      job_list: 求人一覧
+      administrator_related_information: 管理者関連情報
+      student_company_information: 学生・企業関連情報
+      event_transmission_information: 情報発信管理
+      contract_training_information: 契約・トレーニング関連情報
+      developer_permission: 開発者向け
+      function_authority_permission: 管理機能権限管理
+      company_authority_permission: 企業権限管理
+      notification_management: お知らせ管理
+      created_event_list: 作成したイベント一覧
+      headquarters_manager: 本部管理者
+    company_details:
+      nav:
+        overview: 企業概要
+        company_page: 企業ページ

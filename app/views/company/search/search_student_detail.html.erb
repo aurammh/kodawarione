@@ -1,0 +1,14 @@
+<!--begin::Breadcrumb-->
+<% breadcrumbs_navigation_add (t('dashboard.job_seeker')), company_students_search_path if cookies[:previous_url] == '/company/students_search' %>
+<% breadcrumbs_navigation_add (t('dashboard.company_student_matched_result')), company_company_student_matched_questionnaire_result_path if cookies[:previous_url] == '/company/company_student_matched_questionnaire_result' %>
+<% breadcrumbs_navigation_add (t('dashboard.company_student_matched_result')), company_company_student_matched_result_path if cookies[:previous_url] == '/company/company_student_matched_result' %>
+<% breadcrumbs_navigation_add (t('common.favourite_users')), company_favourite_student_index_path if cookies[:previous_url] == '/company/favourite_student_index' %>
+<% breadcrumbs_navigation_add (t('common.favourite_users')), company_favourite_student_list_path if cookies[:previous_url] == '/company/favourite_student_list' %>
+<% breadcrumbs_navigation_add (t('title.student_search_detail_title')), '#' %>
+<%= render_company_breadcrumbs_navigation(t('title.student_search_detail_title')) %> 
+<!--end::Breadcrumb-->
+<% if @student_apply_status.size > 0 %>
+    <%= render partial: "company/shared/student_detail" %>  
+<% else %> 
+    <%= render partial: "company/shared/student_commitment" %> 
+<% end %>

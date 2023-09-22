@@ -1,0 +1,22 @@
+ja:
+  activerecord:
+    models:
+      partner/partner_contact: partner_contact
+    attributes:
+      partner/partner_contact:
+        student_name: 担当者名
+        partner_id: 名前
+        company_name: 企業名
+        contact_date: 入社年月日
+        support_from_date: サポート期間
+        support_end_date: サポート期間
+  errors:
+    attributes:
+      partner_id:
+        blank: "を選択してください。"
+    messages:
+      blank: "を入力してください。"
+      invalid: "無効です。"
+  partner_contact:
+    title:
+      event_header: イベント作成

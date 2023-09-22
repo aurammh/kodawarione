@@ -1,0 +1,28 @@
+//= require trix/dist/trix
+@import "startbootstrap-sb-admin-2/scss/sb-admin-2";
+@import "flatpickr/dist/flatpickr.css";
+@import "jquery-ui/themes/base/all.css";
+@import "flatpickr/dist/plugins/monthSelect/style.css";
+@import "croppie/croppie.css";
+@import "./layout/layouts.scss";
+@import "select2/dist/css/select2";
+@import "actiontext.scss";
+/// Old Design
+@import "admin/admin_import.scss";
+@import "company/company_import.scss";
+@import "student/student_import.scss";
+@import "common.scss";
+@import "search.scss";
+@import "../theme/components/image-input.scss";
+@import "admin/event.scss";
+
+.hide-trix-toolbar {
+    trix-toolbar .trix-button-group--file-tools {
+        display: none;
+    }
+}
+.admin-event-participants{
+    .nav-tabs{
+        border-bottom: none;
+    }
+}

@@ -1,0 +1,14 @@
+<!--begin::Banner-->
+<%# if @user_data.cover_photo.attached? %>
+<!--begin::Container-->
+    <div class="container">
+    <!--<div class=" d-flex flex-row-fluid bgi-size-cover bgi-size-lg-cover bgi-no-repeat bgi-position-center h-200px h-sm-200px h-md-250px h-lg-400px h-xl-400px card-rounded" style="background-image: url(<%# url_for(@company_commitment.cover_photo) %>)" ></div>
+       
+    </div>
+<%# else %>
+    <div class="container">
+        <div class="d-flex flex-row-fluid h-200px h-sm-200px h-md-250px h-lg-400px h-xl-400px card-rounded" style="background: <%= url_for('#7361ab') %>;" >
+        </div>
+    </div>
+<%# end %>
+<!--end::Banner-->

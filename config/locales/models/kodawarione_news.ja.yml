@@ -1,0 +1,19 @@
+ja:
+  activerecord:
+    models:
+      kodawarione/news: news
+    attributes:
+      kodawarione/news:
+        title: タイトル
+        content: お知らせ内容
+        news_type: タイプ
+        news_category: タイプ
+        show_option: 対象者  
+        other: 'その他'      
+  errors:
+    attributes:
+      category:
+        blank: 'を選択してください。'
+    messages:
+      blank: 'を入力してください。'
+      invalid: '無効です。'

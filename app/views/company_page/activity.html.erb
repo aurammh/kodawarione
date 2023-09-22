@@ -1,0 +1,124 @@
+<!--begin::Body-->
+<body id="kt_body" data-bs-spy="scroll" data-bs-target="#kt_landing_menu" data-bs-offset="200" class="bg-white position-relative">
+    <!--begin::Main-->
+    <div class="d-flex flex-column flex-root">
+         <!--begin::Header Section-->
+        <div class="mb-0">
+            <!--begin::Wrapper-->
+            <%= render partial: "company_page/header", :locals =>{:banner => false} %>
+            <!--end::Wrapper-->
+        </div>
+        <!--end::Header Section--> 
+        <div class="container w-100 w-lg-75 w-xl-1000px">
+            <% if @company_activity_lists.present? %>
+                <div class="mt-20 pb-10">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h3 class="text-center fs-2x text-dark fw-bolder w-100 mb-10"><%= t('activity.title') %></h3>                        
+                    </div>
+                    <div class="text-center fs-6 fw-bold text-gray-700 px-4 mb-10">
+                        <%= t('activity.subtitle').html_safe %>
+                    </div>
+                    <!--begin::Row-->
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-4">
+                        <% @company_activity_lists.each do |company_activity| %>
+                            <!--begin::Col-->
+                            <div class="col-lg-6 col-xl-4">
+                            <!--begin::Publications post-->
+                            <div class="card-xl-stretch me-md-6">
+                                <!--begin::Video-->
+                                <% if company_activity.video_clip.attached? && company_activity.video_clip.persisted? && company_activity.thumbnail.attached? && company_activity.thumbnail.persisted? %>
+                                    <div class="position-relative">
+                                        <button data-bs-toggle="modal" data-bs-target="#video-play-modal<%= company_activity.video_clip.id %>" class="vdo-play-btn position-absolute top-50 start-50 translate-middle btn bg-dark bg-opacity-50 bg-hover-lighten bg-hover-opacity-75 px-12 py-5 rounded border border-white border-1 d-flex flex-center" style="z-index: 1"><i class="fas fa-play text-white fs-3 opacity-100"></i></button>
+                                        <video
+                                            id="my-video-poster"
+                                            class="video-js vjs-default-skin vjs-big-play-centered w-100 h-175px mb-4 cursor-pointer"
+                                            preload="auto"
+                                            width="400"
+                                            height="175"
+                                            poster="<%= url_for(company_activity.thumbnail) %>"
+                                            data-setup="{}"
+                                            data-bs-toggle="modal" data-bs-target="#video-play-modal<%= company_activity.video_clip.id %>"
+                                        > 
+                                        </video>
+                                        <%= hidden_field_tag(:video_id,'',id: "#{company_activity.video_clip.id}") %>
+                                        <%= render partial: 'video_play_modal', locals: { activity_var: company_activity.video_clip, id: company_activity.video_clip.id }%>
+                                    </div>
+                                <% end %>
+                                <!--end::Video-->
+                                <!--begin::Body-->
+                                <div class="m-0">
+                                <!--begin::Title-->
+                                <%= link_to activity_details_path(activity_id: company_activity), class: "fs-4 text-dark fw-bolder text-hover-primary text-dark lh-base" do %> 
+                                    <%=  company_activity.title.truncate(40) %> 
+                                <% end %>
+                                <!--end::Title-->
+                                <!--begin::Text-->
+                                <div class="fw-bold fs-5 text-gray-600 text-dark mt-3 mb-5"><%= company_activity.desc.to_plain_text.truncate(120) %></div>
+                                <!--end::Text-->
+                                <!--begin::Content-->
+                                <div class="fs-6 fw-bolder">
+                                    <!--begin::Author-->
+                                    <span class="text-gray-700 text-hover-primary">作成日 : </span>
+                                    <!--end::Author-->
+                                    <!--begin::Date-->
+                                    <span class="text-muted"><%= l company_activity.created_at.to_date %></span>
+                                    <!--end::Date-->
+                                </div> 
+                                <!--end::Content-->
+                                </div>
+                                <!--end::Body-->
+                            </div>
+                            <!--end::Publications post-->
+                            </div>
+                            <!--end::Col-->
+                        <% end %>
+                    </div>
+                    <!--end::Row--> 
+                    <!--begin::Pagination-->
+                    <div class="d-flex flex-wrap justify-content-between align-items-center pt-10">
+                        <div class="d-flex flex-wrap">
+                        <%= paginate @company_activity_lists %>
+                        </div>
+                        <div class="d-flex align-items-center py-3">
+                        <span class="text-muted"><%=  t('common.list_display')  %> <%= @company_activity_lists.total_count %> <%=  t('common.to')  %> <%= @company_activity_lists.offset_value + 1 %> ~ <%=  @company_activity_lists.offset_value + @company_activity_lists.count %> <%=  t('common.search_result')  %> </span>
+                        </div>
+                    </div>
+                    <!--end::Pagination-->
+                </div> 
+            <% else %>
+                <!--begin::Card-->
+                <div class="card bg-body border-0 shadow-sm mt-20">
+                    <!--begin::Card body-->
+                    <div class="card-body p-0">
+                        <!--begin::Wrapper-->
+                        <div class="card-px py-5 my-5">
+                            <!--begin::Description-->
+                            <div class="d-flex align-items-center flex-column">
+                                <span class="m-1 fw-bolder"><%= t('commitment_profile.content.no_corresponding_data') %></span>
+                            </div>
+                            <!--end::Description-->
+                        </div>
+                        <!--end::Wrapper-->
+                    </div>
+                    <!--end::Card body-->
+                </div>
+                <!--end::Card-->
+            <% end %>
+        </div>
+        <!--begin::Scrolltop-->
+        <div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
+            <!--begin::Svg Icon | path: icons/duotune/arrows/arr066.svg-->
+            <span class="svg-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <rect opacity="0.5" x="13" y="6" width="13" height="2" rx="1" transform="rotate(90 13 6)" fill="black" />
+                    <path d="M12.5657 8.56569L16.75 12.75C17.1642 13.1642 17.8358 13.1642 18.25 12.75C18.6642 12.3358 18.6642 11.6642 18.25 11.25L12.7071 5.70711C12.3166 5.31658 11.6834 5.31658 11.2929 5.70711L5.75 11.25C5.33579 11.6642 5.33579 12.3358 5.75 12.75C6.16421 13.1642 6.83579 13.1642 7.25 12.75L11.4343 8.56569C11.7467 8.25327 12.2533 8.25327 12.5657 8.56569Z" fill="black" />
+                </svg>
+            </span>
+            <!--end::Svg Icon-->
+        </div>
+        <!--end::Scrolltop-->
+    </div>
+    <!--end::Main-->
+</body>
+<!--end::Body-->
+<%= javascript_pack_tag "common.js" %>

@@ -1,0 +1,21 @@
+<!--begin::Header-->
+<% breadcrumbs_navigation_add (t ('Event Search')), kodawarione_event_manage_search_event_path %>
+<% breadcrumbs_navigation_add (t ('Event Detail')), '#' %>
+<%= render_partner_breadcrumbs_navigation(t ('Event Detail')) %>		
+<!--end::Header-->
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+	<!--begin::Container-->
+	<div class="container-fluid" id="kt_content_container">
+		<!--begin::Tab Content-->
+		<div class="tab-content">
+			<!--begin::Tab pane-->
+			<div id="kt_project_users_card_pane" class="tab-pane fade show active">  
+			<% if can?(:search_event_detail, Kodawarione::EventManage) %>
+                <%= render partial: "kodawarione/shared/event_manage/search_event_detail"   %>              
+			<% end %>
+            </div>
+            <!--end::Tab pane-->
+        </div>
+    </div>
+</div> 

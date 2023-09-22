@@ -1,0 +1,103 @@
+<div class="card mb-12 bg-body">
+    <!--begin::Hero body-->
+    <div class="card-body flex-column p-5">
+        <!--begin::Hero content-->
+        <div class="d-flex align-items-center h-lg-150px p-5">
+            <!--begin::Wrapper-->
+            <div class="d-flex flex-column align-items-start justift-content-center flex-equal">
+                <!--begin::Title-->
+                <h1 class="fw-bolder fs-4 fs-lg-1 text-gray-800"><%= @company_vacancy_list.vacancy_title %></h1>
+                <!--end::Title-->
+                <div class="d-flex flex-wrap mb-6">
+                    <!--begin::Item-->
+                    <div class="me-9 my-1">
+                        <!--begin::Icon-->
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                        <span class="svg-icon svg-icon-primary svg-icon-2 me-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black"></rect>
+                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black"></rect>
+                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black"></rect>
+                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black"></rect>
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                        <!--end::Icon-->
+                        <!--begin::Label-->
+                        <span class="fw-bolder text-gray-400"><%= @company_vacancy_list.industry_name %></span>
+                        <!--end::Label-->
+                    </div>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <div class="me-9 my-1">
+                        <!--begin::Icon-->
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                        <span class="svg-icon svg-icon-primary svg-icon-2 me-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black"></rect>
+                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black"></rect>
+                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black"></rect>
+                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black"></rect>
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                        <!--end::Icon-->
+                        <!--begin::Label-->
+                        <span class="fw-bolder text-gray-400"><%= number_with_delimiter(@company_vacancy_list.basic_salary) %> <%= t 'unit.money'%></span>
+                        <!--end::Label-->
+                    </div>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <div class="me-9 my-1">
+                        <!--begin::Icon-->
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                        <span class="svg-icon svg-icon-primary svg-icon-2 me-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black"></rect>
+                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black"></rect>
+                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black"></rect>
+                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black"></rect>
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                        <!--end::Icon-->
+                        <!--begin::Label-->
+                        <span class="fw-bolder text-gray-400"><%= number_with_delimiter(@company_vacancy_list.required_applicants) %> <%= t 'unit.persons'%></span>
+                        <!--end::Label-->
+                    </div>
+                    <!--end::Item-->
+                </div>
+            </div>
+            <!--end::Wrapper-->
+        </div>
+        <!--end::Hero content-->
+        <!--begin::Hero nav-->
+        <div class="card-rounded bg-light d-flex flex-stack flex-wrap p-5 mx-4">
+            <!--begin::Nav-->
+            <ul class="nav flex-wrap border-transparent fw-bolder">
+                <!--begin::Nav item-->
+                <% if can? :read, @company_vacancy_list %>
+                <li class="nav-item my-1">
+                    <%= link_to "Overview", company_vacancy_path(@company_vacancy_list), class: "btn btn-color-gray-600 btn-active-white btn-active-color-primary fw-boldest fs-8 fs-lg-base nav-link px-3 px-lg-8 mx-1 #{company_active_url?(company_vacancy_path(@company_vacancy_list))}" %>
+                </li>
+                <% end %>
+                <!--end::Nav item-->
+                <!--begin::Nav item-->
+                <% if can? :vacancy_applied_student_list, @company_vacancy_list %>
+                    <li class="nav-item my-1">
+                        <%= link_to "Apply List", company_vacancy_applied_student_list_path(@company_vacancy_list), class: "btn btn-color-gray-600 btn-active-white btn-active-color-primary fw-boldest fs-8 fs-lg-base nav-link px-3 px-lg-8 mx-1 #{company_active_url?(company_vacancy_applied_student_list_path(@company_vacancy_list))}" %>
+                    </li>
+                <% end %>
+                <!--end::Nav item-->
+            </ul>
+            <!--end::Nav-->
+            <!--begin::Action-->
+            <% if can? :update, @company_vacancy_list %>
+                <%= link_to (t 'btn.edit'), edit_company_vacancy_path(@company_vacancy_list) , class: "btn btn-primary fw-bolder fs-8 fs-lg-base" %> 
+            <% end %>
+            <!--end::Action-->
+        </div>
+        <!--end::Hero nav-->
+    </div>
+    <!--end::Hero body-->
+</div>

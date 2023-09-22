@@ -1,0 +1,2 @@
+module Admin::SuperPartnersHelper
+end

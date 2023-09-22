@@ -1,0 +1,49 @@
+<button type="button" class="btn  btn-light-primary font-weight-bolder text-uppercase mr-2" data-bs-toggle="modal" data-bs-target="#about-behavioral-modal">
+<%= t('student_assessment.behavioral.about.popup_about_title')%>
+</button>
+
+<!-- Modal -->
+<div class="modal fade pl-0" id="about-behavioral-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+        <div class="modal-content ">
+            <div class="modal-header">
+            <h3 class="modal-title" id="exampleModalLongTitle"><%= t('student_assessment.behavioral.about.popup_about_title')%></h3>
+            <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                  <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                  <span class="svg-icon svg-icon-1">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                          <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                          <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                      </svg>
+                  </span>
+                  <!--end::Svg Icon-->
+            </div>
+           
+            
+        </div>
+            <div class="modal-body assessment_popup">
+                <%= image_tag "student/behavioral.jpg", class: "img-fluid potential-img", alt: "Responsive image" %>   
+                <section>
+                    <div class="d-flex justify-content-center align-items-center"></div>
+                    <div>
+                        <p class="text-justify mt-2"><%= t('student_assessment.behavioral.about.summary_text')%></p>
+                    </div>
+                </section>
+                <section class="behaviour">
+                    <div class="text-left pt-1">
+                        <h5 class="text-dark font-weight-bold pl-1 std-border-color">
+                            <%= t('student_assessment.behavioral.about.title_1')%>
+                        </h5>
+                        <p class="text-indent"><%= t('student_assessment.behavioral.about.text_title_1')%><br><span class='ml-5'><%= t('student_assessment.behavioral.about.text_1')%></span></p>
+                        <p class="text-indent"><%= t('student_assessment.behavioral.about.text_title_2')%><br><span class='ml-5'><%= t('student_assessment.behavioral.about.text_2')%></span></p>
+                        <p class="text-indent"><%= t('student_assessment.behavioral.about.text_title_3')%><br><span class='ml-5'><%= t('student_assessment.behavioral.about.text_3')%></span></p>
+                        <p class="text-indent"><%= t('student_assessment.behavioral.about.text_4')%></p>
+                    </div>
+                </section>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn  btn-primary font-weight-bolder text-uppercase" data-bs-dismiss="modal"><%= t('student_commitment.title.close')%></button>
+            </div>
+        </div>
+    </div>
+</div>

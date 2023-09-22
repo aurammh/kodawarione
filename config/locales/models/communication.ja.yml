@@ -1,0 +1,59 @@
+ja:
+  activerecord:
+    models:
+      communication/communication: communication
+    attributes:
+      communication/communication:
+        title: タイトル
+        content: 送信内容
+        receiver_email: 宛先
+        vacancy_id: スカウトする求人
+        mail_template_id: テンプレート
+        scout_statuses:
+          waiting_accept: 未対応
+          accept: 承認　
+          denied: 否認
+  errors:
+    messages:
+      blank: "を入力してください。"
+      invalid: "無効です。"
+      empty_list: はありません。
+  communication:
+    title:
+      forum_name: メッセージ内容
+      content: 送信内容
+      Student: 学生情報
+      Company: 企業情報
+      Vacancy: 採用情報
+      Event: イベント情報
+      Member: メンバー
+      mail_header: の問い合わせ
+      surname: 様
+      mail_content_1: メッセージが届いています。
+      mail_content_2: 以下のリンクよりシステムにアクセスして確認してください。
+      mail_ending: よろしくお願い致します。
+      direct_message: コミュニケーションメール
+      scouted_message: スカウトメール
+      scouted_message_sub_title: あなたのプロフィールに興味を持った企業からオファーが届きます。
+      send_message: コンタクト
+      scout: スカウト
+      subject: 件名
+      ability: Ability
+      sender_email: 送信者メール
+    scout:
+      error_message: こだわり人材をスカウトするには、プロフィール情報の登録が必要です。 
+      accept: 承認
+      denied: 辞退
+      btn:
+        go_to_profile: 入力はこちら
+      text:
+        waiting_accept: さんはスカウトをまだ受けておりません。
+        accept: さんはあなたのスカウトを受け取りました。
+        reject: さんはあなたのスカウトを拒否されました。
+        std_waiting_accept: 様のプロフィールに興味を持った求人からスカウトが届きました。「承認」または「辞退」をクリックしてください。
+      status:
+        accept: 承認済み
+        reject: 否認済み
+    list:
+      title: コミュニケーション一覧
+      no_communication: スカウトデータはありません。

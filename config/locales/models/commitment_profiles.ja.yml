@@ -1,0 +1,21 @@
+ja:
+  commitment_profile:
+    title:
+      commitment_profile_title: ホーム
+      about_us_title: 私たちについて
+      recruitment_title: 募集要項
+      member_title: メンバー
+      videos: ビデオ
+    content:
+      home_no_data_content: 企業ページを作成して優秀なこだわり人材を採用しましょう。
+      about_us_no_data_content: あなたの会社事業内容をもっと詳しく伝えましょう。
+      member_no_data_content: メンバーの情報を追加しましょう。
+      recruitment_no_data_content: 募集要項を伝えてください。
+      no_corresponding_data: 該当データがありません。
+    placeholder:
+      title: キーワード
+    btn:
+      create_home_content: ホームページの作成
+      create_about_us_content: 事業内容登録
+      create_member_content: メンバー情報登録
+      create_recruitment_content: 募集要項を書く

@@ -1,0 +1,2 @@
+class MCommitmentAbility < ApplicationRecord
+end

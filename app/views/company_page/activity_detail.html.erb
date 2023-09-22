@@ -1,0 +1,125 @@
+<!--begin::Body-->
+<body id="kt_body" data-bs-spy="scroll" data-bs-target="#kt_landing_menu" data-bs-offset="200" class="bg-white position-relative">
+    <!--begin::Main-->
+    <div class="d-flex flex-column flex-root">
+        <!--begin::Header Section-->
+        <div class="mb-0">
+            <!--begin::Wrapper-->
+            <%= render partial: "company_page/header", :locals =>{:banner => false} %>
+            <!--end::Wrapper-->
+        </div>
+        <!--end::Header Section-->
+        <!--begin::Container-->
+        <div class="container w-100 w-lg-75 w-xl-1000px mt-10">
+            <div class="mt-10 pb-10">
+                <div class="w-100 mb-10">
+                    <h3 class="fs-2x text-dark fw-bolder"><%= @company_activity.title %></h3>
+                    <div class="mt-1">
+                        <!--begin::Icon-->
+                            <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                            <span class="svg-icon svg-icon-primary svg-icon-2  me-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black"></rect>
+                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black"></rect>
+                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black"></rect>
+                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black"></rect>
+                            </svg>
+                            </span>
+                            <!--end::Svg Icon-->
+                        <!--end::Icon-->
+                        <!--begin::Label-->
+                        <span class="text-muted fw-bolder fs-7 me-5"><%= l @company_activity.created_at.to_date %></span>
+                        <span class="text-muted fw-bolder fs-7 me-5">Announcements</span>
+                        <!--end::Label-->
+                    </div>
+                </div>
+                <!--begin::Container-->
+                    <% if @company_activity.video_clip.attached? && @company_activity.video_clip.persisted? && @company_activity.thumbnail.attached? && @company_activity.thumbnail.persisted? %>
+                    <div class="my-8">
+                        <!--begin::Video-->
+                        <video
+                        id="my-video"
+                        class="video-js vjs-default-skin vjs-big-play-centered w-100 h-425px"
+                        controls
+                        preload="auto"
+                        height= "700"
+                        width="700"
+                        poster="<%= url_for(@company_activity.thumbnail) %>"
+                        data-setup="{}"
+                        >
+                        <source src="<%= url_for(@company_activity.video_clip) %>" />
+                        </video>
+                        <!--end::Video-->
+                    </div>
+                    <% end %>
+                <!--end::Container-->
+                <div class="fs-6 fw-bold text-gray-700 pb-10">
+                    <%= @company_activity.desc %>
+                </div>
+                <!--begin::Latest activity-->
+                <div class="mt-20 pb-10">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h3 class="fs-2x text-gray-600 fw-bolder"><%= t('activity.title') %></h3>
+                        <%= link_to t('activity.title'), company_page_activity_path, class: "fw-bolder" %>
+                    </div>
+                    <!--begin::Row-->
+                    <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-4">
+                        <% @company_activities.each do |company_activity| %>
+                            <!--begin::Col-->
+                            <div class="col-lg-6 col-xl-4">
+                            <!--begin::Publications post-->
+                            <div class="card-xl-stretch me-md-6">
+                                <!--begin::Video-->
+                                <% if company_activity.video_clip.attached? && company_activity.video_clip.persisted? && company_activity.thumbnail.attached? && company_activity.thumbnail.persisted? %>
+                                <video
+                                    id="my-video"
+                                    class="video-js vjs-default-skin vjs-big-play-centered w-100 h-175px mb-4"
+                                    controls
+                                    preload="auto"
+                                    width="400"
+                                    height="175"
+                                    poster="<%= url_for(company_activity.thumbnail) %>"
+                                    data-setup="{}"
+                                >
+                                    <source src="<%= url_for(company_activity.video_clip) %>" />
+                                </video>
+                                <% end %>
+                                <!--end::Video-->
+                                <!--begin::Body-->
+                                <div class="m-0">
+                                <!--begin::Title-->
+                                <%= link_to activity_details_path(activity_id: company_activity), class: "fs-4 text-dark fw-bolder text-hover-primary text-dark lh-base" do %> 
+                                    <%=  company_activity.title.truncate(40) %> 
+                                <% end %>
+                                <!--end::Title-->
+                                <!--begin::Text-->
+                                <div class="fw-bold fs-5 text-gray-600 text-dark mt-3 mb-5"><%= company_activity.desc.to_plain_text.truncate(120) %></div>
+                                <!--end::Text-->
+                                <!--begin::Content-->
+                                <div class="fs-6 fw-bolder">
+                                    <!--begin::Author-->
+                                    <span class="text-gray-700 text-hover-primary">作成日 : </span>
+                                    <!--end::Author-->
+                                    <!--begin::Date-->
+                                    <span class="text-muted"><%= l company_activity.created_at.to_date %></span>
+                                    <!--end::Date-->
+                                </div> 
+                                <!--end::Content-->
+                                </div>
+                                <!--end::Body-->
+                            </div>
+                            <!--end::Publications post-->
+                            </div>
+                            <!--end::Col-->
+                        <% end %>
+                    </div>
+                    <!--end::Row--> 
+                </div> 
+                <!--end::Latest activity-->
+            </div>
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Main-->
+</body>
+<!--end::Body-->

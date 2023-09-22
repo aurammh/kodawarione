@@ -1,0 +1,42 @@
+ja:
+  activerecord:
+    models:
+      partner/partner_contacts_schedule: partner_contacts_schedule
+    attributes:
+      partner/partner_contacts_schedule:
+        content: 内容詳細
+        contact_date: 連絡日
+        contact_type: 連絡手段
+        contact_detail: 連絡内容
+  errors:
+    attributes:
+      contact_type:
+        blank: "を選択してください。"
+      contact_detail:
+        blank: "を選択してください。"
+    messages:
+      blank: "を入力してください。"
+      invalid: "無効です。"
+  partner_contacts_schedule:
+    title:
+      event_header: イベント作成
+    contact_types:
+      phone: 電話
+      zoom: zoom
+      skype: skype
+      google_meet: Googlemeet
+      teams: Teams
+      other_web_meeting: 他web-Meeting
+      in_person: 対面
+      email: メール
+      line: メール
+      others: その他
+      administrator_input: 本部入力
+    contact_details:
+      monthly_contact: 月次連絡
+      consultation: 相談
+      various_change_requests: 各種変更依頼
+      requests_to_companies: 企業への要望
+      requests_trom_companies: 企業からの要望
+      attendance_data: 企業からの要望
+      others_details: その他

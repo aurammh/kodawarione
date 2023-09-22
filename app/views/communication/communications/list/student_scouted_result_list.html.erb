@@ -1,0 +1,280 @@
+<div class="toolbar py-5 py-lg-5" id="kt_toolbar">
+    <!--begin::Container-->
+    <div id="kt_toolbar_container" class="container-xxl d-flex flex-stack flex-wrap">
+        <!--begin::Page title-->
+        <% breadcrumbs_navigation_add (t('menu.scout_mail_list')), '#' %>
+        <%= render_student_breadcrumbs_navigation(t('menu.scout_mail_list')) %>
+        <!--end::Page title-->
+    </div>
+    <!--end::Container-->
+</div>
+<div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
+  <!--begin::Post-->
+  <div class="content flex-row-fluid" id="kt_content"> 
+  <!--begin::Desktop -->
+    <% if @student_scouted_result.present? %>
+        <div class="card bg-body d-none d-sm-none d-md-none d-lg-block d-xl-block">
+            <!--begin::Header-->
+            <div class="card-header border-0 pt-5">
+                <h3 class="card-title align-items-start flex-column">
+                    <span class="card-label fw-bolder fs-3 mb-1"><%= t('menu.scout_mail_list') %></span>
+                </h3>
+                <div class="card-toolbar">
+                    <ul class="nav " >
+                        <li class="nav-item">  
+                            <%= link_to student_scouted_result_path,class: "nav-link btn btn-sm btn-color-muted btn-active btn-active-secondary fw-bolder px-4 me-1 text-primary "   do %>  
+                            <%= t('status.all')%>
+                            <% end %>
+                        </li>
+                        <li class="nav-item">
+                            <%= link_to student_scouted_result_path(scout_status: 1) ,class: "nav-link btn btn-sm btn-color-muted btn-active btn-active-secondary fw-bolder px-4 me-1 #{current_page?(student_scouted_result_path(scout_status: 1) ) ? "active" : nil}"   do %> 
+                                <%= t('status.not_yet')%>
+                            <% end %>
+                        </li>
+                        <li class="nav-item">
+                            <%= link_to student_scouted_result_path(scout_status: 2) ,class: "nav-link btn btn-sm btn-color-muted btn-active btn-active-secondary fw-bolder px-4 me-1 #{current_page?(student_scouted_result_path(scout_status: 2) ) ? "active" : nil}"   do %> 
+                                <%= t('status.replied')%>
+                            <% end %>
+                        </li>
+                        <li class="nav-item">
+                            <%= link_to student_scouted_result_path(scout_status: 3) ,class: "nav-link btn btn-sm btn-color-muted btn-active btn-active-secondary fw-bolder px-4 me-1 #{current_page?(student_scouted_result_path(scout_status: 3) ) ? "active" : nil}"   do %> 
+                                <%= t('status.rejected')%>
+                            <% end %>
+                        </li>
+                    </ul> 
+                </div>
+            </div>
+            <!--end::Header-->
+            <!--begin::Body-->
+            <div class="card-body py-3">
+                <!--begin::Table container-->
+                <div class="table-responsive">
+                    <!--begin::Table-->
+                    <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
+                        <!--begin::Table head-->
+                        <thead>
+                            <tr class="fw-bolder text-muted">
+                                <th class="min-w-140px "><%= t('status.student_name')%></th> 
+                                <th class="min-w-140px"><%=  Company::Vacancy.human_attribute_name('vacancy_title') %></th>
+                                <th class="pe-0 min-w-120px"><%= t('status.replied_date') %></th>  
+                                <th class="pe-0 min-w-120px"><%= t('status.approval_status') %></th>
+                                <th class="pe-0 text-end min-w-120px"><%= t('event.title.edit_text_title') %></th>
+                            </tr>
+                        </thead>
+                        <!--end::Table head-->
+                        <!--begin::Table body-->
+                        <tbody>
+                            <% @student_scouted_result.each do |scout| %>
+                                <tr> 
+                                    <td class=" w-sm-75px w-md-100px w-lg-175px w-xl-100px ">
+                                        <div class="d-flex align-items-center">
+                                            <!--begin:: Avatar -->
+                                            <div class="symbol symbol-40px overflow-hidden me-3">
+                                                <% if scout.image.attached? %>
+                                                    <%= image_tag scout.image, class: " " %>  
+                                                <% else %>
+                                                    <%= image_tag "student/office-building.png", class: " " %>
+                                                <% end %>
+                                            </div>
+                                            <!--end::Avatar-->
+                                            <!--begin::User details-->
+                                            <div class="w-sm-75px w-md-100px w-lg-175px w-xl-100px text-truncate"> 
+                                                <span class="text-gray-800 text-hover-primary mb-1 fs-6 text-start pe-0">
+                                                    <%= scout.company_name  %>
+                                                </span>
+                                                <span class="text-muted fs-8 d-block text-start ps-0"><%= scout.scout_status == 1 || scout.scout_status == 3 ? '-' : scout.contact_email.truncate(20) %></span>
+                                            </div> 
+                                            <!--begin::User details-->
+                                        </div>
+                                    </td> 
+                                    <td class="min-w-150px w-sm-200px w-md-350px w-lg-450px w-xl-600px">
+                                        <span class="text-muted text-hover-primary fw-bold d-block fs-6  w-sm-200px w-md-350px w-lg-450px w-xl-600px text-truncate"><%= scout.vacancy_title.present??  scout.vacancy_title : "-" %></span>
+                                    </td>
+                                    <td class="min-w-120px w-120px w-md-150px w-lg-150px">
+                                        <span class="text-muted fw-bolder d-block fs-6"><%= l(scout.scout_date.strftime('%Y-%m-%d').to_date, default: '-') %></span>
+                                    </td> 
+                                    <td>
+                                        <% if scout.scout_status == 1 %>
+                                            <span class="badge badge-light-warning badge-lg"><%= t('status.not_yet') %></span> 
+                                        <% elsif scout.scout_status == 2 %>
+                                            <span class="badge badge-light-primary badge-lg"><%= t('status.replied') %></span> 
+                                        <% else %>
+                                            <span class="badge badge-light-danger badge-lg"><%=  t('status.rejected') %></span>
+                                        <% end %>
+                                    </td>   
+                                    <td>
+                                        <div class="d-flex justify-content-end flex-shrink-0">
+                                            <%= link_to (communication_conversation_forum_path(:id => scout.communication_id)),remote: true, :class=>"btn btn-icon btn-bg-light btn-active-color-primary btn-sm" do %>
+                                                <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
+                                                    <span class="svg-icon svg-icon-3">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                            <path d="M17.5 11H6.5C4 11 2 9 2 6.5C2 4 4 2 6.5 2H17.5C20 2 22 4 22 6.5C22 9 20 11 17.5 11ZM15 6.5C15 7.9 16.1 9 17.5 9C18.9 9 20 7.9 20 6.5C20 5.1 18.9 4 17.5 4C16.1 4 15 5.1 15 6.5Z" fill="black" />
+                                                            <path opacity="0.3" d="M17.5 22H6.5C4 22 2 20 2 17.5C2 15 4 13 6.5 13H17.5C20 13 22 15 22 17.5C22 20 20 22 17.5 22ZM4 17.5C4 18.9 5.1 20 6.5 20C7.9 20 9 18.9 9 17.5C9 16.1 7.9 15 6.5 15C5.1 15 4 16.1 4 17.5Z" fill="black" />
+                                                        </svg>
+                                                    </span>
+                                                <!--end::Svg Icon-->
+                                            <% end %>
+                                            <div id="communicationModal"></div>
+                                        </div>
+                                    </td>                               
+                                </tr>
+                            <% end %>
+                        </tbody>
+                        <!--end::Table body-->
+                    </table>
+                    <!--end::Table-->
+                </div>
+                <!--end::Table container-->
+            </div> 
+            <!--end::Body-->
+        </div>
+    <% else %>
+        <div class="card bg-body d-none d-sm-none d-md-none d-lg-block d-xl-block mb-5 mb-xl-10">
+            <!--begin::Header-->
+            <div class="card-header border-0 pt-5">
+                <h3 class="card-title align-items-start flex-column">
+                    <span class="card-label fw-bolder fs-3 mb-1"><%= t('menu.scout_result') %></span>
+                </h3>
+                <div class="card-toolbar">
+                    <ul class="nav " >
+                        <li class="nav-item">  
+                            <%= link_to student_scouted_result_path,class: "nav-link btn btn-sm btn-color-muted btn-active btn-active-secondary fw-bolder px-4 me-1 text-primary"   do %>  
+                            <%= t('status.all')%>
+                            <% end %>
+                        </li>
+                        <li class="nav-item">
+                            <%= link_to student_scouted_result_path(scout_status: 1) ,class: "nav-link btn btn-sm btn-color-muted btn-active btn-active-secondary fw-bolder px-4 me-1 #{current_page?(student_scouted_result_path(scout_status: 1) ) ? "active" : nil}"   do %> 
+                                <%= t('status.not_yet')%>
+                            <% end %>
+                        </li>
+                        <li class="nav-item">
+                            <%= link_to student_scouted_result_path(scout_status: 2) ,class: "nav-link btn btn-sm btn-color-muted btn-active btn-active-secondary fw-bolder px-4 me-1 #{current_page?(student_scouted_result_path(scout_status: 2) ) ? "active" : nil}"   do %> 
+                                <%= t('status.replied')%>
+                            <% end %>
+                        </li>
+                        <li class="nav-item">
+                            <%= link_to student_scouted_result_path(scout_status: 3) ,class: "nav-link btn btn-sm btn-color-muted btn-active btn-active-secondary fw-bolder px-4 me-1 #{current_page?(student_scouted_result_path(scout_status: 3) ) ? "active" : nil}"   do %> 
+                                <%= t('status.rejected')%>
+                            <% end %>
+                        </li>
+                    </ul>                  
+                </div>
+            </div>
+            <!--end::Header-->
+            <!--begin::Card body-->
+            <div class="card-body p-0">
+                <!--begin::Wrapper-->
+                <div class="card-px text-center py-5 my-5">
+                    <!--begin::Title-->
+                    <h3 class="fs-3 fw-bolder mb-5"><%= t('menu.scout_result') %></h3>
+                    <!--end::Title-->
+                    <!--begin::Description-->
+                    <p class="text-gray-400 fs-7 fw-bold mb-10"><%= t('communication.list.no_communication') %></p>
+                </div>
+                <!--end::Wrapper-->
+            </div>
+            <!--end::Card body-->
+        </div> 
+    <% end %>    
+    <!--end:: Desktop -->
+    <!--begin:: Mobile-->
+    <% if @student_scouted_result.present? %>
+      <div class="card d-lg-none">
+          <!--begin::Header-->
+              <div class="d-flex flex-stack pt-4 ms-5 me-5">
+                  <div class="d-flex align-items-center">
+                      <h3 class="d-flex card-title align-items-start flex-column">
+                          <span class="card-label fw-bolder fs-3 mb-1"><%= t('menu.scout_mail_list') %></span>
+                      </h3>
+                  </div>
+                  <div class="d-flex justify-content-end flex-shrink-0">
+                      <div class="card-toolbar">
+                          <%= form_with(url: student_scouted_result_path, method: :get) do |form| %>
+                              <div class="d-flex align-items-center my-3">
+                                  <%= form.select(:scout_status, options_for_select(Communication::Communication.scout_status_attributes_for_select,params[:scout_status]),{:include_blank => (t'status.all')}, {:class => "form-select form-select-solid bg-body" , id: "select2_2", :onchange => 'this.form.submit()', :data => { :control => 'select2', 'hide-search' => true }}) %> 
+                              </div>
+                          <% end %>
+                      </div>
+                  </div>
+              </div>
+          <!--end::Header-->
+          <!--begin::Body-->
+          <% @student_scouted_result.each do |scout| %>
+                <div class="col-xxl-4">
+                    <div class="card bg-body card-custom gutter-b card-stretch mb-3 mx-5">
+                        <div class="card-body p-4">
+                            <div class='row'>
+                                <div class="d-flex align-items-center">
+                                    <!--begin:: Avatar -->
+                                    <div class="symbol symbol-40px overflow-hidden me-3">
+                                        <% if scout.image.attached? %>
+                                            <%= image_tag scout.image %>  
+                                        <% else %>
+                                            <%= image_tag "student/office-building.png" %>
+                                        <% end %>
+                                    </div>
+                                    <!--end::Avatar-->
+                                    <!--begin::User details-->
+                                    <div class="d-flex flex-column min-w-100px w-100">
+                                        <div class="d-flex justify-content-between">
+                                            <span class="text-gray-800 fw-bolder text-truncate pe-1" >
+                                                <%= scout.company_name %>
+                                            </span> 
+                                            <p class="badge text-muted fs-9 px-0 mb-1"><%= l(scout.scout_date.strftime('%Y-%m-%d').to_date, default: '-') %></p>
+                                        </div>
+                                        <span class="text-truncate text-gray-500 fw-bold fs-7"><%= scout.vacancy_title %></span>
+                                    </div>
+                                    <!--end::User details-->
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+          <% end %>
+          <!--end::Body-->
+      </div>
+    <% else %>
+      <div class="card bg-body d-lg-none mb-5 mb-xl-10">
+          <!--begin::Header-->
+          <div class="card-header border-0 pt-5">
+              <h3 class="card-title align-items-start flex-column">
+                  <span class="card-label fw-bolder fs-3 mb-1"><%= t('menu.scout_result') %></span>
+                  <span class="text-muted mt-1 fw-bold fs-7"><%= @student_scouted_result.size %> <%= t('common.student_total_count') %></span>
+              </h3>
+              <div class="card-toolbar">
+                  <%= form_with(url: student_scouted_result_path, method: :get) do |form| %>
+                      <div class="d-flex align-items-center my-3 ">
+                          <%= form.select(:scout_status, options_for_select(Communication::Communication.scout_status_attributes_for_select,params[:scout_status]),{:include_blank => (t'status.all')}, {:class => "form-select form-select-solid" , id: "select2_1", :onchange => 'this.form.submit()', :data => { :control => 'select2', 'hide-search' => true }}) %> 
+                      </div>
+                  <% end %>
+              </div>
+          </div>
+          <!--end::Header-->
+          <!--begin::Card body-->
+          <div class="card-body p-0">
+              <!--begin::Wrapper-->
+              <div class="card-px text-center py-5 my-5">
+                  <!--begin::Title-->
+                  <h3 class="fs-3 fw-bolder mb-5"><%= t('menu.scout_result') %></h3>
+                  <!--end::Title-->
+                  <!--begin::Description-->
+                  <p class="text-gray-400 fs-7 fw-bold mb-10"><%= t('communication.list.no_communication') %></p>
+              </div>
+              <!--end::Wrapper-->
+          </div>
+          <!--end::Card body-->
+      </div> 
+    <% end %>         
+  <!--end:: Mobile-->
+  <!--begin:: Pagination-->
+  <div class="d-flex flex-wrap justify-content-between align-items-center pt-10">
+      <div class="d-flex flex-wrap">
+          <%= paginate @student_scouted_result %>
+      </div>
+      <div class="d-flex align-items-center py-3">
+          <span class="text-muted"><%=  t('common.display')  %> <%= @student_scouted_result.total_count %> <%=  t('common.to')  %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%= @student_scouted_result.offset_value + 1 %> ~ <%=  @student_scouted_result.offset_value + @student_scouted_result.count %> <%=  t('common.search_result')  %> </span>
+      </div>
+  </div>	
+  <!--end: Pagination-->
+  </div>
+</div>  

@@ -1,0 +1,23 @@
+<!--begin::Header-->
+<% breadcrumbs_navigation_add (t('dashboard.job_seeker')), kodawarione_student_manage_search_student_path %>
+<% breadcrumbs_navigation_add ( t ('event.title.admin_event_participant_list_title')),'#' %>
+<%= render_partner_breadcrumbs_navigation(t ('student.title.header_link1')) %>		
+<!--end::Header-->
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+	<!--begin::Container-->
+	<div class="container-fluid" id="kt_content_container">
+		<div>
+			<%= render partial: "kodawarione/shared/company_manage/profile_navbar", :locals =>{:current_route => "join_event_list"}  %>
+		</div>
+		<!--begin::Tab Content-->
+		<div class="tab-content">
+			<!--begin::Tab pane-->
+			<div id="kt_project_users_card_pane" class="tab-pane fade show active">
+				<% if can?(:join_event_list, Kodawarione::CompanyManage) %>
+                <%= render partial: "common/company_join_event_list", locals: {join_events: @admin_event_result}  %>  
+				<% end %>
+            </div>
+        </div>
+    </div>
+</div>

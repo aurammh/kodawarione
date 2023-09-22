@@ -1,0 +1,39 @@
+<!--begin::Hero-->
+<div class="card card-custom overflow-hidden position-relative bgi-size-cover bgi-position-center home-video-wrapper">
+  <div class="overlay"></div>
+  <%= video_tag "company_info.mov", autoplay: :autoplay, loop: :loop, muted: :muted, class: "home_video" %>
+</div>
+<!--end::Hero-->
+<!--begin::Navigation-->
+<div class="container">
+  <div class="">
+    <ul class="nav nav-tabs nav-tabs-line" role="tablist">
+      <!--begin::Nav Item-->
+      <li class="nav-item mr-14 mt-4">
+        <%= link_to "Home", student_company_home_path, class: "nav-link font-size-h5 font-weight-bold border-2 pb-6 mx-0 #{student_active_url(student_company_home_path)}" %> 
+      </li>
+      <!--end::Nav Item-->
+      <!--begin::Nav Item-->
+      <li class="nav-item mr-14 mt-4">
+        <%= link_to "About", student_company_about_path, class: "nav-link font-size-h5 font-weight-bold border-2 pb-6 mx-0 #{student_active_url(student_company_about_path)}" %> 
+      </li>
+      <!--end::Nav Item-->
+      <!--begin::Nav Item-->
+      <li class="nav-item mr-14 mt-4">
+        <%= link_to "Jobs", student_company_job_path, class: "nav-link font-size-h5 font-weight-bold border-2 pb-6 mx-0 #{student_active_url(student_company_job_path)}" %> 
+      </li>
+      <!--end::Nav Item-->
+      <!--begin::Nav Item-->
+      <li class="nav-item mr-14 mt-4">
+        <%= link_to "Members", student_company_member_path, class: "nav-link font-size-h5 font-weight-bold border-2 pb-6 mx-0 #{student_active_url(student_company_member_path)}" %> 
+      </li>
+      <!--end::Nav Item-->
+      <!--begin::Nav Item-->
+      <li class="nav-item mr-14 mt-4">
+        <%= link_to "Events", student_company_event_path, class:"nav-link font-size-h5 font-weight-bold border-2 pb-6 mx-0 #{student_active_url(student_company_event_path)}" %> 
+      </li>
+      <!--end::Nav Item-->
+    </ul>
+  </div>
+</div>
+<!--end::Navigation-->

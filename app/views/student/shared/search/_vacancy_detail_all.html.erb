@@ -1,0 +1,347 @@
+<div class="col-12 col-xl-8 col-lg-8 mb-5 mb-xl-0 mb-lg-0">
+    <div class="card">
+        <div class="card-body">
+            <!--begin::Hero content-->
+            <div class="d-flex align-items-center">
+                <!--begin::Wrapper-->
+                <div class="d-flex flex-column align-items-start justift-content-center flex-equal">
+                    <!--begin::Title-->
+                    <h1 class="fw-bolder fs-4 fs-lg-1 text-gray-800"><%= @company_vacancy_list.vacancy_title %></h1>
+                    <!--end::Title-->
+                    <div class="d-flex flex-wrap mb-6">
+                        <!--begin::Item-->
+                        <div class="me-9 my-1">
+                            <!--begin::Icon-->
+                            <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                            <span class="svg-icon svg-icon-primary svg-icon-2 me-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect x="2" y="2" width="9" height="9" rx="2" fill="black"></rect>
+                                    <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black"></rect>
+                                    <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black"></rect>
+                                    <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black"></rect>
+                                </svg>
+                            </span>
+                            <!--end::Svg Icon-->
+                            <!--end::Icon-->
+                            <!--begin::Label-->
+                            <span class="fw-bolder text-gray-600"><%= @company_vacancy_list.industry_name %></span>
+                            <!--end::Label-->
+                        </div>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <div class="me-9 my-1">
+                            <!--begin::Icon-->
+                            <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                            <span class="svg-icon svg-icon-primary svg-icon-2 me-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect x="2" y="2" width="9" height="9" rx="2" fill="black"></rect>
+                                    <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black"></rect>
+                                    <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black"></rect>
+                                    <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black"></rect>
+                                </svg>
+                            </span>
+                            <!--end::Svg Icon-->
+                            <!--end::Icon-->
+                            <!--begin::Label-->
+                            <span class="fw-bolder text-gray-600"><%= number_with_delimiter(@company_vacancy_list.basic_salary) %> <%= t 'unit.money'%></span>
+                            <!--end::Label-->
+                        </div>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <div class="me-9 my-1">
+                            <!--begin::Icon-->
+                            <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                            <span class="svg-icon svg-icon-primary svg-icon-2 me-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect x="2" y="2" width="9" height="9" rx="2" fill="black"></rect>
+                                    <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black"></rect>
+                                    <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black"></rect>
+                                    <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black"></rect>
+                                </svg>
+                            </span>
+                            <!--end::Svg Icon-->
+                            <!--end::Icon-->
+                            <!--begin::Label-->
+                            <span class="fw-bolder text-gray-600"><%= number_with_delimiter(@company_vacancy_list.required_applicants) %> <%= t 'unit.persons'%></span>
+                            <!--end::Label-->
+                        </div>
+                        <!--end::Item-->
+                    </div>
+                </div>
+                <!--end::Wrapper-->
+            </div>
+            <!--end::Hero content-->
+            <div class="d-flex align-items-center justify-content-between flex-wrap mb-10">
+                <!--end::Col-->
+                <div class="d-flex flex-column">
+                    <!--end::Label-->
+                    <span class="fw-bold fs-7 text-gray-600 mb-1"><%= t 'title.display_period' %></span>
+                    <!--end::Label-->
+                    <!--end::Col-->
+                    <div class="text-primary text-primary-800 fw-bolder fs-6">
+                        <%= l @company_vacancy_list.display_from %>
+                        <span class="text-gray-600">～</span><span class="text-danger"> 
+                            <%= l @company_vacancy_list.display_to %>
+                            （<%= expiry_day_left(@company_vacancy_list.display_from, @company_vacancy_list.display_to)%>）
+                        </span>
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Col-->
+            </div>
+            <div class="mb-9">
+                <!--begin::Title-->
+                <h5 class="fw-bolder mb-4 p-4 bg-light border w-100 rounded"><%= t('title.vacancy_description') %></h5>
+                <!--end::Title-->
+                <!--begin::Text-->
+                <div class="text-gray-600 ps-4"><%= @company_vacancy_list.vacancy_description %></div>
+                <!--end::Text-->
+            </div>
+            <div class="mb-7">
+                <!--begin::Title-->
+                <h5 class="fw-bolder mb-4 p-4 bg-light border w-100 rounded"><%= t("benefit.work_content") %></h5>
+                <!--end::Title-->
+                <!--begin::Details-->
+                <table class="table fw-bold gs-0 gy-2 gx-2 ms-4">
+                    <tbody>
+                        <!--begin::Row-->
+                        <tr>
+                            <td class="text-gray-600 min-w-150px w-150px  w-lg-250px"><%= Company::Vacancy.human_attribute_name('recruit_industry_type') %>:</td>
+                            <td class="text-gray-900 "><%= @company_vacancy_list.industry_name %></td>
+                        </tr>
+                        <!--end::Row-->
+                        <!--begin::Row-->
+                        <tr>
+                            <td class="text-gray-600"><%= Company::Vacancy.human_attribute_name('recruit_job_type') %>:</td>
+                            <td class="text-gray-900"><%= @company_vacancy_list.occupation_name %></td>
+                        </tr>
+                        <!--end::Row-->
+                        <!--begin::Row-->
+                        <tr>
+                            <td class="text-gray-600"><%= Company::Vacancy.human_attribute_name('required_applicants') %>:</td>
+                            <td class="text-gray-900"><%= number_with_delimiter(@company_vacancy_list.required_applicants) %> <%= t'unit.persons'%></td>
+                        </tr>
+                        <!--end::Row-->
+                        <!--begin::Row-->
+                        <tr>
+                            <td class="text-gray-600"><%= t('title.target_city') %>:</td>
+                            <td class="text-gray-900"><%= get_prefecture_name(@company_vacancy_list.m_prefecture_id) %></td>
+                        </tr>
+                        <!--end::Row-->
+                        <!--begin::Row-->
+                        <tr>
+                            <td class="text-gray-600 min-w-150px w-150px  w-lg-250px"><%= Company::Vacancy.human_attribute_name('working_hours') %>:</td>
+                            <td class="min-w-200px">
+                                <span class="text-gray-900"><%= @company_vacancy_list.working_hours %></span>
+                            </td>
+                        </tr>
+                        <!--end::Row-->
+                        <!--begin::Row-->
+                        <tr>
+                            <td class="text-gray-600"><%= Company::Vacancy.human_attribute_name('break_time') %>:</td>
+                            <td class="text-gray-900"><%= @company_vacancy_list.break_time %></td>
+                        </tr>
+                        <!--end::Row-->
+                        <!--begin::Row-->
+                        <tr>
+                            <td class="text-gray-600"><%= Company::Vacancy.human_attribute_name('holiday') %>:</td>
+                            <td class="text-gray-900"><%= @company_vacancy_list.holiday %></td>
+                        </tr>
+                        <!--end::Row-->
+                        <!--begin::Row-->
+                        <tr>
+                            <td class="text-gray-600"><%= Company::Vacancy.human_attribute_name('over_time') %>:</td>
+                            <td class="text-gray-900">
+                                <% if @company_vacancy_list.over_time? %>
+                                    <%= Company::Vacancy.human_attribute_name('over_time') %><%= t 'title.there_is' %>
+                                <% else %>
+                                    <%= Company::Vacancy.human_attribute_name('over_time') %><%= t 'title.there_is_no' %>
+                                <% end %>
+                            </td>
+                        </tr>
+                        <!--end::Row-->
+                    </tbody>
+                </table>
+                <!--end::Details-->
+            </div>
+            <div class="mb-7">
+                <!--begin::Title-->
+                <h5 class="fw-bolder mb-4 p-4 bg-light border w-100 rounded"><%= t("benefit.payment") %></h5>
+                <!--end::Title-->
+                <!--begin::Details-->
+                <table class="table fw-bold gs-0 gy-2 gx-2 ms-4">
+                    <tbody>
+                        <!--begin::Row-->
+                        <tr>
+                            <td class="text-gray-600 min-w-150px w-150px  w-lg-250px"><%= Company::Vacancy.human_attribute_name('basic_salary') %>:</td>
+                            <td class="min-w-200px">
+                                <span class="text-gray-900"><%= @company_vacancy_list.basic_salary %> <%= t('unit.money') %></span>
+                            </td>
+                        </tr>
+                        <!--end::Row--> 
+                        <!--begin::Row-->
+                        <tr>
+                            <td class="text-gray-600"><%= Company::Vacancy.human_attribute_name('bonus') %>:</td>
+                            <td class="text-gray-900"><%= @company_vacancy_list.bonus %></td>
+                        </tr>
+                        <!--end::Row-->
+                        <!--begin::Row-->
+                        <tr>
+                            <td class="text-gray-600"><%= Company::Vacancy.human_attribute_name('allowance') %>:</td>
+                            <td class="text-gray-900"><%= @company_vacancy_list.allowance %></td>
+                        </tr>
+                        <!--end::Row-->
+                    </tbody>
+                </table>
+                <!--end::Details-->
+            </div>
+            <!--begin::Other-->
+            <% if  @company_vacancy_list.other.present? %>
+                <div class="mb-7 ">
+                    <!--begin::Title-->
+                    <h5 class="fw-bolder mb-4 p-4 bg-light border w-100 rounded"><%= Company::Vacancy.human_attribute_name('other') %></h5>
+                    <!--end::Title-->
+                    <!--begin::Details-->
+                    <div class="d-flex flex-wrap ms-4">
+                        <!--begin::Row-->
+                        <div class="flex-equal me-5">
+                            <!--begin::Details-->
+                            <table class="table fs-6 fw-bold gs-0 gy-2 gx-2 m-0">                                        
+                                <!--begin::Row-->
+                                <tr>
+                                    <td class="text-gray-600 text-break w-500px"><%= @company_vacancy_list.other %></td>
+                                </tr>
+                                <!--end::Row-->
+                            </table>
+                            <!--end::Details-->
+                        </div>
+                        <!--end::Row-->
+                    </div>
+                </div>
+            <% end %>
+            <div class="mb-7">
+                <!--begin::Title-->
+                <h5 class="fw-bolder mb-4 p-4 bg-light border w-100 rounded"><%= t('title.company_enhancement_title') %></h5>
+                <!--begin::Details-->
+                <table class="table fs-6 fw-bold gs-0 gy-2 gx-2 ms-4">
+                    <!--begin::Row-->
+                    <tr>                                            
+                        <td class="text-gray-600 text-break min-w-200px">
+                            <!--begin::Row-->
+                            <% if @company_vacancy_list.probation? %>
+                                <div class="welfare badge badge-primary mr-2 mb-2">
+                                    <%= Company::Vacancy.human_attribute_name('probation') %>
+                                </div>
+                            <% end %>
+                            <!--end::Row-->
+                            <!--begin::Row-->
+                            <% if @company_vacancy_list.dormitory? %>
+                                <div class="welfare badge badge-primary mr-2 mb-2">
+                                    <%= Company::Vacancy.human_attribute_name('dormitory') %>
+                                </div>
+                            <% end %>
+                            <!--end::Row-->
+                            <!--begin::Row-->
+                            <% if @company_vacancy_list.insurance? %>
+                                <div class="welfare badge badge-primary mr-2 mb-2">
+                                    <%= Company::Vacancy.human_attribute_name('insurance') %>
+                                </div>
+                            <% end %>
+                            <!--end::Row-->
+                            <!--begin::Row-->
+                            <% if @company_vacancy_list.severance_pay? %>
+                                <div class="welfare badge badge-primary mr-2 mb-2">
+                                    <%= Company::Vacancy.human_attribute_name('severance_pay') %>
+                                </div>
+                            <% end %>
+                            <!--end::Row-->
+                            <!--begin::Row-->
+                            <% if @company_vacancy_list.promotion? %>
+                                <div class="welfare badge badge-primary mr-2 mb-2">
+                                    <%= Company::Vacancy.human_attribute_name('promotion') %>
+                                </div>
+                            <% end %>
+                            <!--end::Row-->
+                            <!--begin::Row-->
+                            <% if @company_vacancy_list.transportation_allowance? %>
+                                <div class="welfare badge badge-primary mr-2 mb-2">
+                                    <%= Company::Vacancy.human_attribute_name('transportation_allowance') %>
+                                </div>
+                            <% end %>
+                            <!--end::Row-->
+                            <% if @company_vacancy_list.company_enhancement.present? %>
+                                <% @company_vacancy_list.company_enhancement.each_with_index do |v,i| %>
+                                    <% if v != 0 %>
+                                        <div class="welfare badge badge-primary mr-2 mb-2">
+                                            <%= t("company_vacancy_enhancement.#{Company::Vacancy.company_vacancy_enhancements.key(i+1)}") %>
+                                        </div> 
+                                    <% end %>
+                                <% end %>
+                            <% end %>
+                            <% if @welfare_list.present? %>
+                                <% @welfare_list.each do |data| %>
+                                    <div class="welfare badge badge-primary mr-2 mb-2">
+                                        <%= data.welfare_type %>
+                                    </div>
+                                <% end %>
+                            <% end %>
+                        </td>
+                    </tr>
+                    <!--end::Row-->                                        
+                </table>
+                <!--end::Details-->
+            </div>
+            <!--begin::Hiring Flow Data-->
+            <% unless @company_vacancy_list.hiring_flow_data.nil? %>
+                <div class="mb-7 ">
+                    <!--begin::Title-->
+                    <h5 class="fw-bolder mb-4 p-4 bg-light border w-100 rounded"><%= t('title.hiring_flow_data_title') %></h5>
+                    <!--end::Title-->
+                    <!--begin::Details-->
+                    <div class="my-2 ms-4">
+                        <% unless @company_vacancy_list.hiring_flow_data.nil? %>
+                            <% @company_vacancy_list.hiring_flow_data.each do |flow_data| %>
+                                <!--begin::Row-->
+                                <div class="d-flex align-items-start mb-3">
+                                    <!--begin::Bullet-->
+                                    <span class="bullet me-3 mt-3"></span>
+                                    <!--end::Bullet-->
+                                    <!--begin::Label-->
+                                    <div class="text-gray-600 fw-bold fs-6"><%= flow_data %></div>
+                                    <!--end::Label-->
+                                </div>
+                                <!--end::Row-->
+                            <% end %>
+                        <% end %>
+                    </div>
+                    <!--end::Details-->
+                </div>
+            <% end %>
+            <!--end::Hiring Flow Data--> 
+            <!--begin::Other Skill-->
+            <% if  @company_vacancy_list.other_skill.present? %>
+                <div class="mb-7">
+                    <!--begin::Title-->
+                    <h5 class="fw-bolder mb-4 p-4 bg-light border w-100 rounded"><%= Company::Vacancy.human_attribute_name('other_skill') %></h5>
+                    <!--end::Title-->
+                    <!--begin::Details-->
+                    <div class="d-flex flex-wrap ms-4">
+                        <!--begin::Row-->
+                        <div class="flex-equal me-5">
+                            <!--begin::Details-->
+                            <table class="table fs-6 fw-bold gs-0 gy-2 gx-2 m-0">                                        
+                                <!--begin::Row-->
+                                <tr>
+                                    <td class="text-gray-600 text-break w-500px"><%= @company_vacancy_list.other_skill %></td>
+                                </tr>
+                                <!--end::Row-->
+                            </table>
+                        </div>
+                        <!--end::Details-->
+                    </div>
+                </div>
+            <% end %>
+            <!--end::Other Skill-->
+        </div>
+    </div> 
+</div>

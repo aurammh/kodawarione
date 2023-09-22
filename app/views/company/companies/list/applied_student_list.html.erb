@@ -1,0 +1,159 @@
+<!--begin::Header-->
+<% breadcrumbs_navigation_add (t('common.applied_vacancy')), '#' %>
+<%= render_company_breadcrumbs_navigation(t('common.applied_vacancy')) %>
+<!--end::Header-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <% if @applied_users_list.present? %>
+        <!--begin::form-->
+        <%= form_with(url: communication_new_communicate_list_path,method: :get,local: false) do |form| %>
+            <%= form.hidden_field :name,value: "Vacancy" %>
+            <!--begin::Container-->
+            <div class="container-xxl" id="kt_content_container">
+                <!--begin::Event Tables Widget -->
+                <div class="card bg-body mb-5 mb-xl-10">
+                    <!--begin::Header-->
+                    <div class="card-header border-0 pt-5">
+                        <h3 class="card-title align-items-start flex-column">
+                            <span class="card-label fw-bolder fs-3 mb-1"><%= t('common.applied_vacancy') %></span>
+                            <span class="text-muted mt-1 fw-bold fs-7"><%= @applied_users_list.size %> <%= t('common.student_total_count') %></span>
+                        </h3>
+                    </div>
+                    <!--end::Header-->
+                    <!--begin::Body-->
+                    <div class="card-body py-3">
+                        <!--begin::Table container-->
+                        <div class="table-responsive  overflow-auto">
+                            <!--begin::Table-->
+                            <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
+                                <!--begin::Table head-->
+                                <thead>
+                                    <tr class="fw-bolder text-muted">
+                                        <th class="min-w-250px"><%= t('student.student_show.name')%></th>
+                                        <th class="min-w-50px"><%= t('dashboard.age')%></th>
+                                        <th class="min-w-50px"><%= t('dashboard.gender')%></th>
+                                        <th class="min-w-100px"><%= Student::Student.human_attribute_name('school_type') %></th>
+                                        <th class="min-w-100px"><%= Student::Student.human_attribute_name('school_name') %></th>
+                                        <th class="min-w-100px"><%= Student::Student.human_attribute_name('graduation_date') %></th>
+                                        <th class="min-w-100px"><%= Company::Vacancy.human_attribute_name('vacancy_title') %></th>
+                                        <th class="min-w-100px"><%= Company::Vacancy.human_attribute_name('vacancy_description') %></th>
+                                        <th class="min-w-50px text-end"><%= t('event.title.edit_text_title') %></th>
+                                    </tr>
+                                </thead>
+                                <!--end::Table head-->
+                                <!--begin::Table body-->
+                                <tbody>
+                                    <% @applied_users_list.each do |student| %>
+                                        <tr>
+                                            <td class="">
+                                                <div class="d-flex align-items-center">
+                                                    <!--begin:: Avatar -->
+                                                    <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
+                                                        <% if student.image.attached? %>
+                                                        <%= image_tag (student.image), :class=> "symbol-label" %>
+                                                        <% else %>
+                                                            <% if student.gender == "female" %>
+                                                                <%= image_tag "avatar/female.svg", :class=> "symbol-label" %>                                
+                                                            <% else %>
+                                                                <%= image_tag "avatar/male.svg", :class=> "symbol-label" %>   
+                                                            <% end %>
+                                                        <% end %> 
+                                                    </div>
+                                                    <!--end::Avatar-->
+                                                    <!--begin::User details-->
+                                                    <div class="d-flex flex-column">
+                                                        <span class="text-gray-800 mb-1">
+                                                            <%= student.nick_name %>
+                                                        </span>
+                                                        <span class="text-muted fw-bold text-muted d-block fs-7"><%= student.user.email %></span>
+                                                    </div>
+                                                    <!--begin::User details-->
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <span class="text-muted fw-bolder d-block fs-6"><%= get_birthday(student.birthday) %></span>
+                                            </td>
+                                            <td>
+                                                <span class="text-muted fw-bold d-block fs-6"><%= get_gender(student.gender) %></span>
+                                            </td>
+                                            <td>
+                                                <span class="text-muted fw-bold d-block fs-6"><%= get_school_type(student.school_type) %></span>
+                                            </td>
+                                            <td>
+                                                <span class="text-muted fw-bold d-block fs-6"><%= get_student_field_name(student.school_name) %></span>
+                                            </td>
+                                            <td>
+                                                <span class="text-muted fw-bold d-block fs-6"><%= get_graduation_date(student.graduation_date) %></span>
+                                            </td>  
+                                            <td>
+                                                <span class="text-muted fw-bold d-block fs-6"><%= student.vacancy_title.present??  student.vacancy_title.truncate(20) : "-" %></span>
+                                            </td>
+                                            <td>
+                                                <span class="text-muted fw-bold d-block fs-6"><%= student.vacancy_description.present??  student.vacancy_description.truncate(20) : "-" %></span>
+                                            </td>                                  
+                                            <td>
+                                                <div class="d-flex justify-content-center flex-shrink-0">
+                                                    <div class="checkbox-inline py-3">
+                                                        <div class="col-12 col-sm-4 col-md-6 m-0 p-0">
+                                                            <label  class= "form-check form-check-sm form-check-custom form-check-solid"> 
+                                                                <%= form.check_box :receiver_ids, {type: 'checkbox', class: 'form-check-input', id: "checkbox#{student.id}", multiple: true}, student.id %>
+                                                                <span class="form-check-label"></span>
+                                                            </label>
+                                                        </div>
+                                                    </div> 
+                                                    <%= form.label :'', for: "checkbox#{student.id}",class: 'select-label' %>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    <% end %>
+                                </tbody>
+                                <!--end::Table body-->
+                            </table>
+                            <!--end::Table-->
+                        </div>
+                        <!--end::Table container-->
+                    </div>
+                    <div  id="communicationModal">
+                        <%= render 'communication/communications/communication_muti_modal'%>
+                    </div> 
+                    <!--end::Body-->
+                </div>
+                <!--end::Event Tables Widget -->
+                <!--start::submit_button-->
+                <div>
+                    <%= form.submit t('event.title.communicate_event_btn'),class: "btn-primary btn col-12 col-sm-12 col-md-3 col-lg-3 px-4 py-2 mr-1 text-decoration-none text-white"%>
+                </div>
+                <!--end::submit_button-->
+                <!--begin:: Pagination-->
+                <div class="d-flex flex-wrap justify-content-between align-items-center">
+                    <div class="d-flex flex-wrap py-2 ml-3">
+                        <%= paginate @applied_users_list %>
+                    </div>
+                    <div class="d-flex align-items-center py-3">
+                        <span class="text-muted">Showing <%= @applied_users_list.offset_value + 1 %> - <%=  @applied_users_list.offset_value + @applied_users_list.count %> of <%= @applied_users_list.total_count %></span>
+                    </div>
+                </div>	
+                <!--end: Pagination-->
+            </div>
+            <!--end::Container-->
+        <% end %>    
+        <!-- end::from -->
+    <% else %>
+        <!--begin::Container-->
+        <div class="container-xxl" id="kt_content_container">
+            <!--begin::Event Tables Widget -->
+            <div class="card bg-body mb-5 mb-xl-10">
+                <!--begin::Header-->
+                <div class="card-header border-0 pt-5">
+                    <h3 class="card-title align-items-start flex-column">
+                        <span class="card-label fw-bolder fs-3 mb-1"><%= t('common.applied_vacancy') %></span>
+                        <span class="text-muted m-1 fw-bold fs-7"><%= t('common.applied_company_list_empty') %></span>
+                    </h3>
+                </div>
+                <!--end::Header-->
+            </div>
+            <!--end::Event Tables Widget -->
+        </div>
+        <!--end::Container-->
+    <% end %>
+</div>
+<%= javascript_pack_tag 'common.js'%>

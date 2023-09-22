@@ -1,0 +1,10 @@
+$(function () {
+    <% if current_company_user || current_company %>
+        $("#communicationModal").html("<%= j render 'communication/communications/scout_communication_modal' %>");
+    <% elsif current_user && (cookies[:previous_url] == '/home' || cookies[:previous_url] == '/members') %>
+        $("#communicationModal").html("<%= j render "communication/communications/communication_modal" %>");
+    <% else %>
+        $("#communicationModal").html("<%= j render "communication/communications/list/scout_manage_form" %>");
+    <% end %>
+    $("#communication-modal").modal('show');
+});

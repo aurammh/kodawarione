@@ -1,0 +1,158 @@
+<button type="button" class="btn btn-primary  text-uppercase" data-bs-toggle="modal" data-bs-target="#result-brain"><%= t('student_assessment.brain.result.btn')%></button>  
+
+<!-- Modal -->
+<div class="modal fade pl-0" id="result-brain" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="exampleModalLongTitle"><%= t('student_assessment.brain.result.modal_title') %></h3>
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                        </svg>
+                    </span>
+                    <!--end::Svg Icon-->
+                </div>
+            </div>
+            <div class="modal-body ">
+                 <%= image_tag "student/student_brain_cover.jpg", class: "img-fluid ", alt: "Responsive image" %>  
+                <div class="assessment_popup">
+                    <div class="form-card bg-white mt-1 mb-2 py-1 px-2">
+                        <div class="text-justify">
+                            <%# Aが優位な方 %>
+                            <div class = "mb-4">
+                                <h5 class="std-border-color sub-title font-weight-bold px-2 mt-3">
+                                <%= t('student_assessment.brain.result.title_1') %>
+                                </h5>
+                                <p><%= t('student_assessment.brain.result.paragraph_1') %></p>
+                                <div class = "row mb-3">
+                                    <div class="col-12 col-md-4 col-lg-4 mb-3 mb-lg-0 mb-md-0 d-flex align-items-center justify-content-center">
+                                     <%= image_tag "student/student_brain_result_01.jpg", class: "img-fluid  d-block mx-auto", alt: "Responsive image" %>
+                                    </div>
+                                    <div class="col-12 col-md-8 col-lg-8">
+                                        <p class="text-dark font-weight-bold"><%= t('student_assessment.brain.result.title_1_1') %></p>
+                                        <p class = "text-indent">
+                                          <%= t('student_assessment.brain.result.paragraph_1_1_1') %>
+                                        </p>
+                                        <p class = "text-indent">
+                                          <%= t('student_assessment.brain.result.paragraph_1_1_2') %>
+                                        </p>
+                                        <p class="text-dark font-weight-bold"><%= t('student_assessment.brain.result.title_1_2') %></p>
+                                        <p class = "text-indent">
+                                        <%= t('student_assessment.brain.result.paragraph_1_2_1') %>
+                                        </p>
+                                        <p class = "my-2 text-dark font-weight-bold">
+                                        <%= t('student_assessment.brain.result.paragraph_1_2_2') %>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class = "row">
+                                </div>
+                            </div>
+
+                            <%# Bが優位な方 %>
+                            <div class = "mb-4">
+                                <h5 class="std-border-color sub-title font-weight-bold px-2 ">
+                                <%= t('student_assessment.brain.result.title_2') %>
+                                </h5>
+                                <p><%= t('student_assessment.brain.result.paragraph_2') %></p>
+                                <div class = "row mb-3">
+                                    <div class="col-12 col-md-4 col-lg-4 mb-3 mb-lg-0 mb-md-0 d-flex align-items-center justify-content-center">
+                                    <%= image_tag "student/student_brain_result_02.jpg", class: "img-fluid  d-block mx-auto", alt: "Responsive image"  %>
+                                    </div>
+                                    <div class="col-12 col-md-8 col-lg-8">
+                                        <p class="text-dark font-weight-bold"><%= t('student_assessment.brain.result.title_2_1') %></p>
+                                        <p class = "text-indent"><%= t('student_assessment.brain.result.paragraph_2_1_1') %></p>
+                                        <p class = "text-indent"><%= t('student_assessment.brain.result.paragraph_2_1_2') %></p>
+                                        <p class="text-dark font-weight-bold"><%= t('student_assessment.brain.result.title_2_2')%></p>
+                                        <p class = "text-indent"><%= t('student_assessment.brain.result.paragraph_2_2_1') %></p>
+                                        <p class = "text-indent"><%= t('student_assessment.brain.result.paragraph_2_2_2') %></p>
+                                        <p class = "my-2 text-dark font-weight-bold">
+                                        <%= t('student_assessment.brain.result.paragraph_2_2_3') %>
+                                        </p> 
+                                    </div>
+                                </div>
+                            </div>
+
+                            <%# Cが優位な方 %>
+                            <div class = "mb-4">
+                                <h5 class="std-border-color sub-title font-weight-bold px-2 ">
+                                <%= t('student_assessment.brain.result.title_3') %>
+                               </h5>
+                                <p> <%= t('student_assessment.brain.result.paragraph_3') %></p>
+                                <div class = "row mb-3">
+                                    <div class="col-12 col-md-4 col-lg-4 mb-3 mb-lg-0 mb-md-0 d-flex align-items-center justify-content-center">
+                                     <%= image_tag "student/student_brain_result_03.jpg", class: "img-fluid  d-block mx-auto", alt: "Responsive image"%>
+                                    </div>
+                                    <div class="col-12 col-md-8 col-lg-8">
+                                        <p class="text-dark font-weight-bold"><%= t('student_assessment.brain.result.title_3_1') %></p>
+                                        <p class = "text-indent"><%= t('student_assessment.brain.result.paragraph_3_1_1') %></p>
+                                        <p class = "text-indent"><%= t('student_assessment.brain.result.paragraph_3_1_2') %></p>
+                                        <p class="text-dark font-weight-bold"><%= t('student_assessment.brain.result.title_3_2') %></p>
+                                        <p class = "text-indent"><%= t('student_assessment.brain.result.paragraph_3_2_1') %></p>
+                                        <p class = "text-indent"><%= t('student_assessment.brain.result.paragraph_3_2_2') %></p>
+                                        <p class = "my-2 text-dark font-weight-bold">
+                                        <%= t('student_assessment.brain.result.paragraph_3_2_3') %>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <%# Dが優位な方 %>
+                            <div class = "mb-4">
+                                <h5 class="std-border-color sub-title font-weight-bold px-2 ">
+                                <%= t('student_assessment.brain.result.title_4') %>
+                               </h5>
+                                <p> <%= t('student_assessment.brain.result.paragraph_4') %></p>
+                                <div class = "row mb-3">
+                                    <div class="col-12 col-md-4 col-lg-4 mb-3 mb-lg-0 mb-md-0 d-flex align-items-center justify-content-center">
+                                     <%= image_tag "student/student_brain_result_04.jpg", class: "img-fluid  d-block mx-auto", alt: "Responsive image" %>
+                                    </div>
+                                    <div class="col-12 col-md-8 col-lg-8">
+                                        <p class="text-dark font-weight-bold"><%= t('student_assessment.brain.result.title_4_1') %></p>
+                                        <p class = "text-indent"><%= t('student_assessment.brain.result.paragraph_4_1_1') %></p>
+                                        <p class = "text-indent"><%= t('student_assessment.brain.result.paragraph_4_1_2') %></p>
+                                        <p class="text-dark font-weight-bold"><%= t('student_assessment.brain.result.title_4_2') %></p>
+                                        <p class = "text-indent"><%= t('student_assessment.brain.result.paragraph_4_2_1') %></p>
+                                        <p class = "text-indent"><%= t('student_assessment.brain.result.paragraph_4_2_2') %></p>
+                                        <p class = "mt-2 text-dark font-weight-bold">
+                                        <%= t('student_assessment.brain.result.paragraph_4_2_3') %>
+                                        </p>
+                                        <p class = "mb-2 text-dark font-weight-bold">
+                                        <%= t('student_assessment.brain.result.paragraph_4_2_4') %>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <%# 利き脳®タイプの活かし方%>
+                            <div>
+                                <h5 class="std-border-color sub-title font-weight-bold px-2 ">
+                                    <%= t('student_assessment.brain.result.title_5') %>
+                               </h5>
+                                <p>
+                                <%= t('student_assessment.brain.result.paragraph_5') %>
+                                </p>
+                                <p><%= t('student_assessment.brain.result.title_5_1') %></p>
+                                <%= image_tag "student/student_brain_result_05.jpg", class: "img-fluid ", alt: "Responsive image" %>   
+                                <div class="d-flex justify-content-center align-items-center mb-xl-5 mb-md-3"></div>
+                                <p class = "text-indent"><%= t('student_assessment.brain.result.paragraph_5_1_1') %></p>
+                                <p class = "mb-2 text-indent"><%= t('student_assessment.brain.result.paragraph_5_1_2') %></p>
+                                <p class = "text-indent"><%= t('student_assessment.brain.result.paragraph_5_1_3') %></p>
+                                <p class = "text-indent"><%= t('student_assessment.brain.result.paragraph_5_1_4') %></p>
+                                <p class = "text-indent"><%= t('student_assessment.brain.result.paragraph_5_1_5') %></p>
+                                <p class = "text-indent"><%= t('student_assessment.brain.result.paragraph_5_1_6') %></p>
+                            </div>
+                        </div>   
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary fw-bolder text-uppercase" data-bs-dismiss="modal"><%= t('student_commitment.title.close')%></button>
+            </div>
+        </div>
+    </div>
+</div>

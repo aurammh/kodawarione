@@ -1,0 +1,58 @@
+<%= form_for(@admin_user, url: admin_admin_users_path, method:"post") do |form| %>
+  
+    <div class="row col-12 event-registration px-1 px-sm-4 mt-3">  
+      <section class="col-md-12 mb-5 pl-5"> 
+        <div class="d-container shadow py-4 bg-white" style="border-radius: 0.8rem">
+          <div class="col-12 pb-4 pt-3">
+            <span class="h4 com-font-color"><%= t('partner.partner_user.title.partner_user_information')%></span>
+          </div>
+        <%#= form.hidden_field :super_partner_id,value: @super_partner_id  %>
+        <div class="col-12 col-md-6 mb-3">
+            <div class="d-flex">
+              <%= form.label :first_name, class: "form-label"  %>
+              <label class="ml-auto required-label"> <%= t('common.require') %> </label>
+            </div>
+            <%= form.text_field :first_name, id: "name", class: "form-control shadow-none errors", maxlength: 255 %>
+            <p class="d-flex align-items-start text-danger font-size-sm ms-invalid-feedback"><%= @admin_user.errors.full_messages_for(:first_name)[0] %></p>
+        </div>
+        <div class="col-12 col-md-6 mb-3">
+            <div class="d-flex">
+              <%= form.label :last_name, class: "form-label"  %>
+              <label class="ml-auto required-label"> <%= t('common.require') %> </label>
+            </div>
+            <%= form.text_field :last_name, id: "name", class: "form-control shadow-none errors", maxlength: 255 %>
+            <p class="d-flex align-items-start text-danger font-size-sm ms-invalid-feedback"><%= @admin_user.errors.full_messages_for(:last_name)[0] %></p>
+        </div>
+          
+        <div class="col-12 col-md-6 mb-3">
+          <div class="d-flex">
+            <%= form.label :email, class: "form-label"  %>
+            <label class="ml-auto required-label"><%= t('common.require') %> </label>
+          </div>
+          <%= form.text_field :email, class: "form-control shadow-none" %>   
+          <p class="d-flex align-items-start text-danger font-size-sm ms-invalid-feedback"><%= @admin_user.errors.full_messages_for(:email)[0] %></p>     
+      </div>
+      <div class="col-12 col-md-6 mb-3">
+          <div class="d-flex">
+              <%= form.label :password, class: "form-label" %>
+              <label class="ml-auto required-label"><%= t('common.require') %> </label>
+          </div>
+          <%= form.password_field :password, class: "form-control shadow-none" %>
+          <p class="d-flex align-items-start text-danger font-size-sm ms-invalid-feedback"><%= @admin_user.errors.full_messages_for(:password)[0] %></p>
+      </div>
+      <div class="col-12 col-md-6 mb-3">
+        <div class="d-flex">
+            <%= form.label :password_confirmation, class: "form-label" %>
+            <label class="ml-auto required-label"><%= t('common.require') %> </label>
+        </div>
+      <%= form.password_field :password_confirmation, class: "form-control shadow-none" %>
+      <p class="d-flex align-items-start text-danger font-size-sm ms-invalid-feedback"><%= @admin_user.errors.full_messages_for(:password_confirmation)[0] %></p>
+      </div>
+      </div>    
+      <div class="actions d-flex justify-content-center mt-5">
+      
+          <%= form.submit (t "btn.update"), :class => 'custom-btn text-white' %>
+      </div>     
+      </section>    
+    </div> 
+<% end %>

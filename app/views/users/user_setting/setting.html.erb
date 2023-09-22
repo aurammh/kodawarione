@@ -1,0 +1,209 @@
+<!--begin::Toolbar-->
+<div class="toolbar py-5 py-lg-5 mb-0" id="kt_toolbar">
+    <!--begin::Container-->
+    <div id="kt_toolbar_container" class="container-xxl d-flex flex-stack flex-wrap">
+        <!--begin::Page title-->
+        <% breadcrumbs_navigation_add (t ('password_setting.title.change_login_setting')), '#' %>
+        <%= render_student_breadcrumbs_navigation(t ('password_setting.title.change_login_setting')) %>			
+        <!--end::Page title-->
+    </div>
+    <!--end::Container-->
+</div>
+<!--end::Toolbar-->
+<div class="mb-9">
+    <% if check_user_type == LogoutHistory.active_types["user"].to_i %>
+        <%= render partial: "student/shared/student_commitment/profile_banner" %>
+    <% end %>
+</div>
+<% flash.each do |key, value| %>
+    <% if value != nil %>
+        <% if key == 'email_change' %>
+            <div class="container">
+                <div class="alert alert-success d-flex justify-content-between align-items-center" role="alert">
+                <%= value %>
+                <button type="button" class="close btn btn-outline-none fw-bold fs-2 p-0" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+            </div>
+        <% end %>
+    <% end %>
+<% end %>
+<!--begin::Entry-->
+<% if check_user_type == LogoutHistory.active_types["user"].to_i %>
+    <!--begin::Container-->
+    <div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
+        <!--begin::Content-->
+        <div class="content flex-row-fluid" id="kt_content">
+            <!--begin::Navbar-->
+            <%= render partial: "student/shared/students/profile_navbar", :locals =>{:current_route => "password"} %>
+            <!--end::Navbar-->
+            <!--begin::Card-->
+            <div class="card mb-5 mb-xl-10 setting">
+                <!--begin::Card header-->
+                <div class="card-header border-0">
+                    <!--begin::Card title-->
+                    <div class="card-title m-0">
+                        <h3 class="fw-bolder m-0"><%= t ('password_setting.title.change_login_setting') %></h3>
+                    </div>
+                    <!--end::Card title-->
+                </div>
+                <!--end::Card header-->
+                <!--begin::Form-->
+                <%= form_with(model: @setting_user , url: user_setting_update_url , method: "patch") do |f| %>
+                    <div class="card-body border-top p-9">
+                        <!--begin::Input group-->
+                        <div class="row mb-6">
+                            <!--begin::Label-->
+                            <label for= "user_chk_edit_email" class="col-lg-4 col-form-label fw-bold fs-6"><%=  t('password_setting.change_email')%></label>
+                            <!--end::Label-->
+                            <!--begin::Col-->
+                            <div class="col-lg-8 fv-row">
+                                <div class="checkbox-inline py-3">
+                                    <div class="col-12 col-sm-4 col-md-6 m-0 p-0">
+                                        <label  class= "form-check form-check-sm form-check-custom form-check-solid">
+                                            <%= f.check_box :chk_edit_email, :as => :boolean, checked: @setting_user.chk_edit_email == '1' ? true : false, class: 'chk_email form-check-input'%> 
+                                            <span class="form-check-label"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Input group-->
+                        <!--begin::Input group-->
+                        <div class="row mb-6 edit_username collapse">
+                            <!--begin::Label-->
+                            <label class="col-lg-4 col-form-label required fw-bold fs-6"><%= f.label :email  %></label>
+                            <!--end::Label-->
+                            <!--begin::Col-->
+                            <div class="col-lg-8 fv-row">
+                                <div class="position-relative d-flex align-items-center">
+                                    <!--begin::Icon-->
+                                    <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
+                                    <span class="svg-icon svg-icon-2 position-absolute mx-4">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path opacity="0.3" d="M21 19H3C2.4 19 2 18.6 2 18V6C2 5.4 2.4 5 3 5H21C21.6 5 22 5.4 22 6V18C22 18.6 21.6 19 21 19Z" fill="currentColor"></path>
+                                            <path d="M21 5H2.99999C2.69999 5 2.49999 5.10005 2.29999 5.30005L11.2 13.3C11.7 13.7 12.4 13.7 12.8 13.3L21.7 5.30005C21.5 5.10005 21.3 5 21 5Z" fill="currentColor"></path>
+                                        </svg>
+                                    </span>
+                                    <!--end::Svg Icon-->
+                                    <!--end::Icon-->
+                                    <%= f.email_field :email, :class=> "form-control form-control-lg form-control-solid ps-12", disabled: false %>
+                                </div>
+                                <p class="text-danger fs-6 ms-invalid-feedback mt-1"><%= @setting_user.errors.full_messages_for(:email)[0] %></p>
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Input group-->
+                        <!--begin::Input group-->
+                        <div class="row mb-6">
+                            <!--begin::Label-->
+                            <label for= "user_chk_pass_edit" class="col-lg-4 col-form-label fw-bold fs-6"><%=  t('password_setting.change_password')%></label>
+                            <!--end::Label-->
+                            <!--begin::Col-->
+                            <div class="col-lg-8 fv-row">
+                                <div class="checkbox-inline py-3">
+                                    <div class="col-12 col-sm-4 col-md-6 m-0 p-0">
+                                        <label  class= "form-check form-check-sm form-check-custom form-check-solid">
+                                            <%= f.check_box :chk_pass_edit, :as => :boolean, checked: @setting_user.chk_pass_edit == '1' ? true : false, class: 'chk_pass form-check-input' %> 
+                                            <span class="form-check-label"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Input group-->
+                        <!--begin::Input group-->
+                        <div class="row mb-6 edit_password collapse">
+                            <!--begin::Label-->
+                            <label class="col-lg-4 col-form-label required fw-bold fs-6"><%= t('password_setting.new_password') %></label>
+                            <!--end::Label-->
+                            <!--begin::Col-->
+                            <div class="col-lg-8 fv-row">
+                                <%= f.password_field :password, :class=> "form-control form-control-lg form-control-solid", placeholder: t("password_setting.new_password"), disabled: false %>
+                                <!-- <span toggle="#password-field" class="fa fa-fw fa-eye-slash user-toggle-password cursor-pointer text-muted float-end mt-n9 me-5"></span> -->
+                                <span toggle="#password-field" class="user-toggle-password cursor-pointer text-muted float-end mt-n10 me-5">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye-slash" viewBox="0 0 16 16">
+                                        <path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"/>
+                                        <path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z"/>
+                                        <path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z"/>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye d-none" viewBox="0 0 16 16">
+                                        <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+                                        <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+                                    </svg>	
+								</span>
+                                <p class="text-danger font-size-sm ms-invalid-feedback mt-1"><%= flash[:password] %></p>
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Input group-->
+                        <!--begin::Input group-->
+                        <div class="row mb-6 edit_password collapse">
+                            <!--begin::Label-->
+                            <label class="col-lg-4 col-form-label required fw-bold fs-6"><%= f.label :password_confirmation %></label>
+                            <!--end::Label-->
+                            <!--begin::Col-->
+                            <div class="col-lg-8 fv-row">
+                                <%= f.password_field :password_confirmation, :class=> "form-control form-control-lg form-control-solid", placeholder: t("password_setting.password_confirmation"),disabled: false %>
+                                <!-- <span toggle="#password-field" class="fa fa-fw fa-eye-slash conf-toggle-password cursor-pointer text-muted float-end mt-n9 me-5"></span> -->
+                                <span toggle="#password-field" class="conf-toggle-password cursor-pointer text-muted float-end mt-n10 me-5">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye-slash" viewBox="0 0 16 16">
+                                        <path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"/>
+                                        <path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z"/>
+                                        <path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z"/>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye d-none" viewBox="0 0 16 16">
+                                        <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+                                        <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+                                    </svg>	
+								</span>
+                                <p class="text-danger font-size-sm ms-invalid-feedback mt-1"><%= flash[:password_confirmation] %></p>
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Input group-->
+                        <!--begin::Input group-->
+                        <div class="row mb-6">
+                            <!--begin::Label-->
+                            <label class="col-lg-4 col-form-label required fw-bold fs-6"><%= f.label :current_password %></label>
+                            <!--end::Label-->
+                            <!--begin::Col-->
+                            <div class="col-lg-8 fv-row">
+                                <%= f.password_field :current_password, class: "form-control form-control-lg form-control-solid",placeholder: t("password_setting.current_password"),:id=>"password" %>
+                                <!-- <span toggle="#password-field" class="far fa-fw fa-eye-slash toggle-password cursor-pointer text-muted float-end mt-n9 me-5"></span> -->
+                                <span toggle="#password-field" class="toggle-password cursor-pointer text-muted float-end mt-n10 me-5">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye-slash" viewBox="0 0 16 16">
+                                        <path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"/>
+                                        <path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z"/>
+                                        <path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z"/>
+                                    </svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye d-none" viewBox="0 0 16 16">
+                                        <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+                                        <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+                                    </svg>	
+								</span>
+                                <p class ="text-danger font-size-sm mt-1"><%= flash[:password_notice] %></p>
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Input group-->
+                    </div>
+                    <!--begin::Actions-->
+                    <div class="card-footer d-flex justify-content-end py-6 px-9">
+                        <%= f.submit t('btn.submit'), class: "btn btn-primary" %>
+                    </div>
+                    <!--end::Actions-->
+                <% end %>
+            </div>
+            <!--end::Card-->
+         </div>
+    </div>
+    <!--end::Container-->
+<% end %>
+<!--end::Entry-->
+<%# render "users/shared/toastr" %>
+<%= javascript_pack_tag "company/company.js" %>
+<%= javascript_pack_tag "user/user.js" %>

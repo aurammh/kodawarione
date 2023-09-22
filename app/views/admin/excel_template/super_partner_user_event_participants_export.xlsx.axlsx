@@ -1,0 +1,31 @@
+wb = xlsx_package.workbook
+
+wb.styles do |style|
+  project_heading = style.add_style(b: true, sz: 14)
+  heading = style.add_style(b: true)
+
+  wb.add_worksheet(name: "Users") do |sheet|
+    # Add a title row
+    sheet.add_row [t('event_participant.title.user_event_participant')], style: project_heading
+    # Add the date this was downloaded
+    sheet.add_row ["Downloaded at", Time.now.strftime("%Y年%-m月%-d日")]
+    # Add a blank row
+    sheet.add_row []
+    # Create the header row
+    sheet.add_row [
+      t('event_participant.title.user_name'),
+      Event.human_attribute_name('event_name'),
+      t('event_participant.title.user_email'),
+      t('event_participant.title.updated_at'),
+      ], style: heading
+    # Create entries for each item
+    @user_event_participants_list.each do |user_event_participants|
+      sheet.add_row [
+      !user_event_participants.last_name.nil? && !user_event_participants.first_name.nil? ? user_event_participants.last_name+''+user_event_participants.first_name : " ",
+      user_event_participants.event_name, 
+      user_event_participants.email,
+      l(user_event_participants.updated_at.strftime('%Y-%m-%d').to_date, default: '-'),
+      ]
+    end
+  end
+end

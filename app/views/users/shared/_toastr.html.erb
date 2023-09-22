@@ -1,0 +1,51 @@
+<% flash.each do |name, msg| %>
+    <%= content_tag :section, msg[1], :id => "flash_#{name}_title", :class => " d-none" %>
+    <%= content_tag :section, msg[0], :id => "flash_#{name}_message", :class => " d-none" %>
+    <% flash.discard(name) %>
+<% end %>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        if ($("#flash_success_title").length) {
+            toastr.options = {
+                "closeButton": false,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": false,
+                "positionClass": "position-absolute top-0 end-0",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+                };
+
+            toastr.success($("#flash_success_message").text(), $("#flash_success_title").text());
+        }else if ($("#flash_error_title").length){
+            toastr.options = {
+                "closeButton": false,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": false,
+                "positionClass": "position-absolute top-0 end-0",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+                };
+
+            toastr.error($("#flash_error_message").text(), $("#flash_error_title").text());
+        }
+    })
+</script>

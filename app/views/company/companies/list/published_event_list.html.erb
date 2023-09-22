@@ -1,0 +1,168 @@
+<div class="d-flex flex-column-fluid">
+	<!--begin::Container-->
+	<div class="container">
+		<div class="subheader py-2 py-lg-6 subheader-transparent" id="kt_subheader">
+			<div class="d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+				<% breadcrumbs_navigation_add (t ('event.title.event_entry_list_tilte')), company_events_path %>
+				<% breadcrumbs_navigation_add ((t'event.title.past_event')), '#' %>
+				<%= render_student_breadcrumbs_navigation((t'event.title.past_event')) %>
+			</div>
+		</div>
+		<% if @past_events.present? %>
+			<!--begin::Event Tables Widget -->
+            <div class="card bg-body mb-5 mb-xl-10">
+                <!--begin::Header-->
+                <div class="card-header border-0 pt-5">
+                    <h3 class="card-title align-items-start flex-column">
+                        <span class="card-label fw-bolder fs-3 mb-1"><%= (t'event.title.past_event') %></span>
+                        <span class="text-muted mt-1 fw-bold fs-7"><%= @past_events.size %> <%= t('common.event_total_count') %></span>
+                    </h3>
+                    <div class="card-toolbar">
+                        <% if can?(:create, Event) %>
+                            <%= link_to new_company_event_path, class: "btn btn-primary fw-bolder fs-6 me-5 my-3" do %>
+                                <span class="svg-icon svg-icon-white svg-icon-md"><!--begin::Svg Icon | path:src/media/svg/icons\Communication\Flag.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <rect x="0" y="0" width="24" height="24"/>
+                                    <path d="M3.5,3 L5,3 L5,19.5 C5,20.3284271 4.32842712,21 3.5,21 L3.5,21 C2.67157288,21 2,20.3284271 2,19.5 L2,4.5 C2,3.67157288 2.67157288,3 3.5,3 Z" fill="#000000"/>
+                                    <path d="M6.99987583,2.99995344 L19.754647,2.99999303 C20.3069317,2.99999474 20.7546456,3.44771138 20.7546439,3.99999613 C20.7546431,4.24703684 20.6631995,4.48533385 20.497938,4.66895776 L17.5,8 L20.4979317,11.3310353 C20.8673908,11.7415453 20.8341123,12.3738351 20.4236023,12.7432941 C20.2399776,12.9085564 20.0016794,13 19.7546376,13 L6.99987583,13 L6.99987583,2.99995344 Z" fill="#000000" opacity="0.3"/>
+                                </g><sup><i class="flaticon2-plus icon-xs text-light"></i></sup>
+                                </svg><%= t'event.title.event_header' %><!--end::Svg Icon--></span>
+                            <% end %>
+                        <% end %>
+                        <% if can?(:read, Event) %>
+                            <%= link_to company_events_path, class: "btn btn-primary fw-bolder fs-6 my-3" do %>
+                                <span class="svg-icon svg-icon-white svg-icon-md"><!--begin::Svg Icon | path:src/media/svg/icons\Communication\Flag.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <rect x="0" y="0" width="24" height="24"/>
+                                    <path d="M3.5,3 L5,3 L5,19.5 C5,20.3284271 4.32842712,21 3.5,21 L3.5,21 C2.67157288,21 2,20.3284271 2,19.5 L2,4.5 C2,3.67157288 2.67157288,3 3.5,3 Z" fill="#000000"/>
+                                    <path d="M6.99987583,2.99995344 L19.754647,2.99999303 C20.3069317,2.99999474 20.7546456,3.44771138 20.7546439,3.99999613 C20.7546431,4.24703684 20.6631995,4.48533385 20.497938,4.66895776 L17.5,8 L20.4979317,11.3310353 C20.8673908,11.7415453 20.8341123,12.3738351 20.4236023,12.7432941 C20.2399776,12.9085564 20.0016794,13 19.7546376,13 L6.99987583,13 L6.99987583,2.99995344 Z" fill="#000000" opacity="0.3"/>
+                                </g>
+                                </svg>&nbsp;<%= t ('event.title.event_entry_list_tilte') %><!--end::Svg Icon--></span>
+                            <% end %>
+                        <% end %>
+                    </div>
+                </div>
+                <!--end::Header-->
+                <!--begin::Body-->
+                <div class="card-body py-3">
+                    <!--begin::Table container-->
+                    <div class="table-responsive  overflow-auto">
+                        <!--begin::Table-->
+                        <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
+                            <!--begin::Table head-->
+                            <thead>
+                                <tr class="fw-bolder text-muted">
+                                    <th class="min-w-400px"><%= Event.human_attribute_name('event_name') %></th>
+                                    <th class="min-w-100px"><%= t('search.event_status') %></th>
+                                    <th class="min-w-250px"><%= t('event.title.event_date') %></th>
+                                    <th class="min-w-150px text-end"><%= t('event.title.edit_text_title') %></th>
+                                </tr>
+                            </thead>
+                            <!--end::Table head-->
+                            <!--begin::Table body-->
+                            <tbody>
+                                <% @past_events.each do |event| %>
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="symbol symbol-45px me-5">
+                                                    <div class="d-flex flex-column justify-content-center text-dark symbol-label bg-primary bg-opacity-75">
+                                                        <span class="fs-7 text-white"><%= t('date.abbr_month_names')[event.event_start_date.month] %></span>
+                                                        <span class="fs-5 fw-boldest text-white"><%= event.event_start_date.strftime('%d') %><%= t('date.prompts.day') %></span>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex justify-content-start flex-column">
+                                                    <span class="text-dark fw-bolder fs-6"><%= event.event_name.truncate(45) %></span>
+                                                    <span class="text-muted fw-bold text-muted d-block fs-7"><i class="flaticon2-pin me-1"></i> <%= event.venue.present? ? event.venue.truncate(45) : t("event.venue_types.online") %></span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span class="badge badge-light-danger py-2 px-4 fs-6"><%= t('event.title.recuirment_closed')%></span>
+                                        </td>
+                                        <td>
+                                            <span class="text-muted fw-bold d-block fs-6"><%= l event.event_start_date.to_date %>～<%= l event.event_end_date.to_date %></span>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex justify-content-end flex-shrink-0">
+                                                <% if can?(:event_apply_list, Event) %>
+                                                    <%= link_to company_event_apply_list_path(event.id), :class=>"btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" do %>
+                                                        <!--begin::Svg Icon | path: icons/duotune/general/gen019.svg-->
+                                                        <span class="svg-icon svg-icon-3">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                <polygon points="0 0 24 0 24 24 0 24"/>
+                                                                <path d="M18,14 C16.3431458,14 15,12.6568542 15,11 C15,9.34314575 16.3431458,8 18,8 C19.6568542,8 21,9.34314575 21,11 C21,12.6568542 19.6568542,14 18,14 Z M9,11 C6.790861,11 5,9.209139 5,7 C5,4.790861 6.790861,3 9,3 C11.209139,3 13,4.790861 13,7 C13,9.209139 11.209139,11 9,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
+                                                                <path d="M17.6011961,15.0006174 C21.0077043,15.0378534 23.7891749,16.7601418 23.9984937,20.4 C24.0069246,20.5466056 23.9984937,21 23.4559499,21 L19.6,21 C19.6,18.7490654 18.8562935,16.6718327 17.6011961,15.0006174 Z M0.00065168429,20.1992055 C0.388258525,15.4265159 4.26191235,13 8.98334134,13 C13.7712164,13 17.7048837,15.2931929 17.9979143,20.2 C18.0095879,20.3954741 17.9979143,21 17.2466999,21 C13.541124,21 8.03472472,21 0.727502227,21 C0.476712155,21 -0.0204617505,20.45918 0.00065168429,20.1992055 Z" fill="#000000" fill-rule="nonzero"/>
+                                                                </g>
+                                                            </svg>
+                                                        </span>
+                                                        <!--end::Svg Icon-->
+                                                    <% end %>
+                                                <% end %>
+                                                <% if can?(:create, Event) %>
+                                                    <%= link_to company_event_path(:id => event.id), :class=>"btn btn-icon btn-bg-light btn-active-color-primary btn-sm" do %>
+                                                        <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
+                                                        <span class="svg-icon svg-icon-3">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                <path d="M17.5 11H6.5C4 11 2 9 2 6.5C2 4 4 2 6.5 2H17.5C20 2 22 4 22 6.5C22 9 20 11 17.5 11ZM15 6.5C15 7.9 16.1 9 17.5 9C18.9 9 20 7.9 20 6.5C20 5.1 18.9 4 17.5 4C16.1 4 15 5.1 15 6.5Z" fill="black" />
+                                                                <path opacity="0.3" d="M17.5 22H6.5C4 22 2 20 2 17.5C2 15 4 13 6.5 13H17.5C20 13 22 15 22 17.5C22 20 20 22 17.5 22ZM4 17.5C4 18.9 5.1 20 6.5 20C7.9 20 9 18.9 9 17.5C9 16.1 7.9 15 6.5 15C5.1 15 4 16.1 4 17.5Z" fill="black" />
+                                                            </svg>
+                                                        </span>
+                                                        <!--end::Svg Icon-->
+                                                    <% end %>
+                                                <% end %>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <% end %>
+                            </tbody>
+                            <!--end::Table body-->
+                        </table>
+                        <!--end::Table-->
+                    </div>
+                    <!--end::Table container-->					
+                </div>
+                <!--begin::Body-->
+            </div>
+            <!--end::Event Tables Widget -->
+            <!--begin::Pagination-->
+            <div class="d-flex flex-wrap justify-content-between align-items-center">
+				<div class="d-flex flex-wrap py-2 mr-3">
+					<%= paginate @past_events %>
+				</div>
+                <div class="d-flex align-items-center py-3">
+                    <span class="text-muted"><%=  t('common.list_display')  %> <%= @past_events.total_count %> <%=  t('common.to')  %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%= @past_events.offset_value + 1 %> ~ <%= @past_events.offset_value + @past_events.count %> <%=  t('common.search_result')  %></span>
+                </div>
+            </div>
+            <!--end::Pagination-->
+		<% else %>
+			<!--begin::Card-->
+            <div class="card bg-body mb-5 mb-xl-10">
+                <!--begin::Card body-->
+                <div class="card-body p-0">
+                    <!--begin::Wrapper-->
+                    <div class="card-px text-center py-5 my-5">
+                        <!--begin::Title-->
+                        <h2 class="fs-2x fw-bolder mb-10"><%= (t'event.title.past_event') %></h2>
+                        <!--end::Title-->
+                        <!--begin::Description-->
+                        <p class="text-gray-400 fs-4 fw-bold mb-10"><%= t('common.past_event_no_data') %></p>
+                        <!--end::Description-->
+                        <!--begin::Action-->
+                        <%# link_to "イベント作成", new_company_event_path, class: "btn btn-primary" %>
+                        <% if can?(:create, Event) %>
+						    <%= link_to t('event.title.event_entry_list_tilte'), company_events_path, class: "btn btn-primary" %>
+                        <% end %>
+                        <!--end::Action-->
+                    </div>
+                    <!--end::Wrapper-->
+                </div>
+                <!--end::Card body-->
+            </div>
+            <!--end::Card-->
+		<% end %>
+	</div>
+	<!--end::Container-->
+</div>
+<%= javascript_pack_tag 'common.js'%>

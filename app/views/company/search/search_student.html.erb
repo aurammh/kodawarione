@@ -1,0 +1,228 @@
+<script type="text/javascript">
+    var BASE_URL = '<%= root_url %>';
+</script>
+<!--begin::Header-->
+<% breadcrumbs_navigation_add (t('dashboard.job_seeker')), '#' %>
+<%= render_company_breadcrumbs_navigation(t('dashboard.job_seeker')) %>		
+<!--end::Header-->
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Container-->
+    <div class="container-xxl" id="kt_content_container">
+        <!--begin::Form-->
+        <div id="kt_search">
+            <div class="search_form" data-kt-drawer="true" data-kt-drawer-name="search_form" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '100%'}" data-kt-drawer-direction="start" data-kt-drawer-toggle="#search_form_toggle" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_body', lg: '#kt_search'}"> 
+                <%= form_with(url: company_students_search_path, method: :get) do |form| %>
+                    <!--begin::Card-->
+                    <div class="card bg-body mb-7">
+                        <div class="card-title d-flex d-md-flex d-lg-none d-xl-none align-item-center justify-content-center p-5">
+                            <%= link_to  root_path,class: "flex-grow-1 mt-auto" do %>
+                                <%= image_tag "layout/header_logo.png", class: "h-25px h-lg-40px" %>   
+                            <% end %>
+                            <!--begin::Close-->
+                            <div class="d-flex d-md-flex d-lg-none d-xl-none btn btn-sm btn-icon btn-light btn-color-muted btn-active-primary active">
+                                <span class="svg-icon svg-icon-2x" data-kt-drawer-dismiss="true">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                                    <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                                </svg>
+                                </span>
+                            </div>
+                            <!--end::Close-->        
+                        </div>
+                        <!--begin::Card body-->
+                        <div class="card-body">
+                            <!--begin::Compact form-->
+                            <div class="d-flex align-items-center">
+                                <div class="flex-grow-1 flex-sm-grow-1 flex-md-grow-1 flex-lg-grow-1 flex-xl-grow-0 w-md-400px me-0 me-sm-0 me-md-0 me-lg-0 me-xl-5 my-3">
+                                    <!--begin::Select-->
+                                    <%=  select_tag :address,options_for_select(prefecture_options_for_vacancy_search.map { |pref| [pref.prefecture_name, pref.id] },params[:address]),:prompt => '居住地',:class => 'form-select form-select-solid', id: "select2_1", :data => { :control => 'select2', 'hide-search' => true } %>
+                                    <!--end::Select-->
+                                </div>
+                                <!--begin:Action-->
+                                <div class="d-none d-md-none d-lg-none d-xl-flex align-items-center my-3">
+                                    <%= link_to t('search.clear'), company_students_search_path, class: "btn btn-light-primary me-5" %>
+                                    <%= form.submit t('search.apply'),class: "btn btn-primary" %>
+                                    <!--<a id="kt_horizontal_search_advanced_link" class="btn btn-link" data-bs-toggle="collapse" href="#kt_advanced_search_form">Advanced Search</a>-->
+                                </div>
+                                <!--end:Action-->
+                            </div>
+                            <!--end::Compact form-->
+                            <!--begin::Advance form-->
+                            <div class="collapse show" id="kt_advanced_search_form">
+                                <!--begin::Separator-->
+                                <div class="separator separator-dashed mt-9 mb-6"></div>
+                                <!--end::Separator-->
+                                <!--begin::Row-->
+                                <div class="row g-8 mb-8">
+                                    <!--begin::Col-->
+                                    <!--begin:Search-->
+                                    <div class="col-xxl-4">
+                                        <%= form.label (t('search.keyword_search')), class: "fs-6 form-label fw-bolder text-dark" %>
+                                        <div class="position-relative">
+                                            <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
+                                            <span class="svg-icon svg-icon-3 svg-icon-gray-500 position-absolute top-50 translate-middle ms-6">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                    <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="black"></rect>
+                                                    <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="black"></path>
+                                                </svg>
+                                            </span>
+                                            <!--end::Svg Icon-->
+                                            <%= form.text_field :keyword, class: "form-control form-control-solid ps-10 h-40px", value: (params[:keyword]), placeholder: t('search.keyword_search') %>
+                                        </div>
+                                    </div>
+                                    <div class="col-xxl-4">
+                                        <%= form.label "希望勤務地", class: "fs-6 form-label fw-bolder text-dark" %>
+                                        <%=  select_tag :desired_location,options_for_select(prefecture_options_for_vacancy_search.map { |pref| [pref.prefecture_name, pref.id] },params[:desired_location]),class: 'form-select form-select-solid', :multiple => true, data: {:placeholder => "希望勤務地", :control => 'select2', 'hide-search' => true, 'close-on-select' => false}, id: "select2_2"  %>  
+                                    </div>
+                                    <!--end::Col-->
+                                    <!--begin::Col-->
+                                    <div class="col-xxl-4">
+                                        <%= form.label "希望職種", class: "fs-6 form-label fw-bolder text-dark" %>
+                                        <%=  select_tag :jobcategory_id,options_for_select(occupation_options.map { |detail| [detail.occupation_name, detail.id] },params[:jobcategory_id]),class: 'form-select form-select-solid',:multiple => true, data: {:placeholder =>'希望職種', :control => 'select2', 'hide-search' => true, 'close-on-select' => false}, id: "select2_3"  %>
+                                    </div>
+                                    <!--end::Col-->
+                                    <!--end:Search-->
+                                </div>
+                                <!--end::Row-->
+                            </div>
+                            <!--end::Advance form-->
+                            <!--begin:Action-->
+                            <div class="d-flex d-md-flex d-lg-flex d-xl-none border border-gray-500 border-dashed rounded justify-content-center min-w-100px my-3 p-2">
+                                <%= link_to t('search.clear'), company_students_search_path, class: "btn btn-light-primary me-5" %>
+                                <%= form.submit t('search.apply'),class: "btn btn-primary" %>
+                                <!--<a id="kt_horizontal_search_advanced_link" class="btn btn-link" data-bs-toggle="collapse" href="#kt_advanced_search_form">Advanced Search</a>-->
+                            </div>
+                            <!--end:Action-->
+                        </div>
+                        <!--end::Card body-->
+                    </div>
+                    <!--end::Card-->
+                <% end %>
+            </div>
+        </div>
+        <!--end::Form-->
+        <!--begin::Toolbar-->
+        <div class="d-flex flex-wrap flex-stack pb-7">
+            <!--begin::Title-->
+            <div class="d-flex flex-wrap align-items-center my-1">
+                <h3 class="fw-bolder me-5 my-1">
+                    <%= t'common.display' %> <%= @results.total_count %> <%= t('search.count_unit') %>
+                </h3>
+            </div>
+            <!--end::Title-->
+            <div class="d-flex flex-wrap my-1 d-block d-lg-none">
+                <!--begin::Tab nav-->
+                <ul class="nav nav-pills mb-2 mb-sm-0">
+                    <li class="nav-item m-0" id="search_form_toggle">
+                        <a class="btn btn-sm btn-icon btn-light btn-color-muted btn-active-primary active">
+                            <!--begin::Svg Icon | path: icons/duotune/abstract/abs015.svg-->
+                            <span class="svg-icon svg-icon-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M21 7H3C2.4 7 2 6.6 2 6V4C2 3.4 2.4 3 3 3H21C21.6 3 22 3.4 22 4V6C22 6.6 21.6 7 21 7Z" fill="black"></path>
+                                    <path opacity="0.3" d="M21 14H3C2.4 14 2 13.6 2 13V11C2 10.4 2.4 10 3 10H21C21.6 10 22 10.4 22 11V13C22 13.6 21.6 14 21 14ZM22 20V18C22 17.4 21.6 17 21 17H3C2.4 17 2 17.4 2 18V20C2 20.6 2.4 21 3 21H21C21.6 21 22 20.6 22 20Z" fill="black"></path>
+                                </svg>
+                            </span>
+                            <!--end::Svg Icon-->
+                        </a>
+                    </li>
+                </ul>
+                <!--end::Tab nav-->
+            </div>                      
+        </div>
+        <!--end::Toolbar-->
+        <!--begin::Tab Content-->
+        <div class="tab-content">
+            <!--begin::Tab pane-->
+            <div id="kt_project_users_card_pane" class="tab-pane fade show active">
+                <!--begin::Row-->
+                <div class="row g-6 g-xl-9">
+                    <% @results.each do |user| %>
+                        <% unless user.nick_name==nil %>
+                            <!--begin::Col-->
+                            <div class="col-md-6 col-xxl-4">
+                                <!--begin::Card-->
+                                <div class="position-relative">
+                                    <% if can?(:favourite_student, Company::Search) %>
+                                        <div class="favourite-student action-btn position-absolute top-0 end-0 pt-4 px-3" id="<%= user.id %>">
+                                            <i class="flaticon-black fs-2  cursor-pointer <%= @student_favourite_arr.include?(user.id) ? 'text-danger' : 'text-secondary' %>"></i> 
+                                        </div> 
+                                    <% end %>
+                                </div> 
+                                <div class="card bg-body border border-1 border-white border-hover-primary">                                                     
+                                    <!--begin::Card body-->      
+                                    <%= link_to company_student_details_path(user.user_id), class: "card-body pb-0 d-flex flex-center flex-column cursor-pointer" do %>                                 
+                                            <!--begin::Avatar-->
+                                            <div class="symbol symbol-65px symbol-circle mb-5">
+                                                <% if user.image.attached? %>
+                                                    <%= image_tag (user.image) %>
+                                                <% else %>
+                                                    <% if user.gender == "female" %>
+                                                        <%= image_tag "avatar/female.svg" %>
+                                                    <% else %>
+                                                        <%= image_tag "avatar/male.svg" %> 
+                                                    <% end %>
+                                                <% end %> 
+                                            </div>
+                                            <!--end::Avatar-->
+                                            <!--begin::Name-->
+                                            <span class="fs-4 text-gray-800 text-hover-primary fw-bolder mb-5"><%= user.nick_name.truncate(10) %></span>
+                                            <!--end::Name--> 
+                                    <% end %>
+                                    <div class="card-body pt-0 d-flex justify-content-center">
+                                        <!--begin::Chat-->
+                                        <%= link_to new_communication_communication_path(:id =>user.id, :forum_id => user.id, :name => "Student"),class: "scout-popup-btn btn btn-primary",remote: true do %>
+                                            <%= hidden_field_tag(:std_progress_complete, user.progress_complete)%>
+                                            <i class="flaticon-chat"></i>
+                                            <span class="label"><%= t 'communication.title.scouted_message' %></span>
+                                        <% end %> 
+                                        <!--end::Chat-->
+                                    </div>
+                                    <!--end::Card body-->
+                                </div>
+                                <!--end::Card-->
+                            </div>
+                            <!--end::Col-->
+                        <% end %>
+                    <% end %>
+                </div>
+                <!--end::Row-->
+                <% unless @results.present?  %>
+                    <div class="col-12 my-5">
+                        <h3> <%= (t "search.no_result") %></h3>
+                    </div>
+                <% end %>
+                <div id="communicationModal">
+                    <%# render 'communication/communications/communication_modal'%>
+                </div>  
+                <!--start::Pagination-->
+                <% if @results.present? %>
+                    <div class="d-flex flex-wrap justify-content-between align-items-center pt-10">
+                        <div class="d-flex flex-wrap">
+                            <%= paginate @results %>
+                        </div>
+                        <div class="d-flex align-items-center py-3">
+                            <span class="text-muted"><%=  t('common.display')  %> <%= @results.total_count %> <%=  t('common.to')  %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%= @results.offset_value + 1 %> ~ <%=  @results.offset_value + @results.count %> <%=  t('common.search_result')  %> </span>
+                        </div>
+                    </div>
+                <% end %>
+                <!--end::Pagination-->
+            </div>
+            <!--end::Tab pane-->
+        </div>
+        <!--end::Tab Content-->
+    </div>
+    <!--end::Container-->
+</div>
+<%= hidden_field_tag(:com_progress_complete, current_company.progress_complete) %>
+<%= hidden_field_tag(:com_progress_details, @progress_percent_arr) %>
+<%= hidden_field_tag(:com_error_msg, t('communication.scout.error_message')) %>
+<%= hidden_field_tag(:link_btn, t('communication.scout.btn.go_to_profile')) %>
+<%= hidden_field_tag(:temporary_registration_link, edit_company_company_commitment_path(@user_data)) %>
+<%= hidden_field_tag(:commitment_ability_link, company_commitment_ability_index_path) %>
+<%= hidden_field_tag(:question_assessment_link, company_assessments_path) %>
+<%= hidden_field_tag(:basic_info_link, edit_company_company_path(@user_data)) %>
+<%= hidden_field_tag(:home_form_link, home_company_commitment_profiles_path) %>
+<%= hidden_field_tag(:about_us_form_link, about_us_company_commitment_profiles_path) %>
+<%= javascript_pack_tag "company/company.js" %>
+<%= javascript_pack_tag "company/scout_disable.js" %>

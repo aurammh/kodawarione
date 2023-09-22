@@ -1,0 +1,153 @@
+<!--begin::Breadcrumb-->
+<% breadcrumbs_navigation_add (t('company_member.title.member_list')), company_company_members_path %>
+<% breadcrumbs_navigation_add t('company_member.title.member_edit'), '#' %>
+<%= render_company_breadcrumbs_navigation(t('company_member.title.member_edit')) %>
+<!--end::Breadcrumb-->
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+  <!--begin::Container-->
+  <div class="container-xxl" id="kt_content_container">
+    <!--begin::Layout-->
+    <div class="d-flex flex-column flex-lg-row">
+      <!--begin::Content-->
+      <div class="flex-lg-row-fluid mb-10 mb-lg-0">
+        <!--begin::Card-->
+        <div class="card bg-body">
+          <!--begin::Form-->
+          <%= form_with(model: company_company_member) do |form| %>
+            <!--begin::Card body-->
+            <div class="card-body">
+              <!--begin::Wrapper-->
+              <div class="d-flex flex-column align-items-start flex-xxl-row">
+                <!--begin::Input group-->
+                <div class="d-flex flex-center flex-equal fw-row text-nowrap order-1 order-xxl-2 me-4">
+                  <span class="fs-2x fw-bolder text-gray-800"><%= t('company_member.title.member') %></span>
+                </div>
+                <!--end::Input group-->
+              </div>
+              <!--end::Top-->
+              <!--begin::Separator-->
+              <div class="separator separator-dashed my-10"></div>
+              <!--end::Separator-->
+              <!--begin::Wrapper-->
+              <div class="mb-0">
+                <!--begin::Row-->
+                <div class="row form-group gx-10 mb-5">
+                  <div class="col-12 col-sm-12 col-md-5  col-lg-5 col-xl-5 text-left text-sm-left text-md-end text-lg-end text-xl-end col-form-label font-weight-bold pr-0" >
+                    <%= form.label :company_member_logo, class: "form-label fs-6 fw-bold text-gray-700" %>
+                  </div>
+                  <div class="col-12 col-sm-12 col-md-6 col-lg-5 col-xl-5">
+                    <div class="image-input image-input-outline">
+                      <div class="image-input-wrapper upload-preview">
+                          <%= image_tag company_company_member.image.attached? && company_company_member.image.persisted? ? company_company_member.image : "avatar/preview.svg", class: "w-100 h-100" %>
+                      </div>
+                      <label class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow"
+                          data-kt-image-input-action="change"
+                          data-bs-toggle="tooltip"
+                          data-bs-dismiss="click"
+                          title="Change avatar">
+                          <i class="fa fa-pen icon-sm text-muted"></i>
+                          <%= form.hidden_field :image_data, :value => false , id: "image_data" %>
+                          <%= form.hidden_field :imageFlag, :value => false , id: "imageFlag" %>
+                          <%= form.file_field :image,accept: "image/png,image/gif,image/jpeg,image/jpg", :class=> "input-file", :id => "image", "data-existed": form.object.image.attached?%>
+                          <input type="hidden" name="profile_avatar_remove" />
+                      </label>
+                      <span class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow"
+                          data-kt-image-input-action="cancel"
+                          data-bs-toggle="tooltip"
+                          data-bs-dismiss="click"
+                          title="Cancel avatar">
+                          <i class="ki ki-bold-close icon-xs text-muted"></i>
+                      </span>
+                      <span type="button" id="img-remove" class="btn btn-icon btn-circle btn-color-muted btn-active-color-primary w-25px h-25px bg-body shadow"
+                          data-kt-image-input-action="remove"
+                          data-bs-toggle="tooltip"
+                          data-bs-dismiss="click"
+                          title="Remove avatar">
+                          <i class="ki ki-bold-close icon-xs text-muted"></i>
+                      </span>
+                    </div>
+                    <!--begin::Hint-->
+                    <div class="py-4">
+                        <% if company_company_member.image.attached? && company_company_member.image.persisted? %>
+                            <span class="form-text text-muted chosen-text img-name text-break"><%= company_company_member.image.filename %></span>
+                        <% else %>
+                            <span class="form-text text-muted chosen-text"><%=t('common.profile_upload_text')%></span>
+                        <% end %>
+                    </div>
+                    <!--end::Hint-->
+                    <%# image upload modal start%>
+                    <%= render "common/image_crop" %>
+                    <%# image upload modal end%>
+                  </div>
+                </div>
+                <!--end::Row-->
+                <!--begin::Row-->
+                <div class="row form-group gx-10 mb-5">
+                    <div class="col-12 col-sm-12 col-md-5  col-lg-5 col-xl-5 text-left text-sm-left text-md-end text-lg-end text-xl-end col-form-label font-weight-bold pr-0" >
+                      <%= form.label :user_email, class: "form-label fs-6 fw-bold text-gray-700" %><span class="ms-1 text-danger">*</span>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-5 col-xl-5">
+                      <%= form.text_field :user_email, id: "user_email", class: "form-control form-control-solid", placeholder: Company::CompanyMember.human_attribute_name('user_email'), maxlength: 255 %>
+                      <p class="text-danger font-size-sm ms-invalid-feedback mt-1"><%= company_company_member.errors.full_messages_for(:user_email)[0] %></p>
+                    </div>
+                </div>
+                <!--end::Row-->
+                <!--begin::Row-->
+                <div class="row form-group gx-10 mb-5">
+                    <div class="col-12 col-sm-12 col-md-5  col-lg-5 col-xl-5 text-left text-sm-left text-md-end text-lg-end text-xl-end col-form-label font-weight-bold pr-0" >
+                      <%= form.label :department, class: "form-label fs-6 fw-bold text-gray-700" %><span class="ms-1 text-danger">*</span>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-5 col-xl-5">
+                      <%= form.text_field :department, id: "department", class: "form-control form-control-solid", placeholder: Company::CompanyMember.human_attribute_name('department'), maxlength: 255 %>
+                      <p class="text-danger font-size-sm ms-invalid-feedback mt-1"><%= company_company_member.errors.full_messages_for(:department)[0] %></p>
+                    </div>
+                </div>
+                <!--end::Row-->
+                <!--begin::Row-->
+                <div class="row form-group gx-10 mb-5">
+                    <div class="col-12 col-sm-12 col-md-5  col-lg-5 col-xl-5 text-left text-sm-left text-md-end text-lg-end text-xl-end col-form-label font-weight-bold pr-0" >
+                      <%= form.label :position, class: "form-label fs-6 fw-bold text-gray-700" %><span class="ms-1 text-danger">*</span>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-5 col-xl-5">
+                      <%= form.text_field :position, id: "position", class: "form-control form-control-solid", placeholder: Company::CompanyMember.human_attribute_name('position'), maxlength: 255 %>
+                      <p class="text-danger font-size-sm ms-invalid-feedback mt-1"><%= company_company_member.errors.full_messages_for(:position)[0] %></p>
+                    </div>
+                </div>
+                <!--end::Row-->
+                <!--begin::Row-->
+                <div class="row form-group gx-10 mb-5">
+                    <div class="col-12 col-sm-12 col-md-5  col-lg-5 col-xl-5 text-left text-sm-left text-md-end text-lg-end text-xl-end col-form-label font-weight-bold pr-0" >
+                      <%= form.label :company_roles_id, class: "form-label fs-6 fw-bold text-gray-700" %><span class="ms-1 text-danger">*</span>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-5 col-xl-5">
+                      <%= form.select(:company_roles_id, company_role_type_options, { :include_blank => (t "select.not_select")}, selected: form.object.company_roles_id, id: "company_role", :class=> "form-select form-select-solid", :data => { :control => 'select2', 'hide-search' => true }) %>
+                      <p class="text-danger font-size-sm ms-invalid-feedback mt-1"><%= company_company_member.errors.full_messages_for(:company_roles_id)[0] %></p> 
+                    </div>
+                </div>
+                <!--end::Row--> 
+              </div>
+              <!--end::Wrapper-->
+            </div>
+            <!--end::Card body-->
+            <!--begin::Card footer-->
+            <div class="card-footer d-flex justify-content-center py-6 px-9">
+                <%= link_to t('btn.return'), company_company_members_path, class: "btn btn-light btn-active-light-primary me-2" %>
+                <%= form.submit t('btn.submit'), class: "btn btn-primary" %>
+            </div>
+            <!--end::Card footer-->
+          <% end %>
+          <!--end::Form-->
+        </div>
+        <!--end::Card-->
+      </div>
+      <!--end::Content-->
+    </div>
+    <!--end::Layout-->
+  </div>
+  <!--end::Container-->
+</div>
+<!--end::Content-->
+<%= render "users/shared/toastr" %>
+<%= javascript_pack_tag "company/event.js" %>
+<%= javascript_pack_tag "common.js" %>

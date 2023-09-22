@@ -1,0 +1,2 @@
+module Kodawarione::PlansHelper
+end

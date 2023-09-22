@@ -1,0 +1,75 @@
+<!--begin::Breadcrumb-->
+<% breadcrumbs_navigation_add (t('partner_news.title.news_list')), kodawarione_news_index_path %>
+<% breadcrumbs_navigation_add t('partner_news.title.news_show'), '#' %>
+<%= render_partner_breadcrumbs_navigation(t('partner_news.title.news_show')) %>	  
+<!--end::Breadcrumb-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+	<!--begin::Container-->
+	<div class="container-fluid" id="kt_content_container">
+		<!--begin::Tab Content-->
+		<div class="tab-content">
+			<!--begin::Tab pane-->
+			<div id="kt_project_users_card_pane" class="tab-pane fade show active">
+				<!--begin::Table-->
+				<div class="card bg-body">
+					<!--begin::Header-->
+					<div class="card-header border-0 pt-5">
+						<h3 class="card-title align-items-start flex-column">
+							<span class="card-label fw-bolder fs-3 mb-1"><%= t('partner_news.title.news_show') %></span> 
+						</h3>
+						<div class="card-toolbar">
+							<%= link_to kodawarione_news_index_path, class: "btn btn-sm btn-primary" do %>
+                                <i class="ki ki-long-arrow-back icon-sm"></i><%= t("btn.return") %>
+							<% end %>
+						</div>
+					</div>
+					
+					<div class="separator separator-dashed mt-4 mb-6"></div>
+					<!--end::Header-->
+					
+					<div class="card-header mb-0">
+						<!--begin::Head-->
+						<div class="d-flex align-items-center mb-4">
+							<!--begin::Title-->
+							<span class="fs-2 fw-bolder text-gray-900 text-hover-primary me-1">  
+								<%= @news.title %> 
+							</span>
+							<!--end::Title-->
+						</div>
+						<!--end::Head-->
+						<!--begin::Summary-->
+						<div class="fs-base fw-normal text-gray-700 mb-4">
+							<%= @news.content %> 
+						</div>
+						<!--end::Summary-->
+						<!--begin::Foot-->
+						<div class="d-flex flex-stack flex-wrap">
+							<!--begin::Author-->
+							<div class="d-flex align-items-center py-1">
+								<!--begin::Symbol-->
+								<%# <div class="symbol symbol-35px me-2">
+									<div class="symbol-label bg-light-success fs-3 fw-bold text-success text-uppercase">J</div>
+								</div> %>
+								<!--end::Symbol-->
+								<!--begin::Name-->
+								<div class="d-flex flex-column align-items-start justify-content-center px-4 me-2">
+									<%# <span class="text-gray-900 fs-7 fw-bold lh-1 mb-2">James Hunt</span> %>
+									<span class="text-muted fs-8 fw-bold lh-1"><%= l(@news.created_at.strftime('%Y-%m-%d').to_date, default: '-') %></span>
+
+								</div>
+								<!--end::Name-->
+								<span class="btn btn-sm btn-outline btn-outline-dashed btn-outline-default ml-3"><%= @news.news_type.nil? ? '' : t("partner_news.news_type_options.#{@news.news_category}") %></span>
+							</div>
+							<!--end::Author-->
+							
+						</div>
+						<!--end::Foot-->
+					</div>
+				</div>
+				<!--end::Table--> 				
+			</div>
+		</div>
+		<!--end::Tab Content-->
+	</div>
+	<!--end::Container-->
+</div>

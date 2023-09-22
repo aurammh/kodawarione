@@ -1,0 +1,10 @@
+ja:
+  activerecord:
+    models:
+      vacancy_apply_favourite: vacancy_apply_favourite
+    attributes:
+      vacancy_apply_favourite:
+        apply_statuses:
+          waiting_accept: 未対応
+          accept: 承認　
+          denied: 否認   

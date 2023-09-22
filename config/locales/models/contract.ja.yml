@@ -1,0 +1,24 @@
+ja:
+  activerecord:
+    models:
+      kodawarione/contract: contract
+    attributes:
+      kodawarione/contract:
+        contract_to_id: 企業名
+        start_date: 開始日
+        end_date: 終了日
+        training_start_date: 研修開始日
+        training_end_date: 研修終了日
+        plan_id: プラン
+        payment_type: 支払い方法
+        training_period: 研修契約期間
+        contract_period: 契約期間     
+  errors:
+    attributes:
+      category:
+        blank: 'を選択してください。'
+    messages:
+      blank: 'を入力してください。'
+      invalid: '無効です。'
+    tooltip:
+      copied_text: コピー済

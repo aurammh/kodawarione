@@ -1,0 +1,217 @@
+//
+// Nav
+//
+
+// Line tabs
+.nav-line-tabs {
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: $border-color;
+
+	.nav-item {
+		margin-bottom: -1px;
+
+		// Base link
+		.nav-link {
+			color: $gray-500;
+			border: 0;
+			border-bottom: 1px solid transparent;
+			transition: $transition-link;
+			padding: 0.5rem 0;
+			margin: 0 1rem;
+		}
+
+		// First Item
+		&:first-child {
+			.nav-link {
+				margin-left: 0;
+			}
+		}
+
+		// Last Item
+		&:last-child {
+			.nav-link {
+				margin-right: 0;
+			}
+		}
+	}
+
+	// Active & Hover States
+	.nav-item .nav-link.active,
+  	.nav-item.show .nav-link,
+	.nav-item .nav-link:hover:not(.disabled) {
+		background-color: transparent;
+		border: 0;
+		border-bottom: 1px solid $primary;
+		transition: $transition-link;
+  	}
+
+	// 2x Line
+	&.nav-line-tabs-2x {
+		border-bottom-width: 2px;
+
+		.nav-item {
+			margin-bottom: -2px;
+
+			.nav-link {
+				border-bottom-width: 2px;
+			}
+		}
+
+		// Active & Hover States
+		.nav-item .nav-link.active,
+	  	.nav-item.show .nav-link,
+		.nav-item .nav-link:hover:not(.disabled) {
+			border-bottom-width: 2px;
+		}
+	}
+}
+
+// Nav Pills
+.nav-pills {
+	.nav-item {
+		margin-right: 0.5rem;
+
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+}
+
+.nav.nav-pills.nav-pills-custom .show > .nav-link,
+.nav.nav-pills.nav-pills-custom .nav-link {
+	border: 1px dashed #E4E6EF;
+	border-radius: 12px;
+}
+.nav.nav-pills.nav-pills-custom .show > .nav-link .nav-icon img,
+.nav.nav-pills.nav-pills-custom .nav-link .nav-icon img {
+	width: 30px;
+	transition: color 0.2s ease, background-color 0.2s ease;
+}
+.nav.nav-pills.nav-pills-custom .show > .nav-link .nav-icon img.default,
+.nav.nav-pills.nav-pills-custom .nav-link .nav-icon img.default {
+	display: inline-block;
+}
+.nav.nav-pills.nav-pills-custom .show > .nav-link .nav-icon img.active,
+.nav.nav-pills.nav-pills-custom .nav-link .nav-icon img.active {
+	display: none;
+}
+.nav.nav-pills.nav-pills-custom .show > .nav-link.active,
+.nav.nav-pills.nav-pills-custom .nav-link.active {
+	background-color: transparent;
+	border: 1px solid #E4E6EF;
+	transition-duration: 1ms;
+	position: relative;
+}
+.nav.nav-pills.nav-pills-custom .show > .nav-link.active .nav-text,
+.nav.nav-pills.nav-pills-custom .nav-link.active .nav-text {
+	color: #3F4254 !important;
+	transition: color 0.2s ease, background-color 0.2s ease;
+}
+.nav.nav-pills.nav-pills-custom .show > .nav-link.active .bullet-custom,
+.nav.nav-pills.nav-pills-custom .nav-link.active .bullet-custom {
+	display: block;
+}
+.nav.nav-pills.nav-pills-custom .show > .nav-link .bullet-custom,
+.nav.nav-pills.nav-pills-custom .nav-link .bullet-custom {
+	display: none;
+}
+.nav {
+	&.nav-pills {
+		&.nav-pills-custom {
+			&.nav-pills-active-custom {
+				.nav-item {
+					.nav-link {
+						&:not(:active) {
+							span {
+								&:nth-child(1) {
+									color: #B5B5C3;
+								}
+								&:nth-child(2) {
+									color: #3F4254;
+								}
+							}
+						}
+						&:hover {
+							span {
+								&:nth-child(1) {
+									color: white !important;
+								}
+								&:nth-child(2) {
+									color: white !important;
+								}
+							}
+						}
+						&.active {
+							span {
+								&:nth-child(1) {
+									color: white !important;
+								}
+								&:nth-child(2) {
+									color: white !important;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+// Stretch items
+.nav-stretch {
+	align-items: stretch;
+	padding-top: 0 !important;
+	padding-bottom: 0 !important;
+
+	.nav-item {
+		display: flex;
+		align-items: stretch;
+		padding-top: 0 !important;
+		padding-bottom: 0 !important;
+	}
+
+	.nav-link {
+		display: flex;
+		align-items: center;
+	}
+}
+
+// Nav group
+.nav-group {
+	padding: 0.35rem;
+	@include border-radius($border-radius);
+	background-color: $gray-100;
+
+	// Outline nav group
+	&.nav-group-outline {	
+		background-color: transparent;
+		border: 1px solid $border-color;	
+	}
+
+	// Fluid option
+	&.nav-group-fluid {
+		display: flex;
+
+		> label,
+		> .btn {
+			position: relative;
+			flex-shrink: 0;
+			flex-grow: 1;
+			flex-basis: 0;
+		}
+
+		> label {
+			margin-right: 0.1rem;
+
+			> .btn {
+				width: 100%;
+			}
+
+			&:last-child {
+				margin-right: 0;
+			}
+		}
+	}
+}

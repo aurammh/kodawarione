@@ -1,0 +1,29 @@
+<div class="modal" id="uploadBannerImageModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"><%=t('image_crop.upload')%></h4>
+                <div class="btn btn-sm btn-icon btn-active-color-primary close" data-bs-dismiss="modal">
+                  <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                  <span class="svg-icon svg-icon-1">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                          <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                          <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                      </svg>
+                  </span>
+                  <!--end::Svg Icon-->
+                </div>
+            </div>
+            <div class="px-2 d-flex">
+                <button type="button" class="btn btn-icon btn-light-primary vanilla-rotate col-12 col-sm-2 col-lg-1 w-100 ml-auto mr-5 mt-2" data-deg="-90"><i class="fas fa-sync"></i></button>
+            </div>   
+            <div class="modal-body">
+                 <div id="banner-image-demo"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="col-12 col-sm-6 col-md-4 col-lg-3 custom-btn px-4 py-2 mr-1 btn btn-light-primary close-crop" data-bs-dismiss="modal"><%=t('image_crop.cancel')%></button>
+                <button type="button" class="col-12 col-sm-6 col-md-4 col-lg-3 custom-btn px-4 py-2 mr-1 btn btn-primary banner-crop-image "><%=t('image_crop.crop')%></button>
+            </div>
+        </div>
+    </div>
+</div>

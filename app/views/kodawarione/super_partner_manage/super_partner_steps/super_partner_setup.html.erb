@@ -1,0 +1,154 @@
+<!--begin::Header-->
+<% breadcrumbs_navigation_add (t('super_partner.title.super_partner_setup')), '#' %>
+<%= render_partner_breadcrumbs_navigation(t('super_partner.title.super_partner_setup')) %>		
+<!--end::Header-->
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+  <!--begin::Container-->
+  <div class="container-fluid" id="kt_content_container">
+		<!--begin::Tab Content-->
+		<div class="tab-content">
+			<!--begin::Tab pane-->
+			<div id="kt_project_users_card_pane" class="tab-pane fade show active">
+        <div class="card bg-body">
+          <!--begin::Card body-->
+          <div class="card-body pb-0">
+            <!--begin::Stepper-->
+            <div class="stepper stepper-links d-flex flex-column pt-15" id="kt_create_account_stepper">
+              <%= render partial: 'kodawarione/super_partner_manage/super_partner_steps/steps_links', :locals =>{:current_step => 1} %>
+              <div class="mx-auto mw-650px w-100 pt-15 pb-10">
+                <!--begin::Step 1-->
+                <div class="current" data-kt-stepper-element="content">
+                  <!--begin::Wrapper-->
+                  <div class="w-100">
+                    <!--begin::Heading-->
+                    <div class="pb-10 pb-lg-15">
+                      <!--begin::Title-->
+                      <h2 class="fw-bolder d-flex align-items-center text-dark">
+                        <%= t('super_partner.steps.title.current_super_partner_details_setup', current_super_partner_name: @super_partner.name).html_safe %>
+                        <span type="button" class=""
+                          data-kt-image-input-action="remove"
+                          data-bs-toggle="tooltip"
+                          data-bs-dismiss="click"
+                          title="Super Partner Setup">
+                          <i class="fas fa-exclamation-circle ms-2 fs-7"></i>
+                        </span>
+                      </h2>
+                      <!--end::Title-->
+                      <!--begin::Notice-->
+                      <div class="text-muted fw-bold fs-6">
+                        <%= (t 'super_partner.notice.text_1').html_safe %>
+                      </div>
+                      <!--end::Notice-->
+                    </div>
+                    <!--end::Heading-->
+                    <!--begin::Input group-->
+                    <div class="fv-row">
+                      <!--begin::Form-->
+                      <%= form_with(model: @super_partner, url: wizard_path, method: :patch) do |form| %> 
+                        <div class="row">
+                          <div class="col-12 mb-3">
+                            <div class="d-flex">
+                              <%= form.label :name, class: "form-label required fw-bolder"  %>
+                            </div>
+                            <%= form.text_field :name, id: "name", class: "form-control shadow-none errors", maxlength: 255 %>
+                            <p class ="text-danger fs-6 ms-invalid-feedback mt-1"><%= @super_partner.errors.full_messages_for(:name)[0] %></p>
+                          </div>
+                          <div class="col-12 col-md-6 mb-3">
+                            <div class="d-flex">
+                                <%= form.label :postal_code, class: "form-label required fw-bolder"  %>
+                            </div>
+                            <%= form.text_field :postal_code, class: "form-control shadow-none errors", autocomplete: "off", maxlength: 7,id: "postalcode" %> 
+                            <p class="text-danger fs-6 ms-invalid-feedback mt-1"><%= @super_partner.errors.full_messages_for(:postal_code)[0] %></p>          
+                          </div>
+                          <div class="col-12 col-md-6 mb-3">
+                            <div class="d-flex">
+                              <%= form.label :region_name, class: "form-label required fw-bolder"  %>
+                            </div>
+                            <%= form.hidden_field :m_region_id,value: @super_partner.m_region_id ,id: "region_id" %>
+                            <%= form.text_field :region_name,class: "form-control shadow-none errors",id: "region",readonly: true %>
+                          </div>
+                          <div class="col-12 col-md-6 mb-7">
+                            <div class="d-flex">
+                              <%= form.label :prefecture_name, class: "form-label required fw-bolder"  %>
+                            </div>
+                            <%= form.hidden_field :m_prefecture_id,value: @super_partner.m_prefecture_id ,id: "prefecture_id" %>
+                            <%= form.text_field :prefecture_name, class: "form-control shadow-none errors",id: "prefecture",readonly: true %>
+                          </div>
+                          <div class="col-12 col-md-6 mb-7">
+                            <div class="d-flex">
+                              <%= form.label :postalcode_city, class: "form-label required fw-bolder"  %>
+                            </div>
+                            <%= form.text_field :postalcode_city, class: "form-control shadow-none errors",id: "city", readonly: true %>
+                          </div>
+                          <div class="col-12 mb-3">
+                            <div class="d-flex">
+                              <%= form.label :address, class: "form-label required fw-bolder"  %>
+                              <label class="form-label ms-3 fs-8"> <%= t('common.building_address') %> </label>
+                            </div>
+                            <%= form.text_area :address, class: "form-control shadow-none errors", rows: 4, maxlength: 255, id: "address" %>
+                            <p class="text-danger fs-6 ms-invalid-feedback mt-1"><%= @super_partner.errors.full_messages_for(:address)[0] %></p>
+                          </div>
+                          <div class="col-12 mb-3 display_address">
+                            <div class="d-flex">
+                              <%= form.label :display_address, class: "form-label required fw-bolder mr-2"  %>
+                            </div>
+                            <%= form.text_area :display_address, class: "form-control shadow-none errors", maxlength: 255 ,id: "display_address" ,readonly: true%>
+                            <p class="text-danger fs-6 ms-invalid-feedback mt-1"><%= @super_partner.errors.full_messages_for(:display_address)[0] %></p>
+                          </div>
+                          <div class="col-12 mb-3">
+                            <div class="d-flex">
+                              <%= form.label :website_url, class: "form-label required fw-bolder"  %>
+                            </div>
+                            <%= form.text_field :website_url, class: "form-control shadow-none errors", id: "website_url",  maxlength: 255 %>
+                            <p class="text-danger fs-6 ms-invalid-feedback mt-1"><%= @super_partner.errors.full_messages_for(:website_url)[0] %></p>
+                          </div>
+                          <div class="col-12">
+                            <div class="d-flex">
+                              <%= form.label :phone_no, class: "form-label required fw-bolder"  %>
+                              <label class="form-label">  <%= t('common.ph_no_remark') %> </label>
+                            </div>                
+                            <%= form.text_field :phone_no, class: "form-control shadow-none only-num-stud errors", id: "phone_no",  maxlength: 20 %>
+                            <p class ="text-danger fs-6 ms-invalid-feedback mt-1"><%= @super_partner.errors.full_messages_for(:phone_no)[0] %></p>      
+                          </div> 
+                          <!--begin: Wizard Actions-->
+                          <div class="d-flex justify-content-between pt-15">
+                            <div class="mr-2"></div>
+                            <div>
+                              <%= button_tag( :class => "btn btn-primary font-weight-bolder font-size-h6 pl-8 pr-4 py-4 my-3") do %>
+                                <%= t 'super_partner.steps.buttons.continue' %>
+                                <span class="svg-icon svg-icon-md ml-1">
+                                  <!--begin::Svg Icon | path:assets/media/svg/icons/Navigation/Right-2.svg-->
+                                  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                      <polygon points="0 0 24 0 24 24 0 24" />
+                                      <rect fill="#000000" opacity="0.3" transform="translate(8.500000, 12.000000) rotate(-90.000000) translate(-8.500000, -12.000000)" x="7.5" y="7.5" width="2" height="9" rx="1" />
+                                      <path d="M9.70710318,15.7071045 C9.31657888,16.0976288 8.68341391,16.0976288 8.29288961,15.7071045 C7.90236532,15.3165802 7.90236532,14.6834152 8.29288961,14.2928909 L14.2928896,8.29289093 C14.6714686,7.914312 15.281055,7.90106637 15.675721,8.26284357 L21.675721,13.7628436 C22.08284,14.136036 22.1103429,14.7686034 21.7371505,15.1757223 C21.3639581,15.5828413 20.7313908,15.6103443 20.3242718,15.2371519 L15.0300721,10.3841355 L9.70710318,15.7071045 Z" fill="#000000" fill-rule="nonzero" transform="translate(14.999999, 11.999997) scale(1, -1) rotate(90.000000) translate(-14.999999, -11.999997)" />
+                                    </g>
+                                  </svg>
+                                  <!--end::Svg Icon-->
+                                </span>
+                              <% end %>
+                            </div>
+                          </div>
+                          <!--end: Wizard Actions-->  
+                        </div>  
+                      <% end %>
+                      <!--end::Form-->
+                    </div>
+                    <!--end::Input group-->
+                  </div>
+                  <!--end::Wrapper-->
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--end::Card body-->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<%= javascript_pack_tag "company/event.js" %>
+<%= javascript_pack_tag "common.js" %>
+<%= javascript_pack_tag "postalcode.js" %>

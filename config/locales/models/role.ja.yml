@@ -1,0 +1,27 @@
+ja:
+  activerecord:
+    models:
+      admin/role: role
+    attributes:
+      admin/role:
+        role_type: 制限
+        remark: 備考
+  role:
+    title:
+      header: 制限設定
+      list: 役割一覧
+      create: 権限設定
+      information: 権限情報
+      permission: アクセス状態
+      role_type: 制限
+      remark: 備考
+      count: 役割タイプ
+      created_at: 作成日
+      add_permission: 権限
+      choose_permission: 権限選択
+      permission_type: 権限
+      module_name: アクセス
+      return: 戻る
+    modal:
+      warning: 警告
+      message: 他のメンバー情報と繋がっているので、削除できません。

@@ -1,0 +1,260 @@
+<div>
+    <%= render partial: "kodawarione/shared/company_manage/profile_navbar", :locals =>{:current_route => "overview"}  %>
+</div>
+<!--begin::Container-->
+<!--begin::Row-->
+<div class="row g-6 g-xl-9">
+    <% if @members_list.present? %>
+        <!--begin::Title-->
+        <div class="d-flex flex-wrap align-items-center">
+            <div class="flex-column">
+                <h3 class="fw-bolder mb-1"><%= t('company_member.title.member_list') %></h3>
+                <div class="fs-6 fw-bold text-gray-400">Total <%= @members_list.size %> joined members</div>
+            </div>
+        </div>
+        <!--end::Title-->
+        <!--begin::Desktop-->
+        <div class="col-12 d-none d-xl-block">
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">                        
+                    <% (@members_list.size%3 == 0 ? @members_list.size/3  : @members_list.size/3 + 1).times  do |i| %>
+                        <div class="carousel-item <%= i == 0 ? 'active' :  '' %> ">
+                            <div class="row">
+                                <% @members_list.offset(3*i).limit(3).each_with_index do |member| %>
+                                    <div class="col-4">
+                                        <%# link_to kodawarione_company_manage_company_details_overview_path(:company_id => member.id,:status => 1), class: "col-6" do %> 
+                                            <!--begin::Card-->
+                                            <div class="card card-stretch h-350px bg-body p-9">
+                                                <!--begin::Card body-->
+                                                <div class="card-body d-flex flex-center flex-column p-0">
+                                                    <!--begin::Avatar-->
+                                                    <div class="symbol symbol-65px symbol-circle mb-5">
+                                                        <% if member.image.present? %>
+                                                            <%= image_tag (member.image), :class=> "symbol-label" %>
+                                                        <% else %>
+                                                            <span class="symbol-label fs-2x fw-bold text-primary bg-light-primary"><%= member.last_name.chr.upcase %></span>
+                                                        <% end %>
+                                                        <div class="bg-success position-absolute border border-4 border-white h-15px w-15px rounded-circle translate-middle start-100 top-100 ms-n3 mt-n3"></div>
+                                                    </div>
+                                                    <!--end::Avatar-->
+                                                    <!--begin::Name-->
+                                                    <span class="fs-4 text-gray-800 fw-bolder mb-0 text-truncate w-300px w-md-250px w-lg-300px w-xl-350px text-center"><%= member.last_name %> <%= member.first_name %></span>
+                                                    <!--end::Name-->
+                                                    <!--begin::Position-->
+                                                    <div class="fw-bold text-gray-400 mb-6">
+                                                        <%= member.role_type %>
+                                                    </div>
+                                                    <!--end::Position-->
+                                                    <!--begin::Info-->
+                                                    <div class="d-flex flex-center flex-wrap">
+                                                        <!--begin::Stats-->
+                                                        <% if member.join_date.present? %>
+                                                            <div class="border border-gray-300 border-dashed rounded min-w-80px py-3 px-4 mx-2 mb-3">
+                                                                <div class="fs-6 fw-bolder text-gray-700"><%= l(member.join_date.strftime('%Y-%m-%d').to_date, default: '-')%></div>
+                                                                <div class="fw-bold text-gray-400"><%= Company::CompanyMember.human_attribute_name('join_date') %></div>
+                                                            </div>
+                                                        <% end %>
+                                                        <% if member.user_email.present? %>
+                                                            <div class="border border-gray-300 border-dashed rounded min-w-80px py-3 px-4 mx-2 mb-3">
+                                                                <div class="fs-6 fw-bolder text-gray-700"><%= member.user_email %></div>
+                                                                <div class="fw-bold text-gray-400"><%= Company::CompanyMember.human_attribute_name('user_email') %></div>
+                                                            </div>
+                                                        <% end %>
+                                                        <!--end::Stats-->
+                                                    </div>
+                                                    <!--end::Info-->
+                                                </div>
+                                                <!--end::Card body-->
+                                            </div>
+                                            <!--end::Card-->
+                                        <%# end %>
+                                    </div>
+                            <% end %>                         
+                            </div>
+                        </div> 
+                    <% end %> 
+                </div>
+                <% if @members_list.size > 3 %>
+                    <div class="carousel-control-prev">
+                        <a class="carousel-control-prev btn mb-3 mx-3" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
+                            <i class="fas fa-chevron-left text-primary" style=" font-size: 30px;"></i>
+                        </a>
+                    </div>
+                    <div class="carousel-control-next">
+                        <a class="carousel-control-next btn mb-3 mx-3" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
+                        <i class="fas fa-chevron-right text-primary" style=" font-size: 30px;"></i>
+                        </a>             
+                    </div>
+                <% end %> 
+            </div>
+        </div>
+        <!--end::Desktop-->
+
+        <!--begin::Tablet-->
+        <div class="col-12 d-none d-xl-none d-lg-block d-md-block d-sm-none">
+            <div id="carouselExampleIndicatorsTablet" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">                        
+                    <% (@members_list.size%2 == 0 ? @members_list.size/2  : @members_list.size/2 + 1).times  do |i| %>
+                        <div class="carousel-item <%= i == 0 ? 'active' :  '' %> ">
+                            <div class="row">
+                                <% @members_list.offset(2*i).limit(2).each_with_index do |member| %>
+                                    <div class="col-6">
+                                        <%# link_to kodawarione_company_manage_company_details_overview_path(:company_id => member.id,:status => 1), class: "col-6" do %> 
+                                            <!--begin::Card-->
+                                            <div class="card card-stretch h-350px bg-body p-9">
+                                                <!--begin::Card body-->
+                                                <div class="card-body d-flex flex-center flex-column p-0">
+                                                    <!--begin::Avatar-->
+                                                    <div class="symbol symbol-65px symbol-circle mb-5">
+                                                        <% if member.image.present? %>
+                                                            <%= image_tag (member.image), :class=> "symbol-label" %>
+                                                        <% else %>
+                                                            <span class="symbol-label fs-2x fw-bold text-primary bg-light-primary"><%= member.last_name.chr.upcase %></span>
+                                                        <% end %>
+                                                        <div class="bg-success position-absolute border border-4 border-white h-15px w-15px rounded-circle translate-middle start-100 top-100 ms-n3 mt-n3"></div>
+                                                    </div>
+                                                    <!--end::Avatar-->
+                                                    <!--begin::Name-->
+                                                    <span class="fs-4 text-gray-800 fw-bolder mb-0 text-truncate w-300px w-md-250px w-lg-300px w-xl-350px text-center"><%= member.last_name %> <%= member.first_name %></span>
+                                                    <!--end::Name-->
+                                                    <!--begin::Position-->
+                                                    <div class="fw-bold text-gray-400 mb-6">
+                                                        <%= member.role_type %>
+                                                    </div>
+                                                    <!--end::Position-->
+                                                    <!--begin::Info-->
+                                                    <div class="d-flex flex-center flex-wrap">
+                                                        <!--begin::Stats-->
+                                                        <% if member.join_date.present? %>
+                                                            <div class="border border-gray-300 border-dashed rounded min-w-80px py-3 px-4 mx-2 mb-3">
+                                                                <div class="fs-6 fw-bolder text-gray-700"><%= l(member.join_date.strftime('%Y-%m-%d').to_date, default: '-')%></div>
+                                                                <div class="fw-bold text-gray-400"><%= Company::CompanyMember.human_attribute_name('join_date') %></div>
+                                                            </div>
+                                                        <% end %>
+                                                        <% if member.user_email.present? %>
+                                                            <div class="border border-gray-300 border-dashed rounded min-w-80px py-3 px-4 mx-2 mb-3">
+                                                                <div class="fs-6 fw-bolder text-gray-700"><%= member.user_email %></div>
+                                                                <div class="fw-bold text-gray-400"><%= Company::CompanyMember.human_attribute_name('user_email') %></div>
+                                                            </div>
+                                                        <% end %>
+                                                        <!--end::Stats-->
+                                                    </div>
+                                                    <!--end::Info-->
+                                                </div>
+                                                <!--end::Card body-->
+                                            </div>
+                                            <!--end::Card-->
+                                        <%# end %>
+                                    </div>
+                            <% end %>                         
+                            </div>
+                        </div> 
+                    <% end %> 
+                </div>
+                <% if @members_list.size > 2 %>
+                    <div class="carousel-control-prev">
+                        <a class="carousel-control-prev btn mb-3 mx-3" href="#carouselExampleIndicatorsTablet" role="button" data-bs-slide="prev">
+                            <i class="fas fa-chevron-left text-primary" style=" font-size: 30px;"></i>
+                        </a>
+                    </div>
+                    <div class="carousel-control-next">
+                        <a class="carousel-control-next btn mb-3 mx-3" href="#carouselExampleIndicatorsTablet" role="button" data-bs-slide="next">
+                        <i class="fas fa-chevron-right text-primary" style=" font-size: 30px;"></i>
+                        </a>             
+                    </div>
+                <% end %> 
+            </div>
+        </div>
+        <!--end::Tablet-->
+
+        <!--begin::Mobile-->
+        <div class="col-12 d-block d-xl-none d-lg-none d-md-none d-sm-block">
+            <div id="carouselExampleIndicatorsMobile" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">                        
+                    <% (@members_list.size%1 == 0 ? @members_list.size/1  : @members_list.size/1 + 1).times  do |i| %>
+                        <div class="carousel-item <%= i == 0 ? 'active' :  '' %> ">
+                            <div class="row">
+                                <% @members_list.offset(1*i).limit(1).each_with_index do |member| %>
+                                    <div class="col-12">
+                                        <%# link_to kodawarione_company_manage_company_details_overview_path(:company_id => member.id,:status => 1), class: "col-6" do %> 
+                                            <!--begin::Card-->
+                                            <div class="card card-stretch bg-body p-9">
+                                                <!--begin::Card body-->
+                                                <div class="card-body d-flex flex-center flex-column p-0">
+                                                    <!--begin::Avatar-->
+                                                    <div class="symbol symbol-65px symbol-circle mb-5">
+                                                        <% if member.image.present? %>
+                                                            <%= image_tag (member.image), :class=> "symbol-label" %>
+                                                        <% else %>
+                                                            <span class="symbol-label fs-2x fw-bold text-primary bg-light-primary"><%= member.last_name.chr.upcase %></span>
+                                                        <% end %>
+                                                        <div class="bg-success position-absolute border border-4 border-white h-15px w-15px rounded-circle translate-middle start-100 top-100 ms-n3 mt-n3"></div>
+                                                    </div>
+                                                    <!--end::Avatar-->
+                                                    <!--begin::Name-->
+                                                    <span class="fs-4 text-gray-800 fw-bolder mb-0 text-truncate w-300px w-md-250px w-lg-300px w-xl-350px text-center"><%= member.last_name %> <%= member.first_name %></span>
+                                                    <!--end::Name-->
+                                                    <!--begin::Position-->
+                                                    <div class="fw-bold text-gray-400 mb-6">
+                                                        <%= member.role_type %>
+                                                    </div>
+                                                    <!--end::Position-->
+                                                    <!--begin::Info-->
+                                                    <div class="d-flex flex-center flex-wrap">
+                                                        <!--begin::Stats-->
+                                                        <% if member.join_date.present? %>
+                                                            <div class="border border-gray-300 border-dashed rounded min-w-80px py-3 px-4 mx-2 mb-3">
+                                                                <div class="fs-6 fw-bolder text-gray-700"><%= l(member.join_date.strftime('%Y-%m-%d').to_date, default: '-')%></div>
+                                                                <div class="fw-bold text-gray-400"><%= Company::CompanyMember.human_attribute_name('join_date') %></div>
+                                                            </div>
+                                                        <% end %>
+                                                        <% if member.user_email.present? %>
+                                                            <div class="border border-gray-300 border-dashed rounded min-w-80px py-3 px-4 mx-2 mb-3">
+                                                                <div class="fs-6 fw-bolder text-gray-700"><%= member.user_email %></div>
+                                                                <div class="fw-bold text-gray-400"><%= Company::CompanyMember.human_attribute_name('user_email') %></div>
+                                                            </div>
+                                                        <% end %>
+                                                        <!--end::Stats-->
+                                                    </div>
+                                                    <!--end::Info-->
+                                                </div>
+                                                <!--end::Card body-->
+                                            </div>
+                                            <!--end::Card-->
+                                        <%# end %>
+                                    </div>
+                            <% end %>                         
+                            </div>
+                        </div> 
+                    <% end %> 
+                </div>
+                <% if @members_list.size > 1 %>
+                    <div class="carousel-control-prev">
+                        <a class="carousel-control-prev btn mb-3 mx-3" href="#carouselExampleIndicatorsMobile" role="button" data-bs-slide="prev">
+                            <i class="fas fa-chevron-left text-primary" style=" font-size: 30px;"></i>
+                        </a>
+                    </div>
+                    <div class="carousel-control-next">
+                        <a class="carousel-control-next btn mb-3 mx-3" href="#carouselExampleIndicatorsMobile" role="button" data-bs-slide="next">
+                        <i class="fas fa-chevron-right text-primary" style=" font-size: 30px;"></i>
+                        </a>             
+                    </div>
+                <% end %> 
+            </div>
+        </div>
+        <!--end::Mobile-->
+    <% end %>
+</div>
+<!--end::Row-->
+
+<%= render partial: "common/company_favourite_student", locals: {fav_students:  @favourite_users_list} %>  		
+<%= render partial: "common/company_join_event", locals: { join_events: @admin_event_entry_list} %>  
+<%= render partial: "common/company_event_vacancy", locals: {vacancy: @company_vacancies, event: @event_entry_list} %>  
+
+<script>
+  $(document).ready(function() {
+    $('.carousel').carousel({
+      interval: false
+    })
+  });
+</script>

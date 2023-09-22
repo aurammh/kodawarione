@@ -1,0 +1,323 @@
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Container-->
+    <div class="container-xxl" id="kt_content_container">
+        <!--begin::Form-->
+        <%= form_with(url: url, method: :get) do |form| %>
+            <!--begin::Card-->
+            <div class="card bg-body mb-7">
+                <!--begin::Card body-->
+                <div class="card-body">
+                    <!--begin::Compact form-->
+                    <div class="d-flex flex-wrap align-items-center">
+                        <div class="w-md-400px me-5 position-relative my-1">
+                            <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
+                            <span class="svg-icon svg-icon-3 svg-icon-gray-500 position-absolute top-50 translate-middle ms-6">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="black"></rect>
+                                    <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="black"></path>
+                                </svg>
+                            </span>
+                            <!--end::Svg Icon-->
+                            <!--begin::Select-->
+                            <%= form.text_field :keyword, class: "form-control form-control-solid ps-10", value: (params[:keyword]), placeholder: t('search.keyword_search') %>
+                            <%#=  select_tag :address,options_from_collection_for_select(prefecture_options, 'id', 'prefecture_name',params[:address]),:prompt => '居住地',:class => 'form-select form-select-solid', id: "select2_1", :data => { :control => 'select2', 'hide-search' => true } %>
+                            <!--end::Select-->
+                        </div>
+                        <!--begin:Action-->
+                        <div class="d-flex align-items-center my-1">
+                            <%= form.submit t('search.apply'),class: "btn btn-primary me-5" %>
+                            <%= link_to t('search.clear'), partner_student_manage_student_index_path, class: "btn btn-light-primary me-5" %>
+                            <!--<a id="kt_horizontal_search_advanced_link" class="btn btn-link" data-bs-toggle="collapse" href="#kt_advanced_search_form">Advanced Search</a>-->
+                        </div>
+                        <!--end:Action-->                
+                        <!--begin::Filter-->
+                        <button type="button" class="btn btn-light-primary me-3 my-1" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                            <!--begin::Svg Icon | path: icons/duotune/general/gen031.svg-->
+                            <span class="svg-icon svg-icon-2">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M19.0759 3H4.72777C3.95892 3 3.47768 3.83148 3.86067 4.49814L8.56967 12.6949C9.17923 13.7559 9.5 14.9582 9.5 16.1819V19.5072C9.5 20.2189 10.2223 20.7028 10.8805 20.432L13.8805 19.1977C14.2553 19.0435 14.5 18.6783 14.5 18.273V13.8372C14.5 12.8089 14.8171 11.8056 15.408 10.964L19.8943 4.57465C20.3596 3.912 19.8856 3 19.0759 3Z" fill="currentColor" />
+                                </svg>
+                            </span>
+                            <!--end::Svg Icon-->
+                            Filter
+                        </button>
+                        <!--begin::Menu 1-->
+                        <div class="menu menu-sub menu-sub-dropdown w-300px w-md-325px" data-kt-menu="true">
+                            <!--begin::Header-->
+                            <div class="px-7 py-5">
+                                <div class="fs-5 text-dark fw-bold">Filter Options</div>
+                            </div>
+                            <!--end::Header-->
+                            <!--begin::Separator-->
+                            <div class="separator border-gray-200"></div>
+                            <!--end::Separator-->
+                            <!--begin::Content-->
+                            <div class="px-7 py-5">
+                                <!--begin::Input group-->                                
+                                <div class="mb-3">
+                                <%= form.label t('search.date_type'), class: "fs-6 form-label fw-bolder text-dark" %>
+                                <%= select_tag :date_type, options_for_select([[t('search.date_label'), 'created_at'], [t('search.admin_graduate_date'), 'graduation_date']], selected: params[:date_type]),class: 'form-select form-select-solid', id: "select2_1", :data => { :control => 'select2', 'hide-search' => true } %>
+                         
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Col-->
+                                <div class="mb-3">
+                                <%= form.label t('search.start_date'), class: "fs-6 form-label fw-bolder text-dark" %>
+                                <div class="position-relative d-flex align-items-center datepicker" id="a_start_date">
+                                    <!--begin::Icon-->
+                                    <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
+                                    <span class="svg-icon svg-icon-2 position-absolute mx-4">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path opacity="0.3" d="M21 22H3C2.4 22 2 21.6 2 21V5C2 4.4 2.4 4 3 4H21C21.6 4 22 4.4 22 5V21C22 21.6 21.6 22 21 22Z" fill="black"></path>
+                                            <path d="M6 6C5.4 6 5 5.6 5 5V3C5 2.4 5.4 2 6 2C6.6 2 7 2.4 7 3V5C7 5.6 6.6 6 6 6ZM11 5V3C11 2.4 10.6 2 10 2C9.4 2 9 2.4 9 3V5C9 5.6 9.4 6 10 6C10.6 6 11 5.6 11 5ZM15 5V3C15 2.4 14.6 2 14 2C13.4 2 13 2.4 13 3V5C13 5.6 13.4 6 14 6C14.6 6 15 5.6 15 5ZM19 5V3C19 2.4 18.6 2 18 2C17.4 2 17 2.4 17 3V5C17 5.6 17.4 6 18 6C18.6 6 19 5.6 19 5Z" fill="black"></path>
+                                            <path d="M8.8 13.1C9.2 13.1 9.5 13 9.7 12.8C9.9 12.6 10.1 12.3 10.1 11.9C10.1 11.6 10 11.3 9.8 11.1C9.6 10.9 9.3 10.8 9 10.8C8.8 10.8 8.59999 10.8 8.39999 10.9C8.19999 11 8.1 11.1 8 11.2C7.9 11.3 7.8 11.4 7.7 11.6C7.6 11.8 7.5 11.9 7.5 12.1C7.5 12.2 7.4 12.2 7.3 12.3C7.2 12.4 7.09999 12.4 6.89999 12.4C6.69999 12.4 6.6 12.3 6.5 12.2C6.4 12.1 6.3 11.9 6.3 11.7C6.3 11.5 6.4 11.3 6.5 11.1C6.6 10.9 6.8 10.7 7 10.5C7.2 10.3 7.49999 10.1 7.89999 10C8.29999 9.90003 8.60001 9.80003 9.10001 9.80003C9.50001 9.80003 9.80001 9.90003 10.1 10C10.4 10.1 10.7 10.3 10.9 10.4C11.1 10.5 11.3 10.8 11.4 11.1C11.5 11.4 11.6 11.6 11.6 11.9C11.6 12.3 11.5 12.6 11.3 12.9C11.1 13.2 10.9 13.5 10.6 13.7C10.9 13.9 11.2 14.1 11.4 14.3C11.6 14.5 11.8 14.7 11.9 15C12 15.3 12.1 15.5 12.1 15.8C12.1 16.2 12 16.5 11.9 16.8C11.8 17.1 11.5 17.4 11.3 17.7C11.1 18 10.7 18.2 10.3 18.3C9.9 18.4 9.5 18.5 9 18.5C8.5 18.5 8.1 18.4 7.7 18.2C7.3 18 7 17.8 6.8 17.6C6.6 17.4 6.4 17.1 6.3 16.8C6.2 16.5 6.10001 16.3 6.10001 16.1C6.10001 15.9 6.2 15.7 6.3 15.6C6.4 15.5 6.6 15.4 6.8 15.4C6.9 15.4 7.00001 15.4 7.10001 15.5C7.20001 15.6 7.3 15.6 7.3 15.7C7.5 16.2 7.7 16.6 8 16.9C8.3 17.2 8.6 17.3 9 17.3C9.2 17.3 9.5 17.2 9.7 17.1C9.9 17 10.1 16.8 10.3 16.6C10.5 16.4 10.5 16.1 10.5 15.8C10.5 15.3 10.4 15 10.1 14.7C9.80001 14.4 9.50001 14.3 9.10001 14.3C9.00001 14.3 8.9 14.3 8.7 14.3C8.5 14.3 8.39999 14.3 8.39999 14.3C8.19999 14.3 7.99999 14.2 7.89999 14.1C7.79999 14 7.7 13.8 7.7 13.7C7.7 13.5 7.79999 13.4 7.89999 13.2C7.99999 13 8.2 13 8.5 13H8.8V13.1ZM15.3 17.5V12.2C14.3 13 13.6 13.3 13.3 13.3C13.1 13.3 13 13.2 12.9 13.1C12.8 13 12.7 12.8 12.7 12.6C12.7 12.4 12.8 12.3 12.9 12.2C13 12.1 13.2 12 13.6 11.8C14.1 11.6 14.5 11.3 14.7 11.1C14.9 10.9 15.2 10.6 15.5 10.3C15.8 10 15.9 9.80003 15.9 9.70003C15.9 9.60003 16.1 9.60004 16.3 9.60004C16.5 9.60004 16.7 9.70003 16.8 9.80003C16.9 9.90003 17 10.2 17 10.5V17.2C17 18 16.7 18.4 16.2 18.4C16 18.4 15.8 18.3 15.6 18.2C15.4 18.1 15.3 17.8 15.3 17.5Z" fill="black"></path>
+                                        </svg>
+                                    </span>
+                                    <!--end::Svg Icon-->
+                                    <!--end::Icon-->
+                                    <!--begin::Datepicker-->
+                                    <%= form.text_field :startDate, "data-input": "", id: "start_date",  class: "form-control form-control-solid ps-12 flatpickr-input active", placeholder: t('search.start_date'), value: (params[:startDate])%>
+                                    <!--end::Datepicker-->
+                                </div>
+                            </div>
+                            <!--end::Col-->
+                            <!--begin::Col-->
+                            <div class="mb-3">
+                                <%= form.label t('search.end_date'), class: "fs-6 form-label fw-bolder text-dark" %>
+                                <div class="position-relative d-flex align-items-center datepicker" id="a_end_date">
+                                    <!--begin::Icon-->
+                                    <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
+                                    <span class="svg-icon svg-icon-2 position-absolute mx-4">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path opacity="0.3" d="M21 22H3C2.4 22 2 21.6 2 21V5C2 4.4 2.4 4 3 4H21C21.6 4 22 4.4 22 5V21C22 21.6 21.6 22 21 22Z" fill="black"></path>
+                                            <path d="M6 6C5.4 6 5 5.6 5 5V3C5 2.4 5.4 2 6 2C6.6 2 7 2.4 7 3V5C7 5.6 6.6 6 6 6ZM11 5V3C11 2.4 10.6 2 10 2C9.4 2 9 2.4 9 3V5C9 5.6 9.4 6 10 6C10.6 6 11 5.6 11 5ZM15 5V3C15 2.4 14.6 2 14 2C13.4 2 13 2.4 13 3V5C13 5.6 13.4 6 14 6C14.6 6 15 5.6 15 5ZM19 5V3C19 2.4 18.6 2 18 2C17.4 2 17 2.4 17 3V5C17 5.6 17.4 6 18 6C18.6 6 19 5.6 19 5Z" fill="black"></path>
+                                            <path d="M8.8 13.1C9.2 13.1 9.5 13 9.7 12.8C9.9 12.6 10.1 12.3 10.1 11.9C10.1 11.6 10 11.3 9.8 11.1C9.6 10.9 9.3 10.8 9 10.8C8.8 10.8 8.59999 10.8 8.39999 10.9C8.19999 11 8.1 11.1 8 11.2C7.9 11.3 7.8 11.4 7.7 11.6C7.6 11.8 7.5 11.9 7.5 12.1C7.5 12.2 7.4 12.2 7.3 12.3C7.2 12.4 7.09999 12.4 6.89999 12.4C6.69999 12.4 6.6 12.3 6.5 12.2C6.4 12.1 6.3 11.9 6.3 11.7C6.3 11.5 6.4 11.3 6.5 11.1C6.6 10.9 6.8 10.7 7 10.5C7.2 10.3 7.49999 10.1 7.89999 10C8.29999 9.90003 8.60001 9.80003 9.10001 9.80003C9.50001 9.80003 9.80001 9.90003 10.1 10C10.4 10.1 10.7 10.3 10.9 10.4C11.1 10.5 11.3 10.8 11.4 11.1C11.5 11.4 11.6 11.6 11.6 11.9C11.6 12.3 11.5 12.6 11.3 12.9C11.1 13.2 10.9 13.5 10.6 13.7C10.9 13.9 11.2 14.1 11.4 14.3C11.6 14.5 11.8 14.7 11.9 15C12 15.3 12.1 15.5 12.1 15.8C12.1 16.2 12 16.5 11.9 16.8C11.8 17.1 11.5 17.4 11.3 17.7C11.1 18 10.7 18.2 10.3 18.3C9.9 18.4 9.5 18.5 9 18.5C8.5 18.5 8.1 18.4 7.7 18.2C7.3 18 7 17.8 6.8 17.6C6.6 17.4 6.4 17.1 6.3 16.8C6.2 16.5 6.10001 16.3 6.10001 16.1C6.10001 15.9 6.2 15.7 6.3 15.6C6.4 15.5 6.6 15.4 6.8 15.4C6.9 15.4 7.00001 15.4 7.10001 15.5C7.20001 15.6 7.3 15.6 7.3 15.7C7.5 16.2 7.7 16.6 8 16.9C8.3 17.2 8.6 17.3 9 17.3C9.2 17.3 9.5 17.2 9.7 17.1C9.9 17 10.1 16.8 10.3 16.6C10.5 16.4 10.5 16.1 10.5 15.8C10.5 15.3 10.4 15 10.1 14.7C9.80001 14.4 9.50001 14.3 9.10001 14.3C9.00001 14.3 8.9 14.3 8.7 14.3C8.5 14.3 8.39999 14.3 8.39999 14.3C8.19999 14.3 7.99999 14.2 7.89999 14.1C7.79999 14 7.7 13.8 7.7 13.7C7.7 13.5 7.79999 13.4 7.89999 13.2C7.99999 13 8.2 13 8.5 13H8.8V13.1ZM15.3 17.5V12.2C14.3 13 13.6 13.3 13.3 13.3C13.1 13.3 13 13.2 12.9 13.1C12.8 13 12.7 12.8 12.7 12.6C12.7 12.4 12.8 12.3 12.9 12.2C13 12.1 13.2 12 13.6 11.8C14.1 11.6 14.5 11.3 14.7 11.1C14.9 10.9 15.2 10.6 15.5 10.3C15.8 10 15.9 9.80003 15.9 9.70003C15.9 9.60003 16.1 9.60004 16.3 9.60004C16.5 9.60004 16.7 9.70003 16.8 9.80003C16.9 9.90003 17 10.2 17 10.5V17.2C17 18 16.7 18.4 16.2 18.4C16 18.4 15.8 18.3 15.6 18.2C15.4 18.1 15.3 17.8 15.3 17.5Z" fill="black"></path>
+                                        </svg>
+                                    </span>
+                                    <!--end::Svg Icon-->
+                                    <!--end::Icon-->
+                                    <!--begin::Datepicker-->
+                                    <%= form.text_field :endDate, "data-input": "", id: "end_date",  class: "form-control form-control-solid ps-12 flatpickr-input active", placeholder: t('search.end_date'), value: (params[:endDate])%>
+                                    <!--end::Datepicker-->
+                                </div>
+                            </div>
+                            <!--end::Col-->
+                            <!--begin::Col-->
+                            <div class="mb-3">
+                                <%= form.label Student::Student.human_attribute_name('school_type'), class: "fs-6 form-label fw-bolder text-dark" %>
+                                <!--begin::Select-->
+                                <%= form.select(:school_type, options_for_select(school_type_options,selected: params[:school_type]),{:include_blank => ( t'select.not_select')}, {:class => "form-select form-select-solid",:id => "school_type"}) %>                
+                                <!--end::Select-->
+                            </div>
+                            <!--end::Col-->
+                            <!--begin::Col-->
+                            <div class="mb-3">
+                                <%= form.label Student::Student.human_attribute_name('gender'), class: "fs-6 form-label fw-bolder text-dark" %>
+                                <!--begin::Select-->
+                                <%= form.select(:gender_keyword, options_for_select(admin_gender_type_options,selected: params[:gender_keyword]),{:include_blank => ( t'select.not_select')}, {:class => "form-select form-select-solid",:id => "gender"}) %>
+                                <!--end::Select-->
+                            </div>
+                            <!--end::Col-->
+                            <!--begin::Actions-->
+                            <div class="d-flex justify-content-end">
+                                <%= form.submit t('search.apply'),class: "btn btn-primary me-5" %>
+                                <%= link_to t('search.clear'), partner_student_manage_student_index_path, class: "btn btn-light-primary me-5" %>
+                            </div>
+                            <!--end::Actions-->
+                            </div>
+                            <!--end::Content-->
+                        </div>
+                        <!--end::Menu 1-->              
+                    </div>
+                    <!--end::Compact form-->             
+                </div>
+                <!--end::Card body-->
+            </div>
+            <!--end::Card-->
+        <% end %>
+        <!--end::Form-->
+        <div class="tab-content">
+			<!--begin::Tab pane-->
+			<div id="kt_project_users_card_pane" class="tab-pane fade show active">
+				<!--begin::Table-->
+				<div class="card bg-body">
+					<!--begin::Header-->
+					<div class="card-header border-0 pt-5">
+						<h3 class="card-title align-items-start flex-column">
+							<span class="card-label fw-bolder fs-3 mb-1"><%= t ('search.search_title') %></span>
+						</h3>
+						<div class="card-toolbar">
+							<span class="card-label fs-3 mb-1"><%= result.total_count %><%= t ('search.count_unit') %></span>
+						</div>
+					</div>
+					<!--end::Header-->
+					<!--begin::Body-->
+					<div class="card-body py-3">
+                    <% if result.present? %>
+						<!--begin::Table container-->
+						<div class="table-responsive">
+							<!--begin::Table-->
+							<table class="table align-middle gs-0 gy-4">
+								<!--begin::Table head-->
+								<thead>
+									<tr class="fw-bolder text-muted bg-light">
+										<th class="ps-4 min-w-10px rounded-start" scope="col"><%= t('student.student_show.name') %></th>
+                                        <th class="min-w-10px" scope="col"><%= t "unit.age" %></th>
+                                        <th class="min-w-10px" scope="col"><%= Student::Student.human_attribute_name('gender') %></th>
+                                        <th class="min-w-10px" scope="col"><%= Student::Student.human_attribute_name('school_name') %> </th>
+                                        <th class="min-w-10px" scope="col"><%= Student::Student.human_attribute_name('school_type') %></th>
+                                        <th class="min-w-10px" scope="col"><%= t('search.admin_prefecture_area') %></th>
+                                        <th class="min-w-10px" scope="col"><%= Student::Student.human_attribute_name('club_name') %></th>
+                                        <th class="min-w-10px" scope="col"><%= t('admin.setting.assessment_title') %></th>
+                                        <th class="min-w-10px" scope="col"><%= t('search.date_label') %></th>
+                                        <th class="min-w-10px"><%= t('event.title.publish_status') %></th>
+                                        <th class="min-w-125px text-end rounded-end"></th>
+									</tr>
+								</thead>
+								<!--end::Table head-->
+								<!--begin::Table body-->
+								<tbody>
+									<% result.each do |user| %>
+										<tr>
+                                            <!--begin::User=-->
+                                            <td class="d-flex align-items-center">
+                                                <!--begin:: Avatar -->
+                                                <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">                                                
+                                                    <div class="symbol-label">
+                                                        <% if user.image.attached? %>
+                                                            <%= image_tag user.image, :class=> "w-100" %>  
+                                                        <% else %>
+                                                            <% if user.gender == "female" %>
+                                                                <%= image_tag "avatar/female.svg", class: "w-100" %>                                
+                                                            <% else %>
+                                                                <%= image_tag "avatar/male.svg", class: "w-100" %>   
+                                                            <% end %>                                                   
+                                                        <% end %>
+                                                    </div>                                              
+                                                </div>
+                                                <!--end::Avatar-->
+                                                <!--begin::User details-->
+                                                <div class="d-flex flex-column">
+                                                    <span class="text-gray-800 text-hover-primary mb-1">  <%= user.last_name %> <%= user.first_name %></span>
+                                                </div>
+                                                <!--begin::User details-->
+                                            </td>
+                                            <!--end::User=-->		
+											<td>
+												<span>
+                                                <% unless user.birthday.nil?%>
+                                                <%= Date.today.year - user.birthday.year%>
+                                                <% end %>
+                                                </span>
+											</td>
+											<td>
+                                                <% unless user.gender.nil?%>
+                                                <%= t("student.gender.#{user.gender}") %>
+                                                <% end %>
+                                            </td>
+											<td>
+                                                <%= user.school_name%>
+                                            </td>
+                                            <td>
+                                                <span>
+                                                    <% unless user.school_type.nil?%>
+                                                        <%=  t("student.school_type.#{user.school_type}") %>
+                                                    <% end %>
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span>
+                                                    <%= (user.pre_name) %>
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span>
+                                                    <%= (user.club_name) %>
+                                                </span>
+                                            </td>
+                                            <td> <%= assessment.include?(user.id)? t('admin.setting.implemented') : t('admin.setting.not_implemented')%> </td>
+											<td>
+                                                <span>
+                                                    <%= l(user.created_at.strftime('%Y-%m-%d').to_date, default: '-')%>
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span>
+                                                    <% if user.birthday.nil? %>
+                                                        <%= t('search.uncomplete_register_status')%>
+                                                    <% else %>
+                                                        <%= t('search.complete_register_status')%>
+                                                    <% end%>
+                                                </span>
+                                            </td>
+                                            <td class="text-end">
+                                                <%= link_to partner_student_manage_detail_path(:id => user.id), :class=> 'btn btn-icon btn-bg-light btn-active-color-primary btn-sm mr-3' do %>
+                                                    <span class="svg-icon svg-icon-3">
+                                                        <!--begin::Svg Icon | path:assets/media/svg/icons/General/Settings-1.svg-->
+                                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                <rect x="0" y="0" width="24" height="24" />
+                                                                <path d="M7,3 L17,3 C19.209139,3 21,4.790861 21,7 C21,9.209139 19.209139,11 17,11 L7,11 C4.790861,11 3,9.209139 3,7 C3,4.790861 4.790861,3 7,3 Z M7,9 C8.1045695,9 9,8.1045695 9,7 C9,5.8954305 8.1045695,5 7,5 C5.8954305,5 5,5.8954305 5,7 C5,8.1045695 5.8954305,9 7,9 Z" fill="#000000" />
+                                                                <path d="M7,13 L17,13 C19.209139,13 21,14.790861 21,17 C21,19.209139 19.209139,21 17,21 L7,21 C4.790861,21 3,19.209139 3,17 C3,14.790861 4.790861,13 7,13 Z M17,19 C18.1045695,19 19,18.1045695 19,17 C19,15.8954305 18.1045695,15 17,15 C15.8954305,15 15,15.8954305 15,17 C15,18.1045695 15.8954305,19 17,19 Z" fill="#000000" opacity="0.3" />
+                                                            </g>
+                                                        </svg>
+                                                        <!--end::Svg Icon-->
+                                                    </span>
+                                                <% end %>
+                                                <%= link_to partner_student_manage_edit_path(id: user.id), :class=> 'btn btn-icon btn-bg-light btn-active-color-primary btn-sm' do %>
+                                                    <span class="svg-icon svg-icon-3">
+                                                        <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Write.svg-->
+                                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                <rect x="0" y="0" width="24" height="24" />
+                                                                <path d="M12.2674799,18.2323597 L12.0084872,5.45852451 C12.0004303,5.06114792 12.1504154,4.6768183 12.4255037,4.38993949 L15.0030167,1.70195304 L17.5910752,4.40093695 C17.8599071,4.6812911 18.0095067,5.05499603 18.0083938,5.44341307 L17.9718262,18.2062508 C17.9694575,19.0329966 17.2985816,19.701953 16.4718324,19.701953 L13.7671717,19.701953 C12.9505952,19.701953 12.2840328,19.0487684 12.2674799,18.2323597 Z" fill="#000000" fill-rule="nonzero" transform="translate(14.701953, 10.701953) rotate(-135.000000) translate(-14.701953, -10.701953)" />
+                                                                <path d="M12.9,2 C13.4522847,2 13.9,2.44771525 13.9,3 C13.9,3.55228475 13.4522847,4 12.9,4 L6,4 C4.8954305,4 4,4.8954305 4,6 L4,18 C4,19.1045695 4.8954305,20 6,20 L18,20 C19.1045695,20 20,19.1045695 20,18 L20,13 C20,12.4477153 20.4477153,12 21,12 C21.5522847,12 22,12.4477153 22,13 L22,18 C22,20.209139 20.209139,22 18,22 L6,22 C3.790861,22 2,20.209139 2,18 L2,6 C2,3.790861 3.790861,2 6,2 L12.9,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+                                                            </g>
+                                                        </svg>
+                                                        <!--end::Svg Icon-->
+                                                    </span>
+                                                <% end %>
+                                            </td>
+										</tr>
+									<% end %>
+								</tbody>
+								<!--end::Table body-->
+							</table>
+							<!--end::Table-->
+						</div>
+
+                        <%# Remove by NL %>
+                        <%# <div class="col-12 d-flex justify-content-end py-3 py-sm-0 px-2 px-sm-0"> %>
+                            <%#= link_to partner_student_manage_student_index_path(format: :xlsx, startDate: params[:startDate], endDate: params[:endDate], date_type: params[:date_type], keyword: params[:keyword],gender_keyword: params[:gender_keyword], school_type: params[:school_type]), class: 'd-inline-block btn btn-sm bg-primary shadow-sm' do%>
+                            <%# <i class="fas fa-download fa-sm text-muted"></i> %>
+                            <%#= t('search.excel_download')%>
+                            <%# end %>
+                        <%# </div> %>
+                        
+						<!--end::Table container-->
+                        <!--end::Table-->
+                        <!--begin::pagination-->
+                        <div class="d-flex flex-wrap justify-content-between align-items-center">
+                            <div class="d-flex flex-wrap py-2 me-3">
+                                <%= paginate result %>
+                            </div>
+                            <div class="d-flex align-items-center py-3">
+                                <span class="text-muted"><%=  t('common.display')  %> <%= result.total_count %> <%=  t('common.to')  %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%= result.offset_value + 1 %> ~ <%=  result.offset_value + result.count %> <%=  t('common.search_result')  %> </span>
+                            </div>
+                        </div>
+                <% else %>
+                    <div class="col-12 m-2">
+                        <h3><%= t('search.no_result') %></h3>
+                    </div>
+                <% end %>
+            </div>
+			<!--end::pagination-->
+        </div>
+	</div>
+	</div>
+    </div>
+    <!--end::Container-->
+</div>
+<%= javascript_pack_tag "admin/admin_search.js" %>
+<%= javascript_pack_tag 'common.js'%>

@@ -1,0 +1,243 @@
+/* 
+ *= require_tree ../theme/fonts/flaticon
+ *= require_tree ../theme/fonts/flaticon2
+ *= require_tree ../theme/fonts/keenthemes-icons
+ *= require_tree ../fonts
+ */
+
+@import 'select2/dist/css/select2';
+@import '../student-theme/style';
+@import 'flatpickr/dist/flatpickr.min.css';
+@import 'flatpickr/dist/plugins/monthSelect/style.css';
+@import 'trix/dist/trix';
+@import 'actiontext.scss';
+@import 'communication/communications.scss';
+@import 'croppie/croppie.css';
+@import 'react-circular-progressbar/dist/styles.css';
+@import './company/assessment.scss';
+@import 'react-quill/dist/quill.snow.css';
+@import 'video.js/dist/video-js.css';
+
+/* roboto-regular - latin */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./roboto-v30-latin-regular.eot'); /* IE9 Compat Modes */
+  src: url('./roboto-v30-latin-regular.eot?#iefix') format('embedded-opentype'),
+    /* IE6-IE8 */ url('./roboto-v30-latin-regular.woff2') format('woff2'),
+    /* Super Modern Browsers */ url('./roboto-v30-latin-regular.woff')
+      format('woff'),
+    /* Modern Browsers */ url('./roboto-v30-latin-regular.ttf')
+      format('truetype'),
+    /* Safari, Android, iOS */ url('./roboto-v30-latin-regular.svg#Roboto')
+      format('svg'); /* Legacy iOS */
+}
+
+body {
+  font-family: sans-serif, 'Roboto';
+}
+
+.information-title-img {
+  background-image: url(image_path('user/workerPrivacy_bg.jpg'));
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 43vh;
+  background-size: 100%;
+  .information-title {
+    font-size: 30px;
+    color: #858585;
+  }
+}
+
+.privacy-policy {
+  p {
+    font-size: 14px;
+    color: #858585;
+  }
+  .form-card {
+    border-radius: 15px;
+    .main-title {
+      color: black;
+    }
+    .sub-title {
+      color: black;
+    }
+    li {
+      font-size: 14px;
+      color: #858585;
+    }
+  }
+
+  .title-bar {
+    background-color: #eaedef;
+  }
+}
+
+.ol-parentheses {
+  counter-reset: item;
+  li {
+    display: block;
+  }
+  li::before {
+    display: inline-block;
+    content: '(' counter(item) ')';
+    counter-increment: item;
+    width: 2em;
+    margin-left: -2em;
+  }
+}
+
+.com-border-color {
+  border-left: 7px solid $companyColor;
+}
+
+.std-border-color {
+  border-left: 7px solid $studentColor;
+}
+
+.std-bg-color {
+  background-color: $studentColor;
+}
+
+.com-bg-color {
+  background-color: $companyColor;
+}
+
+// +++++++++++
+/*--------------------------------------------------------------
+# Hero Section
+--------------------------------------------------------------*/
+.hero {
+  width: 100%;
+  height: 90vh;
+}
+@media (min-width: 1024px) {
+  .hero {
+    background-attachment: fixed;
+  }
+}
+@media (max-width: 991px) {
+  .hero {
+    // height: auto;
+    padding: 120px 0 60px 0;
+  }
+}
+@media (max-width: 768px) {
+  .hero {
+    text-align: center;
+  }
+}
+.about {
+  .content {
+    // padding: 40px;
+    height: 100vh;
+  }
+}
+
+.facebook-bg {
+  background-color: #1975d1;
+}
+.line-bg {
+  background-color: #3ace00;
+}
+
+.bahavioral-model {
+  border: 1px solid $studentColor;
+  height: 30px;
+}
+.bahavioral-fill {
+  background-color: $studentColor;
+}
+.bahavioral-font {
+  font-size: 11px;
+}
+.bahavioral-p {
+  background-color: $studentColor !important;
+  width: 220px;
+  font-size: 1rem;
+  box-shadow: 0 2px 10px rgba(117, 116, 116, 0.4);
+  transition: box-shadow 5s;
+  border-radius: 6px;
+  border: 0;
+  outline: none;
+}
+
+.company-detail-event-card {
+  @media (max-width: 400px) {
+    padding-inline: 0rem;
+  }
+
+  @media (min-width: 400px) {
+    padding-inline: 6rem;
+  }
+}
+.custom-table {
+  table-layout: fixed;
+}
+.hide-trix-toolbar {
+  trix-toolbar .trix-button-row {
+    display: none;
+  }
+}
+.custom-scroll {
+  max-height: 100vh;
+  overflow-y: scroll;
+}
+
+.text-decoration-underline {
+  text-underline-offset: 0.15rem;
+  &:hover {
+    text-decoration: underline !important;
+  }
+}
+
+.action-btn {
+  z-index: 1;
+}
+
+// Circle chart
+.single-chart {
+  width: 100%;
+}
+
+.circular-chart {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  max-height: 110px;
+}
+
+.circle-bg {
+  fill: none;
+  stroke: #eee;
+  stroke-width: 3.8;
+}
+
+.circle {
+  fill: none;
+  stroke-width: 2.8;
+  stroke-linecap: round;
+  animation: progress 1s ease-out forwards;
+}
+
+@keyframes progress {
+  0% {
+    stroke-dasharray: 0 100;
+  }
+}
+
+.circular-chart.primary .circle {
+  stroke: $primary;
+}
+
+.text {
+  fill: #666;
+  font-size: 0.35em;
+  text-anchor: middle;
+}
+.percentage {
+  fill: #666;
+  font-size: 0.7em;
+  text-anchor: middle;
+}

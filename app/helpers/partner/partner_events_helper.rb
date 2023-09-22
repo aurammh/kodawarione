@@ -1,0 +1,3 @@
+module Partner::PartnerEventsHelper
+    
+end

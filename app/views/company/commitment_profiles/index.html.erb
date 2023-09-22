@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Company Commitment Profiles</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title 1</th>
+      <th>Title 2</th>
+      <th>Title 3</th>
+      <th>Company message</th>
+      <th>Other message</th>
+      <th>Experience requirements</th>
+      <th>Fresher requirements</th>
+      <th>Fresher second requirements</th>
+      <th>Created userid</th>
+      <th>Updated userid</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @company_commitment_profiles.each do |company_commitment_profile| %>
+      <tr>
+        <td><%= company_commitment_profile.title_1 %></td>
+        <td><%= company_commitment_profile.title_2 %></td>
+        <td><%= company_commitment_profile.title_3 %></td>
+        <td><%= company_commitment_profile.company_message %></td>
+        <td><%= company_commitment_profile.other_message %></td>
+        <td><%= company_commitment_profile.experience_requirements %></td>
+        <td><%= company_commitment_profile.fresher_requirements %></td>
+        <td><%= company_commitment_profile.fresher_second_requirements %></td>
+        <td><%= company_commitment_profile.created_userid %></td>
+        <td><%= company_commitment_profile.updated_userid %></td>
+        <td><%= link_to 'Show', company_commitment_profile %></td>
+        <td><%= link_to 'Edit', edit_company_commitment_profile_path(company_commitment_profile) %></td>
+        <td><%= link_to 'Destroy', company_commitment_profile, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Company Commitment Profile', new_company_commitment_profile_path %>

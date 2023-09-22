@@ -1,0 +1,12 @@
+$(function () {
+    var event_id = <%= @event_id.inspect.html_safe %>;
+    var join_user_type = <%= @join_user_type.inspect.html_safe %>;
+    var join_parent_user_id = <%= @join_parent_user_id.inspect.html_safe %>;
+    var join_user_id = <%= @join_user_id.inspect.html_safe %>;
+
+    $("#event_id").html(event_id);
+    $("#join_user_type").html(join_user_type);
+    $("#join_parent_user_id").html(join_parent_user_id);
+    $("#join_user_id").html(join_user_id);
+    $("#event-wait-confirm-modal").modal('show');
+});

@@ -1,0 +1,479 @@
+<!--begin::Aside-->
+<div id="kt_aside" class="aside py-9" data-kt-drawer="true" data-kt-drawer-name="aside" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '250px'}" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_aside_toggle">
+    <!--begin::Brand-->
+    <div class="aside-logo flex-column-auto px-9 mb-9" id="kt_aside_logo">
+        <!--begin::Logo-->
+        <%= link_to root_path  do %>
+            <%= image_tag "layout/header_logo.png", class: "h-40px logo" %>    
+        <% end %> 
+        <!--end::Logo-->
+    </div>
+    <!--end::Brand-->
+    <!--begin::Aside menu-->
+    <div class="aside-menu flex-column-fluid ps-5 pe-3 mb-9" id="kt_aside_menu">
+        <!--begin::Aside Menu-->
+        <div class="w-100 hover-scroll-overlay-y d-flex pe-2" id="kt_aside_menu_wrapper" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-height="auto" data-kt-scroll-dependencies="#kt_aside_logo, #kt_aside_footer" data-kt-scroll-wrappers="#kt_aside, #kt_aside_menu, #kt_aside_menu_wrapper" data-kt-scroll-offset="100">
+        <!--begin::Menu-->
+        <div class="menu menu-column menu-rounded fw-bold my-auto" id="#kt_aside_menu" data-kt-menu="true">
+            <% if company_user_signed_in? && can?(:index, Company::Company) %>
+                <div class="menu-item">
+                    <%= link_to company_companies_path, class: "menu-link #{company_active_url?(company_companies_path)}" do %> 
+                        <span class="menu-icon">
+                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr001.svg-->
+                            <span class="svg-icon svg-icon-5">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M14.4 11H3C2.4 11 2 11.4 2 12C2 12.6 2.4 13 3 13H14.4V11Z" fill="black" />
+                                <path opacity="0.3" d="M14.4 20V4L21.7 11.3C22.1 11.7 22.1 12.3 21.7 12.7L14.4 20Z" fill="black" />
+                                </svg>
+                            </span>
+                        <!--end::Svg Icon-->
+                        </span>
+                        <span class="menu-title"><%= t('student.title.header_link') %></span>
+                    <% end %>
+                </div>
+            <% end %>
+            <% if can?(:student_search, Company::Search) || can?(:index, Company::CompanyStudentMatchedResult) || can?(:favourite_student_list, Company::Company) %>
+                <div data-kt-menu-trigger="click" class="menu-item <%= company_active_url?(company_students_search_path) %> <%= company_active_url?(company_company_student_matched_result_path) %>  <%= company_active_url?(company_company_student_matched_questionnaire_result_path) %> <%= company_active_url?(company_favourite_student_list_path) %>  menu-accordion">
+                    <span class="menu-link">
+                        <span class="menu-icon">
+                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr001.svg-->
+                        <span class="svg-icon svg-icon-5">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M14.4 11H3C2.4 11 2 11.4 2 12C2 12.6 2.4 13 3 13H14.4V11Z" fill="black" />
+                            <path opacity="0.3" d="M14.4 20V4L21.7 11.3C22.1 11.7 22.1 12.3 21.7 12.7L14.4 20Z" fill="black" />
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                        </span>
+                        <span class="menu-title"><%= t( 'menu.scout_service') %></span>
+                        <span class="menu-arrow"></span>
+                    </span>
+                    <div class="menu-sub menu-sub-accordion menu-active-bg">
+                        <% if can?(:student_search, Company::Search) %>
+                            <div class="menu-item">
+                                <%= link_to company_students_search_path, class: "menu-link #{company_active_url?(company_students_search_path)}" do %>  
+                                    <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title"><%= t'menu.student_search' %></span>
+                                <% end %>
+                            </div>
+                        <% end %>
+                        <% if can?(:index, Company::CompanyStudentMatchedResult) %>
+                            <div class="menu-item">
+                                <%= link_to company_company_student_matched_result_path, class: "menu-link #{company_active_url?(company_company_student_matched_result_path)} #{company_active_url?(company_company_student_matched_questionnaire_result_path)}" do %>  
+                                    <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title"><%= t'menu.company_student_matched_result_search' %></span>
+                                <% end %>
+                            </div>
+                        <% end %>
+                        <% if can?(:favourite_student_list, Company::Company) %>
+                            <div class="menu-item">
+                                <%= link_to company_favourite_student_list_path, class: "menu-link #{company_active_url?(company_favourite_student_list_path)}" do %>  
+                                    <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title"><%= t'menu.scout_student_favorites_list' %></span>
+                                <% end %>
+                            </div>
+                        <% end %>
+                    </div>
+                </div>
+            <% end %>
+            <!-- job application management -->
+            <% if can?(:scouted_result, Company::Company) || can?(:applied_job_approval_list, Company::Company) %>
+                <div data-kt-menu-trigger="click" class="menu-item <%= company_active_url?(company_scouted_result_path) %> <%= company_active_url?(company_applied_job_approval_list_path) %>  menu-accordion">
+                    <span class="menu-link">
+                        <span class="menu-icon">
+                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr001.svg-->
+                        <span class="svg-icon svg-icon-5">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M14.4 11H3C2.4 11 2 11.4 2 12C2 12.6 2.4 13 3 13H14.4V11Z" fill="black" />
+                            <path opacity="0.3" d="M14.4 20V4L21.7 11.3C22.1 11.7 22.1 12.3 21.7 12.7L14.4 20Z" fill="black" />
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                        </span>
+                        <span class="menu-title"><%= t( 'menu.job_applicant_management') %></span>
+                        <span class="menu-arrow"></span>
+                    </span>
+                    <div class="menu-sub menu-sub-accordion menu-active-bg">
+                        <% if can?(:scouted_result, Company::Company)%>
+                            <div class="menu-item">
+                                <%= link_to company_scouted_result_path, class: "menu-link #{company_active_url?(company_scouted_result_path)}" do %>  
+                                    <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title"><%= t'menu.scout_result1' %></span>
+                                <% end %>
+                            </div>
+                        <% end %>
+                        <% if can?(:applied_job_approval_list, Company::Company) %>
+                            <div class="menu-item"> 
+                                <%= link_to company_applied_job_approval_list_path, class: "menu-link #{company_active_url?(company_applied_job_approval_list_path)}" do %>   
+                                    <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title"><%= t'menu.applied_job_approval_screen1' %> <span> 
+                                <% end %>
+                            </div>
+                        <% end %>
+                    </div>
+                </div>   
+            <% end %>
+            <div class="menu-item">
+                <%= link_to communication_communications_path(mail_type: "2222"), class: "menu-link #{company_active_url?(communication_communications_path)}" do %> 
+                    <span class="menu-icon">
+                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr001.svg-->
+                        <span class="svg-icon svg-icon-5">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M14.4 11H3C2.4 11 2 11.4 2 12C2 12.6 2.4 13 3 13H14.4V11Z" fill="black" />
+                            <path opacity="0.3" d="M14.4 20V4L21.7 11.3C22.1 11.7 22.1 12.3 21.7 12.7L14.4 20Z" fill="black" />
+                            </svg>
+                        </span>
+                    <!--end::Svg Icon-->
+                    </span>
+                    <span class="menu-title"><%= t'menu.communication_menu'%></span>
+                <% end %>
+            </div> 
+            <% if can?(:read, Company::Vacancy) || can?(:create, Company::Vacancy) %>
+                <div data-kt-menu-trigger="click" class="menu-item <%= company_active_url?(new_company_vacancy_path) %>  <%= company_active_url?(company_vacancies_path) %> menu-accordion">
+                    <span class="menu-link">
+                        <span class="menu-icon">
+                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr001.svg-->
+                        <span class="svg-icon svg-icon-5">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M14.4 11H3C2.4 11 2 11.4 2 12C2 12.6 2.4 13 3 13H14.4V11Z" fill="black" />
+                            <path opacity="0.3" d="M14.4 20V4L21.7 11.3C22.1 11.7 22.1 12.3 21.7 12.7L14.4 20Z" fill="black" />
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                        </span>
+                        <span class="menu-title"><%= t( 'menu.job_management') %></span>
+                        <span class="menu-arrow"></span>
+                    </span>
+                    <div class="menu-sub menu-sub-accordion menu-active-bg">
+                        <% if can? :create, Company::Vacancy %>
+                            <div class="menu-item">
+                                <%= link_to new_company_vacancy_path, class: "menu-link #{company_active_url?(new_company_vacancy_path)}" do %>  
+                                    <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title"><%= t'common.vacancy_registration_confirm_screen' %></span>
+                                <% end %>
+                            </div>
+                        <% end %>
+                        <% if can? :read, Company::Vacancy %>
+                            <div class="menu-item">
+                                <%= link_to company_vacancies_path, class: "menu-link #{company_active_url?(company_vacancies_path)}" do %>  
+                                    <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title"><%= t'title.vacancy_list' %></span>
+                                <% end %>
+                            </div>
+                        <% end %>
+                    </div>
+                </div>
+            <% end %>
+            <% if can?(:read, Event) || can?(:create, Event) || can?(:search_event, Company::Search) || can?(:admin_event_list, Company::AdminEvent) %>
+                <div data-kt-menu-trigger="click" class="menu-item <%= company_active_url?(new_company_event_path) %> <%= company_active_url?(company_search_event_path) %> <%= company_active_url?(company_events_path) %> <%= company_active_url?(company_admin_event_list_path) %>menu-accordion">
+                    <span class="menu-link">
+                        <span class="menu-icon">
+                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr001.svg-->
+                        <span class="svg-icon svg-icon-5">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M14.4 11H3C2.4 11 2 11.4 2 12C2 12.6 2.4 13 3 13H14.4V11Z" fill="black" />
+                            <path opacity="0.3" d="M14.4 20V4L21.7 11.3C22.1 11.7 22.1 12.3 21.7 12.7L14.4 20Z" fill="black" />
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                        </span>
+                        <span class="menu-title"><%= t( 'menu.event_management') %></span>
+                        <span class="menu-arrow"></span>
+                    </span>
+                    <div class="menu-sub menu-sub-accordion menu-active-bg">
+                        <% if can?(:create, Event) %>
+                            <div class="menu-item">
+                                <%= link_to new_company_event_path, class: "menu-link #{company_active_url?(new_company_event_path)}" do %>  
+                                    <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title"><%= t'menu.event_create' %></span>
+                                <% end %>
+                            </div>
+                        <% end %>
+                        <% if can?(:read, Event) %>
+                            <div class="menu-item">
+                                <%= link_to company_events_path, class: "menu-link #{company_active_url?(company_events_path)}" do %>  
+                                    <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title"><%= t'event.title.event_list' %></span>
+                                <% end %>
+                            </div>
+                        <% end %>
+                        <% if can?(:search_event, Company::Search) %>
+                            <div class="menu-item">
+                                <%= link_to company_search_event_path, class: "menu-link #{company_active_url?(company_search_event_path)}" do %>  
+                                    <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title"><%= t'btn.event_search' %> <span>
+                                <% end %>
+                            </div>
+                        <% end %>
+                        <% if can?(:admin_event_list, Company::AdminEvent) %>
+                            <div class="menu-item">
+                                <%= link_to company_admin_event_list_path , class: "menu-link #{company_active_url?(company_admin_event_list_path)}" do %>  
+                                    <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title"><%= t'event.title.joined_event_list' %></span>
+                                <% end %>
+                            </div>
+                        <% end %>
+                    </div>
+                </div>
+            <% end %>
+            <% if can?(:update, Company::CompanyCommitment) || can?(:update, Company::Company) || can?(:index, Company::CompanyCommitmentAbility) || can?(:home, Company::Company) %>
+                <div data-kt-menu-trigger="click" class="menu-item <%= company_active_url?(edit_company_company_commitment_path(@user_data)) %> <%= company_active_url?(edit_company_company_path(@user_data)) %> <%= company_active_url?(company_commitment_ability_index_path) %><%= company_active_url?(company_assessments_path) %> <%= company_active_url?(home_company_commitment_profiles_path) %> menu-accordion">
+                    <span class="menu-link">
+                        <span class="menu-icon">
+                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr001.svg-->
+                        <span class="svg-icon svg-icon-5">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M14.4 11H3C2.4 11 2 11.4 2 12C2 12.6 2.4 13 3 13H14.4V11Z" fill="black" />
+                            <path opacity="0.3" d="M14.4 20V4L21.7 11.3C22.1 11.7 22.1 12.3 21.7 12.7L14.4 20Z" fill="black" />
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                        </span>  
+                        <span class="menu-title"><%= t( 'student_commitment.menu.corporate_information_management_company') %></span>
+                        <span class="menu-arrow"></span>
+                    </span>
+                    <div class="menu-sub menu-sub-accordion menu-active-bg">
+                        <% if can?(:update, Company::CompanyCommitment) && can?(:update, Company::Company) %>
+                            <div class="menu-item">
+                                <%= link_to edit_company_company_commitment_path(@user_data), class: "menu-link #{company_active_url?(edit_company_company_commitment_path(@user_data))} #{company_active_url?(edit_company_company_path(@user_data))}" do %>  
+                                    <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title"><%= t'student_commitment.steps.title.step1' %></span>
+                                <% end %>
+                            </div>
+                        <% elsif can?(:update, Company::CompanyCommitment) %>
+                            <div class="menu-item">
+                                <%= link_to edit_company_company_commitment_path(@user_data), class: "menu-link #{company_active_url?(edit_company_company_commitment_path(@user_data))} #{company_active_url?(edit_company_company_path(@user_data))}" do %>  
+                                    <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title"><%= t'student_commitment.steps.title.step1' %></span>
+                                <% end %>
+                            </div>
+                        <% elsif can?(:update, Company::Company)%>
+                            <div class="menu-item">
+                                <%= link_to edit_company_company_path(@user_data), class: "menu-link #{company_active_url?(edit_company_company_commitment_path(@user_data))} #{company_active_url?(edit_company_company_path(@user_data))}" do %>  
+                                    <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title"><%= t'student_commitment.steps.title.step1' %></span>
+                                <% end %>
+                            </div>
+                        <% end %>
+                        <% if can?(:index, Company::CompanyCommitmentAbility) %>
+                            <div class="menu-item">
+                                <%= link_to company_commitment_ability_index_path, class: "menu-link #{company_active_url?(company_commitment_ability_index_path)} #{company_active_url?(company_assessments_path) }" do %>  
+                                    <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title"> <%= t'student_commitment.menu.discerning_registration' %><span>
+                                <% end %>
+                            </div>
+                        <% end %>
+                        <% if can?(:home, Company::Company) %>
+                            <div class="menu-item">
+                                <%= link_to home_company_commitment_profiles_path, class: "menu-link #{company_active_url?(home_company_commitment_profiles_path)}" do %>  
+                                    <span class="menu-bullet">
+                                    <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title"> <%= t'student_commitment.menu.create_company_page' %><span>
+                                <% end %>
+                            </div> 
+                        <% end %>
+                    </div>
+                </div>
+            <% end %>
+            <% if can?(:read, Company::CompanyMember) %>
+                <div class="menu-item">
+                    <%= link_to company_company_members_path, class: "menu-link #{company_active_url?(company_company_members_path)}" do %> 
+                        <span class="menu-icon">
+                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr001.svg-->
+                            <span class="svg-icon svg-icon-5">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M14.4 11H3C2.4 11 2 11.4 2 12C2 12.6 2.4 13 3 13H14.4V11Z" fill="black" />
+                                <path opacity="0.3" d="M14.4 20V4L21.7 11.3C22.1 11.7 22.1 12.3 21.7 12.7L14.4 20Z" fill="black" />
+                                </svg>
+                            </span>
+                        <!--end::Svg Icon-->
+                        </span>
+                        <span class="menu-title"><%= t'company_member.title.header' %></span>
+                    <% end %>
+                </div>  
+            <% end %>
+            <div class="menu-item">
+                <%= link_to company_setting_path, class: "menu-link #{company_active_url?(company_setting_path)}" do %> 
+                    <span class="menu-icon">
+                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr001.svg-->
+                        <span class="svg-icon svg-icon-5">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M14.4 11H3C2.4 11 2 11.4 2 12C2 12.6 2.4 13 3 13H14.4V11Z" fill="black" />
+                            <path opacity="0.3" d="M14.4 20V4L21.7 11.3C22.1 11.7 22.1 12.3 21.7 12.7L14.4 20Z" fill="black" />
+                            </svg>
+                        </span>
+                    <!--end::Svg Icon-->
+                    </span>
+                    <span class="menu-title"><%= t'password_setting.title.personal_information_setting' %></span>
+                <% end %>
+            </div>
+        </div>
+        <!--end::Menu-->
+        </div>
+        <!--end::Aside Menu-->
+    </div>
+    <!--end::Aside menu-->
+    <!--begin::Footer-->
+    <div class="aside-footer flex-column-auto px-9" id="kt_aside_footer">
+        <!--begin::User panel-->
+        <div class="d-flex flex-stack">
+            <!--begin::Wrapper-->
+            <div class="d-flex align-items-center">
+                <!--begin::Avatar-->
+                <div class="symbol symbol-circle symbol-40px">
+                    <% if @user_data.image.attached? %>
+                        <%= image_tag (@user_data.image), :class=> "symbol-label" %>
+                    <% else %>
+                        <%= image_tag "avatar/preview.svg", :class=> "symbol-label" %> 
+                    <% end %>  
+                </div>
+                <!--end::Avatar-->
+                <!--begin::User info-->
+                <div class="ms-2">
+                <!--begin::Name-->
+                <a href="#" class="text-gray-800 text-break text-hover-primary fs-6 fw-bolder lh-1"><%= @user_data.company_name %></a>
+                <!--end::Name-->
+                <!--begin::Major-->
+                <span class="text-muted text-break fw-bold d-block fs-7 lh-1">
+                    <% if @user_data.website_url.present? %>
+                        <%= @user_data.website_url %>
+                    <% else %>
+                        <%= t('placeholder.url') %> <%= t('errors.messages.blank') %>
+                    <% end %> 
+                </span>
+                <!--end::Major-->
+                </div>
+                <!--end::User info-->
+            </div>
+            <!--end::Wrapper-->
+            <!--begin::User menu-->
+            <div class="ms-1">
+                <div class="btn btn-sm btn-icon btn-active-color-primary position-relative me-n2" data-kt-menu-trigger="click" data-kt-menu-overflow="true" data-kt-menu-placement="top-end">
+                    <!--begin::Svg Icon | path: icons/duotune/coding/cod001.svg-->
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path opacity="0.3" d="M22.1 11.5V12.6C22.1 13.2 21.7 13.6 21.2 13.7L19.9 13.9C19.7 14.7 19.4 15.5 18.9 16.2L19.7 17.2999C20 17.6999 20 18.3999 19.6 18.7999L18.8 19.6C18.4 20 17.8 20 17.3 19.7L16.2 18.9C15.5 19.3 14.7 19.7 13.9 19.9L13.7 21.2C13.6 21.7 13.1 22.1 12.6 22.1H11.5C10.9 22.1 10.5 21.7 10.4 21.2L10.2 19.9C9.4 19.7 8.6 19.4 7.9 18.9L6.8 19.7C6.4 20 5.7 20 5.3 19.6L4.5 18.7999C4.1 18.3999 4.1 17.7999 4.4 17.2999L5.2 16.2C4.8 15.5 4.4 14.7 4.2 13.9L2.9 13.7C2.4 13.6 2 13.1 2 12.6V11.5C2 10.9 2.4 10.5 2.9 10.4L4.2 10.2C4.4 9.39995 4.7 8.60002 5.2 7.90002L4.4 6.79993C4.1 6.39993 4.1 5.69993 4.5 5.29993L5.3 4.5C5.7 4.1 6.3 4.10002 6.8 4.40002L7.9 5.19995C8.6 4.79995 9.4 4.39995 10.2 4.19995L10.4 2.90002C10.5 2.40002 11 2 11.5 2H12.6C13.2 2 13.6 2.40002 13.7 2.90002L13.9 4.19995C14.7 4.39995 15.5 4.69995 16.2 5.19995L17.3 4.40002C17.7 4.10002 18.4 4.1 18.8 4.5L19.6 5.29993C20 5.69993 20 6.29993 19.7 6.79993L18.9 7.90002C19.3 8.60002 19.7 9.39995 19.9 10.2L21.2 10.4C21.7 10.5 22.1 11 22.1 11.5ZM12.1 8.59998C10.2 8.59998 8.6 10.2 8.6 12.1C8.6 14 10.2 15.6 12.1 15.6C14 15.6 15.6 14 15.6 12.1C15.6 10.2 14 8.59998 12.1 8.59998Z" fill="black" />
+                        <path d="M17.1 12.1C17.1 14.9 14.9 17.1 12.1 17.1C9.30001 17.1 7.10001 14.9 7.10001 12.1C7.10001 9.29998 9.30001 7.09998 12.1 7.09998C14.9 7.09998 17.1 9.29998 17.1 12.1ZM12.1 10.1C11 10.1 10.1 11 10.1 12.1C10.1 13.2 11 14.1 12.1 14.1C13.2 14.1 14.1 13.2 14.1 12.1C14.1 11 13.2 10.1 12.1 10.1Z" fill="black" />
+                        </svg>
+                    </span>
+                    <!--end::Svg Icon-->
+                    </div>
+                    <!--begin::Menu-->
+                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-275px" data-kt-menu="true">
+                    <!--begin::Menu item-->
+                    <div class="menu-item px-3">
+                        <div class="menu-content d-flex align-items-center px-3">
+                        <!--begin::Avatar-->
+                        <div class="symbol symbol-50px me-5">
+                            <% if @user_data.image.attached? %>
+                                <%= image_tag (@user_data.image), :class=> "symbol-label" %>
+                            <% else %>
+                                <%= image_tag "avatar/preview.svg", :class=> "symbol-label" %> 
+                            <% end %>   
+                        </div>
+                        <!--end::Avatar-->
+                        <!--begin::Username-->
+                        <div class="d-flex flex-column">
+                            <div class="text-break fw-bolder d-flex align-items-center fs-5"><%= @user_data.company_name %>
+                            <span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2"></span></div>
+                            <a href="#" class="fw-bold text-muted text-break text-hover-primary fs-7"><%= current_company_user.email %></a>
+                        </div>
+                        <!--end::Username-->
+                        </div>
+                    </div>
+                    <!--end::Menu item-->
+                    <!--begin::Menu separator-->
+                    <div class="separator my-2"></div>
+                    <!--end::Menu separator-->
+                    <!--begin::Menu item-->
+                    <% if can?(:update, Company::Company)%>
+                    <div class="menu-item px-5">
+                        <%= link_to t('student_commitment.steps.title.step1'), edit_company_company_path(@user_data), class: "menu-link px-5" %>
+                    </div>
+                    <% end %>
+                    <!--end::Menu item-->
+                    <!--begin::Menu item-->
+                    <% if can? :read, Company::Vacancy %>
+                    <div class="menu-item px-5">
+                        <%= link_to (t'title.vacancy_list'), company_vacancies_path, class: "menu-link px-5" %>
+                    </div>
+                    <% end %>
+                    <!--end::Menu item-->
+                    <!--begin::Menu item-->
+                    <% if can?(:read, Event) %>
+                    <div class="menu-item px-5">
+                        <%= link_to (t'event.title.event_list'), company_events_path, class: "menu-link px-5" %>
+                    </div>
+                    <% end %>
+                    <!--end::Menu item-->
+                    <!--begin::Menu separator-->
+                    <div class="separator my-2"></div>
+                    <!--end::Menu separator-->
+                    <!--begin::Menu item-->
+                    <div class="menu-item px-5 my-1">
+                        <%= link_to (t 'password_setting.title.change_login_setting'), company_setting_path, :class=> 'menu-link px-5' %>
+                    </div>
+                    <!--end::Menu item-->
+                    <!--begin::Menu separator-->
+                    <div class="separator my-2"></div>
+                    <!--end::Menu separator-->
+                    <!--begin::Menu item-->
+                    <div class="menu-item px-5">
+                        <%= link_to destroy_company_user_session_path, method: :delete, class: "menu-link px-5" do %> 
+                            <%= t('student.title.logout_link') %>
+                        <% end %>
+                    </div>
+                    <!--end::Menu item-->
+                </div>
+                <!--end::Menu-->
+            </div>
+            <!--end::User menu-->
+        </div>
+        <!--end::User panel-->
+    </div>
+    <!--end::Footer-->
+</div>
+<!--end::Aside-->
+<!--begin::Scrolltop-->
+<div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
+    <!--begin::Svg Icon | path: icons/duotune/arrows/arr066.svg-->
+    <span class="svg-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <rect opacity="0.5" x="13" y="6" width="13" height="2" rx="1" transform="rotate(90 13 6)" fill="black" />
+        <path d="M12.5657 8.56569L16.75 12.75C17.1642 13.1642 17.8358 13.1642 18.25 12.75C18.6642 12.3358 18.6642 11.6642 18.25 11.25L12.7071 5.70711C12.3166 5.31658 11.6834 5.31658 11.2929 5.70711L5.75 11.25C5.33579 11.6642 5.33579 12.3358 5.75 12.75C6.16421 13.1642 6.83579 13.1642 7.25 12.75L11.4343 8.56569C11.7467 8.25327 12.2533 8.25327 12.5657 8.56569Z" fill="black" />
+        </svg>
+    </span>
+    <!--end::Svg Icon-->
+</div>
+<!--end::Scrolltop-->

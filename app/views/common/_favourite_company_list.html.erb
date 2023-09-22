@@ -1,0 +1,159 @@
+<!--begin::Favourite Company List-->
+<% if  favourite_companies.present? %>
+  <div class="card d-none d-sm-none d-md-block d-lg-block d-xl-block  <%= current_admin ? 'bg-body' : '' %>">
+    <!--begin::Favourite Company Card header-->
+    <div class="card-header border-0 pt-5">
+      <h3 class="card-title align-items-start flex-column">
+        <span class="card-label fw-bolder fs-3 mb-1"><%= t ('common.favourite_company') %></span>
+      </h3>
+    </div>          
+    <!--end::Card header-->
+    <!--begin::Card body-->
+    <div class="card-body pt-2 pb-5">
+      <!--begin::Table container-->           
+      <div class="table-responsive">
+        <!--begin::Table-->
+        <table class="table table-row-dashed align-middle gs-0 gy-4 my-0">
+          <!--begin::Table head-->
+          <thead class="bg-light">
+            <tr class="fs-7 fw-bolder text-gray-500 border-bottom-0">
+                <th class="ps-4 min-w-140px rounded-start"><%= Company::Company.human_attribute_name('company_name') %></th>
+                <th class="text-end min-w-140px"><%= Company::Company.human_attribute_name('m_industry_id') %></th>
+                <th class="pe-0 text-end min-w-120px"><%= Company::Company.human_attribute_name('postalcode_city') %></th>
+                <th class="pe-0 text-end min-w-120px"><%= Company::Company.human_attribute_name('employee_count') %></th>
+                <th class="rounded-end"></th>
+            </tr>
+          </thead>
+          <!--end::Table head-->
+          <!--begin::Table body-->
+          <tbody>
+            <%  favourite_companies.each do |company| %>
+                <tr>
+                    <td class="ps-0 min-w-150px w-sm-200px w-md-250px w-lg-450px w-xl-350px">
+                        <div class="d-flex align-items-center">
+                            <% if company.image.attached? %>
+                                <%= image_tag (company.image), class: "rounded w-30px me-5" %>
+                            <% else %>
+                                <%= image_tag "student/office-building.png", class: "w-30px me-5" %>
+                            <% end %>
+                            <div class=" w-sm-200px w-md-250px w-lg-450px w-xl-350px text-truncate">
+                                <%= link_to "#{current_admin ? kodawarione_company_manage_company_details_overview_path(company_id: company.id) : company_page_home_path(id: company.id)}",  class: "text-gray-800 fw-bolder text-hover-primary mb-1 fs-6 text-start pe-0" do %><%= company.company_name %><% end %>
+                                <span class="text-gray-600 fs-8 d-block text-start ps-0"><%= company.company_name_kana %></span>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <span class="text-gray-800 d-block fs-6 ps-0 text-end"><%= get_industry_name_by_ID(company.m_industry_id) %></span>
+                    </td>
+                    <td class="text-end pe-0">
+                        <span class="text-gray-800 d-block fs-6"><%= company.postalcode_city %></span>
+                    </td>
+                    <td class="text-end pe-0">
+                        <span class="text-gray-800 d-block fs-6"><%= number_with_delimiter(company.employee_count) %> <%= t('unit.persons') %></span>
+                    </td>
+                    <td class="pe-0 text-end">
+                      <%= link_to "#{current_admin ? kodawarione_company_manage_company_details_overview_path(company_id: company.id) : company_page_home_path(id: company.id)}",  class: "btn btn-icon btn-active-light-primary w-30px h-30px" do %>
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen019.svg-->
+                        <span class="svg-icon svg-icon-3">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M17.5 11H6.5C4 11 2 9 2 6.5C2 4 4 2 6.5 2H17.5C20 2 22 4 22 6.5C22 9 20 11 17.5 11ZM15 6.5C15 7.9 16.1 9 17.5 9C18.9 9 20 7.9 20 6.5C20 5.1 18.9 4 17.5 4C16.1 4 15 5.1 15 6.5Z" fill="currentColor" />
+                            <path opacity="0.3" d="M17.5 22H6.5C4 22 2 20 2 17.5C2 15 4 13 6.5 13H17.5C20 13 22 15 22 17.5C22 20 20 22 17.5 22ZM4 17.5C4 18.9 5.1 20 6.5 20C7.9 20 9 18.9 9 17.5C9 16.1 7.9 15 6.5 15C5.1 15 4 16.1 4 17.5Z" fill="currentColor" />
+                          </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                      <% end %>                      
+                      <!--end::Menu-->
+                    </td>
+                </tr>
+            <% end %>
+          </tbody>
+          <!--end::Table body-->
+        </table>
+      </div>
+      <!--end::Table-->
+    </div>
+    <!--end::Card body-->
+  </div>
+  <div class="d-block d-sm-block d-md-none d-lg-none d-xl-none">
+    <!--begin::Body-->
+    <%  favourite_companies.each do |company| %>
+      <div class="col-xxl-4">
+        <%= link_to "#{current_admin ? kodawarione_company_manage_company_details_overview_path(company_id: company.id) : company_page_home_path(id: company.id)}" do %>
+          <div class="card border border-primary border-4 border-top-0 border-end-0 border-bottom-0 border-start card-custom mb-3  <%= current_admin ? 'bg-body' : 'bg-light' %>">
+            <div class="card-body p-4">
+              <div class='row'>
+                <div class="d-flex align-items-center">
+                  <!--begin:: Avatar -->
+                  <div class="symbol symbol-40px overflow-hidden ms-2 me-5">
+                    <% if company.image.attached? %>
+                      <%= image_tag (company.image) %>
+                    <% else %>
+                      <%= image_tag "student/office-building.png" %>
+                    <% end %>
+                  </div>
+                  <!--end::Avatar-->
+                  <!--begin::User details-->
+                  <div class="d-flex flex-column">
+                    <span class="text-gray-500 fw-bold fs-8"><%= get_industry_name_by_ID(company.m_industry_id) %></span>
+                    <span class="text-gray-800 fw-bolder fs-5 pe-1" >
+                      <%= company.company_name %>
+                    </span> 
+                    <div class="d-flex flex-wrap">
+                      <!--begin::Text-->
+                      <span class="fw-bolder text-dark fs-7 me-2"><i class="fas fa-users me-1 text-primary"></i>  <%= Company::Company.human_attribute_name('employee_count') %> : </span>
+                      <span class="fw-bold text-gray-600 fs-7"><%= company.employee_count %><%= t('unit.persons') %></span>
+                      <!--end::Text-->                                 
+                    </div>
+                  </div>
+                  <!--end::User details-->
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+    <!--end::Body-->
+  </div>
+<% else %>	
+  <div class="card  <%= current_admin ? 'bg-body' : 'bg-light' %>">
+    <!--begin::Applied Vacancy Card header-->
+    <div class="card-header border-0 pt-5">
+    <h3 class="card-title align-items-start flex-column">
+      <span class="card-label fw-bolder fs-3 mb-1"><%= t ('common.favourite_company') %></span>
+    </h3>
+  </div>          
+  <!--end::Card header-->
+  <!--begin::Card body-->
+  <div class="card-body pt-2 pb-5">
+    <!--begin::Wrapper-->
+    <div class="text-center py-2 my-10">
+      <!--begin::Description-->
+      <p class="text-gray-400 fs-7 fw-bold mb-5"><%= t ('dashboard.notice.text14') %>
+      <% unless current_admin %>
+      （<i class="fas fa-heart text-danger icon-mid mx-2"></i>）<%= t ('dashboard.notice.text15') %></p>
+      <% end %>
+      <!--end::Description-->
+      <!--begin::Action-->
+      <% unless current_admin %>
+      <%= link_to student_companies_search_path, class: "btn btn-primary" do %><%= t ('btn.fav-text') %><% end %>
+      <% end %>
+      <!--end::Action-->
+    </div>
+  </div>
+</div>
+<!--end::Wrapper-->					
+<% end %>
+<!--end::Applied Vacancy List-->
+<!--begin:: Pagination-->
+<% if  favourite_companies.present? %>
+  <div class="d-flex flex-wrap justify-content-between align-items-center pt-10">
+    <div class="d-flex flex-wrap">
+      <%= paginate  favourite_companies %>
+    </div>
+    <div class="d-flex align-items-center py-3">
+      <span class="text-muted"><%=  t('common.list_display')  %> <%=  favourite_companies.total_count %> <%=  t('common.to')  %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%=  favourite_companies.offset_value + 1 %> ~ <%=   favourite_companies.offset_value +  favourite_companies.count %> <%=  t('common.search_result')  %></span>
+    </div>
+  </div>	
+<% end %>
+<!--end: Pagination-->

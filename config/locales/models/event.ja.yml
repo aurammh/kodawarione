@@ -1,0 +1,166 @@
+ja:
+  activerecord:
+    models:
+      event: event
+    attributes:
+      event:
+        event_start_date: 開催日〔開始〕
+        event_end_date: 開催日〔終了〕
+        event_name: イベント名
+        venue: 開催場所
+        category: カテゴリー
+        applicants_count: 募集人数
+        post_start_date: 掲載日〔開始〕
+        post_end_date: 掲載日〔終了〕
+        application_start_date: 申込開始日
+        application_deadline: 申込締切日
+        event_content: イベント内容
+        content: イベント内容
+        event_logo: イベント画像
+        apply_event_limit: 募集人数
+        apply_event_limit_string: 募集人数
+        event_show_option: 対象者
+      partner/partner_event:
+        event_start_date: 開催日〔開始〕
+        event_end_date: 開催日〔終了〕
+        event_name: イベント名
+        venue: 開催場所
+        category: カテゴリー
+        applicants_count: 募集人数
+        post_start_date: 掲載日〔開始〕
+        post_end_date: 掲載日〔終了〕
+        application_deadline: 申込締切日
+        event_content: イベント内容
+        event_logo: イベント画像
+        region_name: エリア
+        partner_apply_event_limit: 募集人数
+        event_show_option: 対象者
+        application_start_date: 申込開始日
+        apply_event_limit: 募集人数
+        apply_event_limit_string: 募集人数
+  errors:
+    attributes:
+      category:
+        blank: "を選択してください。"
+    messages:
+      blank: "を入力してください。"
+      invalid: "無効です。"
+  event:
+    edit: "イベント編集"
+    show: "イベント表示"
+    warning_text: 該当イベントに申請者がいるので、削除できません。管理者に連絡してください。
+    title:
+      event_header: イベント作成
+      partner_admin_event_page: 本部イベント一覧
+      event_information: イベント情報
+      kodawari_event_detail: こだわりイベント詳細情報
+      company_event_detail: 企業イベント詳細情報
+      event_entry_list_tilte: 作成したイベント
+      admin_event_entry_list_tilte: 申込者情報
+      admin_event_participant_list_title: 参加イベント一覧
+      student_admin_event_participant_list_title: 参加こだわりイベント一覧
+      admin_event_participant_list_text: 参加予定のイベントはありません。
+      student_admin_event_participant_list_text: 参加予定のこだわりイベントはありません。
+      event_code: イベントコード
+      event_date: 開催日〔開催期間〕
+      event_category: イベントカテゴリ
+      event_entry_count: 登録人数
+      post_date: 掲載期間
+      publish_status: ステータス
+      login: ログイン可
+      apply_limit: 参加者数
+      no_data_text: 登録されたイベントはありません。
+      event_com_name: 企業名
+      edit_text_title: 詳細
+      edit_text: 編集画面
+      publishing: 掲載中
+      un_publish: 準備中
+      published: 完了
+      student_id: 個人ID
+      name: 名前
+      position: 役職
+      department: 部署
+      uni_name: 大学名
+      participant_count: 申込人数
+      com_description: 備考
+      update_pop_up_title: 申込者情報変更
+      delete_pop_up_title: 申込者情報削除
+      delete_confirm: 申込者情報を削除されてもよろしいでしょうか？
+      apply_event_pop_text: 申し訳ございませんが、募集人数が達しました。
+      new_event_recuirment: 新着
+      event_in_progress: 募集中
+      recuirment_closed: 終了
+      recuirment_full: 満員
+      past_event: 過去のイベント
+      back_to_event_search: 検索に戻る
+      back_to_company_index: 一覧に戻る
+      application_period: 申込期間
+      event_list: 作成したイベント
+      super_partner_event_list: スーパーパートナーイベント一覧
+      joined_event_list: 参加イベント一覧
+      joined_event_title: マイこだわりイベント
+      admin_event_title: 本部イベント一覧
+      admin_event_join: 参加
+      admin_event_date_type: イベント日
+      admin_event_start: 開始日
+      admin_event_end: 終了日
+      latest_events: 最新イベント
+      communicate_event_btn: 送信
+      join_participant_title: 申込済みのこだわりイベント情報はこちら
+      join_participant: 参加者情報
+      change_participant: 参加者を変更
+      my_kodawari_event: マイこだわりイベント画面へ
+      event_joint_cancel_notice: キャンセルの場合は、直接主催者にご連絡ください
+      event_join_stu_list: イベント登録学生一覧
+      event_join_stu_list_no_data: イベントに登録された学生はまだありません。
+      join: このイベントに申し込む
+      edit_join: 参加者の変更
+      super_partner_name: スーパーパートナー名
+    venue_types:
+      offline: オフライン
+      online: オンライン
+      both: 両方
+    admin_event_show_options:
+      student: "学生"
+      company: "企業"
+      all_user: "全て"
+      partner: "パートナー"
+      super_partner: "スーパーパートナー"
+    spu_event_show_options:
+      student: "学生"
+      company: "企業"
+      all_user: "全て"
+      partner: "パートナー"
+    partner_event_show_options:
+      student: "学生"
+      company: "企業"
+      all_user: "全て"
+    placeholder:
+      date_format: YYYY/MM/DD
+      event_name: △△が教える××向けセミナー
+      venue: ○○会館　△F
+      category: カテゴリー
+      applicants_count: 60名
+      event_content: ※開催時間などのイベントの内容や、必要に応じてオンライン開催の場合はURL等の詳細をご入力ください。
+      apply_event_limit: 募集人数
+      admin_apply_event_limit: 例：〇〇人
+    category:
+      com_info_explancation: 企業説明会（単独）
+      related_com_explanation: 合同説明会
+      internship: インターンシップ
+      part_time_job_recruit: アルバイト募集
+      seminar_recruit: セミナー
+      sponsored_recruit: スポンサー募集
+      marketing: マーケティング
+      other_session: その他
+    event_organizers:
+      admin_event: "本部"
+      super_partner_event: "スーパーパートナー"
+      partner_event: "パートナー"
+      company_event: "企業"
+  search:
+    event_count_title: イベント検索結果
+    company_event_count_title: 企業イベント検索結果
+    kodawari_event_count_title: こだわりイベント検索結果
+    remove_past_event: 募集中のイベントのみ表示
+    event_organizer: 主催者

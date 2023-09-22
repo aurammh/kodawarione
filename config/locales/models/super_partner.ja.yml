@@ -1,0 +1,37 @@
+ja:
+  activerecord:
+    models:
+      admin/super_partner: super_partner
+    attributes:
+      admin/super_partner:
+        name: スーパーパートナー名
+        partner_code: コード
+        address: 町/丁目/番地
+        display_address: 現住所
+        website_url: ウェブサイトのURL
+        phone_no: 連絡先
+        postal_code: 郵便番号
+        region_name: エリア
+        m_region_id: エリア
+        m_prefecture_id: 都道府県名
+        prefecture_name: 都道府県名
+        postalcode_city: 市区町村
+        partner_user:
+        first_name: 名（漢字）
+        last_name: 姓（漢字）
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワードの確認
+  errors:
+    attributes:
+      category:
+        blank: "を選択してください。"
+    messages:
+      blank: "を入力してください。"
+      invalid: "無効です。"
+  super_partner:
+    super_partner_user:
+      title:
+        name: ユーザー名
+        email: メールアドレス
+      btn_goto: スーパーパートナーユーザ

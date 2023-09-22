@@ -1,0 +1,20 @@
+<div class="footer bg-white py-4 d-flex flex-lg-column" id="kt_footer">
+	<!--begin::Container-->
+	<div class="container d-flex flex-column flex-md-row align-items-center justify-content-between">
+		<!--begin::Copyright-->
+		<div class="text-dark order-2 order-md-1">
+            <div class="symbol symbol-100 me-2"> 
+                    <%= image_tag "layout/header_logo.png", class: "w-125px w-lg-150px h-50 align-self-center" %>
+            </div> 
+		</div>
+		<!--end::Copyright-->
+		<!--begin::Nav-->
+		<div class="nav nav-dark order-1 order-md-2"> 
+          <%= link_to t('welcome.privacy policy.top_page_link.link1'),welcome_privacy_path,  class: "nav-link pr-3 pl-0" %>
+          <%= link_to t('welcome.privacy policy.top_page_link.link2'), welcome_term_condition_path, class: "nav-link px-3"%>
+          <%= link_to t('welcome.privacy policy.top_page_link.link3'), welcome_contact_path, class: "nav-link pl-3 pr-0"  %> 
+		</div>
+		<!--end::Nav-->
+	</div>
+  <!--end::Container-->
+</div>

@@ -1,0 +1,329 @@
+<!--begin::Modal - New Card-->
+<div id="communication-modal" class="modal fade overflow-hidden communication-section" tabindex="-1" aria-hidden="true">
+    <!--begin::Modal dialog-->
+    <div class="modal-dialog modal-dialog-centered modal-fullscreen">
+        <!--begin::Modal content-->
+        <div class="modal-content">
+            <!--begin::Close-->
+            <div class="d-flex justify-content-end p-3">
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                        </svg>
+                    </span>
+                    <!--end::Svg Icon-->
+                </div>
+            </div>
+            <!--end::Close-->
+            <!--begin::Modal body-->
+            <div class="custom-scroll">
+                <div class="modal-body container-xxl my-5">
+                    <div class="row">
+                        <!--begin::Notice-->
+                        <% if action_name == 'show' %>
+                            <div class="col-12">
+                                <div class="notice d-flex rounded border border-dashed rounded-3 p-6 mb-7 <%= @communication_communication.scout_status == 'waiting_accept'? 'bg-light-warning border-warning' : @communication_communication.scout_status == 'accept'? 'bg-light-primary border-primary' : 'bg-light-danger border-danger' %>">
+                                    <!--begin::Wrapper-->
+                                    <div class="d-flex flex-stack flex-grow-1">
+                                        <!--begin::Content-->
+                                        <div class="fw-bold">
+                                            <h4 class="text-gray-900 fw-bolder"><%= t('communication.title.scout')%></h4>
+                                            <div class="fs-6 text-gray-700">
+                                                <% if @communication_communication.scout_status == 'waiting_accept' %>
+                                                    <%= @student_nick_name.upcase %><%= t('communication.scout.text.waiting_accept') %> 
+                                                <% elsif @communication_communication.scout_status == 'accept' %>
+                                                    <%= @student_nick_name.upcase %><%= t('communication.scout.text.accept') %> 
+                                                <% else %>
+                                                    <%= @student_nick_name.upcase %><%= t('communication.scout.text.reject') %> 
+                                                <% end %>
+                                            </div>
+                                        </div>
+                                        <!--end::Content-->
+                                    </div>
+                                    <!--end::Wrapper-->
+                                </div>
+                            </div>
+                        <% end %>
+                        <!--end::Notice-->
+                        <div class="col-12 col-xl-8 col-lg-8">
+                            <% if @student_cover_photo.present? %>
+                                <!--begin::Image-->
+                                <div class="bgi-no-repeat bgi-position-center bgi-size-cover card-rounded min-h-250px d-flex align-items-center" style="background-image:url('<%= url_for(@student_cover_photo) %>')">
+                                <!--end::Image-->
+                            <% else %>
+                                <!--begin::Image-->
+                                <div class="bgi-no-repeat bgi-position-center bgi-size-cover card-rounded min-h-250px d-flex align-items-center" style="background-image:url('<%= asset_path 'company/background_cover.jpg' %>')">
+                                <!--end::Image-->
+                            <% end %>
+                                <!--begin:: Avatar -->
+                                <div class="d-flex flex-row mx-10 my-3">
+                                    <div class="symbol symbol-circle symbol-100px overflow-hidden mx-5">
+                                        <% if @student_image.present? %>
+                                            <%= image_tag (@student_image), :class=> "symbol-label" %>
+                                        <% else %>
+                                            <% if @student_gender == "female" %>
+                                                <%= image_tag "avatar/female.svg", :class=> "symbol-label" %>                                
+                                            <% else %>
+                                                <%= image_tag "avatar/male.svg", :class=> "symbol-label" %>   
+                                            <% end %>
+                                        <% end %> 
+                                    </div>
+                                    <div class="d-flex flex-column align-items-start justify-content-center">
+                                        <div class="text-white fs-2 fw-bolder">
+                                            <%= @student_nick_name.present? ? @student_nick_name.upcase : '-' %>
+                                        </div>
+                                        <div class="text-white fs-5 fw-bold">
+                                            <i class="fas fa-map-marker-alt me-2"></i>
+                                            <% if @student_preferred_working_area.present?  %>
+                                                <%= get_prefecture_name_with_multi_select(@student_preferred_working_area).present? ? get_prefecture_name_with_multi_select(@student_preferred_working_area) : "-"  %>
+                                            <% end %>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--end::Avatar-->
+                            </div>
+                            <!--begin::Details-->
+                            <div class="my-10 pb-lg-5">
+                                <div class="mb-10">
+                                    <!--begin::List-->
+                                    <% if @student_commmitment_commitment.present? %>
+                                        <div class="row mb-7">
+                                            <!--begin::Label-->
+                                            <div class="col-lg-4">
+                                                <div class="d-flex align-items-center">
+                                                    <span class="bullet me-3"></span>
+                                                    <label class="text-gray-600 fw-bold fs-6"><%= Student::Student.human_attribute_name('commitment') %></label>
+                                                </div>
+                                            </div>
+                                            <!--end::Label-->
+                                            <!--begin::Col-->
+                                            <div class="col-lg-8">
+                                                <span class="fw-bolder fs-6 text-gray-800 text-break"><%= @student_commmitment_commitment %></span>
+                                            </div>
+                                            <!--end::Col-->
+                                        </div>
+                                    <% end %>
+                                    <!--end::List-->
+                                    <!--begin::List-->
+                                    <% if @student_nick_name.present? %>
+                                        <div class="row mb-7">
+                                            <!--begin::Label-->
+                                            <div class="col-lg-4">
+                                                <div class="d-flex align-items-center">
+                                                    <span class="bullet me-3"></span>
+                                                    <label class="text-gray-600 fw-bold fs-6"><%= Student::Student.human_attribute_name('nick_name') %></label>
+                                                </div>
+                                            </div>
+                                            <!--end::Label-->
+                                            <!--begin::Col-->
+                                            <div class="col-lg-8">
+                                                <span class="fw-bolder fs-6 text-gray-800 text-break"><%= @student_nick_name.upcase %></span>
+                                            </div>
+                                            <!--end::Col-->
+                                        </div>
+                                    <% end %>
+                                    <!--end::List-->
+                                    <!--begin::List-->
+                                    <% if @student_address.present? %>
+                                        <div class="d-none row mb-7">
+                                            <!--begin::Label-->
+                                            <div class="col-lg-4">
+                                                <div class="d-flex align-items-center">
+                                                    <span class="bullet me-3"></span>
+                                                    <label class="text-gray-600 fw-bold fs-6"><%= Student::Student.human_attribute_name('current_address') %></label>
+                                                </div>
+                                            </div>
+                                            <!--end::Label-->
+                                            <!--begin::Col-->
+                                            <div class="col-lg-8">
+                                                <span class="fw-bolder fs-6 text-gray-800"><%= get_prefecture_name(@student_address) %></span>
+                                            </div>
+                                            <!--end::Col-->
+                                        </div>
+                                    <% end %>
+                                    <!--end::List-->
+                                    <!--begin::List-->
+                                    <% if @student_preferred_working_area.present?  %>
+                                        <div class="row">
+                                            <!--begin::Label-->
+                                            <div class="col-lg-4">
+                                                <div class="d-flex align-items-center">
+                                                    <span class="bullet me-3"></span>
+                                                    <label class="text-gray-600 fw-bold fs-6"><%= Student::Student.human_attribute_name('preferred_working_area') %></label>
+                                                </div>
+                                            </div>
+                                            <!--end::Label-->
+                                            <!--begin::Col-->
+                                            <div class="col-lg-8">
+                                                <span class="fw-bolder fs-6 text-gray-800"> 
+                                                    <%= get_prefecture_name_with_multi_select(@student_preferred_working_area).present? ? get_prefecture_name_with_multi_select(@student_preferred_working_area) : "-"  %>
+                                                </span>
+                                            </div>
+                                            <!--end::Col-->
+                                        </div>
+                                    <% end %>
+                                    <!--end::List-->
+                                </div>
+                                <!--begin::Chart-->
+                                <% if @ability_list1.present? %>
+                                    <!--begin::Chart-->
+                                    <div class="card-label fw-bolder fs-3 mb-5">
+                                        <%= t 'student_commitment.title.student_commitment_title' %> Chart
+                                    </div>
+                                    <div class="row">
+                                        <!--begin::Content-->
+                                        <div class="col-12 col-lg-6">
+                                            <div class="d-flex flex-column flex-xl-row mb-10">
+                                                <!--begin::Sidebar-->
+                                                <div class="flex-column flex-lg-row-auto align-items-center w-100 mw-lg-300px mw-xxl-350px">
+                                                    <div class="card-rounded bg-light p-10 h-100 d-flex align-items-center ">
+                                                    <!--begin::Item-->
+                                                        <div>
+                                                        <!--begin::Title-->
+                                                            <h4 class="text-gray-700 w-bolder mb-8"><%= t 'communication.title.ability' %></h4>
+                                                            <!--end::Title-->
+                                                            <!--begin::Section-->
+                                                            <% if @ability_list1.present? %>
+                                                                <div class="my-5">
+                                                                    <!--begin::Row-->
+                                                                    <div class="d-flex align-items-center mt-3">
+                                                                        <!--begin::Bullet-->
+                                                                        <span class="bullet me-3"></span>
+                                                                        <!--end::Bullet-->
+                                                                        <!--begin::Label-->
+                                                                        <div class="text-gray-600 fw-bold fs-6"><%= @chart_commitment_label1 %>：　<%= @ability_list1 %></div>
+                                                                        <!--end::Label-->
+                                                                    </div>                                                                        <!--end::Row-->
+                                                                </div>
+                                                            <% end %>
+                                                            <% if @ability_list2.present? %>
+                                                                <div class="my-5">
+                                                                    <!--begin::Row-->
+                                                                    <div class="d-flex align-items-center mt-3">
+                                                                        <!--begin::Bullet-->
+                                                                        <span class="bullet me-3"></span>
+                                                                        <!--end::Bullet-->
+                                                                        <!--begin::Label-->
+                                                                        <div class="text-gray-600 fw-bold fs-6"><%= @chart_commitment_label2 %>：　<%= @ability_list2 %></div>
+                                                                        <!--end::Label-->
+                                                                    </div>
+                                                                    <!--end::Row-->
+                                                                </div>
+                                                            <% end %>
+                                                            <% if @ability_list3.present? %>
+                                                                <div class="my-5">
+                                                                    <!--begin::Row-->
+                                                                    <div class="d-flex align-items-center mt-3">
+                                                                        <!--begin::Bullet-->
+                                                                        <span class="bullet me-3"></span>
+                                                                        <!--end::Bullet-->
+                                                                        <!--begin::Label-->
+                                                                        <div class="text-gray-600 fw-bold fs-6"><%= @chart_commitment_label3 %>：　<%= @ability_list3 %></div>
+                                                                        <!--end::Label-->
+                                                                    </div>
+                                                                    <!--end::Row-->
+                                                                </div>
+                                                            <% end %>
+                                                            <!--end::Section-->
+                                                        </div>
+                                                        <!--end::Item-->
+                                                    </div>
+                                                    <!--end::More channels-->
+                                                </div>
+                                                <!--end::Sidebar-->
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-lg-6">
+                                            <div class="flex-lg-row-fluid mb-20 mb-xl-0">
+                                                <div class="mb-0">
+                                                    <div id="kodawariAssessmentChart"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--end::Content-->
+                                    </div>
+                                    <!--end::Chart-->
+                                    <!--begin::Comments-->
+                                    <div class="row">
+                                        <div class="col-xl-6 mb-3">
+                                            <div class="notice d-flex rounded border-secondary border border-dashed rounded-3 p-6">
+                                                <!--begin::Wrapper-->
+                                                <div class="d-flex flex-stack flex-grow-1">
+                                                    <!--begin::Content-->
+                                                    <div class="fw-bold">
+                                                        <h4 class="text-gray-900 fw-bolder"><%= @ability_list1 %></h4>
+                                                        <div class="fs-6 text-gray-700"><%= @ability_comment1 %></div>
+                                                    </div>
+                                                    <!--end::Content-->
+                                                </div>
+                                                <!--end::Wrapper-->
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6 mb-3">
+                                            <div class="notice d-flex rounded border-secondary border border-dashed rounded-3 p-6">
+                                                <!--begin::Wrapper-->
+                                                <div class="d-flex flex-stack flex-grow-1">
+                                                    <!--begin::Content-->
+                                                    <div class="fw-bold">
+                                                        <h4 class="text-gray-900 fw-bolder"><%= @ability_list2 %></h4>
+                                                        <div class="fs-6 text-gray-700"><%= @ability_comment2 %></div>
+                                                    </div>
+                                                    <!--end::Content-->
+                                                </div>
+                                                <!--end::Wrapper-->
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-6 mb-3">
+                                            <div class="notice d-flex rounded border-secondary border border-dashed rounded-3 p-6">
+                                                <!--begin::Wrapper-->
+                                                <div class="d-flex flex-stack flex-grow-1">
+                                                    <!--begin::Content-->
+                                                    <div class="fw-bold">
+                                                        <h4 class="text-gray-900 fw-bolder"><%= @ability_list3 %></h4>
+                                                        <div class="fs-6 text-gray-700"><%= @ability_comment3 %></div>
+                                                    </div>
+                                                    <!--end::Content-->
+                                                </div>
+                                                <!--end::Wrapper-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--end::Comments-->
+                                <% end %>
+                            </div>
+                            <!--end::Details-->
+                        </div>
+                        <div class="col-12 col-xl-4 col-lg-4 my-5">
+                            <!--begin::Form-->
+                            <% if action_name == 'show' %>
+                                <%= render partial: "communication/communications/show_scout_communication_modal" %>
+                            <% else %>
+                                <%= render partial: "communication/communications/form_scout_communication_modal" %>
+                            <% end %>
+                            <!--end::Form-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--end::Modal body-->
+        </div>
+        <!--end::Modal content-->
+    </div>
+    <!--end::Modal dialog-->
+</div>
+<!--end::Modal - New Card-->
+<script>
+var chartCommitment = <%= @chart_commitment_range.inspect.html_safe %>; 
+var chartLabel = <%= @chart_commitment_label.inspect.html_safe %>; 
+$('.form-select').select2({
+    minimumResultsForSearch: -1
+});
+<% if action_name == 'show' %>
+document.querySelector('trix-editor').editor.element.setAttribute('contentEditable', false)
+<% end %>
+</script>
+<%= javascript_pack_tag "communication/communication.js" %>
+<%= javascript_pack_tag "company/student_search.js" %>

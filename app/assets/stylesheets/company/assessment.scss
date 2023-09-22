@@ -1,0 +1,174 @@
+.assessment-image {
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+  overflow: hidden;
+}
+
+.assessment-card {
+  background-color: white;
+}
+
+.btn-checkbox {
+  position: absolute;
+  left: -100vw;
+}
+
+input.btn-checkbox:checked + label {
+  background-color: #e8fff3 !important;
+  transition: 0.5s;
+}
+
+.app {
+  margin: 1rem 4rem;
+}
+
+.app .quill {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.app .ql-container {
+  // background: #fefcfc;
+  border: none !important;
+}
+
+/* Snow Theme */
+.app .ql-snow.ql-toolbar {
+  border-inline-color: transparent;
+  border-bottom-color: transparent;
+  // border: none !important;
+}
+
+.app .ql-editor {
+  min-height: 4em;
+}
+
+.fade-enter {
+  opacity: 0;
+}
+.fade-exit {
+  opacity: 1;
+}
+.fade-enter-active {
+  opacity: 1;
+}
+.fade-exit-active {
+  opacity: 0;
+}
+.fade-enter-active,
+.fade-exit-active {
+  transition: opacity 500ms;
+}
+
+.slide-enter {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+.slide-enter-active {
+  opacity: 1;
+  transform: translateX(0%);
+}
+.slide-exit {
+  opacity: 1;
+  transform: translateX(0%);
+}
+.slide-exit-active {
+  opacity: 0;
+  transform: translateX(100%);
+}
+.slide-enter-active,
+.slide-exit-active {
+  transition: opacity 500ms, transform 500ms;
+}
+
+.right-to-left-enter {
+  opacity: 0;
+  transform: translateX(100%);
+}
+.right-to-left-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 0.4s ease;
+}
+
+.right-to-left-exit {
+  opacity: 0;
+  transform: translateX(0);
+}
+.right-to-left-exit-active {
+  opacity: 0;
+  position: absolute;
+  transform: translateX(-100%);
+  transition: all 0.4s ease;
+}
+
+.left-to-right-enter {
+  opacity: 0;
+  transform: translateX(-100%);
+}
+.left-to-right-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: all 0.4s ease;
+}
+
+.left-to-right-exit {
+  opacity: 0;
+  transform: translateX(0);
+}
+.left-to-right-exit-active {
+  opacity: 0;
+  position: absolute;
+  transform: translateX(100%);
+  transition: all 0.4s ease;
+}
+
+.spinner {
+  animation: rotate 2s linear infinite;
+  z-index: 2;
+
+  & .path {
+    stroke: hsl(210, 70, 75);
+    stroke-linecap: round;
+    animation: dash 1.5s ease-in-out infinite;
+  }
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 150;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -35;
+  }
+  100% {
+    stroke-dasharray: 90, 150;
+    stroke-dashoffset: -124;
+  }
+}
+
+.item-enter {
+  opacity: 0;
+}
+.item-enter-active {
+  opacity: 1;
+}
+.item-exit {
+  opacity: 1;
+}
+.item-exit-active {
+  opacity: 0;
+}
+.item-enter-active,
+.item-exit-active {
+  transition: opacity 500ms;
+}

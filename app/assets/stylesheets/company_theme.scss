@@ -1,0 +1,171 @@
+/* 
+ *= require_tree ../theme/fonts/flaticon
+ *= require_tree ../theme/fonts/flaticon2
+ *= require_tree ../theme/fonts/keenthemes-icons
+ *= require_tree ../fonts
+ */
+
+@import 'select2/dist/css/select2';
+@import '../company-theme/style.scss';
+@import 'flatpickr/dist/flatpickr.min.css';
+@import 'flatpickr/dist/plugins/monthSelect/style.css';
+@import 'trix/dist/trix';
+@import 'actiontext.scss';
+@import 'communication/communications.scss';
+@import './company/assessment.scss';
+@import 'croppie/croppie.css';
+@import 'react-circular-progressbar/dist/styles.css';
+@import 'react-quill/dist/quill.snow.css';
+@import 'video.js/dist/video-js.css';
+
+/* roboto-regular - latin */
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./roboto-v30-latin-regular.eot'); /* IE9 Compat Modes */
+  src: url('./roboto-v30-latin-regular.eot?#iefix') format('embedded-opentype'),
+    /* IE6-IE8 */ url('./roboto-v30-latin-regular.woff2') format('woff2'),
+    /* Super Modern Browsers */ url('./roboto-v30-latin-regular.woff')
+      format('woff'),
+    /* Modern Browsers */ url('./roboto-v30-latin-regular.ttf')
+      format('truetype'),
+    /* Safari, Android, iOS */ url('./roboto-v30-latin-regular.svg#Roboto')
+      format('svg'); /* Legacy iOS */
+}
+body {
+  font-family: sans-serif, 'Roboto';
+}
+
+.information-title-img {
+  background-image: url(image_path('user/workerPrivacy_bg.jpg'));
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 43vh;
+  background-size: 100%;
+  .information-title {
+    font-size: 30px;
+    color: #858585;
+  }
+}
+
+.privacy-policy {
+  p {
+    font-size: 14px;
+    color: #858585;
+  }
+  .form-card {
+    border-radius: 15px;
+    .main-title {
+      color: black;
+    }
+    .sub-title {
+      color: black;
+    }
+    li {
+      font-size: 14px;
+      color: #858585;
+    }
+  }
+
+  .title-bar {
+    background-color: #eaedef;
+  }
+}
+
+.ol-parentheses {
+  counter-reset: item;
+  li {
+    display: block;
+  }
+  li::before {
+    display: inline-block;
+    content: '(' counter(item) ')';
+    counter-increment: item;
+    width: 2em;
+    margin-left: -2em;
+  }
+}
+
+.com-border-color {
+  border-left: 7px solid $companyColor;
+}
+
+.std-border-color {
+  border-left: 7px solid $studentColor;
+}
+
+.std-bg-color {
+  background-color: $studentColor;
+}
+
+.com-bg-color {
+  background-color: $companyColor;
+}
+
+.hide-trix-toolbar {
+  trix-toolbar .trix-button-row {
+    display: none;
+  }
+}
+.hide-trix-attachment {
+  trix-toolbar .trix-button-group--file-tools {
+    display: none;
+  }
+}
+.custom-scroll {
+  max-height: 100vh;
+  overflow-y: scroll;
+}
+.custom-table {
+  table-layout: fixed;
+}
+.action-btn {
+  z-index: 1;
+}
+
+// Circle chart
+.single-chart {
+  width: 100%;
+}
+
+.circular-chart {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  max-height: 110px;
+}
+
+.circle-bg {
+  fill: none;
+  stroke: #eee;
+  stroke-width: 3.8;
+}
+
+.circle {
+  fill: none;
+  stroke-width: 2.8;
+  stroke-linecap: round;
+  animation: progress 1s ease-out forwards;
+}
+
+@keyframes progress {
+  0% {
+    stroke-dasharray: 0 100;
+  }
+}
+
+.circular-chart.primary .circle {
+  stroke: $primary;
+}
+
+.text {
+  fill: #666;
+  font-size: 0.35em;
+  text-anchor: middle;
+}
+.percentage {
+  fill: #666;
+  font-size: 0.7em;
+  text-anchor: middle;
+}

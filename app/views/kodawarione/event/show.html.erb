@@ -1,0 +1,224 @@
+<!--begin::Header-->
+<% breadcrumbs_navigation_add (t ('event.title.event_list')), kodawarione_event_list_path %>
+<% breadcrumbs_navigation_add (t ('event.title.event_information')), '#' %>
+<%= render_partner_breadcrumbs_navigation(t ('event.title.event_information')) %>		
+<!--end::Header-->
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+	<!--begin::Container-->
+	<div class="container-fluid" id="kt_content_container">
+		<!--begin::Tab Content-->
+		<div class="tab-content">
+			<!--begin::Tab pane-->
+			<div id="kt_project_users_card_pane" class="tab-pane fade show active">  
+                <div class="card bg-body rounded-bottom-0">
+                <!--begin::Hero body-->
+                <div class="card-body flex-column p-5">
+                    <!--begin::Hero content-->
+                    <div class="d-flex align-items-center p-5">
+                    <!--begin::Wrapper-->
+                    <div class="d-flex flex-column align-items-start justift-content-center flex-equal">
+                        <!--begin::Title-->
+                        <h1 class="fw-bolder fs-4 fs-lg-1 text-gray-800"><%= @admin_event.event_name %></h1>
+                        <!--end::Title-->
+                        <div class="d-flex flex-wrap">
+                        <% unless @admin_event.category.nil?%>
+                            <!--begin::Info-->
+                            <div class="d-flex flex-wrap ">
+                            <% @admin_event.category.each do |v| %>
+                                <% if v != nil %>
+                                <!--begin::Item-->
+                                <div class="me-9 my-1">
+                                    <!--begin::Icon-->
+                                    <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                                    <span class="svg-icon svg-icon-primary svg-icon-2 me-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
+                                        <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
+                                        <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
+                                        <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
+                                    </svg>
+                                    </span>
+                                    <!--end::Svg Icon-->
+                                    <!--end::Icon-->
+                                    <!--begin::Label-->
+                                    <span class="fw-bolder text-gray-600"><%= t("event.category.#{Event.event_categories.key(v)}") %></span>
+                                    <!--end::Label-->
+                                </div>
+                                <!--end::Item-->
+                                <% end %>
+                            <% end %>
+                            </div>
+                        <% end %> 
+                        </div>
+                    </div>
+                    <!--end::Wrapper-->
+                    </div>
+                    <!--end::Hero content-->
+                    <!--begin::Hero nav-->
+                    <div class="card-rounded bg-light d-flex flex-stack flex-wrap p-5 mx-4">
+                    <%= render partial: "kodawarione/shared/event_manage/event_joined_detail", :locals =>{:event_show_option => @admin_event.event_show_option}  %> 
+                    <% if @admin_event.application_deadline > Date.today %>
+                        <div class="d-flex justify-content-end">
+                            <% if can?(:admin_self_event_delete, Kodawarione::Event) %>
+                                <div>
+                                <%= render 'delete_event' %>
+                                </div>
+                            <% end %>
+                            <% if can?(:event_edit, Kodawarione::Event) %>
+                                <%= link_to t('event.title.edit_text'), kodawarione_event_edit_path(:id => @admin_event.id), class: "btn btn-primary" %>
+                            <% end %>
+                        </div>
+                    <% end %>
+                    <!--begin::Action-->
+                    <!--begin::HideDeleteAndEdit-->
+                    <%# if @admin_event.application_deadline > Date.today %>
+                    <!--<div class="d-flex justify-content-end">
+                        <%# if can?(:destroy, Event) %>
+                            <div>
+                            <%# render 'delete_event' %>
+                            </div>
+                        <%# end %>
+                        <%# if can?(:update, Event) %>
+                            <%# link_to t('event.title.edit_text'), edit_company_event_path(:id => @admin_event.id), class: "btn btn-primary" %>
+                        <%# end %>
+                        </div>-->
+                    <%# end %>
+                    <!--end::Action-->
+                    </div>
+                    <!--end::Hero nav-->
+                </div>
+                <!--end::Hero body-->
+            </div>
+            <!--begin::Post card-->
+            <div class="card bg-body rounded-top-0 mb-5 mb-xl-10">
+            <!--begin::Body-->
+            <div class="card-body p-lg-10 py-lg-0">
+                <!--begin::Layout-->
+                <div class="d-flex flex-column flex-xl-row">
+                <!--begin::Content-->
+                <div class="flex-lg-row-fluid">
+                    <!--begin::Event Category-->
+                    <div class="mb-8">              
+                    <!--begin::Container-->
+                    <div class="mt-8">
+                        <!--begin::Image-->
+                        <% if @admin_event.event_image.attached? %>
+                        <div class="bgi-no-repeat bgi-position-center bgi-size-cover card-rounded min-h-350px" style="background-image: url(<%= url_for(@admin_event.event_image) %>)"></div>
+                        <% end %>
+                        <!--end::Image-->
+                    </div>
+                    <!--end::Container-->
+                    </div>
+                    <!--begin::Event details-->
+                    <div class="row">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 my-3">
+                        <div class="text-dark fs-6 fw-bolder"><%= t('event.title.post_date')  %></div>
+                        <div class="d-flex flex-wrap my-3">
+                        <!--begin::Due-->
+                        <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-7 mb-3">
+                            <div class="fs-6 text-gray-800 fw-bolder"><%= l @admin_event.post_start_date %><span class="text-primary ms-2 fs-8"><%= t('date.day_names')[@admin_event.post_end_date.wday] %></span></div>
+                            <div class="fw-bold text-gray-600"><%= Event.human_attribute_name('post_start_date') %></div>
+                        </div>
+                        <!--end::Due-->
+                        <!--begin::Budget-->
+                        <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 mb-3">
+                            <div class="fs-6 text-gray-800 fw-bolder"><%= l @admin_event.post_end_date %><span class="text-primary ms-2 fs-8"><%= t('date.day_names')[@admin_event.post_end_date.wday] %></span></div>
+                            <div class="fw-bold text-gray-600"><%= Event.human_attribute_name('post_end_date') %></div>
+                        </div>
+                        <!--end::Budget-->
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 my-3">
+                        <div class="text-dark fs-6 fw-bolder"><%= t('event.title.event_date')  %> </div>
+                        <div class="d-flex flex-wrap my-3">
+                        <!--begin::Due-->
+                        <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-7 mb-3">
+                            <div class="fs-6 text-gray-800 fw-bolder"><%= l @admin_event.event_start_date %><span class="text-primary ms-2 fs-8"><%= t('date.day_names')[@admin_event.event_start_date.wday] %></span></div>
+                            <div class="fw-bold text-gray-600"><%= Event.human_attribute_name('event_start_date') %></div>
+                        </div>
+                        <!--end::Due-->
+                        <!--begin::Budget-->
+                        <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 mb-3">
+                            <div class="fs-6 text-gray-800 fw-bolder"><%= l @admin_event.event_end_date %><span class="text-primary ms-2 fs-8"><%= t('date.day_names')[@admin_event.event_end_date.wday] %></span></div>
+                            <div class="fw-bold text-gray-600"><%= Event.human_attribute_name('event_end_date') %></div>
+                        </div>
+                        <!--end::Budget-->
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 my-3">
+                        <div class="text-dark fs-6 fw-bolder"><%= t('event.title.application_period')  %></div>
+                        <!--begin::Due-->
+                        <div class="d-flex flex-wrap my-3">
+                        <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-7 mb-3">
+                            <div class="fs-6 text-gray-800 fw-bolder"><%= l @admin_event.application_start_date %><span class="text-primary ms-2 fs-8"><%= t('date.day_names')[@admin_event.application_start_date.wday] %></span></div>
+                            <div class="fw-bold text-gray-600"><%= Event.human_attribute_name('application_start_date') %></div>
+                        </div>
+                        <!--end::Due-->
+                        <!--begin::Budget-->
+                        <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 mb-3">
+                            <div class="fs-6 text-gray-800 fw-bolder"><%= l @admin_event.application_deadline %><span class="text-primary ms-2 fs-8"><%= t('date.day_names')[@admin_event.application_deadline.wday] %></span></div>
+                            <div class="fw-bold text-gray-600"><%= Event.human_attribute_name('application_deadline') %></div>
+                        </div>
+                        <!--end::Budget-->
+                        </div>
+                    </div>
+                    <div class="d-flex flex-wrap col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 my-3">
+                        <div class="col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 my-3">
+                        <div class="text-dark fs-6 fw-bolder"><%= Event.human_attribute_name('apply_event_limit')  %></div>
+                        <div class="d-flex align-items-center flex-wrap mt-3">
+                            <!--begin::Item-->
+                            <div class="d-flex align-items-center flex-lg-fill me-5 mb-2">
+                            <span class="me-4">
+                                <i class="flaticon-users display-6 text-muted font-weight-bold"></i>
+                            </span>
+                            <div class="d-flex flex-column text-dart-75">
+                                <span class="fw-bolder">
+                                    <%= number_with_delimiter(@admin_event.apply_event_limit) %> <%= t('unit.persons') %>
+                                </span>
+                            </div>
+                            </div>
+                            <!--end::Item-->
+                        </div>
+                        </div>
+                        <div class="flex-grow-1 col-12 col-sm-12 col-md-3 col-lg-3 col-xl-3 my-3 text-left">
+                        <div class="text-dark fs-6 fw-bolder"><%= Event.human_attribute_name('venue')  %></div>
+                        <div class="d-flex align-items-center flex-wrap mt-3">
+                            <!--begin::Item-->
+                            <div class="d-flex align-items-center flex-lg-fill me-5 mb-2">
+                            <span class="me-4">
+                                <i class="flaticon2-location display-6 text-muted font-weight-bold"></i>
+                            </span>
+                            <div class="d-flex flex-column text-dart-75">
+                                <span class="fw-bolder">
+                                    <%= @admin_event.venue.present? ? @admin_event.venue : t("event.venue_types.online") %> 
+                                </span>
+                            </div>
+                            </div>
+                            <!--end::Item-->
+                        </div>
+                        </div>
+                    </div>
+                    <div class="fs-5 fw-bold text-gray-600">
+                        <div class="text-dark fs-6 fw-bolder"><%= Event.human_attribute_name('event_content')  %></div>
+                        <p><%= @admin_event.event_content %></p>
+                    </div>
+                    </div>
+                </div>
+                <!--end::Content-->
+                </div>
+                <!--end::Layout-->
+            </div>
+            <!--end::Body-->
+            <!--begin::Modal-->
+            <div class="card-footer border-0">
+                
+            </div>
+            <!--end::Modal-->
+            </div>
+            <!--end::Post card-->           
+            </div>
+            <!--end::Tab pane-->
+        </div>
+    </div>
+</div> 

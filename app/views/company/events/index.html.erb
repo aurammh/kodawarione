@@ -1,0 +1,191 @@
+<!--begin::Header-->
+<% breadcrumbs_navigation_add (t ('event.title.event_entry_list_tilte')), '#' %>
+<%= render_company_breadcrumbs_navigation(t ('event.title.event_entry_list_tilte')) %>
+<!--end::Header-->
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+	<!--begin::Container-->
+	<div class="container-xxl" id="kt_content_container">
+		<!--begin::Toolbar-->
+		<div class="d-flex flex-wrap flex-stack pb-7">
+			<!--begin::Title-->
+			<div class="d-flex flex-wrap align-items-center my-1">
+				<h3 class="fw-bolder me-5 my-1">
+					<%= @company_events.total_count %> <%= t('search.count_unit') %>
+				</h3>
+			</div>
+			<!--end::Title-->
+			<!--begin::Controls-->
+			<% if @company_events.present?  %>
+				<div class="d-flex flex-wrap my-1">
+					<!--begin::Actions-->					
+					<div class="d-flex my-0">
+						<% if can?(:create, Event) %>
+							<%= link_to t('event.title.event_header'), new_company_event_path, class: "btn btn-primary btn-sm me-5"  %>
+						<% end %>
+						<% if can?(:select_past_events, Event) %>
+							<%= link_to t('event.title.past_event'), company_select_past_events_path, class: "btn btn-primary btn-sm" %>
+						<% end %>
+					</div>					
+					<!--end::Actions-->
+				</div>
+			<% end %>
+			<!--end::Controls-->
+		</div>
+		<!--end::Toolbar-->
+		<!--begin::Tab Content-->
+		<div class="tab-content">
+			<!--begin::Tab pane-->
+			<div id="kt_project_users_card_pane" class="tab-pane fade show active">
+				<!--begin::Row-->
+				<div class="row g-6 g-xl-9 mt-1">
+					<% @company_events.each do |event| %>
+						<div class="col-md-6 col-lg-12 col-xl-6 col-xxl-6 mt-0">
+							<!--begin::Card-->      
+							<div class="card card-custom card-stretch border border-1 border-white border-hover-primary bg-body" >                                           
+								<!--begin::Body-->
+								<%= link_to company_event_path(:id => event.id), class: "card-body p-xs-2" do %>
+									<div class="d-flex">
+										<div class="min-w-50px text-white me-5 d-none d-sm-block d-md-block">  
+											<div class="symbol symbol-75px w-100">
+												<div class="d-flex flex-column justify-content-center text-white symbol-label bg-primary bg-opacity-75 w-100">
+													<span class="fs-5 fw-bold"><%= t('date.abbr_month_names')[event.event_start_date.month] %></span>
+													<span class="fs-2 fw-bolder"><%= event.event_start_date.strftime('%d') %><%= t('date.prompts.day') %></span>
+												</div> 
+											</div>                
+										</div>
+										<div class="flex-grow-1 text-break">
+											<div class="d-flex flex-column pl-5">
+												<div class="text-decoration-none text-dark" %>
+													<h2 class="card-title fs-2 fw-bolder mb-2">
+														<%= event.event_name.truncate(30) %>
+													</h2>
+												</div>
+												<% unless event.category.nil?%>
+													<!--begin::Info-->
+													<div class="d-flex flex-wrap mb-2">
+														<% event.category.each do |v| %>
+														<% if v != nil %>
+															<!--begin::Item-->
+															<div class="me-5">
+															<!--begin::Icon-->
+															<!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+															<span class="svg-icon svg-icon-primary svg-icon-6 me-1">
+																<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+																<rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
+																<rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
+																<rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
+																<rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
+																</svg>
+															</span>
+															<!--end::Svg Icon-->
+															<!--end::Icon-->
+															<!--begin::Label-->
+															<span class="fw-bolder fs-8 text-gray-400"><%= t("event.category.#{Event.event_categories.key(v)}") %></span>
+															<!--end::Label-->
+															</div>
+															<!--end::Item-->
+														<% end %>
+														<% end %>
+													</div>
+												<% end %>
+												<!--begin::Item-->
+												<div class="d-flex me-5 mb-2">
+													<!--begin::Title-->
+													<div>
+														<% if event.event_type == 1 %>
+															<span class="badge badge-warning"><%= t'search.event_organizer' %>: <%= t('welcome.privacy policy.top_page_link.text2') %></span>
+														<% elsif event.event_type == 2 %>
+															<span class="badge badge-warning"><%= t'search.event_organizer' %>: <%=  t('partner.partners_tab') %></span>
+														<% elsif event.event_type == 4 %>
+															<span class="badge badge-warning"><%= t'search.event_organizer' %>: <%=  t('partner.super_partners_tab') %></span>    
+														<% else %>
+															<span class="badge badge-warning"><%= t'search.event_organizer' %>: <%=  t('Kodawari One') %></span>
+														<% end %>
+													</div>
+													<!--end::Title-->
+													<span class="badge font-weight-lighter fs-8 ms-5 <%= event_status_color(event, @admin_event_participants) ? "badge-light-success" : "badge-light-danger" %>">
+														<%=event_status_text(event, @admin_event_participants) == '1'  ? t('event.title.new_event_recuirment'): event_status_text(event, @admin_event_participants) == '2' ? t('event.title.event_in_progress') : 
+														event_status_text(event, @admin_event_participants) == '3' ? t('event.title.recuirment_full') : t('event.title.recuirment_closed') %>
+													</span>
+												</div>
+												<!--end::Item-->
+												<p class="card-title fw-bolder mt-3">
+													<i class="fas fa-map-marker-alt text-primary mr-2"></i> <%= event.venue.present? ? event.venue.truncate(60) : t("event.venue_types.online") %>                     
+												</p>                                             
+											</div>
+											<div class="d-flex mb-9 mt-3">
+												<!--begin::Due-->
+												<div class="border border-gray-300 border-dashed rounded min-w-100px p-2 me-lg-3 me-1 me-lg-3">
+													<div class="fs-6 text-gray-800 fw-bolder"><%= l event.event_start_date %></div>
+													<div class="fw-bold text-gray-400"><%= Event.human_attribute_name('event_start_date') %></div>
+												</div>
+												<!--end::Due-->
+												<!--begin::Budget-->
+												<div class="border border-gray-300 border-dashed rounded min-w-100px p-2">
+													<div class="fs-6 text-gray-800 fw-bolder"><%= l event.event_end_date %></div>
+													<div class="fw-bold text-gray-400"><%= Event.human_attribute_name('event_end_date') %></div>
+												</div>
+												<!--end::Budget-->
+											</div>  
+										</div>
+										
+									</div>
+								<% end %>
+								<!--end::Body-->                             
+							</div>
+							<!--end::Card-->
+						</div> 
+					<% end %>
+					<% unless @company_events.present?  %>
+						<!--begin::Column-->
+						<div class="col-12">
+							<!--begin::Card-->
+							<div class="card bg-body">
+								<!--begin::Card body-->
+								<div class="card-body p-0">
+									<!--begin::Wrapper-->
+									<div class="card-px py-5 my-5">
+										<!--begin::Description-->
+										<div class="d-flex align-items-center flex-column">
+											<span class="text-muted m-1 fw-bold  mb-5"><%= (t "search.no_event_result") %></span>
+											<!--begin::Action-->
+											<% if can?(:create, Event) %>
+												<%= link_to (t'event.title.event_header'), new_company_event_path, class: "btn btn-primary" %>
+											<% end %>
+											<!--end::Action-->
+											</div>
+										<!--end::Description-->
+									</div>
+									<!--end::Wrapper-->
+								</div>
+								<!--end::Card body-->
+							</div>
+							<!--end::Card-->
+						</div>
+						<!--end::Column-->
+					<% end %>
+				</div>
+				<!--end::Row-->
+				<!--start::Pagination-->
+				<% if @company_events.present? %>
+					<div class="d-flex flex-wrap justify-content-between align-items-center pt-2">
+						<div class="d-flex flex-wrap">
+							<%= paginate @company_events %>
+						</div>
+						<div class="d-flex align-items-center py-3">
+							<span class="text-muted"><%=  t('common.list_display')  %><%= @company_events.total_count %> <%=  t('common.to')  %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%= @company_events.offset_value + 1 %> ~ <%=  @company_events.offset_value + @company_events.count %> <%=  t('common.search_result')  %> </span>
+						</div>
+					</div>
+				<% end %>
+				<!--end::Pagination-->
+			</div>
+			<!--end::Tab pane-->
+		</div>
+		<!--end::Tab Content-->
+	</div>
+	<!--end::Container-->
+</div>
+<!--end::Content-->
+		
+		 

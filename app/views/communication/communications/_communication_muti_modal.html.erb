@@ -1,0 +1,85 @@
+<!--begin::Modal - New Card-->
+<div id="communication-multi-modal" class="modal fade overflow-hidden communication-section" tabindex="-1" aria-hidden="true">
+    <!--begin::Modal dialog-->
+    <div class="modal-dialog modal-dialog-centered mw-650px">
+        <!--begin::Modal content-->
+        <div class="modal-content">
+            <!--begin::Modal header-->
+            <div class="modal-header">
+                <!--begin::Modal title-->
+                <h2><%= t('communication.title.forum_name')%></h2>
+                <!--end::Modal title-->
+                <!--begin::Close-->
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                        </svg>
+                    </span>
+                    <!--end::Svg Icon-->
+                </div>
+                <!--end::Close-->
+            </div>
+            <!--end::Modal header-->
+            <!--begin::Modal body-->
+            <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+        
+            <!--begin::Form ** [for multiple receiver_id] **-->
+            <%= form_with(url: communication_create_with_multiple_users_path ,method: :post ,id: "communication-form") do |form| %> 
+                <%= form.hidden_field :sender_id, value: current_user_data.id, id: "sender_id" %>
+                <%= form.hidden_field :receiver_id, value: @receiver_id ,id: "receiver_id" %>
+                <%= form.hidden_field :category, value:  @category_name%>
+                <%= form.hidden_field :forum_id, value: params[:forum_id] %> 
+                <%= form.hidden_field :company_id, value: params[:id] %>
+                <%= form.hidden_field :user_id, value: @user_id %>
+                <%= form.hidden_field :company_user_id, value: current_user_data.id %>
+                <!--begin::Input group-->
+                <div class="d-flex flex-column mb-7 fv-row error_email">
+                    <!--begin::Label-->
+                    <%= form.email_field :receiver_email, id: "email", value: @receiverMail ,class: "form-control form-control-solid errors", readonly: true, placeholder: Student::Student.human_attribute_name('email') + " *" %>
+                    <!--end::Label-->
+                    <p class="text-danger font-size-sm ms-invalid-feedback mt-1 ">
+                        <span class ="err_email d-none"><%= Student::Student.human_attribute_name('email') %>  <%= t('errors.messages.blank') %></span>
+                    </p>
+                </div>
+                <!--end::Input group-->
+                <!--begin::Input group-->
+                <div class="d-flex flex-column mb-7 fv-row error_title">
+                    <!--begin::Label-->
+                    <%= form.text_field :title, id: "title",class: "form-control form-control-solid errors", placeholder: (t'activerecord.attributes.communication/communication.title') + " *", maxlength: 255 %>
+                    <!--end::Label-->
+                    <p class="text-danger font-size-sm ms-invalid-feedback mt-1 ">
+                        <span class ="err_title d-none"><%= Communication::Communication.human_attribute_name('title') %>  <%= t('errors.messages.blank') %></span>
+                    </p>
+                </div>
+                <!--end::Input group-->
+                <!--begin::Input group-->
+                <div class="d-flex flex-column mb-7 fv-row error_content">
+                    <!--begin::Label-->
+                    <%= form.rich_text_area :content, id: "content",class: "form-control form-control-solid  h-200px h-lg-300px h-xl-300px overflow-auto errors", placeholder: (t'communication.title.content')+ t('errors.messages.blank') + " *" %>
+                    <!--end::Label-->
+                    <p class="text-danger font-size-sm ms-invalid-feedback mt-1">
+                        <span class ="err_content d-none"><%= Communication::Communication.human_attribute_name('content') %>  <%= t('errors.messages.blank') %></span>
+                    </p>
+                </div>
+                <!--end::Input group-->
+                <!--begin::Actions-->
+                <div class="text-center pt-15">
+                    <button type="button" class="btn btn-light me-3" id="modal-btn-no" data-bs-dismiss="modal"><%= t "btn.confirm_no" %></button>
+                    <%= form.submit (t "btn.sent_btn"),:class => "btn btn-primary", :id => "btn-communicaion-list" %>
+                </div>
+                <!--end::Actions-->
+            <% end %>
+            <!--end::Form ** [for multiple receiver_id] **-->
+                    
+            </div>
+            <!--end::Modal body-->
+        </div>
+        <!--end::Modal content-->
+    </div>
+    <!--end::Modal dialog-->
+</div>
+<!--end::Modal - New Card-->
+<%= javascript_pack_tag "communication/communication.js" %>

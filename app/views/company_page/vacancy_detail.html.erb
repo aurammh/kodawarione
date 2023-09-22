@@ -1,0 +1,158 @@
+<!--begin::Body-->
+<body id="kt_body" data-bs-spy="scroll" data-bs-target="#kt_landing_menu" data-bs-offset="200" class="bg-white position-relative">
+    <!--begin::Main-->
+    <div class="d-flex flex-column flex-root">
+        <!--begin::Header Section-->
+        <div class="mb-0">
+            <!--begin::Wrapper-->
+            <%= render partial: "company_page/header", :locals =>{:banner => false} %>
+            <!--end::Wrapper-->
+        </div>
+        <!--end::Header Section-->
+        <!--begin::Container-->
+        <div class="container mt-10">
+            <% if @apply_vacancy %>
+                <div class="notice d-flex bg-light-warning rounded border-warning border border-dashed rounded-3 p-6 mb-9">
+                    <!--begin::Wrapper-->
+                    <div class="d-flex flex-stack flex-grow-1">
+                    <!--begin::Content-->
+                    <div class="fw-bold">
+                        <div class="fs-6 text-gray-800"><%= t("title.vacancy_apply_cancel_notice") %></div>
+                    </div>
+                    <!--end::Content-->
+                    </div>
+                    <!--end::Wrapper-->
+                </div>
+            <% end %>
+            <div class="row">
+                <% if @company_vacancy_list.status == 2 %>
+                    <%= render 'student/shared/search/vacancy_detail_all' %>
+                <% else %>
+                    <%= render 'student/shared/search/vacancy_detail_limiting' %>
+                <% end %>
+                <div class="col-12 col-xl-4 col-lg-4">
+                    <!--begin::Sidebar-->
+                    <div class="flex-column flex-lg-row-auto mb-10 order-1 order-lg-2" >
+                        <div class="card card-flush d-flex flex-column">
+                            <div class="card-body fs-6">
+                                <div class="d-flex flex-column">
+                                    <div id="favourite_vacancy" class="btn btn-light-danger pulse pulse-danger <%= @fav_vacancy ? 'active' : 'inactive' %>">
+                                        <i class="fas fa-heart mr-5"></i><span class='label mx-5'><%= @fav_vacancy ? t("btn.fav-cancel-text") : t("btn.fav-text") %></span>
+                                    </div>                       
+                                </div>
+                                <!--begin::Seperator-->
+                                <div class="separator separator-dashed mb-5"></div>
+                                <!--end::Seperator-->
+                                <div class="d-flex flex-column  <%= 'cursor-not-allowed' if @apply_vacancy %>">
+                                    <div id="apply_vacancy" class="btn <%= @apply_vacancy ? 'btn-secondary pe-none' : 'btn-light-primary' %>">
+                                        <i class="fas fa-bookmark"></i><span class='label mx-5'><%= @apply_vacancy ? t("btn.apply-text") : t("btn.not-apply-text") %></span>
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end::Sidebar-->
+                    <div class="card d-none d-xl-block">
+                        <!--begin::Body-->
+                        <div class="card-body">
+                            <!--begin::Item-->
+                            <div class="mb-8">
+                                <!--begin::Title-->
+                                <h4 class="text-gray-700 w-bolder mb-8"><%= t ('title.detail_title') %> (<%= t('event.title.edit_text_title') %>) </h4>
+                                <!--end::Title-->
+                                <div class="mb-6">
+                                    <div class="fw-bold text-gray-600 fs-7"><%= Company::Vacancy.human_attribute_name('display_to') %>:</div>
+                                    <div class="fw-bolder fs-6 text-gray-800 d-flex align-items-center">
+                                        <%=l @company_vacancy_list.display_to %>
+                                        <span class="fs-7 text-danger d-flex align-items-center">
+                                            <span class="bullet bullet-dot bg-danger mx-2"></span>
+                                            <%= expiry_day_left(@company_vacancy_list.display_from, @company_vacancy_list.display_to)%>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="mb-6">
+                                    <div class="fw-bold text-gray-600 fs-7"><%= Company::Vacancy.human_attribute_name('recruit_industry_type') %>:</div>
+                                    <div class="fw-bolder fs-6 text-gray-800 d-flex align-items-center">
+                                        <%= @company_vacancy_list.industry_name %><br/>
+                                        <span class="fs-7 text-success d-flex align-items-center">
+                                            <span class="bullet bullet-dot bg-success mx-2"></span>
+                                            <%= @company_vacancy_list.occupation_name %>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="mb-6">
+                                    <div class="fw-bold text-gray-600 fs-7"><%= Company::Vacancy.human_attribute_name('required_applicants') %>:</div>
+                                    <div class="fw-bolder fs-6 text-gray-800 d-flex align-items-center"><%= number_with_delimiter(@company_vacancy_list.required_applicants) %> <%= t 'unit.persons'%></div>
+                                </div>
+                                <% if @company_vacancy_list.status == 2 %>
+                                    <%= render 'student/shared/search/vacancy_detail_sidebar_data' %>
+                                <% end %>
+                            </div>
+                            <!--end::Item-->
+                        </div>
+                        <!--end::Body-->
+                    </div>
+                </div>
+            </div>
+            <!--begin::Latest vacancies-->
+            <% if  @company_vacancies.present? %>
+                <div class="mt-20 pb-10">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h3 class="text-gray-600 fw-bolder p-4"><%= t("title.latest_vacancies")%></h3>
+                        <%# link_to t('company_member.title.member_list'), company_page_members_path, class: "fw-bolder" %>
+                    </div>
+                    <div class="row g-10">
+                        <% @company_vacancies.each do |vacancy| %>
+                             <!--begin::Col-->
+                             <div class="col-xl-6 col-lg-12 col-12" >
+                                <%= link_to (vacancy_details_path(id: params[:id],vacancy_id: vacancy,story_id: nil,event_id: nil)) do %>
+                                    <div class="card bg-body border-0 shadow-sm mh-275px" >
+                                        <!--begin::Body-->
+                                        <%= link_to  (vacancy_details_path(id: params[:id],vacancy_id: vacancy,story_id: nil,event_id: nil)), class: "card-body p-5" do %> 
+                                            <div class="d-flex justify-content-between mb-2">
+                                                <div class="text-truncate">
+                                                    <span class="text-gray-400 text-truncate fs-7 fw-bolder me-2 d-block lh-1 pb-1"><%= vacancy.industry_name %> / <%= vacancy.occupation_name %></span>
+                                                    <div class="text-decoration-none text-dark">     
+                                                    <span class="text-gray-800 fs-2 fw-bolder"><%= vacancy.vacancy_title %></span>
+                                                    </div>
+                                                </div> 
+                                            </div>
+                                            <div class="mb-3">
+                                                <!--begin::Text-->
+                                                <span class="d-block text-gray-600 fw-bold"><%= vacancy.vacancy_description.to_plain_text.truncate(200) %></span>
+                                                <!--end::Text-->
+                                            </div>
+                                            <div class="d-flex justify-content-between">
+                                                <!--begin::Text-->
+                                                <div>
+                                                    <span class="fw-bolder text-dark fs-7 me-2"><i class="fas fa-users me-1 text-primary"></i> <%= number_with_delimiter(vacancy.required_applicants) %><%= t('unit.persons') %> -</span>
+                                                    <span class="fw-bold text-gray-600 fs-7"><i class="flaticon2-pin me-1 text-primary"></i> <%= vacancy.postalcode_city %></span>
+                                                </div>
+                                                <!--end::Text-->    
+                                                <div class="d-flex flex-wrap fw-bolder">
+                                                    <%=l vacancy.display_to %>
+                                                    <span class="fs-7 text-danger d-flex align-items-center fw-normal">
+                                                        <span class="bullet bullet-dot bg-danger mx-2"></span>
+                                                        <%= expiry_day_left(vacancy.display_from, vacancy.display_to)%>
+                                                    </span>
+                                                </div>                             
+                                            </div>
+                                        <% end %>
+                                        <!--end::Body-->
+                                    </div>
+                                <% end %>
+                            </div>
+                            <!--end::Col-->
+                        <% end %>
+                    </div>
+                </div>
+            <% end %>
+            <!--end::Latest vacancies-->
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Main-->
+</body>
+<!--end::Body-->
+<%= hidden_field_tag(:vacancy_id, @company_vacancy_list.id) %>
+<%= javascript_pack_tag "student/students.js" %>

@@ -1,0 +1,89 @@
+<!--begin::Breadcrumb-->
+<% breadcrumbs_navigation_add (t('mail_template_registration.title.mail_template_list')), communication_mail_template_registrations_path %>
+<% breadcrumbs_navigation_add t('mail_template_registration.title.mail_template_registration'), '#' %>
+<%= render_company_breadcrumbs_navigation(t('mail_template_registration.title.mail_template_registration')) %>
+<!--end::Breadcrumb-->
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+  <!--begin::Container-->
+  <div class="container-xxl" id="kt_content_container">
+    <!--begin::Layout-->
+    <div class="d-flex flex-column flex-lg-row">
+      <!--begin::Content-->
+      <div class="flex-lg-row-fluid mb-10 mb-lg-0">
+        <!--begin::Card-->
+        <div class="card bg-body">
+          <!--begin::Form-->
+          <%= form_with(model: communication_mail_template_registration) do |form| %>
+            <!--begin::Card body-->
+            <div class="card-body">
+              <!--begin::Wrapper-->
+              <div class="d-flex flex-column align-items-start flex-xxl-row">
+                <!--begin::Input group-->
+                <div class="d-flex flex-center flex-equal fw-row text-nowrap order-1 order-xxl-2 me-4">
+                  <span class="fs-2x fw-bolder text-gray-800"><%= t('mail_template_registration.title.mail_template_registration') %></span>
+                </div>
+                <!--end::Input group-->
+              </div>
+              <!--end::Top-->
+              <!--begin::Separator-->
+              <div class="separator separator-dashed my-10"></div>
+              <!--end::Separator-->
+              <!--begin::Wrapper-->
+              <div class="mb-0">
+                <!--begin::Row-->
+                <div class="row form-group gx-10 mb-5">
+                    <div class="col-12 col-sm-12 col-md-5  col-lg-5 col-xl-5 text-left text-sm-left text-md-end text-lg-end text-xl-end col-form-label font-weight-bold pr-0" >
+                      <%= form.label :template_name, class: "form-label fs-6 fw-bold text-gray-700" %><span class="ms-1 text-danger">*</span>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-5 col-xl-5">
+                      <%= form.text_field :template_name, class: "form-control form-control-solid", placeholder: Communication::MailTemplateRegistration.human_attribute_name('template_name'), maxlength: 255 %>
+                      <p class="text-danger font-size-sm ms-invalid-feedback mt-1"><%= communication_mail_template_registration.errors.full_messages_for(:template_name)[0] %></p>
+                    </div>
+                </div>
+                <!--end::Row-->
+                <!--begin::Row-->
+                <div class="row form-group gx-10 mb-5">
+                    <div class="col-12 col-sm-12 col-md-5  col-lg-5 col-xl-5 text-left text-sm-left text-md-end text-lg-end text-xl-end col-form-label font-weight-bold pr-0" >
+                      <%= form.label :subject, class: "form-label fs-6 fw-bold text-gray-700" %><span class="ms-1 text-danger">*</span>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-5 col-xl-5">
+                      <%= form.text_field :subject, id: "department", class: "form-control form-control-solid", placeholder: Communication::MailTemplateRegistration.human_attribute_name('subject'), maxlength: 255 %>
+                      <p class="text-danger font-size-sm ms-invalid-feedback mt-1"><%= communication_mail_template_registration.errors.full_messages_for(:subject)[0] %></p>
+                    </div>
+                </div>
+                <!--end::Row-->
+                <!--begin::Row-->
+                <div class="row form-group gx-10 mb-5">
+                    <div class="col-12 col-sm-12 col-md-5  col-lg-5 col-xl-5 text-left text-sm-left text-md-end text-lg-end text-xl-end col-form-label font-weight-bold pr-0" >
+                      <%= form.label :content, class: "form-label fs-6 fw-bold text-gray-700" %><span class="ms-1 text-danger">*</span>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-5 col-xl-5">
+                      <%= form.rich_text_area :content, id: "content", class: "form-control form-control-solid h-300px overflow-auto", placeholder: Communication::MailTemplateRegistration.human_attribute_name('content'), maxlength: 1000 %>
+                      <p class="text-danger font-size-sm ms-invalid-feedback mt-1"><%= communication_mail_template_registration.errors.full_messages_for(:content)[0] %></p>
+                    </div>
+                </div>
+                <!--end::Row-->
+              </div>
+              <!--end::Wrapper-->
+            </div>
+            <!--end::Card body-->
+            <!--begin::Card footer-->
+            <div class="card-footer d-flex justify-content-center py-6 px-9">
+                <%= link_to t('btn.cancel'), communication_mail_template_registrations_path, class: "btn btn-light btn-active-light-primary me-2" %>
+                <%= form.submit t('mail_template_registration.btn.template_register_btn'), class: "btn btn-primary" %>
+            </div>
+            <!--end::Card footer-->
+          <% end %>
+          <!--end::Form-->
+        </div>
+        <!--end::Card-->
+      </div>
+      <!--end::Content-->
+    </div>
+    <!--end::Layout-->
+  </div>
+  <!--end::Container-->
+</div>
+<!--end::Content-->
+<%= render "users/shared/toastr" %>

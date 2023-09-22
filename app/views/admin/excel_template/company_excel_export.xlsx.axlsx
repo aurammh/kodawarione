@@ -1,0 +1,76 @@
+wb = xlsx_package.workbook
+
+wb.styles do |style|
+  project_heading = style.add_style(b: true, sz: 14)
+  heading = style.add_style(b: true)
+
+  wb.add_worksheet(name: "Companies") do |sheet|
+    # Add a title row
+    sheet.add_row [t('search.excel_file_name')], style: project_heading
+    # Add the date this was downloaded
+    sheet.add_row ["Downloaded at", Time.now.strftime("%Y年%-m月%-d日")]
+    # Add a blank row
+    sheet.add_row []
+    # Create the header row
+    sheet.add_row [
+      Company::Company.human_attribute_name('company_name'),
+      Company::Company.human_attribute_name('company_name_kana'),
+      Company::Company.human_attribute_name('user_name'),
+      t('title.industry_name'),
+      Company::Company.human_attribute_name('job_info'),
+      Company::Company.human_attribute_name('postal_code'),
+      Company::Company.human_attribute_name('region_name'),
+      Company::Company.human_attribute_name('prefecture_name'),
+      Company::Company.human_attribute_name('postalcode_city'),
+      Company::Company.human_attribute_name('address'),
+      Company::Company.human_attribute_name('website_url'),
+      Company::Company.human_attribute_name('phone_no'),
+      Company::Company.human_attribute_name('company_established'),
+      Company::Company.human_attribute_name('capital_amount'),
+      Company::Company.human_attribute_name('employee_count'),
+      Company::Company.human_attribute_name('sales_amount'),
+      Company::Company.human_attribute_name('related_company'),
+      Company::Company.human_attribute_name('main_bank'),
+      Company::Company.human_attribute_name('history'),
+      Company::Company.human_attribute_name('basic_idea'),
+      Company::Company.human_attribute_name('representative'),
+      Company::Company.human_attribute_name('contact'),
+      Company::Company.human_attribute_name('transportation_facilities'),
+      t('search.event_status'),
+      t('search.date_label'), 
+      t('event.title.publish_status')], style: heading
+    # Create entries for each item
+    @result_list.each do |company|
+      sheet.add_row [
+      company.company_name,
+      company.company_name_kana,
+      company.industry_name,
+      company.job_info,
+      company.postal_code.nil? ? "" : "\t" + company.postal_code,
+      company.region,
+      company.pre_name,
+      company.postalcode_city,
+      company.address,
+      company.website_url,
+      company.phone_no.nil? ? "" : "\t" + company.phone_no,
+      company.company_established,
+      company.capital_amount,
+      company.employee_count,
+      company.sales_amount,
+      company.related_company,
+      company.main_bank,
+      company.history,
+      company.basic_idea,
+      company.representative,
+      company.contact.nil? ? "" : "\t" + company.contact,
+      company.transportation_facilities,
+      @event_status.include?(company.id) ? t('search.exist_status') : t('search.non_exist_status'),
+      l(company.created_at.strftime('%Y-%m-%d').to_date, default: '-'), 
+      if company.company_name_kana.nil?
+        t('search.uncomplete_register_status')
+      else
+        t('search.complete_register_status')
+      end]
+    end
+  end
+end

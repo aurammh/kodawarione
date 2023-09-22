@@ -1,0 +1,21 @@
+<!--begin::Page title-->
+<div class="page-title d-flex flex-column me-3">
+    <!--begin::Title-->
+    <h1 class="d-flex text-dark fw-bolder my-1 fs-3"><%= current_page_name %></h1>
+    <!--end::Title-->
+    <!--begin::Breadcrumb-->
+    <ul class="breadcrumb breadcrumb-dot fw-bold text-gray-600 fs-7 my-1">
+        <!--begin::Item-->
+            <% nav.each do |n| %>
+            <% unless n.equal? nav.last %>
+                <li class="breadcrumb-item"><%= link_to n[:title], n[:url], class: "text-primary" %></li>
+            <% else %>
+                <li class="breadcrumb-item text-muted"><%= n[:title] %></li>
+            <% end %>
+        <% end %>
+        <!--end::Item-->
+    </ul>
+    <!--end::Breadcrumb-->
+</div>
+<!--end::Page title-->
+       

@@ -1,0 +1,78 @@
+<!--begin::Body-->
+<body id="kt_body" data-bs-spy="scroll" data-bs-target="#kt_landing_menu" data-bs-offset="200" class="bg-white position-relative">
+    <!--begin::Main-->
+    <div class="d-flex flex-column flex-root">
+         <!--begin::Header Section-->
+        <div class="mb-0">
+            <!--begin::Wrapper-->
+            <%= render partial: "company_page/header", :locals =>{:banner => false } %>
+            <!--end::Wrapper-->
+        </div>
+        <!--end::Header Section--> 
+        <!--begin::Container-->
+        <div class="container w-100 w-lg-75 w-xl-1000px"> 
+            <% if @company_commitment_profile.experience_requirements.present? || @company_commitment_profile.fresher_requirements.present? || @company_commitment_profile.fresher_second_requirements.present? %>
+                <% if @company_commitment_profile.experience_requirements.present? %>
+                    <div class="mt-4 mt-md-5 mt-lg-20 pb-4 pb-md-5 pb-lg-10">
+                        <h3 class="fs-2x text-dark fw-bolder text-center w-100 rounded mb-10"><%= Company::Company.human_attribute_name('experience_requirements') %></h3>
+                        <div class="fs-6 fw-bold text-gray-700 px-4">
+                            <%= @company_commitment_profile.experience_requirements %>
+                        </div>
+                    </div>
+                <% end %>
+                <% if @company_commitment_profile.fresher_requirements.present? %>
+                    <div class="mt-4 mt-md-5 mt-lg-20 pb-4 pb-md-5 pb-lg-10">
+                        <h3 class="fs-2x text-dark fw-bolder text-center w-100 rounded mb-10"><%= Company::Company.human_attribute_name('fresher_requirements') %></h3>
+                        <div class="fs-6 fw-bold text-gray-700 px-4">
+                            <%= @company_commitment_profile.fresher_requirements %>
+                        </div>
+                    </div>
+                <% end %>
+                <% if @company_commitment_profile.fresher_second_requirements.present? %>
+                    <div class="mt-4 mt-md-5 mt-lg-20 pb-4 pb-md-5 pb-lg-10">
+                        <h3 class="fs-2x text-dark fw-bolder text-center w-100 rounded mb-10"><%= Company::Company.human_attribute_name('fresher_second_requirements') %></h3>
+                        <div class="fs-6 fw-bold text-gray-700 px-4">
+                            <%= @company_commitment_profile.fresher_second_requirements %>
+                        </div>
+                    </div>
+                <% end %>
+            <% else %> 
+                <!--begin::Card-->
+                <div class="card bg-body border-0 shadow-sm mt-20">
+                    <!--begin::Card body-->
+                    <div class="card-body p-0">
+                        <!--begin::Wrapper-->
+                        <div class="card-px py-5 my-5">
+                            <!--begin::Description-->
+                            <div class="d-flex align-items-center flex-column">
+                                <span class="m-1 fw-bolder"><%= t('commitment_profile.content.no_corresponding_data') %></span>
+                            </div>
+                            <!--end::Description-->
+                        </div>
+                        <!--end::Wrapper-->
+                    </div>
+                    <!--end::Card body-->
+                </div>
+                <!--end::Card-->
+            <% end %>
+            <!--begin::Latest vacancies-->
+            <%= render partial: "company_page/vacancies_list", :locals =>{company_vacancies: @company_vacancies} %>
+            <!--end::Latest vacancies-->
+        </div>
+        <!--end::Container--> 
+        <!--begin::Scrolltop-->
+        <div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
+            <!--begin::Svg Icon | path: icons/duotune/arrows/arr066.svg-->
+            <span class="svg-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <rect opacity="0.5" x="13" y="6" width="13" height="2" rx="1" transform="rotate(90 13 6)" fill="black" />
+                    <path d="M12.5657 8.56569L16.75 12.75C17.1642 13.1642 17.8358 13.1642 18.25 12.75C18.6642 12.3358 18.6642 11.6642 18.25 11.25L12.7071 5.70711C12.3166 5.31658 11.6834 5.31658 11.2929 5.70711L5.75 11.25C5.33579 11.6642 5.33579 12.3358 5.75 12.75C6.16421 13.1642 6.83579 13.1642 7.25 12.75L11.4343 8.56569C11.7467 8.25327 12.2533 8.25327 12.5657 8.56569Z" fill="black" />
+                </svg>
+            </span>
+            <!--end::Svg Icon-->
+        </div>
+        <!--end::Scrolltop-->
+    </div>
+    <!--end::Main-->
+</body>
+<!--end::Body-->

@@ -1,0 +1,25 @@
+<div class="d-flex justify-content-between fw-bolder fs-1 mb-7">
+    <%= t('communication.title.scout')%>  
+    <% if @communication_communication.scout_status == 'waiting_accept' %>
+        <span class="badge badge-light-warning mt-3"><%= t('status.not_yet') %></span> 
+    <% elsif @communication_communication.scout_status == 'accept' %>
+        <span class="badge badge-light-primary mt-3"><%= t('status.replied') %></span> 
+    <% else %>
+        <span class="badge badge-light-danger mt-3"><%=  t('status.rejected') %></span>
+    <% end %>
+</div>
+<div class="col-12 mb-7">
+    <div class="w-100 form-control form-control-solid text-wrap text-break overflow-auto mh-90px">
+        <%= get_vacancy_title(@communication_communication.vacancy_id) %>
+    </div>
+</div>
+<div class="col-12 mb-7">
+    <div class="w-100 form-control form-control-solid text-wrap text-break overflow-auto mh-90px">
+        <%= @communication_communication.title %>
+    </div>
+</div>
+<div class="col-12 mb-7">
+    <div class="form-control form-control-solid h-375px overflow-auto">
+        <%= @communication_communication.content %>
+    </div>
+</div>

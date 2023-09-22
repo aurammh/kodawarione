@@ -1,0 +1,65 @@
+ja:
+  activerecord:
+    models:
+      kodawarione/partner: パートナー
+    attributes:
+      kodawarione/partner:
+        super_partner_id: スーパーパートナー
+        name: パートナー名
+        partner_code: コード
+        address: 町/丁目/番地
+        display_address: 現住所
+        website_url: ウェブサイトのURL
+        phone_no: 連絡先
+        postal_code: 郵便番号
+        region_name: エリア
+        m_region_id: エリア
+        m_prefecture_id: 都道府県名
+        prefecture_name: 都道府県名
+        postalcode_city: 市区町村
+        partner_user:
+        first_name: 名（漢字）
+        last_name: 姓（漢字）
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワードの確認
+  errors:
+    attributes:
+      category:
+        blank: を選択してください。
+    messages:
+      blank: を入力してください。
+      invalid: 無効です。
+  partner:
+    banner:
+      banner_title: 新規パートナーの設定
+      banner_subtitle: "追加する<span class='link-primary fw-bolder'>%{field_name}</span>を入力してください。"
+    steps:
+      partner_details_setup: パートナー情報設定
+      partner_member_setup: 管理者情報設定
+      partner_step_complete: 登録完了
+      title:
+        current_partner_details_setup: "<span class='link-primary fw-bolder me-2'>%{current_partner_name}</span>の詳細情報登録"
+        current_partner_member_setup: "<span class='link-primary fw-bolder me-2'>%{current_partner_name}</span>の管理者情報登録"
+        current_partner_step_complete: "<span class='link-primary fw-bolder me-2'>%{current_partner_name}</span>登録完了"
+      complete:
+        title_1: "<span class='link-primary fw-bolder'>%{current_partner_name}</span>のパートナー情報が登録されました。"
+        title_2: "<span class='link-primary fw-bolder'>新規パートナー情報</span>"
+        title_3: "<span class='link-primary fw-bolder'>管理者情報</span>"
+        text_1: "以下の情報を確認させて内容を変更したい場合は「戻る」ボタンをクリックして更新してください。"
+        text_2: "パートナーのログインURLは以下の通りです。https://beta.kodawarione.com/partner_users/sign_in"
+        notice:
+          title: "注：メンバー設定について"
+          text_1: "<span class='link-primary fw-bolder me-2'>%{current_partner_name}</span>の管理者情報は登録致しました。今後複数メンバーを追加したい場合、パートナーのメンバー設定リンクより追加できます。"
+      buttons:
+        back: 戻る
+        continue: 次へ
+        finish: 完了
+    dashboard:
+      partner_list: パートナーリスト
+      partner_dashboard: パートナーのダッシュボード
+      partner_details: パートナー情報
+      partner_member_details: メンバー詳細情報
+      partner_member_list: メンバーリスト
+      admin_member: 管理者
+      add_new_member: メンバー登録

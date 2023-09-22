@@ -1,0 +1,137 @@
+<!--begin::Header-->
+<% breadcrumbs_navigation_add (t('dashboard.job_seeker')), kodawarione_student_manage_search_student_path %>
+<% breadcrumbs_navigation_add (t ('dashboard.assessment_button')), '#' %>
+<%= render_partner_breadcrumbs_navigation(t ('student.title.header_link1')) %>		
+<!--end::Header-->
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+	<!--begin::Container-->
+	<div class="container-fluid" id="kt_content_container">
+        <div class="tab-content">
+			<!--begin::Tab pane-->
+			<div id="kt_project_users_card_pane" class="tab-pane show active">
+            	<%= render partial: "kodawarione/shared/student_manage/student_banner", locals: {student: @student_info, fav_company_count: @favourite_company_list.length, fav_vacancy_count: @favourite_vacancy.length, fav_event_count: @favourite_event_list.length} %>  
+                <!--begin::Tab Content-->
+                <div class="card bg-body">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <!--begin::Nav Panel-->
+                                <div class="d-none d-sm-none d-md-none d-lg-block d-xl-block">
+                                    <ul class="nav row mb-10">
+                                        <li class="nav-item col-12 col-lg mb-5 mb-lg-0">
+                                            <a class="nav-link btn btn-flex btn-color-gray-400 btn-outline btn-outline-default btn-active-primary d-flex flex-grow-1 flex-column flex-center py-3 h-1250px h-lg-125px active" data-bs-toggle="tab" href="#kt_general_widget_1_2">
+                                                <!--begin::Svg Icon | path: icons/duotune/general/gen032.svg-->
+                                                <span class="svg-icon svg-icon-2x mb-5 mx-0">
+                                                <!--begin::Svg Icon | path:assets/media/svg/icons/Media/Movie-Lane2.svg-->
+                                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                            <rect x="0" y="0" width="24" height="24" />
+                                                            <path d="M4,4 L11.6314229,2.5691082 C11.8750185,2.52343403 12.1249815,2.52343403 12.3685771,2.5691082 L20,4 L20,13.2830094 C20,16.2173861 18.4883464,18.9447835 16,20.5 L12.5299989,22.6687507 C12.2057287,22.8714196 11.7942713,22.8714196 11.4700011,22.6687507 L8,20.5 C5.51165358,18.9447835 4,16.2173861 4,13.2830094 L4,4 Z" fill="#000000" opacity="0.3" />
+                                                            <path d="M11.1750002,14.75 C10.9354169,14.75 10.6958335,14.6541667 10.5041669,14.4625 L8.58750019,12.5458333 C8.20416686,12.1625 8.20416686,11.5875 8.58750019,11.2041667 C8.97083352,10.8208333 9.59375019,10.8208333 9.92916686,11.2041667 L11.1750002,12.45 L14.3375002,9.2875 C14.7208335,8.90416667 15.2958335,8.90416667 15.6791669,9.2875 C16.0625002,9.67083333 16.0625002,10.2458333 15.6791669,10.6291667 L11.8458335,14.4625 C11.6541669,14.6541667 11.4145835,14.75 11.1750002,14.75 Z" fill="#000000" />
+                                                        </g>
+                                                    </svg>
+                                                    <!--end::Svg Icon-->
+                                                </span>
+                                                <!--end::Svg Icon-->
+                                                <span class="fs-6 fw-bolder text-gray-600"><%= t('student.assessment.behavioral_trait_title')%></span>
+                                            </a>
+                                        </li>                                        
+                                        <li class="nav-item col-12 col-lg mb-5 mb-lg-0">
+                                            <a class="nav-link btn btn-flex btn-color-gray-400 btn-outline btn-outline-default btn-active-primary d-flex flex-grow-1 flex-column flex-center py-3 h-1250px h-lg-125px" data-bs-toggle="tab" href="#kt_general_widget_1_3" >
+                                                <!--begin::Svg Icon | path: icons/duotune/general/gen008.svg-->
+                                                <span class="svg-icon svg-icon-2x mb-5 mx-0">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                            <rect x="0" y="0" width="24" height="24" />
+                                                            <path d="M5,3 L6,3 C6.55228475,3 7,3.44771525 7,4 L7,20 C7,20.5522847 6.55228475,21 6,21 L5,21 C4.44771525,21 4,20.5522847 4,20 L4,4 C4,3.44771525 4.44771525,3 5,3 Z M10,3 L11,3 C11.5522847,3 12,3.44771525 12,4 L12,20 C12,20.5522847 11.5522847,21 11,21 L10,21 C9.44771525,21 9,20.5522847 9,20 L9,4 C9,3.44771525 9.44771525,3 10,3 Z" fill="#000000" />
+                                                            <rect fill="#000000" opacity="0.3" transform="translate(17.825568, 11.945519) rotate(-19.000000) translate(-17.825568, -11.945519)" x="16.3255682" y="2.94551858" width="3" height="18" rx="1" />
+                                                        </g>
+                                                    </svg>
+                                                </span>
+                                                <!--end::Svg Icon-->
+                                                <span class="fs-6 fw-bolder text-gray-600"><%= t('student.assessment.diagnosis_title')%></span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item col-12 col-lg mb-5 mb-lg-0">
+                                            <a class="nav-link btn btn-flex btn-color-gray-400 btn-outline btn-outline-default btn-active-primary d-flex flex-grow-1 flex-column flex-center py-3 h-1250px h-lg-125px" data-bs-toggle="tab" href="#kt_general_widget_1_4">
+                                                <!--begin::Svg Icon | path: icons/duotune/finance/fin006.svg-->
+                                                <span class="svg-icon svg-icon-2x mb-5 mx-0">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                                <rect x="0" y="0" width="24" height="24" />
+                                                                <rect fill="#000000" opacity="0.3" x="13" y="4" width="3" height="16" rx="1.5" />
+                                                                <rect fill="#000000" x="8" y="9" width="3" height="11" rx="1.5" />
+                                                                <rect fill="#000000" x="18" y="11" width="3" height="9" rx="1.5" />
+                                                                <rect fill="#000000" x="3" y="13" width="3" height="7" rx="1.5" />
+                                                            </g>
+                                                        </svg>
+                                                    </span>
+                                                <!--end::Svg Icon-->
+                                                <span class="fs-6 fw-bolder text-gray-600"><%= t('student.assessment.potential_desire_title')%></span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item col-12 col-lg mb-5 mb-lg-0">
+                                            <a class="nav-link btn btn-flex btn-color-gray-400 btn-outline btn-outline-default btn-active-primary d-flex flex-grow-1 flex-column flex-center py-3 h-1250px h-lg-125px" data-bs-toggle="tab" href="#kt_general_widget_1_5">
+                                                <!--begin::Svg Icon | path: icons/duotune/general/gen032.svg-->
+                                                <span class="svg-icon svg-icon-2x mb-5 mx-0">
+                                                <!--begin::Svg Icon | path:assets/media/svg/icons/Media/Movie-Lane2.svg-->
+                                                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                            <rect x="0" y="0" width="24" height="24" />
+                                                            <path d="M4,4 L11.6314229,2.5691082 C11.8750185,2.52343403 12.1249815,2.52343403 12.3685771,2.5691082 L20,4 L20,13.2830094 C20,16.2173861 18.4883464,18.9447835 16,20.5 L12.5299989,22.6687507 C12.2057287,22.8714196 11.7942713,22.8714196 11.4700011,22.6687507 L8,20.5 C5.51165358,18.9447835 4,16.2173861 4,13.2830094 L4,4 Z" fill="#000000" opacity="0.3" />
+                                                            <path d="M11.1750002,14.75 C10.9354169,14.75 10.6958335,14.6541667 10.5041669,14.4625 L8.58750019,12.5458333 C8.20416686,12.1625 8.20416686,11.5875 8.58750019,11.2041667 C8.97083352,10.8208333 9.59375019,10.8208333 9.92916686,11.2041667 L11.1750002,12.45 L14.3375002,9.2875 C14.7208335,8.90416667 15.2958335,8.90416667 15.6791669,9.2875 C16.0625002,9.67083333 16.0625002,10.2458333 15.6791669,10.6291667 L11.8458335,14.4625 C11.6541669,14.6541667 11.4145835,14.75 11.1750002,14.75 Z" fill="#000000" />
+                                                        </g>
+                                                    </svg>
+                                                    <!--end::Svg Icon-->
+                                                </span>
+                                                <!--end::Svg Icon-->
+                                                <span class="fs-6 fw-bolder text-gray-600"><%= t('student.assessment.behavioral_trait_title')%></span>
+                                            </a>
+                                        </li>                               
+                                    </ul>
+                                </div>
+                                <!--end::Nav Panel-->
+                                <!--begin::Tab Cotent-->
+                                <div class="tab-content mt-10">
+                                    <!--begin::Commitment Ability Chart-->  
+                                    <div class="tab-pane fade show active" id="kt_general_widget_1_2"> 
+                                        <%= render "student/commitment_ability/commitment_ability_chart" %>
+                                    </div>
+                                    <!--end::Commitment Ability Chart--> 
+                                    <!--begin::Self evaluation chart-->
+                                    <div class="tab-pane" id="kt_general_widget_1_3"> 
+                                        <%= render "student/assessments/brain/index_self_evaluation_view" %>
+                                    </div>
+                                    <!--end::Self evaluation chart-->
+                                    <!--begin::Potential desire chart-->     
+                                    <div class="tab-pane" id="kt_general_widget_1_4"> 
+                                        <%= render "student/assessments/potential/index_potential_desire_view" %>
+                                    </div>
+                                    <!--end::Potential desire chart-->  
+                                    <!--begin::Behavioral trait type chart-->  
+                                    <div class="tab-pane" id="kt_general_widget_1_5"> 
+                                        <%= render "student/assessments/behavioral/index_behavioral_view" %>
+                                    </div>
+                                    <!--end::Behavioral trait type chart-->                              
+                                </div>
+                                <!--end::Tab Cotent-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+   </div>
+</div>
+<%= hidden_field_tag(:student_id, @student_info.id) %>
+<script> 
+    var chartSelfEevaluation= <%= @chartOne.inspect.html_safe %>; 
+    var chartPotentialDesire = <%= @chartTwo.inspect.html_safe %>; 
+    var chartThree = <%= @chartThree.inspect.html_safe %>; 
+    var chartKodawari = <%= @chart_commitment_range.inspect.html_safe %>; 
+    var chartKodawariLabel = <%= @chart_commitment_label.inspect.html_safe %>; 
+    var chartColor = "student_color";
+</script> 
+<%= javascript_pack_tag "company/company.js" %>
+<%= javascript_pack_tag "student/assessment.js" %>

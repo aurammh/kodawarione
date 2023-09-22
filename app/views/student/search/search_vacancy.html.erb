@@ -1,0 +1,224 @@
+<!--begin::Toolbar-->
+<div class="toolbar py-5 py-lg-5" id="kt_toolbar">
+    <!--begin::Container-->
+    <div id="kt_toolbar_container" class="container-xxl d-flex flex-stack flex-wrap">
+        <!--begin::Page title-->
+        <% breadcrumbs_navigation_add (t('search.job_search')), '#' %>
+        <%= render_student_breadcrumbs_navigation(t('search.job_search')) %>	
+        <!--end::Page title-->
+    </div>
+    <!--end::Container-->
+</div>
+<!--end::Toolbar-->
+<!--begin::Container-->
+<div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
+    <!--begin::Post-->
+    <div class="content flex-row-fluid" id="kt_content">
+        <!--begin::Layout-->
+        <div class="d-flex flex-column flex-lg-row">
+            <!--begin::Aside-->
+            <div class="flex-column flex-lg-row-auto w-100 w-lg-250px w-xxl-325px me-lg-9 me-5" id="kt_search">
+                <!--begin::Form-->
+                <div class="search_form" data-kt-drawer="true" data-kt-drawer-name="search_form" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '100%'}" data-kt-drawer-direction="start" data-kt-drawer-toggle="#search_form_toggle" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_body', lg: '#kt_search'}">
+                    <%= form_for( '',url: student_vacancy_search_path, :method => "get") do |form| %>    
+                        <!--begin::Card-->
+                        <div class="card border-secondary bg-body">
+                            <div class="card-title d-flex d-md-flex d-lg-none d-xl-none border align-item-center justify-content-center p-5">
+                                <%= link_to student_students_path(id: current_user.id) ,class: "flex-grow-1 mt-auto" do %>
+                                    <%= image_tag "layout/header_logo.png", class: "h-25px h-lg-40px" %>   
+                                <% end %>
+                                <!--begin::Close-->
+                                <div class="d-flex d-md-flex d-lg-none d-xl-none btn btn-sm btn-icon btn-light btn-color-muted btn-active-primary active">
+                                    <span class="svg-icon svg-icon-2x" data-kt-drawer-dismiss="true">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                                        <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                                    </svg>
+                                    </span>
+                                </div>
+                                <!--end::Close-->
+                            </div>
+                            <!--begin::Body-->
+                            <div class="card-body">
+                                <!--begin:Search-->
+                                <div class="position-relative">
+                                    <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
+                                    <span class="svg-icon svg-icon-3 svg-icon-gray-500 position-absolute top-50 translate-middle ms-6">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="black"></rect>
+                                            <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="black"></path>
+                                        </svg>
+                                    </span>
+                                    <!--end::Svg Icon-->
+                                    <%= form.text_field :keyword, class: "form-control form-control-solid ps-10", value: (params[:keyword]), placeholder: t('search.keyword_search') %>
+                                </div>
+                                <!--end:Search-->
+                                <div class="separator separator-dashed my-8"></div>
+                                <!--begin::Input group-->
+                                <div class="mb-5">
+                                    <label class="fs-6 form-label fw-bolder text-dark"><%= Company::Vacancy.human_attribute_name('recruit_industry_type') %></label>
+                                    <!--begin::Select-->
+                                    <%= select_tag :industry_id,options_for_select(industry_type_options.map { |ind| [ind.industry_name, ind.id] },params[:industry_id]),include_blank: t('student.search.view_all_industry_type'),class: 'form-select form-select-solid', id: "select2_1" , :data => { :control => 'select2', 'hide-search' => true } %>
+                                    <!--end::Select-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Border-->
+                                <div class="separator separator-dashed my-8"></div>
+                                <!--end::Border-->
+                                <!--begin::Input group-->
+                                <div class="mb-5">
+                                    <label class="fs-6 form-label fw-bolder text-dark"><%= Company::Vacancy.human_attribute_name('recruit_job_type') %></label>
+                                    <!--begin::Select-->
+                                    <%=  select_tag :job_type_id,options_for_select(occupation_options.map { |oc| [oc.occupation_name, oc.id] },params[:job_type_id]),include_blank: t('student.search.view_all_job_type'),class: 'form-select form-select-solid', id: "select2_2", :data => { :control => 'select2', 'hide-search' => true }  %>  
+                                    <!--end::Select-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Separator-->
+                                <div class="separator separator-dashed mt-9 mb-6"></div>
+                                <!--end::Separator-->
+                                <!--begin::Input group-->
+                                <div class="mb-5">
+                                    <label class="fs-6 form-label fw-bolder text-dark"><%= t'student.search.title.prefecture' %></label>
+                                    <!--begin::Select-->
+                                    <%=  select_tag :prefecture_id,options_for_select(prefecture_options_for_vacancy_search.map { |pref| [pref.prefecture_name, pref.id] },params[:prefecture_id]),include_blank: t('student.search.search_by_prefecture'),class: 'form-select form-select-solid', id: "select2_3", :data => { :control => 'select2', 'hide-search' => true }  %>  
+                                    <!--end::Select-->
+                                </div>
+                                <!--begin::Border-->
+                                <div class="separator separator-dashed my-8"></div>
+                                <!--end::Border-->
+                                <!--begin::Action-->
+                                <div class="d-none d-md-none d-lg-flex d-xl-flex align-items-center justify-content-center min-w-100px p-2">
+                                    <%= link_to t('search.clear'), student_vacancy_search_path, class: "btn btn-light-primary btn-color-gray-400 me-3" %>
+                                    <%= form.submit t('search.apply'),class: "btn btn-primary" %>
+                                </div>
+                                <!--end::Action--> 
+                                <!--begin::Action-->
+                                <div class="d-flex d-md-flex d-lg-none d-xl-none border border-gray-500 border-dashed rounded align-items-center justify-content-center min-w-100px p-2">
+                                    <%= link_to t('search.clear'), student_vacancy_search_path, class: "btn btn-light-primary btn-color-gray-400 me-3" %>
+                                    <%= form.submit t('search.apply'),class: "btn btn-primary" %>
+                                </div>
+                                <!--end::Action-->                                
+                            </div>
+                            <!--end::Body-->
+                        </div>
+                        <!--end::Card-->
+                    <% end %>
+                </div>
+                <!--end::Form-->
+            </div>
+            <!--end::Aside-->
+            <!--begin::Content-->
+            <div class="flex-lg-row-fluid">
+                <!--begin::Toolbar-->
+                <div class="d-flex flex-wrap flex-stack mb-4">
+                    <!--begin::Title-->
+                    <div class="d-flex flex-wrap align-items-center my-1">
+                        <h3 class="fw-bolder me-5 my-1">
+                            <%= t('search.count_title') %> <%= @vacancies.total_count %> <%= t('search.count_unit') %>
+                        </h3>
+                    </div>
+                    <!--end::Title-->
+                    <div class="d-flex flex-wrap my-1 d-block d-lg-none">
+                        <!--begin::Tab nav-->
+                        <ul class="nav nav-pills mb-2 mb-sm-0">
+                            <li class="nav-item m-0" id="search_form_toggle">
+                                <a class="btn btn-sm btn-icon btn-light btn-color-muted btn-active-primary active">
+                                    <!--begin::Svg Icon | path: icons/duotune/abstract/abs015.svg-->
+                                    <span class="svg-icon svg-icon-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path d="M21 7H3C2.4 7 2 6.6 2 6V4C2 3.4 2.4 3 3 3H21C21.6 3 22 3.4 22 4V6C22 6.6 21.6 7 21 7Z" fill="black"></path>
+                                            <path opacity="0.3" d="M21 14H3C2.4 14 2 13.6 2 13V11C2 10.4 2.4 10 3 10H21C21.6 10 22 10.4 22 11V13C22 13.6 21.6 14 21 14ZM22 20V18C22 17.4 21.6 17 21 17H3C2.4 17 2 17.4 2 18V20C2 20.6 2.4 21 3 21H21C21.6 21 22 20.6 22 20Z" fill="black"></path>
+                                        </svg>
+                                    </span>
+                                    <!--end::Svg Icon-->
+                                </a>
+                            </li>
+                        </ul>
+                        <!--end::Tab nav-->
+                    </div>
+                </div>
+                <!--end::Toolbar-->
+                <!--begin::Tab Content-->
+                <div class="tab-content">
+                    <!--begin::Tab pane-->
+                    <div id="kt_project_users_card_pane" class="tab-pane fade show active">
+                        <!--begin::Row-->
+                        <div class="row g-6 g-xl-9"> 
+                                <!--begin::Card-->
+                                <% @vacancies.each do |vacancy| %> 
+                                    <div class="col-12">
+                                        <div class="position-relative">
+                                            <div class="favourite-vacancy action-btn position-absolute cursor-pointer top-0 end-0 pt-5 pe-10 " id="fav_<%= vacancy.id %>">
+                                                <i class="flaticon-black fs-2 me-3 <%= @vacancy_favourite_arr.include?(vacancy.id) ? 'text-danger' : 'text-secondary' %>"></i>
+                                            </div>
+                                            <div class="apply-vacancy action-btn position-absolute top-0 end-0 pt-5 pe-5 <%= @vacancy_apply_arr.include?(vacancy.id) ? 'cursor-not-allowed' : 'cursor-pointer' %>" id="apply_<%= vacancy.id %>">
+                                                <i class="fas fa-bookmark  fs-2 <%= @vacancy_apply_arr.include?(vacancy.id) ? 'text-primary' : 'text-secondary' %>" ></i>
+                                            </div> 
+                                        </div> 
+                                        <div class="card card-custom border border-1 border-secondary border-hover-primary bgi-no-repeat gutter-b">
+                                            <!--begin::Body-->
+                                            <%= link_to  (student_vacancy_details_path(vacancy)), class: "card-body p-5" do %> 
+                                                <div class="d-flex justify-content-between mb-2">
+                                                    <div class="text-truncate">
+                                                        <span class="text-gray-400 text-truncate fs-7 fw-bolder me-2 d-block lh-1 pb-1"><%= vacancy.industry_name %> / <%= vacancy.occupation_name %></span>
+                                                        <div class="text-decoration-none text-dark">     
+                                                        <span class="text-gray-800 fs-2 fw-bolder"><%= vacancy.vacancy_title %></span>
+                                                        </div>
+                                                    </div> 
+                                                </div>
+                                                <div class="mb-3">
+                                                    <!--begin::Text-->
+                                                    <span class="d-block text-gray-600 fw-bold"><%= vacancy.vacancy_description.to_plain_text.truncate(200) %></span>
+                                                    <!--end::Text-->
+                                                </div>
+                                                <div class="d-flex justify-content-between">
+                                                    <!--begin::Text-->
+                                                    <div>
+                                                        <span class="fw-bolder text-dark fs-7 me-2"><i class="fas fa-users me-1 text-primary"></i> <%= number_with_delimiter(vacancy.required_applicants) %><%= t('unit.persons') %> -</span>
+                                                        <span class="fw-bold text-gray-600 fs-7"><i class="flaticon2-pin me-1 text-primary"></i> <%= vacancy.postalcode_city %></span>
+                                                    </div>
+                                                    <!--end::Text-->    
+                                                    <div class="d-flex flex-wrap fw-bolder">
+                                                        <%=l vacancy.display_to %>
+                                                        <span class="fs-7 text-danger d-flex align-items-center fw-normal">
+                                                            <span class="bullet bullet-dot bg-danger mx-2"></span>
+                                                            <%= expiry_day_left(vacancy.display_from, vacancy.display_to)%>
+                                                        </span>
+                                                    </div>                             
+                                                </div>
+                                            <% end %>
+                                        </div>
+                                    </div>  
+                                <% end %>
+                                <!--end::Card-->
+                                <% unless @vacancies.present?  %>
+                                    <div class="col-12 m-2">
+                                        <h3> <%= (t "search.no_result") %></h3>
+                                    </div>
+                                <% end %>   
+                        </div>
+                        <!--end::Row-->
+                        <!--start::Pagination-->
+                        <% if @vacancies.present? %>
+                            <div class="d-flex flex-wrap justify-content-between align-items-center pt-10">
+                                <div class="d-flex flex-wrap">
+                                    <%= paginate @vacancies %>
+                                </div>
+                                <div class="d-flex align-items-center py-3">
+                                    <span class="text-muted"><%=  t('common.display')  %> <%= @vacancies.total_count %> <%=  t('common.to')  %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%= @vacancies.offset_value + 1 %> ~ <%=  @vacancies.offset_value + @vacancies.count %> <%=  t('common.search_result')  %> </span>
+                                </div>
+                            </div>
+                        <% end %>
+                        <!--end::Pagination-->
+                    </div>
+                    <!--end::Tab pane-->
+                </div>
+                <!--end::Tab Content-->
+            </div>
+            <!--end::Content-->
+        </div>
+    </div>
+    <!--end::Post-->
+</div>
+<!--end::Container--> 
+<%= javascript_pack_tag "student/students.js" %>

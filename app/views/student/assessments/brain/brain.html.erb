@@ -1,0 +1,176 @@
+<%= form_with(model: @student_assessment , id: "brain-form") do |form| %>
+    <!--begin::Breadcrumb-->
+    <div id="kt_toolbar" class="toolbar py-5 py-lg-5">
+        <div id="kt_toolbar_container" class="container-xxl d-flex flex-stack flex-wrap"> 
+            <% breadcrumbs_navigation_add (t('dashboard.assessment_button')), student_assessments_path %>
+            <% breadcrumbs_navigation_add (t('student.assessment.diagnosis_input_title')), '#' %>
+            <%= render_student_breadcrumbs_navigation (t('student.assessment.diagnosis_input_title')) %>
+        </div>	
+    </div>
+    <!--end::Breadcrumb-->
+    <!--begin::Entry-->
+    <div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
+        <!--begin::Container-->
+        <div id="kt_content" class="content flex-row-fluid">
+            <!--begin::Card-->
+            <div class="card mb-5 mb-xl-10">
+                <div class="card-header border-0">
+                    <div class="card-title">
+                        <h3 class="card-label"><%=t('student.assessment.diagnosis_input_title')%></h3>
+                    </div>
+                    <div class="card-toolbar">
+                        <div class="example-tools justify-content-center"> 
+                            <%= form.submit t('btn.record') , class: "btn btn-sm btn-primary font-weight-bolder text-uppercase" , :id => "btn-submit" %> 
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body border-top p-9">
+                    <div class="card-scroll" style="height: 444px;">
+                        <div class="col-12 text-center mb-3"> 
+                            <span class='font-weight-bold text-danger'>
+                                <%=t('student.assessment.brain_title_1')%><br>
+                            </span>
+                            <span class='font-weight-bold'>
+                                <%=t('student.assessment.brain_title_2')%>
+                            </span>
+                        </div> <br>
+                        <div class="col-12 mb-3">                    
+                            <div class="student-assessment">
+                                <div class="form-group row ">
+                                    <%= form.fields_for :logical_and_rational  do |f| %>   
+                                        <% Student::Assessment.logical_and_rational_thinkings.each_with_index do |(k, v), index| %> 
+                                            <!--begin::Desktop view-->
+                                            <label class="col-12 col-sm-12 col-md-4 col-lg-6 col-xl-6 col-form-label text-xl-center text-lg-center text-left font-weight-bold pb-0 fs-2">
+                                                <i class="flaticon-questions-circular-button text-primary pr-2 me-1 fs-2"></i>
+                                                <b><%= t ('student.assessment.brain_table1_th1') %>   <%= index + 1 %></b>
+                                            </label>
+                                            <div class="col-12 col-sm-12 col-md-8 col-lg-6 col-xl-6 col-form-label ">                                    
+                                                <span class=" "><%= t("student_assessment.logical_and_rational_thinking.#{k}") %></span>
+                                                <div class="form-check form-check-custom form-check-solid form-check-sm py-2"> 
+                                                    <label for=<%= "student_assessment_logical_and_rational_#{k}_1"%> class="fs-7 me-2 me-sm-2 me-md-5 me-xl-5">
+                                                        <%= f.radio_button "#{k}", 1, { :checked =>@student_assessment.logical_and_rational.nil?  ? false : @student_assessment.logical_and_rational[v-1] == 1, :class => "form-check-input" }%>
+                                                        <span class="form-check-label"></span>
+                                                        <%= t("student.assessment.brain_table1_th3") %>
+                                                    </label> 
+                                                    <label for=<%= "student_assessment_logical_and_rational_#{k}_2"%> class="fs-7 me-2 me-sm-2 me-md-5 me-xl-5">
+                                                        <%= f.radio_button "#{k}", 2, { :checked =>@student_assessment.logical_and_rational.nil?  ? false : @student_assessment.logical_and_rational[v-1] == 2, :class => "form-check-input" }%>
+                                                        <span class="form-check-label"></span>
+                                                        <%= t ('student.assessment.brain_table1_th4') %> 
+                                                    </label> 
+                                                    <label for=<%= "student_assessment_logical_and_rational_#{k}_3"%> class="fs-7 me-2 me-sm-2 me-md-5 me-xl-5">
+                                                        <%= f.radio_button "#{k}", 3, { :checked =>@student_assessment.logical_and_rational.nil?  ? false : @student_assessment.logical_and_rational[v-1] == 3, :class => "form-check-input" }%>
+                                                        <span class="form-check-label"></span>
+                                                        <%= t ('student.assessment.brain_table1_th5') %> 
+                                                    </label>   
+                                                </div>
+                                            </div> 
+                                            <!--end::Desktop view-->
+                                        <% end %>
+                                    <% end %>   
+                                    <%= form.fields_for :solid_and_planned  do |f| %>   
+                                        <% Student::Assessment.solid_and_planned_thinkings.each_with_index do |(k, v), index| %>  
+                                            <!--begin::Desktop view-->
+                                            <label class="col-12 col-sm-12 col-md-4 col-lg-6 col-xl-6 col-form-label text-xl-center text-lg-center text-left font-weight-bold pb-0 fs-2">
+                                                <i class="flaticon-questions-circular-button text-primary pr-2 me-1 fs-2">
+                                                <b></i><%= t ('student.assessment.brain_table1_th1') %>   <%= index + 11 %></b>
+                                            </label>
+                                            <div class="col-12 col-sm-12 col-md-8 col-lg-6 col-xl-6 col-form-label  ">                                    
+                                                <span class=""><%= t("student_assessment.solid_and_planned_thinkings.#{k}") %></span>
+                                                <div class="form-check form-check-custom form-check-solid form-check-sm py-2"> 
+                                                    <label for=<%= "student_assessment_solid_and_planned_#{k}_1"%> class="fs-7 me-2 me-sm-2 me-md-5 me-xl-5">
+                                                        <%= f.radio_button "#{k}", 1, { :checked =>@student_assessment.solid_and_planned.nil?  ? false : @student_assessment.solid_and_planned[v-1] == 1, :class => "form-check-input" }%>
+                                                        <span class="form-check-label"></span>
+                                                        <%= t ('student.assessment.brain_table1_th3') %> 
+                                                    </label>     
+                                                    <label for=<%= "student_assessment_solid_and_planned_#{k}_2"%> class="fs-7 me-2 me-sm-2 me-md-5 me-xl-5">
+                                                        <%= f.radio_button "#{k}", 2, { :checked =>@student_assessment.solid_and_planned.nil?  ? false : @student_assessment.solid_and_planned[v-1] == 2, :class => "form-check-input" }%>
+                                                        <span class="form-check-label"></span>
+                                                        <%= t ('student.assessment.brain_table1_th4') %> 
+                                                    </label>   
+                                                    <label for=<%= "student_assessment_solid_and_planned_#{k}_3"%> class="fs-7 me-2 me-sm-2 me-md-5 me-xl-5">
+                                                        <%= f.radio_button "#{k}", 3, { :checked =>@student_assessment.solid_and_planned.nil?  ? false : @student_assessment.solid_and_planned[v-1] == 3, :class => "form-check-input" }%>
+                                                        <span class="form-check-label"></span>
+                                                        <%= t ('student.assessment.brain_table1_th5') %> 
+                                                    </label>  
+                                                </div>
+                                            </div>
+                                            <!--end::Desktop view-->
+                                        <% end %>
+                                    <% end %>    
+                                    <%= form.fields_for :sensory_and_friendly  do |f| %>   
+                                        <% Student::Assessment.sensory_and_friendly_thinkings.each_with_index do |(k, v), index| %>
+                                            <!--begin::Desktop view-->
+                                            <label class="col-12 col-sm-12 col-md-4 col-lg-6 col-xl-6 col-form-label text-xl-center text-lg-center text-left font-weight-bold pb-0 fs-2">
+                                                <i class="flaticon-questions-circular-button text-primary pr-2 me-1 fs-2"></i>
+                                                <b><%= t ('student.assessment.brain_table1_th1') %>   <%= index + 21 %></b>
+                                            </label>
+                                            <div class="col-12 col-sm-12 col-md-8 col-lg-6 col-xl-6 col-form-label  ">                                    
+                                                <span class=""><%= t("student_assessment.sensory_and_friendly_thinkings.#{k}") %></span>
+                                                <div class="form-check form-check-custom form-check-solid form-check-sm py-2"> 
+                                                    <label for=<%= "student_assessment_sensory_and_friendly_#{k}_1"%> class="fs-7 me-2 me-sm-2 me-md-5 me-xl-5">
+                                                        <%= f.radio_button "#{k}", 1, { :checked =>@student_assessment.sensory_and_friendly.nil?  ? false : @student_assessment.sensory_and_friendly[v-1] == 1, :class => "form-check-input" }%>
+                                                        <span class="form-check-label"></span>
+                                                        <%= t ('student.assessment.brain_table1_th3') %> 
+                                                    </label>      
+                                                    <label for=<%= "student_assessment_sensory_and_friendly_#{k}_2"%> class="fs-7 me-2 me-sm-2 me-md-5 me-xl-5">
+                                                        <%= f.radio_button "#{k}", 2, { :checked =>@student_assessment.sensory_and_friendly.nil?  ? false : @student_assessment.sensory_and_friendly[v-1] == 2, :class => "form-check-input" }%>
+                                                        <span class="form-check-label"></span>
+                                                        <%= t ('student.assessment.brain_table1_th4') %> 
+                                                    </label>    
+                                                    <label for=<%= "student_assessment_sensory_and_friendly_#{k}_3"%> class="fs-7 me-2 me-sm-2 me-md-5 me-xl-5">
+                                                        <%= f.radio_button "#{k}", 3, { :checked =>@student_assessment.sensory_and_friendly.nil?  ? false : @student_assessment.sensory_and_friendly[v-1] == 3, :class => "form-check-input" }%>
+                                                        <span class="form-check-label"></span>
+                                                        <%= t ('student.assessment.brain_table1_th5') %> 
+                                                    </label>  
+                                                </div>
+                                            </div>
+                                            <!--end::Desktop view-->
+                                        <% end %>
+                                    <% end %>  
+                                    <%= form.fields_for :adventurous_and_original  do |f| %>   
+                                        <% Student::Assessment.adventurous_and_original_thinkings.each_with_index do |(k, v), index| %>
+                                            <!--begin::Desktop view-->
+                                            <label class="col-12 col-sm-12 col-md-4 col-lg-6 col-xl-6 col-form-label text-xl-center text-lg-center text-left font-weight-bold pb-0 fs-2">
+                                                <i class="flaticon-questions-circular-button text-primary pr-2 me-1 fs-2"></i>
+                                                <b><%= t ('student.assessment.brain_table1_th1') %>   <%= index + 31 %></b>
+                                            </label>
+                                            <div class="col-12 col-sm-12 col-md-8 col-lg-6 col-xl-6 col-form-label  ">                                    
+                                                <span class=""><%= t("student_assessment.adventurous_and_original_thinkings.#{k}") %></span>
+                                                <div class="form-check form-check-custom form-check-solid form-check-sm py-2"> 
+                                                    <label for=<%= "student_assessment_adventurous_and_original_#{k}_1"%> class="fs-7 me-2 me-sm-2 me-md-5 me-xl-5">
+                                                        <%= f.radio_button "#{k}", 1, { :checked =>@student_assessment.adventurous_and_original.nil?  ? false : @student_assessment.adventurous_and_original[v-1] == 1, :class => "form-check-input" }%>
+                                                        <span class="form-check-label"></span>
+                                                        <%= t ('student.assessment.brain_table1_th3') %> 
+                                                    </label>        
+                                                    <label for=<%= "student_assessment_adventurous_and_original_#{k}_2"%> class="fs-7 me-2 me-sm-2 me-md-5 me-xl-5">
+                                                        <%= f.radio_button "#{k}", 2, { :checked =>@student_assessment.adventurous_and_original.nil?  ? false : @student_assessment.adventurous_and_original[v-1] == 2, :class => "form-check-input" }%>
+                                                        <span class="form-check-label"></span>
+                                                        <%= t ('student.assessment.brain_table1_th4') %> 
+                                                    </label>   
+                                                    <label for=<%= "student_assessment_adventurous_and_original_#{k}_3"%> class="fs-7 me-2 me-sm-2 me-md-5 me-xl-5">
+                                                        <%= f.radio_button "#{k}", 3, { :checked =>@student_assessment.adventurous_and_original.nil?  ? false : @student_assessment.adventurous_and_original[v-1] == 3, :class => "form-check-input" }%>
+                                                        <span class="form-check-label"></span>
+                                                        <%= t ('student.assessment.brain_table1_th5') %> 
+                                                    </label>  
+                                                </div>
+                                            </div>
+                                            <!--end::Desktop view-->
+                                        <% end %>
+                                    <% end %>      
+                                </div> 
+                            </div>
+                        </div>                         
+                    </div>
+                </div>
+            </div>
+            <!--end::Card-->
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Entry-->
+    <%# confirm dialoag start%>
+    <%= render "common/confirm_box" %>
+    <%# confirm dialoag end%>
+
+<%end%> 
+<%= javascript_pack_tag 'common.js'%>

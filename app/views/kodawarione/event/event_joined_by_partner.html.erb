@@ -1,0 +1,146 @@
+<!--begin::Header-->
+<% breadcrumbs_navigation_add (t ('event.title.event_list')), kodawarione_event_list_path %>
+<% breadcrumbs_navigation_add (t ('event.title.event_information')), '#' %>
+<%= render_partner_breadcrumbs_navigation(t ('event.title.event_information')) %>			
+<!--end::Header-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+	<!--begin::Container-->
+	<div class="container-fluid" id="kt_content_container">
+		<!--begin::Tab Content-->
+		<div class="tab-content">
+			<!--begin::Tab pane-->
+			<div id="kt_project_users_card_pane" class="tab-pane fade show active">
+          <div class="card bg-body rounded-bottom-0">
+              <!--begin::Hero body-->
+              <div class="card-body flex-column p-5">
+                  <!--begin::Hero content-->
+                  <div class="d-flex align-items-center p-5">
+                    <!--begin::Wrapper-->
+                    <div class="d-flex flex-column align-items-start justift-content-center flex-equal">
+                      <!--begin::Title-->
+                      <h1 class="fw-bolder fs-4 fs-lg-1 text-gray-800"><%= @admin_event.event_name %></h1>
+                      <!--end::Title-->
+                      <div class="d-flex flex-wrap">
+                        <% unless @admin_event.category.nil?%>
+                          <!--begin::Info-->
+                          <div class="d-flex flex-wrap ">
+                            <% @admin_event.category.each do |v| %>
+                              <% if v != nil %>
+                                <!--begin::Item-->
+                                <div class="me-9 my-1">
+                                  <!--begin::Icon-->
+                                  <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                                  <span class="svg-icon svg-icon-primary svg-icon-2 me-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                      <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
+                                      <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
+                                      <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
+                                      <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
+                                    </svg>
+                                  </span>
+                                  <!--end::Svg Icon-->
+                                  <!--end::Icon-->
+                                  <!--begin::Label-->
+                                  <span class="fw-bolder text-gray-400"><%= t("event.category.#{Event.event_categories.key(v)}") %></span>
+                                  <!--end::Label-->
+                                </div>
+                                <!--end::Item-->
+                              <% end %>
+                            <% end %>
+                          </div>
+                        <% end %> 
+                      </div>
+                    </div>
+                    <!--end::Wrapper-->
+                  </div>
+                  <!--end::Hero content-->
+                  <!--begin::Hero nav-->
+                  <div class="card-rounded bg-light d-flex flex-stack flex-wrap p-5 mx-4">
+                    <%= render partial: "kodawarione/shared/event_manage/event_joined_detail", :locals =>{:event_show_option => @admin_event.event_show_option} %> 
+                  </div>
+                  <!--end::Hero nav-->
+              </div>
+              <!--end::Hero body-->
+          </div>
+          <!--begin::pagination-->
+          <input type="hidden" name="admin_event_id" value= <%= params[:id].nil? ? (params[:admin_event_id]) : params[:id] %>> 
+          <% if @partner_event_participants_lists.present? %>           
+              <div class="content flex-row-fluid pt-0" id="kt_content"> 
+                  <div class="card bg-body rounded-top-0 mb-5 mb-xl-10">
+                      <div class="card-header border-0 pt-5">
+                          <h3 class="card-title align-items-start flex-column">
+                              <span class="card-label fw-bolder fs-3 mb-1"><%= t ('event.title.event_join_stu_list') %></span>
+                              <span class="text-muted mt-1 fw-bold fs-7"><%= @partner_event_participants_lists.size %> <%= t('common.student_total_count') %></span>
+                          </h3> 
+                          <div class="fs-4 fw-bolder bg-light-primary rounded d-flex flex-center px-5">
+                              <%= t'event.title.apply_limit' %>: <%= @partner_event_participants_lists.size %> / <%= @event.apply_event_limit %> <%= t 'unit.persons' %>
+                          </div>
+                      </div>
+                      <div class="card-body py-4"> 
+                          <div class="table-responsive  overflow-auto">
+                              <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_users"> 
+                                  <thead>
+                                      <!--begin::Table row-->
+                                      <tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0"> 
+                                          <th class="min-w-200px"><%=  t 'student.student_show.name' %></th> 
+                                          <th class="min-w-125px"><%= t 'activerecord.attributes.company/company_member.join_date' %></th>  
+                                      </tr>
+                                      <!--end::Table row-->
+                                  </thead> 
+                                  <tbody class="text-gray-600 fw-bold">  
+                                      <% @partner_event_participants_lists.each do |partner_join_event| %>
+                                          <tr>
+                                              <td class="d-flex align-items-center"> 
+                                                  <div class="symbol symbol-circle symbol-50px overflow-hidden me-3">
+                                                      <%= image_tag partner_join_event.image.attached? ? partner_join_event.image : "avatar/male.svg", class: "symbol-label" %> 
+                                                  </div> 
+                                                  <div class="d-flex flex-column">
+                                                      <%#= link_to company_student_details_path(id: partner_join_event.id), :class=> 'text-gray-800 text-hover-primary mb-1' do %>
+                                                          <%= partner_join_event.name %>
+                                                      <%# end %> 
+                                                      <span></span>
+                                                  </div> 
+                                              </td>   
+                                              <td><%= l @event.updated_at.to_date %></td>
+                                          </tr>
+                                      <% end %>
+                                  </tbody> 
+                              </table>                   
+                          </div>                            
+                      </div>
+                  </div>  
+              </div>  
+              <!--begin::pagination-->
+              <div class="d-flex flex-wrap justify-content-between align-items-center my-2">
+                  <div class="d-flex flex-wrap py-2 mr-3">
+                      <%= paginate  @partner_event_participants_lists %>
+                  </div>
+                  <div class="d-flex align-items-center py-3">
+                      <span class="text-muted"><%=  t('common.list_display')  %><%= @partner_event_participants_lists.total_count %> <%=  t('common.to')  %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%= @partner_event_participants_lists.offset_value + 1 %> ~ <%=  @partner_event_participants_lists.offset_value + @partner_event_participants_lists.count %> <%=  t('common.search_result')  %> </span>
+                  </div>
+              </div>
+              <!--end::pagination-->
+              <% else %> 
+              <!--begin::Card-->
+              <div class="card bg-body">
+                  <!--begin::Card body-->
+                  <div class="card-body p-0">
+                      <!--begin::Wrapper-->
+                      <div class="card-px py-5 my-5">
+                          <!--begin::Description-->
+                          <div class="d-flex align-items-center flex-column">
+                              <span class="text-muted m-1 fw-bold"><%= t ('event.title.event_join_stu_list_no_data') %></span>
+                          </div>
+                          <!--end::Description-->
+                      </div>
+                      <!--end::Wrapper-->
+                  </div>
+                  <!--end::Card body-->
+              </div>
+              <!--end::Card-->
+          <% end %>
+          <!--end::Card-->
+        </div>
+      </div>
+    </div>
+</div>

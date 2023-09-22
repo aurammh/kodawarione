@@ -1,0 +1,134 @@
+<div id="kt_toolbar" class="toolbar py-5 py-lg-5">
+    <% breadcrumbs_navigation_add (t('student.assessment.kodawari_assessment_title')), company_commitment_ability_index_path %>
+    <!-- <% breadcrumbs_navigation_add ("こだわり登録"), '#' %> -->
+    <%= render_company_breadcrumbs_navigation (('こだわり登録')) %>
+</div>
+
+
+<div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
+    
+    <div class="content flex-row-fluid" id="kt_content">
+        <div class="card-header h-auto border-0 py-3 bg-transparent">
+            <div class="card-title pt-5 pb-2">
+                <h3 class="card-label">
+                <span class="d-block text-dark fw-bolder">
+                    自社のこだわりに最も近いものを３つ選択してください。
+                </span>
+                </h3>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="d-flex flex-column flex-lg-row">
+                <div class="flex-lg-row mb-3">
+                    <div class="row g-10" style="margin-bottom: 40px; margin-inline: 0px; margin-top: 1px;">
+                        <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12" style="padding-left: 8px; margin-top: 0px;">
+                            <div class="row pb-10 border border-gray-200" style="border-radius: 10px; padding-inline: 10px; margin-right: 20px; background-color: rgba(245, 248, 250, 0.35);">
+                                <div class="card-header h-auto border-0 py-3 bg-transparent">
+                                    <div class="card-title pt-5 pb-2">
+                                        <h3 class="card-label">
+                                            <span class="d-block text-dark fw-bolder">以下の項目の中から、大切にしている「こだわり」を３つ選んでください。</span>
+                                        </h3>
+                                    </div>
+                                </div>
+                                <div class="flex-column col-xl-4 col-lg-6 col-md-6 col-sm-9">
+                                    <% @commitment_ability_list.first(8).each_with_index do |ability, index| %>
+                                        <% tmpIDs = @commitment_ability_detail_results.find {|e| e.m_commitment_abilities_id == ability.id}
+                                            tmpChk = tmpIDs.nil? ?false: true
+                                         %>
+
+                                            <div class="form-check form-check-custom form-check-solid" style="padding-bottom: 10px;"> 
+                                                <%= check_box_tag "checkbox-id[#{ability.id}]", ability.id, tmpChk, {class: "form-check-input", "data-id": ability.id, } %>
+                                                <%= label_tag "checkbox-id[#{ability.id}]", ability.name, {class: "form-check-label",  "data-name": ability.name }%>
+                                            </div>
+                                    <% end %>
+                                   
+                                </div>
+                                <div class="flex-column col-xl-4 col-lg-6 col-md-6 col-sm-9">
+                                    <% @commitment_ability_list.slice(8, 8).each_with_index do |ability, index| %>
+                                    <% tmpIDs = @commitment_ability_detail_results.find {|e| e.m_commitment_abilities_id == ability.id}
+                                            tmpChk = tmpIDs.nil? ? false: true
+                                         %>
+                                            <div class="form-check form-check-custom form-check-solid" style="padding-bottom: 10px;">
+                                                <%= check_box_tag "checkbox-id[#{ability.id}]", ability.id, tmpChk, {class: "form-check-input", "data-id": ability.id} %>
+                                                <%= label_tag "checkbox-id[#{ability.id}]", ability.name, {class: "form-check-label"}%>
+                                            </div>
+                                    <% end %>
+                                </div>
+                                <div class="flex-column col-xl-4 col-lg-6 col-md-6 col-sm-9">
+                                    <% @commitment_ability_list.last(8).each_with_index do |ability, index| %>
+                                    <% tmpIDs = @commitment_ability_detail_results.find {|e| e.m_commitment_abilities_id == ability.id}
+                                            tmpChk = tmpIDs.nil? ? false: true
+                                         %>
+                                            <div class="form-check form-check-custom form-check-solid" style="padding-bottom: 10px;">
+                                                <%= check_box_tag "checkbox-id[#{ability.id}]", ability.id, tmpChk, {class: "form-check-input", "data-id": ability.id} %>
+                                                <%= label_tag "checkbox-id[#{ability.id}]", ability.name, {class: "form-check-label"}%>
+                                            </div>
+                                    <% end %>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card col-xl-3 col-lg-3 col-md-6 col-sm-9 border" style="padding-inline: 10px; border-radius: 10px; margin-top: 0px;">
+                            <div class="card-header h-auto border-0 py-3 bg-transparent" style="padding-left: 3px;">
+                                <div class="card-title pt-5 pb-2">
+                                    <h3 class="card-label"><span class="d-block text-dark fw-bolder">選択された項目</span></h3>
+                                </div>
+                            </div>
+                            <div id="selected-abilities">
+                                <!-- <% @commitment_ability_detail_results.each_with_index do |ability, index| %>
+                                    <div class="d-flex align-items-center" style="padding-bottom: 10px;">
+                                        <span class="badge badge-circle badge-primary min-w-25px min-h-25px" style="margin-right: 5px;"><%= index+1 %></span>
+                                        <label class="fs-6"><%= ability.name %></label>
+                                    </div>
+                                <% end %> -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="ability-reason" class="card border" style="padding-bottom: 30px;">
+                        <div class="card-header h-auto border-0 py-3 bg-transparent" style="align-self: center; margin-bottom: 5px;">
+                            <div class="card-title pt-5 pb-2">
+                                <h3 class="card-label">
+                                    <span class="d-block text-dark fw-bolder">選択した３つのこだわりを10段階で評価しその理由も併せて記載ください。</span>
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="row px-5" id="selected-reasons">
+                            <!-- <% @commitment_ability_detail_results.each_with_index do |ability, index| %>
+                                <div class="col-xl-4 col-lg-8 col-md-9 col-sm-12 mb-6 text-center">
+                                    <div class="d-flex justify-content-center"><span class="badge badge-circle badge-white" style="border: 1px solid gray;"><%= index+1 %></span>
+                                        <div class="fs-5 fw-bolder mb-5" style="margin-left: 5px;"><%= ability.name %></div>
+                                    </div>
+                                    <div class="d-flex justify-content-center mb-1">
+                                        <% (1..10).each do |i| %>
+                                            <div class="d-flex align-items-center" style="padding-bottom: 10px; padding-inline: 2px;">
+                                                <span class="hoverable badge badge-square <%= i == ability.ability_value ? "badge-primary" : "badge-light-primary" %>" style="width: 2.5rem; height: 2.5rem;"><%= i %></span>
+                                            </div>
+                                        <% end %>
+                                    </div>
+                                    <div class="d-flex mb-5" style="justify-content: space-between;">
+                                        <span class="label fw-bold text-primary">低い</span><span class="label fw-bold text-primary">高い</span>
+                                    </div>
+                                    <textarea class="form-control form-control-solid mb-8" rows="5" placeholder="選択理由を教えてください。" style="overflow: hidden; min-width: 100%;"><%= ability.ability_reason %></textarea>
+                                </div>
+                            <% end %> -->
+                            
+                        </div>
+                        <div class="d-flex flex-column align-items-center pt-10">
+                            <span id="ability-error"></span>
+                            <input type="submit" id="ability-save-company-btn" class="btn btn-primary font-weight-bold py-2 px-6 mt-5" value="保存">
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <!--end::Kodawari-->
+    </div>
+</div>
+
+<script> 
+    let commitmentAbilityList = <%= @commitment_ability_list.to_json.html_safe %>;
+    let commitmentAbilityResult = <%= @commitment_ability_detail_results.to_json.html_safe %>;
+</script>
+<%= javascript_pack_tag "company/commitment_abilities.js" %>

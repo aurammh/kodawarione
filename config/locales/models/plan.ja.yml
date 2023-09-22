@@ -1,0 +1,19 @@
+ja:
+  activerecord:
+    models:
+      kodawarione/plan: plan
+    attributes:
+      kodawarione/plan:
+        name: プラン
+        content: 内容
+        fee: 料金
+        partner_fee_string: 料金        
+  errors:
+    attributes:
+      category:
+        blank: 'を選択してください。'
+    messages:
+      blank: 'を入力してください。'
+      invalid: '無効です。'
+    tooltip:
+      copied_text: コピー済

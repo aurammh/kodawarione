@@ -1,0 +1,17 @@
+<%= form_with(model: kodawarione_company_role) do |form| %>
+  <% if kodawarione_company_role.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(kodawarione_company_role.errors.count, "error") %> prohibited this kodawarione_company_role from being saved:</h2>
+
+      <ul>
+        <% kodawarione_company_role.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

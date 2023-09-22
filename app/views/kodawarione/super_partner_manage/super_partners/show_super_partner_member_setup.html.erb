@@ -1,0 +1,81 @@
+<!--begin::Header-->
+<% breadcrumbs_navigation_add (t('super_partner.title.super_partner_list')), kodawarione_super_partner_manage_index_path %>
+<% breadcrumbs_navigation_add (t('student.title.header_link1')), kodawarione_super_partner_manage_super_partner_details_path(@member.super_partners_id) %>
+<% breadcrumbs_navigation_add (t('super_partner.title.super_partner_member_details')), '#' %>
+<%= render_partner_breadcrumbs_navigation("Super Partner Member Details") %>		
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+  <!--begin::Container-->
+  <div class="container-fluid" id="kt_content_container">
+    	<!--begin::Layout-->
+		<div class="d-flex flex-column flex-lg-row">
+			<!--begin::Content-->
+			<div class="flex-lg-row-fluid me-lg-15 order-2 order-lg-1 mb-10 mb-lg-0">
+				<!--begin::Card-->
+				<div class="card bg-body card-flush pt-3 mb-5 mb-xl-10">
+					<!--begin::Card header-->
+					<div class="card-header">
+						<!--begin::Card title-->
+						<div class="card-title">
+							<h2 class="fw-bolder"><%= t('super_partner.title.super_partner_member_details') %></h2>
+						</div>
+						<!--begin::Card title-->
+						<!--begin::Card toolbar-->
+						<% if can?(:edit_super_partner_member_setup, Kodawarione::SuperPartner) %>
+							<div class="card-toolbar">
+								<%= link_to t('super_partner.steps.buttons.back'), kodawarione_super_partner_manage_super_partner_details_path(@member.super_partners_id), :class=>"btn btn-light-primary me-3" %>
+								<%= link_to t('btn.edit'), kodawarione_super_partner_manage_edit_super_partner_member_setup_path(id:@member.id,super_partner_id: @member.super_partners_id), :class=>"btn btn-primary" %>
+							</div>
+						<% end %>
+						<!--end::Card toolbar-->
+					</div>
+					<!--end::Card header-->
+					<!--begin::Card body-->
+					<div class="card-body pt-3">
+						<!--begin::Section-->
+						<div class="mb-10">
+							<!--begin::Title-->
+							<h5 class="mb-4"><%= t('super_partner.title.super_partner_member_details') %>:</h5>
+							<!--end::Title-->
+							<!--begin::Details-->
+							<div class="d-flex flex-wrap py-5">
+								<!--begin::Row-->
+								<div class="flex-equal me-5">
+									<!--begin::Details-->
+									<table class="table fs-6 fw-bold gs-0 gy-2 gx-2 m-0">
+										<!--begin::Row-->
+										<tr>
+											<td class="text-gray-600 min-w-175px w-175px"><%= t'super_partner.super_partner_user.title.name' %>:</td>
+											<td class="text-gray-800 min-w-200px">
+                                            <span class="text-gray-800 fw-bolder"><%= @admin.last_name + " " + @admin.first_name %></span>
+											</td>
+										</tr>
+										<!--end::Row-->
+										<!--begin::Row-->
+                                        <% if @admin.email.present? %>
+                                            <tr>
+                                                <td class="text-gray-600"><%= t'super_partner.super_partner_user.title.email' %>:</td>
+                                                <td class="text-gray-800 fw-bolder"><%= @admin.email %></td>
+                                            </tr>
+                                        <% end %>
+                                        <!--end::Row-->
+									</table>
+									<!--end::Details-->
+								</div>
+								<!--end::Row-->
+							</div>
+							<!--end::Row-->
+						</div>
+						<!--end::Section-->
+					</div>
+					<!--end::Card body-->
+				</div>
+				<!--end::Card-->
+			</div>
+			<!--end::Content-->
+		</div>
+		<!--end::Layout-->
+	</div>
+	<!--end::Post-->
+</div>
+<!--end::Container-->

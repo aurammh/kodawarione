@@ -1,0 +1,18 @@
+ja:
+  activerecord:
+    models:
+      communication/mail_template_registration: mail_template_registration
+    attributes:
+      communication/mail_template_registration:
+        template_name: テンプレート名
+        subject: 件名
+        content: 内容
+  mail_template_registration:
+    title:
+      header: メールテンプレート作成
+      mail_template_list: メールテンプレート一覧
+      mail_template_registration: メールテンプレート登録
+      mail_template_show: メールテンプレートショー
+    btn:
+      template_register_btn: テンプレートとして登録する
+      create_new: 新規作成

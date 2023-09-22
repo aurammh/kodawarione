@@ -1,0 +1,93 @@
+<!--begin::Header-->
+<div id="kt_header" class="header">
+    <!--begin::Container-->
+    <div class="container d-flex align-items-center justify-content-between" id="kt_header_container">
+        <!--begin::Page title-->
+        <div class="page-title d-flex flex-column align-items-start justify-content-center flex-wrap me-lg-2 pb-5 pb-lg-0" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', lg: '#kt_header_container'}">
+            <!--begin::Heading-->
+            <h1 class="d-flex flex-column text-dark fw-bolder my-0 fs-1"><%= current_page_name %></h1>
+            <% unless current_page_name == '新規仮登録入力' && @company_company.created_at == @company_company.updated_at %>
+                <ul class="breadcrumb breadcrumb-dot fw-bold fs-base my-1">
+                    <!--begin::Item-->
+                    <% nav.each do |n| %>
+                        <% unless n.equal? nav.last %>
+                            <li class="breadcrumb-item"><%= link_to n[:title], n[:url], class: "text-muted" %></li>
+                        <% else %>
+                            <li class="breadcrumb-item text-dart"><%= n[:title] %></li>
+                        <% end %>
+                    <% end %>
+                    <!--end::Item-->
+                </ul>
+            <% end %>
+            <!--end::Heading-->
+        </div>
+        <!--end::Page title=-->
+        <!--begin::Wrapper-->
+        <div class="d-flex d-lg-none align-items-center ms-n2 me-2">
+            <!--begin::Aside mobile toggle-->
+            <div class="btn btn-icon btn-active-icon-primary" id="kt_aside_toggle">
+            <!--begin::Svg Icon | path: icons/duotune/abstract/abs015.svg-->
+            <span class="svg-icon svg-icon-1 mt-1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M21 7H3C2.4 7 2 6.6 2 6V4C2 3.4 2.4 3 3 3H21C21.6 3 22 3.4 22 4V6C22 6.6 21.6 7 21 7Z" fill="black" />
+                <path opacity="0.3" d="M21 14H3C2.4 14 2 13.6 2 13V11C2 10.4 2.4 10 3 10H21C21.6 10 22 10.4 22 11V13C22 13.6 21.6 14 21 14ZM22 20V18C22 17.4 21.6 17 21 17H3C2.4 17 2 17.4 2 18V20C2 20.6 2.4 21 3 21H21C21.6 21 22 20.6 22 20Z" fill="black" />
+                </svg>
+            </span>
+            <!--end::Svg Icon-->
+            </div>
+            <!--end::Aside mobile toggle-->
+            <!--begin::Logo-->
+            <%= link_to root_path, class: "d-flex align-items-center"  do %>
+                <%= image_tag "layout/header_logo.png", class: "h-30px" %>    
+            <% end %> 
+            <!--end::Logo-->
+        </div>
+        <!--end::Wrapper-->
+        <!--begin::Topbar-->
+        <div class="d-flex align-items-center flex-shrink-0">
+            <!--begin::Chat-->
+            <div class="d-flex d-none align-items-center ms-3 ms-lg-4">
+                <!--begin::Drawer wrapper-->
+                <div class="btn btn-icon btn-color-gray-700 btn-active-color-primary btn-outline btn-outline-secondary position-relative w-40px h-40px" id="kt_drawer_chat_toggle">
+                    <!--begin::Svg Icon | path: icons/duotune/communication/com003.svg-->
+                    <span class="svg-icon svg-icon-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path opacity="0.3" d="M2 4V16C2 16.6 2.4 17 3 17H13L16.6 20.6C17.1 21.1 18 20.8 18 20V17H21C21.6 17 22 16.6 22 16V4C22 3.4 21.6 3 21 3H3C2.4 3 2 3.4 2 4Z" fill="black" />
+                        <path d="M18 9H6C5.4 9 5 8.6 5 8C5 7.4 5.4 7 6 7H18C18.6 7 19 7.4 19 8C19 8.6 18.6 9 18 9ZM16 12C16 11.4 15.6 11 15 11H6C5.4 11 5 11.4 5 12C5 12.6 5.4 13 6 13H15C15.6 13 16 12.6 16 12Z" fill="black" />
+                    </svg>
+                    </span>
+                    <!--end::Svg Icon-->
+                    <!--begin::Bullet-->
+                    <span class="bullet bullet-dot bg-success h-6px w-6px position-absolute translate-middle top-0 start-50 animation-blink"></span>
+                    <!--end::Bullet-->
+                </div>
+                <!--end::Drawer wrapper-->
+            </div>
+            <!--end::Chat-->
+        </div>
+        <!--end::Topbar-->
+        <!--begin::Logout-->
+		<div class="d-flex align-items-center ms-3 ms-lg-4"  data-bs-toggle="tooltip" data-bs-placement="left" data-bs-trigger="hover" title="" data-bs-original-title="<%= t('student.title.logout_link') %>">
+            <%if company_user_signed_in? %>
+                <%= link_to destroy_company_user_session_path, method: :delete, class: "btn btn-icon btn-color-gray-700 btn-active-color-primary btn-outline btn-outline-secondary w-40px h-40px" do %> 
+                    <!--begin::Svg Icon | path: icons/duotune/general/gen007.svg-->
+                    <span class="svg-icon svg-icon-1">
+                        <span class="svg-icon svg-icon-primary svg-icon-2x">
+                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <rect x="0" y="0" width="24" height="24"/>
+                                    <path d="M7.62302337,5.30262097 C8.08508802,5.000107 8.70490146,5.12944838 9.00741543,5.59151303 C9.3099294,6.05357769 9.18058801,6.67339112 8.71852336,6.97590509 C7.03468892,8.07831239 6,9.95030239 6,12 C6,15.3137085 8.6862915,18 12,18 C15.3137085,18 18,15.3137085 18,12 C18,9.99549229 17.0108275,8.15969002 15.3875704,7.04698597 C14.9320347,6.73472706 14.8158858,6.11230651 15.1281448,5.65677076 C15.4404037,5.20123501 16.0628242,5.08508618 16.51836,5.39734508 C18.6800181,6.87911023 20,9.32886071 20,12 C20,16.418278 16.418278,20 12,20 C7.581722,20 4,16.418278 4,12 C4,9.26852332 5.38056879,6.77075716 7.62302337,5.30262097 Z" fill="#000000" fill-rule="nonzero"/>
+                                    <rect fill="#000000" opacity="0.3" x="11" y="3" width="2" height="10" rx="1"/>
+                                </g>
+                            </svg>
+                        </span>
+                    </span>
+                    <!--end::Svg Icon-->
+                <% end %>
+            <%end %>
+		</div>
+		<!--end::Logout-->
+    </div>
+    <!--end::Container-->
+</div>
+<!--end::Header-->

@@ -1,0 +1,17 @@
+<!--begin::Toolbar-->
+<div class="toolbar py-5 py-lg-5" id="kt_toolbar">
+    <!--begin::Container-->
+    <div id="kt_toolbar_container" class="container-xxl d-flex flex-stack flex-wrap">
+        <!--begin::Page title-->
+        <% breadcrumbs_navigation_add ( t ('common.applied_vacancy')),'#' %>
+        <%= render_student_breadcrumbs_navigation( t ('common.applied_vacancy')) %>
+        <!--end::Page title-->
+    </div>
+    <!--end::Container-->
+</div>
+<div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">            
+	<div class="content flex-row-fluid" id="kt_content">
+        <%= render partial: "common/apply_vacancy_list", locals: { applied_vacancies: @all_applied_vacancy_list } %>  
+    </div>
+</div>
+<%= javascript_pack_tag 'common.js'%>

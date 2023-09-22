@@ -1,0 +1,2 @@
+class ApplicationStatusTransactionsController < ApplicationController
+end

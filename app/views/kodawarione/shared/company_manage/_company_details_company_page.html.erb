@@ -1,0 +1,652 @@
+<div>
+    <%= render partial: "kodawarione/shared/company_manage/profile_navbar", :locals =>{:current_route => "company_page"}  %>
+</div>
+<!--begin::Container-->
+<!--begin::Card-->
+<% if @company_details.m_industry_id.present? || @company_details.job_info.present? || @company_details.employee_count.present? %>
+    <div class="card bg-body card-flush pt-3 mb-5 mb-xl-10">
+        <div class="card-body">
+            <% if @company_details.job_info.present? %>
+                <div class="mt-10 pb-10">
+                    <h3 class="text-center fs-2x text-dark fw-bolder w-100 mb-10"><%= Company::Company.human_attribute_name('job_info') %></h3>
+                    <div class="fs-6 fw-bold text-gray-700 px-4">
+                        <%= @company_details.job_info %>
+                    </div>
+                </div>
+            <% end %>
+            <!--begin::Facts-->
+            <div class="mt-20 pb-10">
+                <!--begin::Seperator-->
+                <div class="separator separator-dashed border-gray-400"></div>
+                <!--end::Seperator-->
+                <!--begin::Industry-->
+                <div class="row my-7 px-20">
+                    <div class="col-12 col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <h3 class="text-gray-600 fw-bolder mb-0 fs-3"><i class="fa fa-genderless text-primary fs-2 me-2"></i><%= Company::Company.human_attribute_name('m_industry_id') %></h3>
+                    </div>
+                    <div class="col-12 col-xs-8 col-sm-8 ol-md-8 col-lg-8">
+                        <p class="fw-normal text-gray-600 mb-0"><%= get_industry_name_by_ID(@company_details.m_industry_id) %></p>
+                    </div>
+                </div>
+                <!--end::Industry-->
+                <!--begin::Seperator-->
+                <div class="separator separator-dashed border-gray-400"></div>
+                <!--end::Seperator--> 
+                <!--begin::Employee_count-->
+                <div class="row my-7 px-20">
+                    <div class="col-12 col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <h3 class="text-gray-600 fw-bolder mb-0 fs-3"><i class="fa fa-genderless text-primary fs-2 me-2"></i><%= Company::Company.human_attribute_name('employee_count') %></h3>
+                    </div>
+                    <div class="col-12 col-xs-8 col-sm-8 ol-md-8 col-lg-8">
+                        <p class="fw-normal text-gray-600 mb-0"><%= number_with_delimiter(@company_details.employee_count) %> <%= t('unit.persons') %></p>
+                    </div>
+                </div>
+                <!--end::Employee_count-->
+                <!--begin::Seperator-->
+                <div class="separator separator-dashed border-gray-400"></div>
+                <!--end::Seperator-->                         
+            </div>
+            <!--end::Facts--> 
+            <% if @company_details.company_intro.present? %>
+                <div class="mt-10 pb-10">
+                    <h3 class="text-center fs-2x text-dark fw-bolder w-100 mb-10"><%= Company::Company.human_attribute_name('company_intro') %></h3>
+                    <div class="fs-6 fw-bold text-gray-700 px-4">
+                        <%= @company_details.company_intro %>
+                    </div>
+                </div>
+            <% end %>
+            <% if @company_details.history.present? %>
+                <div class="mt-10 pb-10">
+                    <h3 class="text-center fs-2x text-dark fw-bolder w-100 mb-10"><%= Company::Company.human_attribute_name('history') %></h3>
+                    <div class="fs-6 fw-bold text-gray-700 px-4">
+                        <%= @company_details.history %>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+        <!--end::Card-->
+    </div>
+<% end %>
+<!--end::Card-->
+<!--begin::Card-->
+<% if @company_details.company_message.present? || @company_details.other_message.present? || @company_details.company_vision_mission.present? || @company_details.what_we_do.present? || @company_details.how_we_do.present? %>
+    <div class="card bg-body card-flush pt-3 mb-5 mb-xl-10">
+        <div class="card-body">
+            <% if @company_details.company_message.present? %>
+                <div class="mt-10 pb-10">
+                    <h3 class="text-center fs-2x text-dark fw-bolder w-100 mb-10"><%= Company::Company.human_attribute_name('company_message') %></h3>
+                    <div class="fs-6 fw-bold text-gray-700 px-4">
+                        <%= @company_details.company_message %>
+                    </div>
+                </div>
+            <% end %>
+            <% if @company_details.other_message.present? %>
+                <div class="mt-20 pb-10">
+                    <h3 class="text-center fs-2x text-dark fw-bolder w-100 mb-10"><%= Company::Company.human_attribute_name('other_message') %></h3>
+                    <div class="fs-6 fw-bold text-gray-700 px-4">
+                    <%= @company_details.other_message %>
+                    </div>
+                </div>
+            <% end %>              
+            <% if @company_details.company_vision_mission.present? %>
+                <div class="mt-20 pb-10">
+                    <h3 class="text-center fs-2x text-dark fw-bolder w-100 mb-10"><%= Company::Company.human_attribute_name('company_vision_mission') %></h3>
+                    <div class="fs-6 fw-bold text-gray-700 px-4">
+                        <%= @company_details.company_vision_mission %>
+                    </div>
+                </div>
+            <% end %>   
+            <% if @company_details.what_we_do.present? %>
+                <div class="mt-20 pb-10">
+                    <h3 class="text-center fs-2x text-dark fw-bolder w-100 mb-10"><%= Company::Company.human_attribute_name('what_we_do') %></h3>
+                    <div class="fs-6 fw-bold text-gray-700 px-4">
+                        <%= @company_details.what_we_do %>
+                    </div>
+                </div>
+            <% end %>      
+            <% if @company_details.how_we_do.present? %>
+                <div class="mt-20 pb-10">
+                    <h3 class="text-center fs-2x text-dark fw-bolder w-100 mb-10"><%= Company::Company.human_attribute_name('how_we_do') %></h3>
+                    <div class="fs-6 fw-bold text-gray-700 px-4">
+                        <%= @company_details.how_we_do %>
+                    </div>
+                </div>
+            <% end %> 
+        </div>
+    </div>
+<% end %>
+<!--end::Card-->
+<!--begin::Card-->
+<% if @company_details.about_our_team.present? || @company_details.member_message.present? %>
+    <div class="card bg-body card-flush pt-3 mb-5 mb-xl-10">
+        <div class="card-body">
+            <% if @company_details.about_our_team.present? %>
+                <div class="mt-10 pb-10">
+                    <h5 class="text-center fs-2x text-dark fw-bolder w-100 mb-10"><%= Company::Company.human_attribute_name('about_our_team') %></h5>
+                    <div class="fs-6 fw-bold text-gray-700 px-4">
+                        <%= @company_details.about_our_team %>
+                    </div>
+                </div>
+            <% end %>
+            <% if @company_details.member_message.present? %>
+                <div class="mt-20 pb-10">
+                    <h5 class="text-center fs-2x text-dark fw-bolder w-100 mb-10"><%= Company::Company.human_attribute_name('member_message') %></h5>
+                    <div class="fs-6 fw-bold text-gray-700 px-4">
+                        <%= @company_details.member_message %>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+    </div>
+<% end %>
+<!--end::Card-->
+<!--begin::Card-->
+<% if @company_interview_story_lists.present? %>
+    <div class="card bg-body card-flush pt-3 pb-5 mb-5 mb-xl-10">
+        <!--begin::Card header-->
+		<div class="card-header">
+            <!--begin::Card title-->
+			<div class="card-title flex-column">
+				<h3 class="fw-bolder mb-1"><%= t('interview_story.title.interview_story_title') %></h3>
+				<div class="fs-6 fw-bold text-gray-400">Total <%= @company_interview_story_lists.size %> interview stories</div>
+			</div>
+			<!--end::Card title-->
+		</div>
+		<!--end::Card header-->
+        <div class="card-body pt-3">
+            <div id="kt_project_users_card_pane" class="tab-pane fade show active">
+                <!--begin::Desktop-->
+                <div class="col-12 d-none d-xl-block">
+                    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner"> 
+                            <% (@company_interview_story_lists.size%3 == 0 ? @company_interview_story_lists.size/3  : @company_interview_story_lists.size/3 + 1).times  do |i| %>
+                                <div class="carousel-item <%= i == 0 ? 'active' :  '' %> ">
+                                    <div class="row">
+                                        <% @company_interview_story_lists.offset(3*i).limit(3).each_with_index do |story| %>
+                                            <div class="col-4">
+                                                <%# link_to kodawarione_company_manage_company_details_overview_path(:company_id => story.id,:status => 1), class: "col-6" do %> 
+                                                    <!--begin::Card-->
+                                                    <div class="card card-stretch h-xxl-250px h-xl-275px border p-9">
+                                                        <!--begin::Card body-->
+                                                        <div class="card-body d-flex flex-column  p-0">
+                                                            <!--begin::Title-->
+                                                            <div>
+                                                                <span class="fs-4 text-gray-800 fw-bolder mb-0 text-truncate w-300px w-md-250px w-lg-300px w-xl-350px"><%= story.title %></span>
+                                                                <div class="fw-bold text-gray-400 mt-2 mb-4">
+                                                                    <%= strip_tags(story.review.to_s).truncate(100) %>
+                                                                </div>
+                                                            </div>
+                                                            <!--end::Title-->
+                                                            <!--begin::Info-->
+                                                            <div class="mt-auto d-flex align-items-center">
+                                                                <!--begin::Avatar-->
+                                                                <div class="symbol symbol-40px symbol-circle">
+                                                                    <% if story.image.present? %>
+                                                                        <%= image_tag (story.image), :class=> "symbol-label" %>
+                                                                    <% else %>
+                                                                        <span class="symbol-label fs-2x fw-bold text-primary bg-light-primary"><%= @company_details.company_name.chr.upcase %></span>
+                                                                    <% end %>
+                                                                </div>
+                                                                <!--end::Avatar-->
+                                                                <div class="fs-6 fw-bolder text-gray-700 ms-2"><%= l(story.created_at.to_date, default: '-')%></div>
+                                                            </div>
+                                                            <!--end::Info-->
+                                                        </div>
+                                                        <!--end::Card body-->
+                                                    </div>
+                                                    <!--end::Card-->
+                                                <%# end %>
+                                            </div>
+                                        <% end %>
+                                    </div>
+                                    <!--end::Row-->
+                                </div>
+                            <% end %>
+                        </div>
+                        <% if @company_interview_story_lists.size > 3 %>
+                            <div class="carousel-control-prev">
+                                <a class="carousel-control-prev btn mb-3 mx-3" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
+                                    <i class="fas fa-chevron-left text-primary" style=" font-size: 30px;"></i>
+                                </a>
+                            </div>
+                            <div class="carousel-control-next">
+                                <a class="carousel-control-next btn mb-3 mx-3" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
+                                <i class="fas fa-chevron-right text-primary" style=" font-size: 30px;"></i>
+                                </a>             
+                            </div>
+                        <% end %>
+                    </div>
+                </div>
+                <!--end::Desktop-->
+
+                <!--begin::Tablet-->
+                <div class="col-12 d-none d-xl-none d-lg-block d-md-block d-sm-none">
+                    <div id="carouselExampleIndicatorsTablet" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner"> 
+                            <% (@company_interview_story_lists.size%2 == 0 ? @company_interview_story_lists.size/2  : @company_interview_story_lists.size/2 + 1).times  do |i| %>
+                                <div class="carousel-item <%= i == 0 ? 'active' :  '' %> ">
+                                    <div class="row">
+                                        <% @company_interview_story_lists.offset(2*i).limit(2).each_with_index do |story| %>
+                                            <div class="col-6">
+                                                <%# link_to kodawarione_company_manage_company_details_overview_path(:company_id => story.id,:status => 1), class: "col-6" do %> 
+                                                    <!--begin::Card-->
+                                                    <div class="card card-stretch h-275px border p-9">
+                                                        <!--begin::Card body-->
+                                                        <div class="card-body d-flex flex-column  p-0">
+                                                            <!--begin::Title-->
+                                                            <div>
+                                                                <span class="fs-4 text-gray-800 fw-bolder mb-0 text-truncate w-300px w-md-250px w-lg-300px w-xl-350px"><%= story.title %></span>
+                                                                <div class="fw-bold text-gray-400 mt-2 mb-4">
+                                                                    <%= strip_tags(story.review.to_s).truncate(100) %>
+                                                                </div>
+                                                            </div>
+                                                            <!--end::Title-->
+                                                            <!--begin::Info-->
+                                                            <div class="mt-auto d-flex align-items-center">
+                                                                <!--begin::Avatar-->
+                                                                <div class="symbol symbol-40px symbol-circle">
+                                                                    <% if story.image.present? %>
+                                                                        <%= image_tag (story.image), :class=> "symbol-label" %>
+                                                                    <% else %>
+                                                                        <span class="symbol-label fs-2x fw-bold text-primary bg-light-primary"><%= @company_details.company_name.chr.upcase %></span>
+                                                                    <% end %>
+                                                                </div>
+                                                                <!--end::Avatar-->
+                                                                <div class="fs-6 fw-bolder text-gray-700 ms-2"><%= l(story.created_at.to_date, default: '-')%></div>
+                                                            </div>
+                                                            <!--end::Info-->
+                                                        </div>
+                                                        <!--end::Card body-->
+                                                    </div>
+                                                    <!--end::Card-->
+                                                <%# end %>
+                                            </div>
+                                        <% end %>
+                                    </div>
+                                    <!--end::Row-->
+                                </div>
+                            <% end %>
+                        </div>
+                        <% if @company_interview_story_lists.size > 2 %>
+                            <div class="carousel-control-prev">
+                                <a class="carousel-control-prev btn mb-3 mx-3" href="#carouselExampleIndicatorsTablet" role="button" data-bs-slide="prev">
+                                    <i class="fas fa-chevron-left text-primary" style=" font-size: 30px;"></i>
+                                </a>
+                            </div>
+                            <div class="carousel-control-next">
+                                <a class="carousel-control-next btn mb-3 mx-3" href="#carouselExampleIndicatorsTablet" role="button" data-bs-slide="next">
+                                <i class="fas fa-chevron-right text-primary" style=" font-size: 30px;"></i>
+                                </a>             
+                            </div>
+                        <% end %>
+                    </div>
+                </div>
+                <!--end::Tablet-->
+
+                <!--begin::Mobile-->
+                <div class="col-12 d-block d-xl-none d-lg-none d-md-none d-sm-block">
+                    <div id="carouselExampleIndicatorsMobile" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner"> 
+                            <% (@company_interview_story_lists.size%1 == 0 ? @company_interview_story_lists.size/1  : @company_interview_story_lists.size/1 + 1).times  do |i| %>
+                                <div class="carousel-item <%= i == 0 ? 'active' :  '' %> ">
+                                    <div class="row">
+                                        <% @company_interview_story_lists.offset(1*i).limit(1).each_with_index do |story| %>
+                                            <div class="col-12">
+                                                <%# link_to kodawarione_company_manage_company_details_overview_path(:company_id => story.id,:status => 1), class: "col-6" do %> 
+                                                    <!--begin::Card-->
+                                                    <div class="card card-stretch h-275px border p-9">
+                                                        <!--begin::Card body-->
+                                                        <div class="card-body d-flex flex-column  p-0">
+                                                            <!--begin::Title-->
+                                                            <div>
+                                                                <span class="fs-4 text-gray-800 fw-bolder mb-0 text-truncate w-300px w-md-250px w-lg-300px w-xl-350px"><%= story.title %></span>
+                                                                <div class="fw-bold text-gray-400 mt-2 mb-4">
+                                                                    <%= strip_tags(story.review.to_s).truncate(100) %>
+                                                                </div>
+                                                            </div>
+                                                            <!--end::Title-->
+                                                            <!--begin::Info-->
+                                                            <div class="mt-auto d-flex align-items-center">
+                                                                <!--begin::Avatar-->
+                                                                <div class="symbol symbol-40px symbol-circle">
+                                                                    <% if story.image.present? %>
+                                                                        <%= image_tag (story.image), :class=> "symbol-label" %>
+                                                                    <% else %>
+                                                                        <span class="symbol-label fs-2x fw-bold text-primary bg-light-primary"><%= @company_details.company_name.chr.upcase %></span>
+                                                                    <% end %>
+                                                                </div>
+                                                                <!--end::Avatar-->
+                                                                <div class="fs-6 fw-bolder text-gray-700 ms-2"><%= l(story.created_at.to_date, default: '-')%></div>
+                                                            </div>
+                                                            <!--end::Info-->
+                                                        </div>
+                                                        <!--end::Card body-->
+                                                    </div>
+                                                    <!--end::Card-->
+                                                <%# end %>
+                                            </div>
+                                        <% end %>
+                                    </div>
+                                    <!--end::Row-->
+                                </div>
+                            <% end %>
+                        </div>
+                        <% if @company_interview_story_lists.size > 1 %>
+                            <div class="carousel-control-prev">
+                                <a class="carousel-control-prev btn mb-3 mx-3" href="#carouselExampleIndicatorsMobile" role="button" data-bs-slide="prev">
+                                    <i class="fas fa-chevron-left text-primary" style=" font-size: 30px;"></i>
+                                </a>
+                            </div>
+                            <div class="carousel-control-next">
+                                <a class="carousel-control-next btn mb-3 mx-3" href="#carouselExampleIndicatorsMobile" role="button" data-bs-slide="next">
+                                <i class="fas fa-chevron-right text-primary" style=" font-size: 30px;"></i>
+                                </a>             
+                            </div>
+                        <% end %>
+                    </div>
+                </div>
+                <!--end::Mobile-->
+            </div>
+        </div>
+    </div>
+<% end %>
+<!--end::Card-->
+<!--begin::Card-->
+<% if @company_details.experience_requirements.present? || @company_details.fresher_requirements.present? || @company_details.fresher_second_requirements.present? %>
+    <div class="card bg-body card-flush pt-3 mb-5 mb-xl-10">
+        <div class="card-body">
+            <% if @company_details.experience_requirements.present? %>
+                <div class="mt-10 pb-10">
+                    <h3 class="text-center fs-2x text-dark fw-bolder w-100 mb-10"><%= Company::Company.human_attribute_name('experience_requirements') %></h3>
+                    <div class="fs-6 fw-bold text-gray-700 px-4">
+                        <%= @company_details.experience_requirements %>
+                    </div>
+                </div>
+            <% end %>
+            <% if @company_details.fresher_requirements.present? %>
+                <div class="mt-20 pb-10">
+                    <h3 class="text-center fs-2x text-dark fw-bolder w-100 mb-10"><%= Company::Company.human_attribute_name('fresher_requirements') %></h3>
+                    <div class="fs-6 fw-bold text-gray-700 px-4">
+                        <%= @company_details.fresher_requirements %>
+                    </div>
+                </div>
+            <% end %>
+            <% if @company_details.fresher_second_requirements.present? %>
+                <div class="mt-20 pb-10">
+                    <h3 class="text-center fs-2x text-dark fw-bolder w-100 mb-10"><%= Company::Company.human_attribute_name('fresher_second_requirements') %></h3>
+                    <div class="fs-6 fw-bold text-gray-700 px-4">
+                        <%= @company_details.fresher_second_requirements %>
+                    </div>
+                </div>
+            <% end %>
+        </div>
+    </div>
+<% end %>
+<!--end::Card-->
+<!--begin::Card-->
+<% if @company_activities.present? %>
+    <div class="card bg-body card-flush pt-3 pb-5 mb-5 mb-xl-10">
+        <!--begin::Card header-->
+		<div class="card-header">
+            <!--begin::Card title-->
+			<div class="card-title flex-column">
+				<h3 class="fw-bolder mb-1"><%= (t "activity.title") %></h3>
+				<div class="fs-6 fw-bold text-gray-400">Total <%= @company_activities.size %> activity videos</div>
+			</div>
+			<!--end::Card title-->
+		</div>
+		<!--end::Card header-->
+        <div class="card-body pt-3">
+            <div id="kt_project_users_card_pane" class="tab-pane fade show active">
+                <!--begin::Desktop-->
+                <div class="col-12 d-none d-xl-block">
+                    <div id="carouselExampleIndicatorsVideo" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <% (@company_activities.size%4 == 0 ? @company_activities.size/4  : @company_activities.size/4 + 1).times  do |i| %>
+                                <div class="carousel-item <%= i == 0 ? 'active' :  '' %> ">
+                                    <div class="row">
+                                        <% @company_activities.offset(4*i).limit(4).each_with_index do |company_activity| %>
+                                            <!--begin::Col-->
+                                            <div class="col-3">
+                                                <!--begin::Publications post-->
+                                                <div class="card border h-375px ">
+                                                    <div class="card-body">
+                                                        <!--begin::Video-->
+                                                        <% if company_activity.video_clip.attached? && company_activity.video_clip.persisted? && company_activity.thumbnail.attached? && company_activity.thumbnail.persisted? %>
+                                                            <div class="position-relative">
+                                                                <button data-bs-toggle="modal" data-bs-target="#video-play-modal<%= company_activity.video_clip.id %>" class="vdo-play-btn position-absolute top-50 start-50 translate-middle btn bg-dark bg-opacity-50 bg-hover-lighten bg-hover-opacity-75 px-12 py-5 rounded border border-white border-1 d-flex flex-center" style="z-index: 1"><i class="fas fa-play text-white fs-3 opacity-100"></i></button>
+                                                                <video
+                                                                    id="my-video-poster"
+                                                                    class="video-js vjs-default-skin vjs-big-play-centered w-100 h-175px mb-4 cursor-pointer"
+                                                                    preload="auto"
+                                                                    width="400"
+                                                                    height="175"
+                                                                    poster="<%= url_for(company_activity.thumbnail) %>"
+                                                                    data-setup="{}"
+                                                                    data-bs-toggle="modal" data-bs-target="#video-play-modal<%= company_activity.video_clip.id %>"
+                                                                > 
+                                                                </video>
+                                                                <%= hidden_field_tag(:video_id,'',id: "#{company_activity.video_clip.id}") %>
+                                                                <%= render partial: 'company_page/video_play_modal', locals: { activity_var: company_activity.video_clip, id: company_activity.video_clip.id }%>
+                                                            </div>
+                                                        <% end %>
+                                                        <!--end::Video-->
+                                                        <!--begin::Body-->
+                                                        <div class="m-0">
+                                                            <div class="fs-4 text-dark fw-bolder text-dark lh-base">
+                                                                <%= company_activity.title %>
+                                                            </div>
+                                                            <!--begin::Text-->
+                                                            <div class="fw-bold fs-5 text-gray-600 text-dark mt-3 mb-5"><%= company_activity.desc.to_plain_text.truncate(120) %></div>
+                                                            <!--begin::Content-->
+                                                            <div class="fs-6 fw-bolder">
+                                                                <!--begin::Author-->
+                                                                <span class="text-gray-700 text-hover-primary">作成日 : </span>
+                                                                <!--end::Author-->
+                                                                <!--begin::Date-->
+                                                                <span class="text-muted"><%= l company_activity.created_at.to_date %></span>
+                                                                <!--end::Date-->
+                                                            </div>
+                                                            <!--end::Content-->
+                                                        </div>
+                                                        <!--end::Body-->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--end::Publications post-->
+                                        <% end %>
+                                    </div>
+                                </div>
+                                <!--end::Row-->
+                            <% end %>
+                        </div>
+                        <% if @company_activities.size > 4 %>
+                            <div class="carousel-control-prev">
+                                <a class="carousel-control-prev btn mb-3 mx-3" href="#carouselExampleIndicatorsVideo" role="button" data-bs-slide="prev">
+                                    <i class="fas fa-chevron-left text-primary" style=" font-size: 30px;"></i>
+                                </a>
+                            </div>
+                            <div class="carousel-control-next">
+                                <a class="carousel-control-next btn mb-3 mx-3" href="#carouselExampleIndicatorsVideo" role="button" data-bs-slide="next">
+                                <i class="fas fa-chevron-right text-primary" style=" font-size: 30px;"></i>
+                                </a>             
+                            </div>
+                        <% end %>
+                    </div>
+                </div>
+                <!--end::Desktop-->
+
+                <!--begin::Tablet-->
+                <div class="col-12 d-none d-xl-none d-lg-block d-md-block d-sm-none">
+                    <div id="carouselExampleIndicatorsVideoTablet" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <% (@company_activities.size%3 == 0 ? @company_activities.size/3  : @company_activities.size/3 + 1).times  do |i| %>
+                                <div class="carousel-item <%= i == 0 ? 'active' :  '' %> ">
+                                    <div class="row">
+                                        <% @company_activities.offset(3*i).limit(3).each_with_index do |company_activity| %>
+                                            <!--begin::Col-->
+                                            <div class="col-4">
+                                                <!--begin::Publications post-->
+                                                <div class="card border h-375px">
+                                                    <div class="card-body">
+                                                        <!--begin::Video-->
+                                                        <% if company_activity.video_clip.attached? && company_activity.video_clip.persisted? && company_activity.thumbnail.attached? && company_activity.thumbnail.persisted? %>
+                                                            <div class="position-relative">
+                                                                <button data-bs-toggle="modal" data-bs-target="#video-play-modal-tablet<%= company_activity.video_clip.id %>" class="vdo-play-btn position-absolute top-50 start-50 translate-middle btn bg-dark bg-opacity-50 bg-hover-lighten bg-hover-opacity-75 px-12 py-5 rounded border border-white border-1 d-flex flex-center" style="z-index: 1"><i class="fas fa-play text-white fs-3 opacity-100"></i></button>
+                                                                <video
+                                                                    id="my-video-poster-tablet"
+                                                                    class="video-js vjs-default-skin vjs-big-play-centered w-100 h-175px mb-4 cursor-pointer"
+                                                                    preload="auto"
+                                                                    width="400"
+                                                                    height="175"
+                                                                    poster="<%= url_for(company_activity.thumbnail) %>"
+                                                                    data-setup="{}"
+                                                                    data-bs-toggle="modal" data-bs-target="#video-play-modal-tablet<%= company_activity.video_clip.id %>"
+                                                                > 
+                                                                </video>
+                                                                <%= hidden_field_tag(:video_id,'',id: "-tablet#{company_activity.video_clip.id}") %>
+                                                                <%= render partial: 'company_page/video_play_modal', locals: { activity_var: company_activity.video_clip, id: '-tablet'+company_activity.video_clip.id.to_s }%>
+                                                            </div>
+                                                        <% end %>
+                                                        <!--end::Video-->
+                                                        <!--begin::Body-->
+                                                        <div class="m-0">
+                                                            <div class="fs-4 text-dark fw-bolder text-dark lh-base">
+                                                                <%= company_activity.title %>
+                                                            </div>
+                                                            <!--begin::Text-->
+                                                            <div class="fw-bold fs-5 text-gray-600 text-dark mt-3 mb-5"><%= company_activity.desc.to_plain_text.truncate(120) %></div>
+                                                            <!--begin::Content-->
+                                                            <div class="fs-6 fw-bolder">
+                                                                <!--begin::Author-->
+                                                                <span class="text-gray-700 text-hover-primary">作成日 : </span>
+                                                                <!--end::Author-->
+                                                                <!--begin::Date-->
+                                                                <span class="text-muted"><%= l company_activity.created_at.to_date %></span>
+                                                                <!--end::Date-->
+                                                            </div>
+                                                            <!--end::Content-->
+                                                        </div>
+                                                        <!--end::Body-->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--end::Publications post-->
+                                        <% end %>
+                                    </div>
+                                </div>
+                                <!--end::Row-->
+                            <% end %>
+                        </div>
+                        <% if @company_activities.size > 3 %>
+                            <div class="carousel-control-prev">
+                                <a class="carousel-control-prev btn mb-3 mx-3" href="#carouselExampleIndicatorsVideoTablet" role="button" data-bs-slide="prev">
+                                    <i class="fas fa-chevron-left text-primary" style=" font-size: 30px;"></i>
+                                </a>
+                            </div>
+                            <div class="carousel-control-next">
+                                <a class="carousel-control-next btn mb-3 mx-3" href="#carouselExampleIndicatorsVideoTablet" role="button" data-bs-slide="next">
+                                <i class="fas fa-chevron-right text-primary" style=" font-size: 30px;"></i>
+                                </a>             
+                            </div>
+                        <% end %>
+                    </div>
+                </div>
+                <!--end::Tablet-->
+
+                <!--begin::Mobile-->
+                <div class="col-12 d-block d-xl-none d-lg-none d-md-none d-sm-block">
+                    <div id="carouselExampleIndicatorsVideoMobile" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <% (@company_activities.size%1 == 0 ? @company_activities.size/1  : @company_activities.size/1 + 1).times  do |i| %>
+                                <div class="carousel-item <%= i == 0 ? 'active' :  '' %> ">
+                                    <div class="row">
+                                        <% @company_activities.offset(1*i).limit(1).each_with_index do |company_activity| %>
+                                            <!--begin::Col-->
+                                            <div class="col-12">
+                                                <!--begin::Publications post-->
+                                                <div class="card border h-375px">
+                                                    <div class="card-body">
+                                                        <!--begin::Video-->
+                                                        <% if company_activity.video_clip.attached? && company_activity.video_clip.persisted? && company_activity.thumbnail.attached? && company_activity.thumbnail.persisted? %>
+                                                            <div class="position-relative">
+                                                                <button data-bs-toggle="modal" data-bs-target="#video-play-modal-mobile<%= company_activity.video_clip.id %>" class="vdo-play-btn position-absolute top-50 start-50 translate-middle btn bg-dark bg-opacity-50 bg-hover-lighten bg-hover-opacity-75 px-12 py-5 rounded border border-white border-1 d-flex flex-center" style="z-index: 1"><i class="fas fa-play text-white fs-3 opacity-100"></i></button>
+                                                                <video
+                                                                    id="my-video-poster-mobile"
+                                                                    class="video-js vjs-default-skin vjs-big-play-centered w-100 h-175px mb-4 cursor-pointer"
+                                                                    preload="auto"
+                                                                    width="400"
+                                                                    height="175"
+                                                                    poster="<%= url_for(company_activity.thumbnail) %>"
+                                                                    data-setup="{}"
+                                                                    data-bs-toggle="modal" data-bs-target="#video-play-modal-mobile<%= company_activity.video_clip.id %>"
+                                                                > 
+                                                                </video>
+                                                                <%= hidden_field_tag(:video_id,'',id: "-mobile#{company_activity.video_clip.id}") %>
+                                                                <%= render partial: 'company_page/video_play_modal', locals: { activity_var: company_activity.video_clip, id: '-mobile'+company_activity.video_clip.id.to_s  }%>
+                                                            </div>
+                                                        <% end %>
+                                                        <!--end::Video-->
+                                                        <!--begin::Body-->
+                                                        <div class="m-0">
+                                                            <div class="fs-4 text-dark fw-bolder text-dark lh-base">
+                                                                <%= company_activity.title %>
+                                                            </div>
+                                                            <!--begin::Text-->
+                                                            <div class="fw-bold fs-5 text-gray-600 text-dark mt-3 mb-5"><%= company_activity.desc.to_plain_text.truncate(120) %></div>
+                                                            <!--begin::Content-->
+                                                            <div class="fs-6 fw-bolder">
+                                                                <!--begin::Author-->
+                                                                <span class="text-gray-700 text-hover-primary">作成日 : </span>
+                                                                <!--end::Author-->
+                                                                <!--begin::Date-->
+                                                                <span class="text-muted"><%= l company_activity.created_at.to_date %></span>
+                                                                <!--end::Date-->
+                                                            </div>
+                                                            <!--end::Content-->
+                                                        </div>
+                                                        <!--end::Body-->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--end::Publications post-->
+                                        <% end %>
+                                    </div>
+                                </div>
+                                <!--end::Row-->
+                            <% end %>
+                        </div>
+                        <% if @company_activities.size > 1 %>
+                            <div class="carousel-control-prev">
+                                <a class="carousel-control-prev btn mb-3 mx-3" href="#carouselExampleIndicatorsVideoMobile" role="button" data-bs-slide="prev">
+                                    <i class="fas fa-chevron-left text-primary" style=" font-size: 30px;"></i>
+                                </a>
+                            </div>
+                            <div class="carousel-control-next">
+                                <a class="carousel-control-next btn mb-3 mx-3" href="#carouselExampleIndicatorsVideoMobile" role="button" data-bs-slide="next">
+                                <i class="fas fa-chevron-right text-primary" style=" font-size: 30px;"></i>
+                                </a>             
+                            </div>
+                        <% end %>
+                    </div>
+                </div>
+                <!--end::Mobile-->
+            </div>
+        </div>
+        <!--end::Card-->
+    </div>
+<% end %>
+<!--end::Card-->
+<!--begin::Card-->
+<% if @company_details.m_industry_id.nil? && @company_details.company_message.nil? && @company_details.about_our_team.nil? && @company_details.member_message.nil? && !@company_activities.present? && !@company_interview_story_lists.present? && @company_details.experience_requirements.nil? && @company_details.fresher_requirements.nil? && @company_details.fresher_second_requirements.nil? %>
+    <div class="card bg-body card-flush pt-3 mb-5 mb-xl-10">
+        <div class="card-body text-center py-20">
+            <h3 class="fs-3 fw-bolder"><%= t('activity.no_data_text') %></h3>
+        </div>
+    </div>
+<% end %>
+<!--end::Card-->
+<!--end::Container-->
+<%= hidden_field_tag(:company_id, @company_details.id) %>
+<%= javascript_pack_tag "common.js" %>
+<%= javascript_pack_tag "student/students.js" %>

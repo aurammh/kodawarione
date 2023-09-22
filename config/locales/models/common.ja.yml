@@ -1,0 +1,180 @@
+ja:
+  common:
+    no: No.
+    registration_confirm_screen: 本登録確認画面
+    registration_confirm_screen1: 本登録画面
+    menu_registration_confirm_screen: 基本情報本登録画面
+    vacancy_registration_confirm_screen: 求人票作成
+    require: 必須
+    default_placeholder: が入ります
+    building_address: ※　町、丁目、番地、ビル・マンション名、部屋番号を続けて入力してください
+    ph_no_remark: 〔半角数字ハイフンなしで入力〕
+    a_yes: "あり"
+    a_no: "なし"
+    favourite_users: "興味ありリスト"
+    favourite_company: "興味あり企業リスト"
+    favourite_vacancy: "興味あり求人リスト"
+    applied_vacancy: "応募リスト"
+    favourite_event: 気になるイベント一覧
+    student_favourite_event: 気になる企業イベント一覧
+    join_event: エントリーイベント一覧
+    student_join_event: 参加企業イベント一覧
+    profile_upload_text: 写真をアップロードしてください。
+    event_profile_upload: 写真をアップロードしてください。
+    profile_upload: アップロード
+    profile_delete: 削除
+    contact_remark: 〔ご担当者・部署名・電話番号・メールアドレス・受付時間など〕
+    year_remark: （年）
+    day_remark: （日）
+    time_remark: （時間）
+    person_remark: （人）
+    rate_remark: （率）
+    money_remark: （円）
+    close: CLOSE
+    number_input_remark: 〔半角数入力〕
+    modal_confirm_title: 確認メッセージ
+    modal_confirm_text: 保存されていない回答があります。移動していいですか？
+    waiting_modal_confirm_text: 満員になりましたので、キャンセル待ちリストになりますが、如何でしょうか？
+    modal_submit_text: 全項目が選択されてないので、「キャンセル」ボタンを押して全項目の情報を選択してくださ い。「OK」ボタン押す場合、選択された情報が無視されます。
+    communication_dashboard_title: コミュニケーション一覧
+    communication_dashboard_title1: コミュニケーション
+    user_page: "ユーザーページ"
+    manage_page: "管理画面"
+    display: " 検索結果"
+    list_display: "表示結果"
+    to: "件中"
+    search_result: "件を表示"
+    member_manage_and_permission: "メンバー追加と権限設定"
+    choosen_company: "選択された企業"
+    possess_company: "選択可企業"
+    low: 低い
+    high: 高い
+    favourite_company_text: ご興味のある方は「お気に入りボタン」より追加させることで、ダッシュボードに「お気に入りリスト」を閲覧することができます。
+    favourite_company_list_empty: 興味あり学生情報はありません。
+    applied_company_list_empty: 応募学生情報はありません。
+    update_success: 正常に更新されました
+    update_error: 入力内容に誤りがあります
+    create_success: 正常に保存されました
+    create_error: 入力内容に誤りがあります
+    jobs: 求人
+    kodawari: こだわり
+    joined_events: 参加予定のイベント
+    recommend_list: おすすめリスト
+    communication_mail: コミュニケーションメール
+    student_total_count: 以上の学生を管理する
+    event_total_count: 以上のイベントを管理する
+    vacancy_total_count: 以上の求人を管理する
+    past_event_no_data: 過去のイベントはありません。
+    vacancy_no_data: 登録された求人はありません。
+    partner_news_no_data: 最新ニュースはありません。
+    check_all: すべてチェック
+  date:
+    abbr_month_names:
+      -
+      - 01月
+      - 02月
+      - 03月
+      - 04月
+      - 05月
+      - 06月
+      - 07月
+      - 08月
+      - 09月
+      - 10月
+      - 11月
+      - 12月
+    day_names:
+      - 日曜日
+      - 月曜日
+      - 火曜日
+      - 水曜日
+      - 木曜日
+      - 金曜日
+      - 土曜日
+    formats:
+      default: "%Y年%m月%d日"
+    prompts:
+      second: 秒
+      minute: 分
+      hour: 時
+      day: 日
+      month: 月
+      year: 年
+  select:
+    not_select: 未選択
+    vacancy_not_select: スカウトする求人を選択する
+    view_area: "希望勤務地"
+  btn:
+    update: 登録
+    edit: 編集
+    save: 更新する
+    record: 登録する
+    cancel: "キャンセル"
+    submit: "保存"
+    change_login_setting: パスワード変更
+    company_search: 企業検索
+    vacancy_search: 求人検索
+    student_search: 検索
+    event_search: イベント検索
+    company_event_search: 企業イベント検索
+    kodawari_event_search: こだわりイベント検索
+    fav-text: お気に入りに追加
+    fav-cancel-text: お気に入りから削除
+    join-text: 参加する
+    joined-text: 参加済み
+    event-wait-text: キャンセル待ち
+    join-cancel-text: 参加キャンセル
+    apply-text: 応募済み
+    not-apply-text: 応募する
+    view_all: 一覧を見る
+    confirm_yes: OK
+    confirm_no: キャンセル
+    sent_btn: 送信
+    scout_sent_btn: スカウトする
+    btn_submit: 作成
+    contact: コンタクト
+    return: 戻る
+    sign_up: 新規登録
+    accept: 承認
+    deny: 辞退
+    thank_you_reply: Thank you for your consideration.
+    reply: Reply
+    new_mail_template: テンプレートとして保存する
+    edit_mail_template: テンプレートを更新する
+    overview: イベント情報
+    apply_list: 参加予定学生一覧
+    view_all_list: もっと見る
+  search:
+    filter_by: "検索条件"
+    clear: "クリア"
+    apply: "実行"
+    no_result: "検索結果に該当するデータがありません。"
+    no_event_result: "作成したイベントはありません。"
+  unit:
+    persons: 人
+    company_unit: 社
+    vacancy_unit: 数
+    age: "歳"
+    money: 円
+    san: さん
+  benefit:
+    title: 私たちが提供できるもの
+    work_content: 募集内容
+    advantage: メリット
+    highlight: ハイライト
+    working_time: 勤務時間について
+    payment: お給料について
+    feature: 特徴
+  image_crop:
+    upload: "画像の加工"
+    crop: "登録"
+    cancel: "キャンセル"
+  authorize:
+    title: "権限警告"
+    body: "表示権限が必要です。"
+  survey:
+    search_engine: 検索web検索
+    sns: SNS広告
+    from_friends: 紹介
+    direct_mail: チラシ、広告
+    other: その他

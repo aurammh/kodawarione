@@ -1,0 +1,70 @@
+<div class="mt-10 pb-10">
+  <div class="w-100 mb-10">
+    <h3 class="fs-2x text-dark fw-bolder"><%= @story_details.title %></h3>
+    <div class="mt-1">
+      <!--begin::Avatar-->
+      <div class="symbol symbol-circle symbol-30px me-3">
+        <% if @story_details.image.attached? %>
+          <%= image_tag (@story_details.image), :class=> "" %>
+        <% else %>
+          <%= image_tag "avatar/preview.svg", :class=> "" %>
+        <% end %>
+      </div>
+      <!--end::Avatar-->
+      <span class="text-muted fw-bolder fs-7 me-5">By : <%= @story_details.last_name %> <%= @story_details.first_name %></span>
+      <span class="text-muted fw-bolder fs-7 me-5">Created at : <%= l @story_details.created_at.to_date %></span>
+    </div>
+  </div>
+  <div class="fs-6 fw-bold text-gray-700 pb-10">
+     <%= @story_details.review %>
+  </div>
+  <!--begin::Latest stories-->
+  <% if  @company_interview_story_hightlight.present? %> 
+      <div class="mt-20 pb-10">
+        <div class="d-flex justify-content-between align-items-center">
+          <h3 class="text-gray-600 fw-bolder p-4"><%= t("interview_story.title.latest_stories")%></h3>
+          <%= link_to t('interview_story.title.all_stories'), company_page_stories_path(@company_details.id), class: "fw-bolder" %>
+        </div>
+        <div class="separator separator-dashed mb-9"></div>
+        <!--begin::Row-->
+        <div class="row g-10">
+          <% @company_interview_story_hightlight.each do |story|%>
+            <!--begin::Col-->
+            <div class="col-12 col-lg-4 col-xl-4">
+              <%= link_to story_details_path(id: params[:id],vacancy_id: nil,story_id: story,event_id: nil), class: "" do %>
+                <div class="shadow-sm p-3">
+                  <!--begin::Card--> 
+                  <div class="card bg-body">
+                    <!--begin::Card body-->
+                    <div class="card-body p-5">
+                      <!--begin::Item-->
+                      <h5 class="fs-5 text-truncate text-dark fw-bolder text-hover-primary text-break"><%= story.title.truncate(30) %></h5>
+                      <span class="text-muted fs-7 d-block fw-bold mt-5"><%= strip_tags(story.review.to_s).truncate(70)  %></span>
+                      <div class="mt-3">
+                        <!--begin::Avatar-->
+                        <div class="symbol symbol-circle symbol-30px me-3">
+                          <% if story.image.attached? %>
+                            <%= image_tag (story.image), :class=> "" %>
+                          <% else %>
+                            <%= image_tag "avatar/preview.svg", :class=> "" %>
+                          <% end %>
+                        </div>
+                        <!--end::Avatar-->
+                        <span class="text-muted fw-bolder fs-7"><%= l story.created_at.to_date %></span>
+                      </div>
+                      <!--end::Item-->
+                    </div>
+                      <!--end::Card body-->
+                  </div> 
+                  <!--end::Card-->
+                </div>    
+              <% end %>         
+            </div> 
+            <!--end::Col-->
+          <% end %>
+        </div>
+        <!--end::Row-->
+      </div>
+  <% end %>
+  <!--end::Latest stories-->
+</div>

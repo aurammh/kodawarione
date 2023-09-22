@@ -1,0 +1,7 @@
+@import "variable";
+.admin-content {
+    .event-registration [type="radio"]:checked + label:after,
+    .event-registration [type="radio"]:not(:checked) + label:after {
+    background: $adminSidebarBgColor;;
+    }
+}

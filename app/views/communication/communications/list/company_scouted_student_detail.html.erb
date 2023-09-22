@@ -1,0 +1,10 @@
+<!--begin::Header-->
+<% breadcrumbs_navigation_add (t('menu.scout_result')), company_scouted_result_path %>
+<% breadcrumbs_navigation_add (t('title.student_search_detail_title')), '#' %>
+<%= render_company_breadcrumbs_navigation(t('menu.scout_result')) %>
+<!--end::Header-->
+<% if @student_apply_status.size > 0 %>
+    <%= render partial: "company/shared/student_detail" %>  
+<% else %>
+    <%= render partial: "company/shared/student_commitment" %>
+<% end %>

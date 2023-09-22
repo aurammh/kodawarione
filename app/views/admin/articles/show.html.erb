@@ -1,0 +1,66 @@
+<section class="admin-details px-sm-4 d-flex flex-column align-items-center mt-3 mb-5 pb-5">
+    <div class="col-12 bg-white py-5 shadow event-info-box search-details ">
+        <div class="row px-2 px-lg-4">
+            <div class="col-12 col-sm-6 px-2 mb-3">
+                <div class="admin-font-color h3"><%= t('admin.article.article_information')%></div>
+            </div>
+
+            <div class="d-flex">
+                <div class="px-3 mt-2">
+                    <%= link_to t('btn.edit'), edit_admin_article_path(id: @admin_article.id), class: "admin-sidebar-color text-white col-sm-5 col-md-4 col-lg-2 custom-btn px-3 py-2 text-decoration-none"  %> 
+                </div>
+                <div class="text-center mb-3">
+                    <%= render 'destroy' %>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row px-2 px-lg-4">
+            <div class="col-12 col-md-12 col-lg-12">
+                <div class="row">
+                    <div class="col-12 col-sm-6 col-md-3 col-lg-4 my-3 d-flex flex-column">
+                        <span class="h6 admin-font-color mb-2"><%= Admin::News.human_attribute_name('title') %></span>
+                        <span class="text-secondary text-break"><%= @admin_article.title %></span>
+                    </div>
+
+                    <div class="col-12 col-sm-6 col-md-3 col-lg-4 my-3 d-flex flex-column">
+                        <span class="h6 admin-font-color mb-2"><%= t('admin.article.show_option') %></span>
+                        <span class="text-secondary"><%=  @admin_article.show_option.nil? ? '' : t("admin.article.article_show_options.#{@admin_article.show_option}") %></span>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-3 col-lg-4 my-3 d-flex flex-column">
+                        <span class="h6 admin-font-color mb-2"><%= t('admin.news.news_created_date') %></span>
+                        <span class="text-secondary text-break"><%= l(@admin_article.created_at.strftime('%Y-%m-%d').to_date, default: '-') %></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row px-2 px-lg-4">
+            <div class="col-12 col-md-12 col-lg-12">
+                <div class="row">
+                    <div class="col-12 col-lg-12 my-3 d-flex flex-column">
+                        <span class="h6 admin-font-color mb-2"><%= t('admin.article.article_tb_content') %></span>
+                        <span class="text-secondary text-break"><%= @admin_article.content %></span>
+                    </div>
+                    
+
+                </div>
+            </div>
+        </div>
+        <div class="col-12 mt-2 mb-3">  
+                    <div class="row mx-0">                                                  
+                        <% if @admin_article.video_link.present? %>                                
+                            <% @admin_article_video.each do |article| %>
+                                <div class="col-12 col-md-3 mb-2">
+                                    <div class="embed-responsive embed-responsive-4by3">
+                                        <iframe loading ="lazy" class="embed-responsive-item" src="<%=article %>"frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen ></iframe>
+                                    </div>
+                                </div>
+                            <% end %> 
+                                <div class="col-12<%= @admin_article_video.total_pages < 2 ? " d-none": " d-flex justify-content-center" %> p-4">
+                                    <%= paginate @admin_article_video%>
+                                </div>                                 
+                        <% end %> 
+                    </div>
+                </div>
+    </div>
+</section>

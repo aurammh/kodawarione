@@ -1,0 +1,101 @@
+<!--begin::Header-->
+<% breadcrumbs_navigation_add (t ('student_commitment.menu.create_company_page')), '#' %>
+<%= render_company_breadcrumbs_navigation(t ('commitment_profile.title.about_us_title')) %>	
+<!--end::Header-->
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+  <!--begin::Container-->
+  <div class="container-xxl" id="kt_content_container">
+    <%= render partial: "company/shared/commitment_profiles/common_banner" %>
+    <!--begin::Card-->
+    <div class="card bg-body mb-5 mb-xl-10"> 
+      <!--begin::Form-->
+      <%= form_with(model: @company_commitment_profile, url: about_us_form_company_commitment_profiles_url, method: "patch") do |form| %>
+        <!--begin::Card body-->
+        <div class="card-body">
+          <%= form.hidden_field :not_company_edit, :value => true %>
+          <%= form.hidden_field :about_us_edit, value: true %>
+          <%= form.hidden_field :form_name, value:  'about_us_form'%>
+          <!--begin::Input group-->
+          <div class="row mb-6">
+            <!--begin::Label-->
+            <label class="col-lg-4 col-form-label required fw-bold fs-6"><%= form.label :company_message %></label>
+            <!--end::Label-->
+            <!--begin::Col-->
+            <div class="col-lg-8 fv-row hide-trix-attachment">
+              <%= form.rich_text_area :company_message, class: "form-control form-control-lg form-control-solid h-200px h-lg-300px h-xl-300px overflow-auto ", id: "company_message", rows: 4, maxlength: 3000 %>
+              <p class ="text-danger fs-6 ms-invalid-feedback mt-1"><%= @company_commitment_profile.errors.full_messages_for(:company_message)[0] %></p>
+            </div>
+            <!--end::Col-->
+          </div>
+          <!--end::Input group-->
+          <!--begin::Input group-->
+          <div class="row mb-6">
+            <!--begin::Label-->
+            <label class="col-lg-4 col-form-label required fw-bold fs-6"><%= form.label :other_message %></label>
+            <!--end::Label-->
+            <!--begin::Col-->
+            <div class="col-lg-8 fv-row hide-trix-attachment">
+              <%= form.rich_text_area :other_message, class: "form-control form-control-lg form-control-solid h-200px h-lg-300px h-xl-300px overflow-auto", id: "other_message", rows: 4, maxlength: 3000 %>
+              <p class ="text-danger fs-6 ms-invalid-feedback mt-1"><%= @company_commitment_profile.errors.full_messages_for(:other_message)[0] %></p>
+            </div>
+            <!--end::Col-->
+          </div>
+          <!--end::Input group-->
+          <!--begin::Input group-->
+          <div class="row mb-6">
+            <!--begin::Label-->
+            <label class="col-lg-4 col-form-label fw-bold fs-6"><%= form.label :company_vision_mission %></label>
+            <!--end::Label-->
+            <!--begin::Col-->
+            <div class="col-lg-8 fv-row hide-trix-attachment">
+              <%= form.rich_text_area :company_vision_mission, id: "title_1", class: "form-control form-control-lg form-control-solid h-200px h-lg-300px h-xl-300px  overflow-auto", id: "company_vision_mission", rows: 4, maxlength: 3000 %>
+              <p class ="text-danger fs-6 ms-invalid-feedback mt-1"><%= @company_commitment_profile.errors.full_messages_for(:company_vision_mission)[0] %></p>
+            </div>
+            <!--end::Col-->
+          </div>
+          <!--end::Input group-->
+          <!--begin::Input group-->
+          <div class="row mb-6">
+            <!--begin::Label-->
+            <label class="col-lg-4 col-form-label fw-bold fs-6"><%= form.label :what_we_do %></label>
+            <!--end::Label-->
+            <!--begin::Col-->
+            <div class="col-lg-8 fv-row hide-trix-attachment">
+              <%= form.rich_text_area :what_we_do, id: "title_1", class: "form-control form-control-lg form-control-solid h-200px h-lg-300px h-xl-300px overflow-auto", id: "what_we_do", rows: 4, maxlength: 3000 %>
+              <p class ="text-danger fs-6 ms-invalid-feedback mt-1"><%= @company_commitment_profile.errors.full_messages_for(:what_we_do)[0] %></p>
+            </div>
+            <!--end::Col-->
+          </div>
+          <!--end::Input group-->
+          <!--begin::Input group-->
+          <div class="row mb-6">
+            <!--begin::Label-->
+            <label class="col-lg-4 col-form-label fw-bold fs-6"><%= form.label :how_we_do %></label>
+            <!--end::Label-->
+            <!--begin::Col-->
+            <div class="col-lg-8 fv-row hide-trix-attachment">
+              <%= form.rich_text_area :how_we_do, id: "title_1", class: "form-control form-control-lg form-control-solid h-200px h-lg-300px h-xl-300px overflow-auto", id: "how_we_do", rows: 4, maxlength: 3000 %>
+              <p class ="text-danger fs-6 ms-invalid-feedback mt-1"><%= @company_commitment_profile.errors.full_messages_for(:how_we_do)[0] %></p>
+            </div>
+            <!--end::Col-->
+          </div>
+          <!--end::Input group-->
+        </div>
+        <!--end::Card body-->
+        <!--begin::Actions-->
+        <div class="card-footer d-flex justify-content-end py-6 px-9">
+          <%= link_to t('btn.cancel'), about_us_company_commitment_profiles_path, class: "btn btn-light btn-active-light-primary me-2" %>
+          <%= form.submit t('btn.submit'), class: "btn btn-primary" %>
+        </div>
+        <!--end::Actions-->
+      <% end %>
+      <!--end::Form-->
+    </div>
+    <!--end::Card-->
+  </div>
+  <!--end::Container-->
+</div>
+<!--end::Content-->
+<%= render "users/shared/toastr" %>
+<%= javascript_pack_tag "company/commitment_profile.js" %>

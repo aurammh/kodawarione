@@ -1,0 +1,322 @@
+<!--begin::Header-->
+<% breadcrumbs_navigation_add (t'btn.event_search'), '#' %>
+<%= render_company_breadcrumbs_navigation(t'btn.event_search') %>		
+<!--end::Header-->
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Container-->
+    <div class="container-xxl" id="kt_content_container">
+        <div id="kt_search">
+            <div class="search_form" data-kt-drawer="true" data-kt-drawer-name="search_form" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="{default:'200px', '300px': '100%'}" data-kt-drawer-direction="start" data-kt-drawer-toggle="#search_form_toggle" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_body', lg: '#kt_search'}"> 
+                <!--begin::Form-->
+                <%= form_for( '',url: company_search_event_path, :method => "get") do |form| %>
+                    <!--begin::Card-->
+                    <div id="filter-card" class="card bg-body mb-5 mb-xl-10">
+                        <div class="card-title d-flex d-md-flex d-lg-none d-xl-none align-item-center justify-content-center p-5">
+                            <%= link_to  root_path,class: "flex-grow-1 mt-auto" do %>
+                                <%= image_tag "layout/header_logo.png", class: "h-25px h-lg-40px" %>   
+                            <% end %>
+                            <!--begin::Close-->
+                            <div class="d-flex d-md-flex d-lg-none d-xl-none btn btn-sm btn-icon btn-light btn-color-muted btn-active-primary active">
+                                <span class="svg-icon svg-icon-2x" data-kt-drawer-dismiss="true">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1" transform="rotate(-45 6 17.3137)" fill="black" />
+                                    <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)" fill="black" />
+                                </svg>
+                                </span>
+                            </div>
+                            <!--end::Close-->        
+                        </div>
+                        <!--begin::Card body-->
+                        <div class="card-body">
+                            <!--begin::Compact form-->
+                            <div class="d-flex flex-wrap align-items-center">
+                                <!--begin::Input group-->
+                                <div class="position-relative flex-grow-1 flex-sm-grow-1 flex-md-grow-1 flex-lg-grow-1 flex-xl-grow-0 w-md-400px me-0 me-sm-0 me-md-0 me-lg-0 me-xl-5 my-3">
+                                    <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
+                                    <span class="svg-icon svg-icon-3 svg-icon-gray-500 position-absolute top-50 translate-middle ms-6">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="black"></rect>
+                                            <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="black"></path>
+                                        </svg>
+                                    </span>
+                                    <!--end::Svg Icon-->
+                                    <%= form.text_field :keyword, id: "keyword", class: "form-control form-control-solid ps-10", value: (params[:keyword]), placeholder: t('search.keyword_search') %>
+                                </div>
+                                <!--end::Input group--> 
+                                <!--begin:Action-->
+                                <div class="d-none d-md-none d-lg-none d-xl-flex align-items-center my-3 ms-5">
+                                    <%= link_to t('search.clear'), company_search_event_path, class: "btn btn-light-primary me-5" %>
+                                    <%= form.submit t('search.apply'),class: "btn btn-primary" %>
+                                    <!--<a id="kt_horizontal_search_advanced_link" class="btn btn-link" data-bs-toggle="collapse" href="#kt_advanced_search_form">Advanced Search</a>-->
+                                </div>
+                                <!--end:Action-->
+                            </div>
+                            <!--end::Compact form-->
+                            <!--begin::Advance form-->
+                            <div class="collapse show" id="kt_advanced_search_form">
+                                <!--begin::Separator-->
+                                <div class="separator separator-dashed mt-9 mb-6"></div>
+                                <!--end::Separator-->
+                                <!--begin::Row-->
+                                <div class="row g-8 mb-8"> 
+                                    <!--begin::Col-->
+                                    <div class="col-xxl-6">
+                                        <%= form.label (Event.human_attribute_name('event_start_date')), class: "fs-6 form-label fw-bolder text-dark" %>
+                                        <!--begin::Input group-->
+                                        <div class="position-relative d-flex align-items-center datepicker" id="a_start_date">
+                                            <!--begin::Icon-->
+                                            <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
+                                            <span class="svg-icon svg-icon-2 position-absolute mx-4">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                    <path opacity="0.3" d="M21 22H3C2.4 22 2 21.6 2 21V5C2 4.4 2.4 4 3 4H21C21.6 4 22 4.4 22 5V21C22 21.6 21.6 22 21 22Z" fill="black"></path>
+                                                    <path d="M6 6C5.4 6 5 5.6 5 5V3C5 2.4 5.4 2 6 2C6.6 2 7 2.4 7 3V5C7 5.6 6.6 6 6 6ZM11 5V3C11 2.4 10.6 2 10 2C9.4 2 9 2.4 9 3V5C9 5.6 9.4 6 10 6C10.6 6 11 5.6 11 5ZM15 5V3C15 2.4 14.6 2 14 2C13.4 2 13 2.4 13 3V5C13 5.6 13.4 6 14 6C14.6 6 15 5.6 15 5ZM19 5V3C19 2.4 18.6 2 18 2C17.4 2 17 2.4 17 3V5C17 5.6 17.4 6 18 6C18.6 6 19 5.6 19 5Z" fill="black"></path>
+                                                    <path d="M8.8 13.1C9.2 13.1 9.5 13 9.7 12.8C9.9 12.6 10.1 12.3 10.1 11.9C10.1 11.6 10 11.3 9.8 11.1C9.6 10.9 9.3 10.8 9 10.8C8.8 10.8 8.59999 10.8 8.39999 10.9C8.19999 11 8.1 11.1 8 11.2C7.9 11.3 7.8 11.4 7.7 11.6C7.6 11.8 7.5 11.9 7.5 12.1C7.5 12.2 7.4 12.2 7.3 12.3C7.2 12.4 7.09999 12.4 6.89999 12.4C6.69999 12.4 6.6 12.3 6.5 12.2C6.4 12.1 6.3 11.9 6.3 11.7C6.3 11.5 6.4 11.3 6.5 11.1C6.6 10.9 6.8 10.7 7 10.5C7.2 10.3 7.49999 10.1 7.89999 10C8.29999 9.90003 8.60001 9.80003 9.10001 9.80003C9.50001 9.80003 9.80001 9.90003 10.1 10C10.4 10.1 10.7 10.3 10.9 10.4C11.1 10.5 11.3 10.8 11.4 11.1C11.5 11.4 11.6 11.6 11.6 11.9C11.6 12.3 11.5 12.6 11.3 12.9C11.1 13.2 10.9 13.5 10.6 13.7C10.9 13.9 11.2 14.1 11.4 14.3C11.6 14.5 11.8 14.7 11.9 15C12 15.3 12.1 15.5 12.1 15.8C12.1 16.2 12 16.5 11.9 16.8C11.8 17.1 11.5 17.4 11.3 17.7C11.1 18 10.7 18.2 10.3 18.3C9.9 18.4 9.5 18.5 9 18.5C8.5 18.5 8.1 18.4 7.7 18.2C7.3 18 7 17.8 6.8 17.6C6.6 17.4 6.4 17.1 6.3 16.8C6.2 16.5 6.10001 16.3 6.10001 16.1C6.10001 15.9 6.2 15.7 6.3 15.6C6.4 15.5 6.6 15.4 6.8 15.4C6.9 15.4 7.00001 15.4 7.10001 15.5C7.20001 15.6 7.3 15.6 7.3 15.7C7.5 16.2 7.7 16.6 8 16.9C8.3 17.2 8.6 17.3 9 17.3C9.2 17.3 9.5 17.2 9.7 17.1C9.9 17 10.1 16.8 10.3 16.6C10.5 16.4 10.5 16.1 10.5 15.8C10.5 15.3 10.4 15 10.1 14.7C9.80001 14.4 9.50001 14.3 9.10001 14.3C9.00001 14.3 8.9 14.3 8.7 14.3C8.5 14.3 8.39999 14.3 8.39999 14.3C8.19999 14.3 7.99999 14.2 7.89999 14.1C7.79999 14 7.7 13.8 7.7 13.7C7.7 13.5 7.79999 13.4 7.89999 13.2C7.99999 13 8.2 13 8.5 13H8.8V13.1ZM15.3 17.5V12.2C14.3 13 13.6 13.3 13.3 13.3C13.1 13.3 13 13.2 12.9 13.1C12.8 13 12.7 12.8 12.7 12.6C12.7 12.4 12.8 12.3 12.9 12.2C13 12.1 13.2 12 13.6 11.8C14.1 11.6 14.5 11.3 14.7 11.1C14.9 10.9 15.2 10.6 15.5 10.3C15.8 10 15.9 9.80003 15.9 9.70003C15.9 9.60003 16.1 9.60004 16.3 9.60004C16.5 9.60004 16.7 9.70003 16.8 9.80003C16.9 9.90003 17 10.2 17 10.5V17.2C17 18 16.7 18.4 16.2 18.4C16 18.4 15.8 18.3 15.6 18.2C15.4 18.1 15.3 17.8 15.3 17.5Z" fill="black"></path>
+                                                </svg>
+                                            </span>
+                                            <!--end::Svg Icon-->
+                                            <!--end::Icon-->
+                                            <!--begin::Datepicker-->
+                                            <%= form.text_field :startDate, "data-input": "", id: "start_date",  class: "form-control form-control-solid ps-12 flatpickr-input active", placeholder: t('search.start_date'), value: (params[:startDate])%>
+                                            <!--end::Datepicker-->
+                                        </div>
+                                        <!--end::Input group-->
+                                    </div>
+                                    <!--end::Col-->
+                                    <!--begin::Col-->
+                                    <div class="col-xxl-6">
+                                        <%= form.label (Event.human_attribute_name('event_end_date')), class: "fs-6 form-label fw-bolder text-dark" %>
+                                        <div class="position-relative d-flex align-items-center datepicker" id="a_end_date">
+                                            <!--begin::Icon-->
+                                            <!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
+                                            <span class="svg-icon svg-icon-2 position-absolute mx-4">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                    <path opacity="0.3" d="M21 22H3C2.4 22 2 21.6 2 21V5C2 4.4 2.4 4 3 4H21C21.6 4 22 4.4 22 5V21C22 21.6 21.6 22 21 22Z" fill="black"></path>
+                                                    <path d="M6 6C5.4 6 5 5.6 5 5V3C5 2.4 5.4 2 6 2C6.6 2 7 2.4 7 3V5C7 5.6 6.6 6 6 6ZM11 5V3C11 2.4 10.6 2 10 2C9.4 2 9 2.4 9 3V5C9 5.6 9.4 6 10 6C10.6 6 11 5.6 11 5ZM15 5V3C15 2.4 14.6 2 14 2C13.4 2 13 2.4 13 3V5C13 5.6 13.4 6 14 6C14.6 6 15 5.6 15 5ZM19 5V3C19 2.4 18.6 2 18 2C17.4 2 17 2.4 17 3V5C17 5.6 17.4 6 18 6C18.6 6 19 5.6 19 5Z" fill="black"></path>
+                                                    <path d="M8.8 13.1C9.2 13.1 9.5 13 9.7 12.8C9.9 12.6 10.1 12.3 10.1 11.9C10.1 11.6 10 11.3 9.8 11.1C9.6 10.9 9.3 10.8 9 10.8C8.8 10.8 8.59999 10.8 8.39999 10.9C8.19999 11 8.1 11.1 8 11.2C7.9 11.3 7.8 11.4 7.7 11.6C7.6 11.8 7.5 11.9 7.5 12.1C7.5 12.2 7.4 12.2 7.3 12.3C7.2 12.4 7.09999 12.4 6.89999 12.4C6.69999 12.4 6.6 12.3 6.5 12.2C6.4 12.1 6.3 11.9 6.3 11.7C6.3 11.5 6.4 11.3 6.5 11.1C6.6 10.9 6.8 10.7 7 10.5C7.2 10.3 7.49999 10.1 7.89999 10C8.29999 9.90003 8.60001 9.80003 9.10001 9.80003C9.50001 9.80003 9.80001 9.90003 10.1 10C10.4 10.1 10.7 10.3 10.9 10.4C11.1 10.5 11.3 10.8 11.4 11.1C11.5 11.4 11.6 11.6 11.6 11.9C11.6 12.3 11.5 12.6 11.3 12.9C11.1 13.2 10.9 13.5 10.6 13.7C10.9 13.9 11.2 14.1 11.4 14.3C11.6 14.5 11.8 14.7 11.9 15C12 15.3 12.1 15.5 12.1 15.8C12.1 16.2 12 16.5 11.9 16.8C11.8 17.1 11.5 17.4 11.3 17.7C11.1 18 10.7 18.2 10.3 18.3C9.9 18.4 9.5 18.5 9 18.5C8.5 18.5 8.1 18.4 7.7 18.2C7.3 18 7 17.8 6.8 17.6C6.6 17.4 6.4 17.1 6.3 16.8C6.2 16.5 6.10001 16.3 6.10001 16.1C6.10001 15.9 6.2 15.7 6.3 15.6C6.4 15.5 6.6 15.4 6.8 15.4C6.9 15.4 7.00001 15.4 7.10001 15.5C7.20001 15.6 7.3 15.6 7.3 15.7C7.5 16.2 7.7 16.6 8 16.9C8.3 17.2 8.6 17.3 9 17.3C9.2 17.3 9.5 17.2 9.7 17.1C9.9 17 10.1 16.8 10.3 16.6C10.5 16.4 10.5 16.1 10.5 15.8C10.5 15.3 10.4 15 10.1 14.7C9.80001 14.4 9.50001 14.3 9.10001 14.3C9.00001 14.3 8.9 14.3 8.7 14.3C8.5 14.3 8.39999 14.3 8.39999 14.3C8.19999 14.3 7.99999 14.2 7.89999 14.1C7.79999 14 7.7 13.8 7.7 13.7C7.7 13.5 7.79999 13.4 7.89999 13.2C7.99999 13 8.2 13 8.5 13H8.8V13.1ZM15.3 17.5V12.2C14.3 13 13.6 13.3 13.3 13.3C13.1 13.3 13 13.2 12.9 13.1C12.8 13 12.7 12.8 12.7 12.6C12.7 12.4 12.8 12.3 12.9 12.2C13 12.1 13.2 12 13.6 11.8C14.1 11.6 14.5 11.3 14.7 11.1C14.9 10.9 15.2 10.6 15.5 10.3C15.8 10 15.9 9.80003 15.9 9.70003C15.9 9.60003 16.1 9.60004 16.3 9.60004C16.5 9.60004 16.7 9.70003 16.8 9.80003C16.9 9.90003 17 10.2 17 10.5V17.2C17 18 16.7 18.4 16.2 18.4C16 18.4 15.8 18.3 15.6 18.2C15.4 18.1 15.3 17.8 15.3 17.5Z" fill="black"></path>
+                                                </svg>
+                                            </span>
+                                            <!--end::Svg Icon-->
+                                            <!--end::Icon-->
+                                            <!--begin::Datepicker-->
+                                            <%= form.text_field :endDate,  "data-input": "", id: "end_date", class: "form-control form-control-solid ps-12 flatpickr-input active", placeholder: t('search.end_date'), value: (params[:endDate])%>
+                                            <!--end::Datepicker-->
+                                        </div>
+                                        <!--end::Input group-->
+                                    </div>
+                                    <!--end::Col-->
+                                    <!--begin::Col-->
+                                    <div class="col-xxl-6">
+                                        <%= form.label Event.human_attribute_name('category'), class: "fs-6 form-label fw-bolder text-dark" %>
+                                        <!--begin::Select-->
+                                        <%= select_tag :category, options_for_select(event_category_options, :selected => params[:category]), {:multiple => true, :class => "form-select form-select-solid",:id => "event_category",data: { :control => 'select2', 'hide-search' => true, 'close-on-select' => false} } %>
+                                        <!--end::Select-->
+                                    </div>
+                                    <div class="col-xxl-6">
+                                        <!--begin::Checkbox-->
+                                        <div class="form-check form-check-custom form-check-solid mt-2 mt-lg-10 mt-xl-10">
+                                            <%= form.check_box "removePastEvent", { :checked => params[:removePastEvent].nil? ? false :  true, class: "form-check-input" },true, nil %>
+                                            <%= form.label "removePastEvent", t("search.remove_past_event"), class: "form-check-label flex-grow-1 fw-bold text-gray-700 fs-6" %>
+                                        </div>
+                                    </div> 
+                                    <!--end::Col-->
+                                    <!--begin::Col-->
+                                    <!--<div class="col-xxl-6">
+                                        <%= form.label "主催者" , class: "fs-6 form-label fw-bolder text-dark" %> -->
+                                        <!--begin::Select-->
+                                        <!--<%# select_tag :event_type, options_for_select(event_options, :selected => params[:event_type]), {:multiple => true, :class => "form-select form-select-solid",:id => "event_type",data: {:placeholder => '主催者', :control => 'select2', 'hide-search' => true, 'close-on-select' => false} } %>-->
+                                        <!--end::Select-->
+                                    <!--</div>-->
+                                    <!--end::Col-->
+                                </div>
+                                <!--end::Row-->
+                            </div>
+                            <!--end::Advance form-->
+                            <!--begin:Action-->
+                            <div class="d-flex d-md-flex d-lg-flex d-xl-none  border border-gray-500 border-dashed rounded justify-content-center min-w-100px my-3 p-2">
+                                <%= link_to t('search.clear'), company_search_event_path, class: "btn btn-light-primary me-5" %>
+                                <%= form.submit t('search.apply'),class: "btn btn-primary" %>
+                                <!--<a id="kt_horizontal_search_advanced_link" class="btn btn-link" data-bs-toggle="collapse" href="#kt_advanced_search_form">Advanced Search</a>-->
+                            </div>
+                            <!--end:Action-->                            
+                        </div>
+                        <!--end::Card body-->
+                    </div>
+                    <!--end::Card-->
+                <% end %>
+                <!--end::Form-->
+            </div>
+        </div>
+        <!--begin::Toolbar-->
+        <div class="d-flex flex-wrap flex-stack pb-7">
+            <!--begin::Title-->
+            <div class="d-flex flex-wrap align-items-center my-1">
+                <h3 class="fw-bolder me-5 my-1">
+                    <%= t'common.display' %> <%= @results.size %> <%= t('search.count_unit') %>
+                </h3>
+            </div>
+            <!--end::Title-->
+            <div class="d-flex flex-wrap my-1 d-block d-lg-none">
+                <!--begin::Tab nav-->
+                <ul class="nav nav-pills mb-2 mb-sm-0">
+                    <li class="nav-item m-0" id="search_form_toggle">
+                        <a class="btn btn-sm btn-icon btn-light btn-color-muted btn-active-primary active">
+                            <!--begin::Svg Icon | path: icons/duotune/abstract/abs015.svg-->
+                            <span class="svg-icon svg-icon-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M21 7H3C2.4 7 2 6.6 2 6V4C2 3.4 2.4 3 3 3H21C21.6 3 22 3.4 22 4V6C22 6.6 21.6 7 21 7Z" fill="black"></path>
+                                    <path opacity="0.3" d="M21 14H3C2.4 14 2 13.6 2 13V11C2 10.4 2.4 10 3 10H21C21.6 10 22 10.4 22 11V13C22 13.6 21.6 14 21 14ZM22 20V18C22 17.4 21.6 17 21 17H3C2.4 17 2 17.4 2 18V20C2 20.6 2.4 21 3 21H21C21.6 21 22 20.6 22 20Z" fill="black"></path>
+                                </svg>
+                            </span>
+                            <!--end::Svg Icon-->
+                        </a>
+                    </li>
+                </ul>
+                <!--end::Tab nav-->
+            </div> 
+        </div>
+        <!--end::Toolbar-->
+        <!--begin::Tab Content-->
+        <div class="tab-content">
+            <!--begin::Tab pane-->
+            <div id="kt_project_users_card_pane" class="tab-pane fade show active">
+                <!--begin::Row-->
+                <div class="row g-6 g-xl-9">
+                    <% @results.each do |event| %>
+                        <div class="col-md-6 col-lg-12 col-xl-6 col-xxl-6">
+							<!--begin::Card-->
+                            <% if can?(:join_admin_event, Company::Search) %>
+                                <div class="position-relative"> 
+                                    <div class="join-admin-event action-btn position-absolute top-0 end-0 pt-5 pe-5 <%= !@join_event_arr.include?(event.id) && get_event_participant_count(event.id) == event.apply_event_limit ? 'cursor-not-allowed' : 'cursor-pointer' %>" id="<%= event.id %>"><i class="fas fa-bookmark fs-2 <%= @join_event_arr.include?(event.id) ? 'text-primary' : 'text-secondary' %>"></i></div>
+                                </div>
+                            <% end %>
+							<div class= "text-decoration-none text-dark" >                                 
+								<div class="card card-custom card-stretch bg-body border-top border-4 border-primary" >       
+									<!--begin::Body-->
+							        <%= link_to company_admin_event_detail_search_path(event), class: "card-body" do %>
+										<div class="d-flex">
+                                            <div class="min-w-50px text-white me-5 d-none d-sm-block d-md-block">  
+                                                <div class="symbol symbol-75px w-100">
+                                                    <div class="d-flex flex-column justify-content-center text-white symbol-label bg-primary bg-opacity-75 w-100">
+                                                        <span class="fs-5 fw-bold"><%= t('date.abbr_month_names')[event.event_start_date.month] %></span>
+                                                        <span class="fs-2 fw-bolder"><%= event.event_start_date.strftime('%d') %><%= t('date.prompts.day') %></span>
+                                                    </div> 
+                                                </div>                 
+                                            </div> 
+											<div class="flex-grow-1 text-break">
+												<div class="d-flex flex-column pl-5">
+													<h5 class="card-title fw-bolder mb-2">
+														<%= event.event_name %>
+													</h5>
+													<% unless event.category.nil?%>
+														<!--begin::Info-->
+														<div class="d-flex flex-wrap mb-3">
+															<% event.category.each do |v| %>
+                                                                <% if v != nil %>
+                                                                    <!--begin::Item-->
+                                                                    <div class="me-5">
+                                                                    <!--begin::Icon-->
+                                                                    <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                                                                    <span class="svg-icon svg-icon-primary svg-icon-6 me-1">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                        <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
+                                                                        <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
+                                                                        <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
+                                                                        <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
+                                                                        </svg>
+                                                                    </span>
+                                                                    <!--end::Svg Icon-->
+                                                                    <!--end::Icon-->
+                                                                    <!--begin::Label-->
+                                                                    <span class="fw-bolder fs-8 text-gray-400"><%= t("event.category.#{Event.event_categories.key(v)}") %></span>
+                                                                    <!--end::Label-->
+                                                                    </div>
+                                                                    <!--end::Item-->
+                                                                <% end %>
+															<% end %>
+														</div>
+													<% end %>
+                                                    <!--begin::Item-->
+                                                    <div class="d-flex me-5 mb-2">
+                                                        <!--begin::Title-->
+                                                        <div>
+                                                            <% if event.event_type == 1 %>
+                                                                <span class="badge badge-warning"><%= t'search.event_organizer' %>: <%= t('welcome.privacy policy.top_page_link.text2') %></span>
+                                                            <% elsif event.event_type == 2 %>
+                                                                <span class="badge badge-warning"><%= t'search.event_organizer' %>: <%=  t('partner.partners_tab') %></span>
+                                                            <% elsif event.event_type == 4 %>
+                                                                <span class="badge badge-warning"><%= t'search.event_organizer' %>: <%=  t('partner.super_partners_tab') %></span>    
+                                                            <% else %>
+                                                                <span class="badge badge-warning"><%= t'search.event_organizer' %>: <%=  t('Kodawari One') %></span>
+                                                            <% end %>
+                                                        </div>
+                                                        <!--end::Title-->
+                                                        <span class="badge font-weight-lighter fs-8 ms-5 <%= check_event_avaliable(event) ? "badge-light-success" : " badge-light-danger"  %>">
+                                                            <%= check_event_avaliable(event) ?  t('event.title.event_in_progress') : t('event.title.recuirment_full')  %>
+                                                        </span>		
+                                                    </div>		
+                                                    <% if event.event_content.present? %>								
+                                                        <p class="card-title text-muted mt-5">
+                                                            <%= event.event_content.to_plain_text.truncate(70) %>
+                                                        </p>
+                                                    <% end %>
+													<p class="card-title fw-bolder mt-3">
+														<i class="fas fa-map-marker-alt text-primary mr-2"></i> <%= event.venue.present? ? event.venue.truncate(60) : t("event.venue_types.online") %>                     
+													</p>                                             
+												</div>
+												<div class="d-flex my-6">
+													<!--begin::Due-->
+													<div class="border border-gray-300 border-dashed rounded min-w-100px p-2 me-lg-3 me-1 me-lg-3">
+														<div class="fs-6 text-gray-800 fw-bolder"><%= l event.event_start_date %></div>
+														<div class="fw-bold text-gray-400"><%= Event.human_attribute_name('event_start_date') %></div>
+													</div>
+													<!--end::Due-->
+													<!--begin::Budget-->
+													<div class="border border-gray-300 border-dashed rounded min-w-100px p-2">
+														<div class="fs-6 text-gray-800 fw-bolder"><%= l event.event_end_date %></div>
+														<div class="fw-bold text-gray-400"><%= Event.human_attribute_name('event_end_date') %></div>
+													</div>
+													<!--end::Budget-->
+												</div>  
+											</div>
+                                            
+                                            
+										</div>
+									
+                                    <% end %>
+									<!--end::Body-->                             
+								</div>
+							</div>
+							<!--end::Card-->
+						</div>                        
+                    <% end %>
+                </div>
+                <!--end::Row-->
+                <% unless @results.present?  %>
+                    <div class="col-12 mt-10">
+                        <h3> <%= (t "search.no_result") %></h3>
+                    </div>
+                <% end %> 
+                <!--start::Pagination-->
+                <% if @results.present?  %>
+                    <div class="d-flex justify-content-between align-items-center flex-wrap pt-10">
+                        <div class="d-flex flex-wrap">
+                            <%= paginate @results %>
+                        </div>
+                        <div class="d-flex align-items-center py-3">
+                            <span class="text-muted"><%=  t('common.display')  %> <%= @results.total_count %> <%=  t('common.to')  %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%= @results.offset_value + 1 %> ~ <%=  @results.offset_value + @results.count %> <%=  t('common.search_result')  %> </span>
+                        </div>
+                    </div> 
+                <% end %>
+                <!--end::Pagination--> 
+            </div>
+            <!--end::Tab pane-->
+        </div>
+        <!--end::Tab Content-->
+    </div>
+    <!--end::Container-->
+</div>
+<%= javascript_pack_tag "admin/admin_search.js" %>
+<%= javascript_pack_tag 'common.js'%>
+<%= javascript_pack_tag "company/company.js" %>
+

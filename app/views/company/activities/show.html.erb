@@ -1,0 +1,103 @@
+<!--begin::Breadcrumb-->
+<% breadcrumbs_navigation_add (t('menu.company_page')), '#' %>
+<%= render_company_breadcrumbs_navigation(t('commitment_profile.title.commitment_profile_title')) %>
+<!--end::Breadcrumb-->
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+  <!--begin::Container-->
+  <div class="container-xxl" id="kt_content_container">
+    <%= render partial: "company/shared/commitment_profiles/common_banner" %>
+    <!--begin::Card-->
+    <div class="card bg-body mb-5 mb-xl-10">
+      <!--begin::Card body-->
+      <div class="card-body p-lg-17">
+        <div class="row">
+          <!--begin::Content-->
+          <div class="col-lg-12">
+            <!--begin::Post content-->
+            <div class="">
+              <!--begin::Info-->
+              <div class="d-flex flex-wrap mb-6">
+                <!--begin::Item-->
+                <div class="me-9 my-1">
+                  <!--begin::Icon-->
+                  <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                  <span class="svg-icon svg-icon-primary svg-icon-2 me-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                      <rect x="2" y="2" width="9" height="9" rx="2" fill="black"></rect>
+                      <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black"></rect>
+                      <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black"></rect>
+                      <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black"></rect>
+                    </svg>
+                  </span>
+                  <!--end::Svg Icon-->
+                  <!--end::Icon-->
+                  <!--begin::Label-->
+                  <span class="fw-bolder text-gray-400"><%= l @company_activity.created_at.to_date %></span>
+                  <!--end::Label-->
+                </div>
+                <!--end::Item-->
+                <!--begin::Item-->
+                <div class="me-9 my-1">
+                  <!--begin::Icon-->
+                  <!--SVG file not found: icons/duotune/finance/fin006.svgFolder.svg-->
+                  <!--end::Icon-->
+                  <!--begin::Label-->
+                  <span class="fw-bolder text-gray-400">Announcements</span>
+                  <!--begin::Label-->
+                </div>
+                <!--end::Item-->
+              </div>
+              <!--end::Info-->
+              <!--begin::Title-->
+              <h2 class="text-dark fs-2 fw-bolder">
+                <%= @company_activity.title %>
+              </h2>
+              <!--end::Title-->
+              <!--begin::Container-->
+              <% if @company_activity.video_clip.attached? && @company_activity.video_clip.persisted? && @company_activity.thumbnail.attached? && @company_activity.thumbnail.persisted? %>
+                <div class="my-8">
+                  <!--begin::Video-->
+                    <video
+                    id="my-video"
+                    class="video-js vjs-default-skin vjs-big-play-centered w-100 h-425px"
+                    controls
+                    preload="auto"
+                    height= "700"
+                    width="700"
+                    poster="<%= url_for(@company_activity.thumbnail) %>"
+                    data-setup="{}"
+                  >
+                    <source src="<%= url_for(@company_activity.video_clip) %>" />
+                  </video>
+                  <!--end::Video-->
+                </div>
+              <% end %>
+              <!--end::Container-->
+            </div>
+            <!--end::Wrapper-->
+            <!--begin::Description-->
+            <div class="fs-5 fw-bold text-gray-600">
+              <!--begin::Text-->
+              <p class="m-0"><%= @company_activity.desc %></p>
+              <!--end::Text-->
+            </div>
+            <!--end::Post content-->
+            <!--begin::Actions-->
+            <% if can?(:update, Company::Activity) %>
+              <div class="d-flex justify-content-center mt-7">
+                <%= link_to t('btn.edit'), edit_company_activity_path(@company_activity), class: "btn btn-primary" %>
+              </div>
+            <% end %>
+            <!--end::Actions-->
+          </div>
+          <!--end::Content-->
+        </div>
+      </div>
+      <!--end::Card body-->
+    </div>
+    <!--end::Card-->
+  </div>
+  <!--end::Container-->
+</div>
+<!--end::Content-->

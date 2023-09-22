@@ -1,0 +1,146 @@
+<div class="container">
+    <div id="kt_subheader" class="subheader subheader-transparent py-2 py-lg-6">
+        <div class="d-flex flex-wrap flex-sm-nowrap align-items-center justify-content-between">
+            <% breadcrumbs_navigation_add (t('admin.article.article_tab')), '#' %>
+            <%= render_student_breadcrumbs_navigation(t ('admin.article.article_tab')) %>		
+        </div>
+    </div>
+    <div class="d-flex flex-row">
+        <div id="kt_profile_aside" class="flex-column offcanvas-mobile w-300px w-xl-325px">
+            <div class="card card-custom gutter-b">
+                <div class="flex-wrap card-header border-0 pt-6 pb-0">
+                    <h3 class="flex-column card-title align-items-start ">
+                        <span class="card-label font-weight-bolder font-size-h3 text-dark"><%= t('admin.article.article_tab') %></span>
+                    </h3>
+                </div>
+                <div class="card-body pt-4">
+                    <div>
+                        <div class="d-flex align-items-center mb-8">
+                            <div class="symbol mr-4 pt-1">
+                                <%= image_tag "media/books/4.png", class: "symbol-label min-w-65px min-h-100px" %>
+                            </div>
+                            <div class="d-flex flex-column">
+                                <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">Job Fair</a>
+                                <span class="text-muted font-weight-bold font-size-sm pb-4">Amazing Short Story About
+                                <br />Darius greatness</span>
+                                <div>
+                                    <button type="button" class="btn btn-light font-weight-bolder font-size-sm py-2">View Event</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center mb-8">
+                            <div class="symbol mr-4 pt-1">
+                                <%= image_tag "media/books/12.png", class: "symbol-label min-w-65px min-h-100px" %>	
+                            </div>
+                            <div class="d-flex flex-column">
+                                <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">Wild Blues</a>
+                                <span class="text-muted font-weight-bold font-size-sm pb-4">Amazing Short Story About
+                                <br />Darius greatness</span>
+                                <div>
+                                    <button type="button" class="btn btn-light font-weight-bolder font-size-sm py-2">View Event</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <div class="symbol mr-4 pt-1">
+                                <%= image_tag "media/books/13.png", class: "symbol-label min-w-65px min-h-100px" %>
+                            </div>
+                            <div class="d-flex flex-column">
+                                <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg">Simple Thinking</a>
+                                <span class="text-muted font-weight-bold font-size-sm pb-4">Amazing Short Story About
+                                <br />Darius greatness</span>
+                                <div>
+                                    <button type="button" class="btn btn-light font-weight-bolder font-size-sm py-2">View Event</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card card-custom gutter-b">
+                <div class="flex-wrap card-header border-0 pt-6 pb-0">
+                    <h3 class="flex-column card-title align-items-start">
+                        <span class="card-label font-weight-bolder font-size-h3 text-dark"><%= t 'admin.article.article_tab' %></span>
+                    </h3>
+                </div>
+                
+                <div class="card-body pt-4">
+                    <div class="d-flex mb-8">
+                        <div class="symbol symbol-50 symbol-2by3 flex-shrink-0 mr-4">
+                            <div class="d-flex flex-column">
+                                <%= image_tag "media/stock-600x400/img-23.jpg", class: "symbol-label mb-3" %>
+                                <a href="#" class="btn btn-light-primary font-weight-bolder font-size-sm py-2">Edit</a>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-column flex-grow-1 my-lg-0 my-2 pr-3">
+                            <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg mb-2">Darius the Great</a>
+                            <span class="text-muted font-weight-bold font-size-sm mb-3">All it takes tank credibility is one glaring error</span>
+                            <span class="text-muted font-weight-bold font-size-lg">Price:
+                            <span class="text-dark-75 font-weight-bolder">99.00$</span></span>
+                        </div>
+                    </div>
+                    <div class="d-flex">
+                        <div class="symbol symbol-50 symbol-2by3 flex-shrink-0 mr-4">
+                            <div class="d-flex flex-column">
+                                <%= image_tag "media/stock-600x400/img-25.jpg", class: "symbol-label mb-3" %>
+                                <a href="#" class="btn btn-light-primary font-weight-bolder py-2 font-size-sm">Edit</a>
+                            </div>
+                        </div>
+                        <div class="d-flex flex-column flex-grow-1 my-lg-0 my-2 pr-3">
+                            <a href="#" class="text-dark-75 font-weight-bolder text-hover-primary font-size-lg mb-2">Nike Airmax</a>
+                            <span class="text-muted font-weight-bold font-size-sm mb-3">All it takes tank credibility is one glaring error</span>
+                            <span class="text-muted font-weight-bold font-size-lg">Price:
+                            <span class="text-dark-75 font-weight-bolder">99.00$</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+            <div class="card card-custom gutter-b">
+                <div class="card-body d-flex p-0">
+                    <div class="flex-grow-1 bg-white card-rounded flex-grow-1 bgi-no-repeat px-8 py-20">
+                        <h3 class="text-inverse-white font-weight-bolder mt-2 mb-4"><%= t 'admin.article.article_tab' %></h4>
+                        <%= link_to t('admin.article.article_tab') ,student_search_article_path, :class => "btn btn-primary font-weight-bold py-2 px-6" %>  
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flex-row-fluid ml-lg-8"> 
+            <!--begin::Card-->
+            <div class="card mb-8">
+                <div class="card-body">
+                    <div class="p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-8">
+                            <!--begin::Heading-->
+                            <h2 class="text-dark"> <%=@admin_article.title%> </h2>
+                            <!--end::Heading-->
+                            <!--begin::Badge-->
+                            <div class="btn btn-text btn-sm btn-light-primary font-weight-bolder"><%= l(@admin_article.created_at.strftime('%Y-%m-%d').to_date, default: '-') %></div>
+                            <!--end::Badge-->
+                        </div>
+                        <!--begin::Content-->
+                        <div class="text-dark-50 font-size-lg">
+                            <p><%= @admin_article.content %></p> 
+                        </div>   
+                        <div class="text-dark-50 font-size-lg">                                                  
+                            <% if @admin_article.video_link.present? %>                                
+                                <% @admin_article_video.each do |article| %>
+                                    <div class="col-12 col-md-3 mb-2">
+                                        <div class="embed-responsive embed-responsive-4by3">
+                                            <iframe loading ="lazy" class="embed-responsive-item" src="<%=article %>"frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen ></iframe>
+                                        </div>
+                                    </div>
+                                <% end %> 
+                                    <div class="col-12<%= @admin_article_video.total_pages < 2 ? " d-none": " d-flex justify-content-center" %> p-4">
+                                        <%= paginate @admin_article_video%>
+                                    </div>                                 
+                            <% end %> 
+                        </div> 
+                        <!--end::Content-->
+                    </div>
+                </div>
+            </div>
+            <!--begin::Card--> 
+        </div>
+    </div>
+</div> 
+<%= javascript_pack_tag "admin/admin_search.js" %>

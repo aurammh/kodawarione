@@ -1,0 +1,142 @@
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+	<%= render "users/shared/flash", resource: resource %>
+	<%= f.hidden_field :user_type, value: params[:user_type]  %>
+    <div class="d-flex flex-column flex-root">
+		<!--begin::Authentication - Sign-up -->
+		<div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed">
+			<!--begin::Content-->
+			<div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
+				<!--begin::Logo-->
+				<%= link_to root_path do %>
+					<%= image_tag "layout/header_logo.png", class: "h-40px mb-12" %>   
+				<% end %>  
+				<!--end::Logo-->
+				<!--begin::Wrapper-->
+				<div class="w-lg-500px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
+					<!--begin::Heading-->
+					<div class="mb-10 text-center">
+						<!--begin::Title-->
+						<h1 class="text-dark mb-3"><%= t('btn.sign_up') %></h1>
+						<!--end::Title-->
+						<!--begin::Link-->
+						<div class="text-gray-400 fw-bold fs-4"><%= t('registeration.session.sign_up_text') %>
+							<%= link_to(t('welcome.privacy policy.top_page_link.link9'),welcome_student_login_path , class: "link-primary fw-bolder") %> 
+						</div>
+						<!--end::Link-->
+					</div>
+					<!--end::Heading-->
+					<!--begin::Action-->
+					<%= link_to user_facebook_omniauth_authorize_path, method: :post ,data: { turbolinks: false }, class: "btn position-relative facebook-bg opacity-75-hover btn-lg w-100 py-3 mb-4" do %>
+						<span class="position-absolute top-50 start-0 translate-middle-y mt-n1 ms-7"> 
+						<img alt="Logo" src="../../../assets/media/svg/brand-logos/facebook-4.svg" class="h-20px me-2">
+						</span>
+						<span class="text-white fw-bolder w-100"><%= t('registeration.session.facebook_login') %></span>
+					<% end %> 
+					<%= link_to user_google_oauth2_omniauth_authorize_path, method: :post ,data: { turbolinks: false }, class: "btn position-relative bg-secondary opacity-75-hover btn-lg w-100 py-3 mb-4" do %>
+						<span class="position-absolute top-50 start-0 translate-middle-y ms-7"> 
+						<img alt="Logo" src="../../../assets/media/svg/brand-logos/google-icon.svg" class="h-20px me-2">
+						</span>
+						<span class="text-dark fw-bolder w-100"><%= t('registeration.session.google_login') %></span>
+					<% end %> 
+					<%= link_to user_line_omniauth_authorize_path , method: :post ,data: { turbolinks: false }, class: "btn position-relative line-bg opacity-75-hover btn-lg w-100 py-3 mb-4" do %>
+						<span class="position-absolute top-50 start-0 translate-middle-y ms-7"> 
+						<img alt="Logo" src="../../../assets/media/svg/brand-logos/line.svg" class="h-20px me-2">
+						</span>
+						<span class="text-white fw-bolder w-100"><%= t('registeration.session.line_login') %></span>
+					<% end %>
+					<!--end::Action-->
+					<!--begin::Separator-->
+					<div class="d-flex align-items-center mb-10">
+						<div class="border-bottom border-gray-300 mw-50 w-100"></div>
+						<span class="fw-bold text-gray-400 fs-7 mx-2">OR</span>
+						<div class="border-bottom border-gray-300 mw-50 w-100"></div>
+					</div>
+					<!--end::Separator-->
+					<!--begin::Input group-->
+					<div class="fv-row mb-7 fv-plugins-icon-container">
+						<label class="form-label fw-bolder text-dark fs-6"><%= t("student.placeholder.email1") %></label>
+						<%= f.email_field :email, class: "form-control form-control-lg form-control-solid",value: params[:email]   %> 
+						<p class ="text-danger font-size-sm ms-invalid-feedback mt-1"><%= resource.errors.full_messages_for(:email)[0] %></p>
+					</div>
+					<!--end::Input group-->
+					<div class="survey-radio-group notice rounded border-primary border border-dashed rounded-3 p-6 mb-7 d-none">
+						<div class="text-gray-900 fw-bolder mb-5">どのようにしてKODAWARI ONEを知りましたか。</div>
+						<div class="form-check form-check-custom form-check-sm form-check-solid mb-3">
+							<input class="form-check-input" type="radio" value="" id="search_engine" name="reason" checked="checked"/>
+							<label class="form-check-label" for="search_engine">
+								<%= t 'survey.search_engine' %>
+							</label>
+						</div>
+						<div class="form-check form-check-custom form-check-sm form-check-solid mb-3">
+							<input class="form-check-input" type="radio" value="" id="sns" name="reason" />
+							<label class="form-check-label" for="sns">
+								<%= t 'survey.sns' %>
+							</label>
+						</div>
+						<div class="form-check form-check-custom form-check-sm form-check-solid mb-3">
+							<input class="form-check-input" type="radio" value="" id="from_friends" name="reason"/>
+							<label class="form-check-label" for="from_friends">
+								<%= t 'survey.from_friends' %>
+							</label>
+						</div>
+						<div class="form-check form-check-custom form-check-sm form-check-solid mb-3">
+							<input class="form-check-input" type="radio" value="" id="direct_mail" name="reason"/>
+							<label class="form-check-label" for="direct_mail">
+								<%= t 'survey.direct_mail' %>
+							</label>
+						</div>
+						<div class="form-check form-check-custom form-check-sm form-check-solid">
+							<input class="form-check-input" type="radio" value="" id="other" name="reason"/>
+							<label class="form-check-label" for="other">
+								<%= t 'survey.other' %>
+							</label>
+						</div>
+						<div class="fv-row mb-7 other_text_field mt-3 d-none">
+							<textarea class="form-control form-control-lg form-control-solid"> 
+							</textarea> 
+						</div>
+					</div>
+					<div class="fv-row mb-10 fv-plugins-icon-container">        
+							<span class="justify-content-start">
+								<span class="form-check-label fw-bold text-gray-700">
+								<%= link_to t('registeration.title.terms_and_conditions_chk_text'),welcome_privacy_path , class: "link-primary text-decoration-underline", target: '_blank' %> <span class="text-dark">、</span>
+								</span>
+							</span>
+							<span>
+								<span class="form-check-label fw-bold text-gray-700"> 
+								<%= link_to t('registeration.title.privacy_policy_chk_text_new1'), welcome_term_condition_path, class: "link-primary text-decoration-underline", target: '_blank'%><span class="text-dark ps-1"><%= t('registeration.title.privacy_policy_chk_text_new2') %></span>
+								</span>
+							</span>
+							<div class="form-check form-check-custom form-check-solid form-check-inline mt-3">
+								<%= f.check_box :tnc_and_policy, checked: false, class: "form-check-input" %>
+								<%= f.label :tnc_and_policy, t('registeration.title.tnc_and_policy_chk_text'), class: "ms-2 link-primary" %>
+							</div>          
+							<p class="ms-invalid-feedback text-danger fs-7 mt-1"><%= f.object.errors.full_messages_for(:tnc_and_policy)[0] %></p>
+						<div class="fv-plugins-message-container invalid-feedback"></div>
+					</div>
+					<!--end::Input group-->
+					<!--begin::Actions-->
+					<div class="text-center">
+						<%= f.submit t("btn.update"), class: "btn btn-lg btn-primary" %> 
+					</div>
+					<!--end::Actions-->
+				</div>
+				<!--end::Wrapper-->
+			</div>
+			<!--end::Content-->
+			<!--begin::Footer-->
+			<div class="d-flex flex-center flex-column-auto p-10">
+				<!--begin::Links-->
+				<div class="d-flex align-items-center fw-bold fs-6">
+					<%= link_to t('welcome.privacy policy.top_page_link.link1'), welcome_privacy_path(user_type: @usertype || @user_type) , class: "text-muted text-hover-primary px-2", target: '_blank' %>/
+					<%= link_to t('welcome.privacy policy.top_page_link.link2'), welcome_term_condition_path, class: "text-muted text-hover-primary mx-3", target: '_blank'%>/
+					<%= link_to t('welcome.privacy policy.top_page_link.link3'), welcome_contact_path(user_type: @usertype || @user_type), class: "text-muted text-hover-primary px-2"  %> 						
+				</div>
+				<!--end::Links-->
+			</div>
+			<!--end::Footer-->
+		</div>
+		<!--end::Authentication - Sign-up-->
+	</div>
+<% end %>
+<%= javascript_pack_tag "user/user.js" %>

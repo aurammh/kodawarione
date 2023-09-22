@@ -1,0 +1,41 @@
+
+<div class="mb-0">
+  <!--<div class="landing-curve landing-dark-color">
+    <svg viewBox="15 -1 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M1 48C4.93573 47.6644 8.85984 47.3311 12.7725 47H1489.16C1493.1 47.3311 1497.04 47.6644 1501 48V47H1489.16C914.668 -1.34764 587.282 -1.61174 12.7725 47H1V48Z" fill="currentColor"></path>
+    </svg>
+  </div>-->
+  <div class="landing-dark-bg pt-20">
+    <div class="container">
+      <div class="row py-10 py-lg-20">
+        <div class="col-lg-6 pe-lg-16 mb-10 mb-lg-0">
+          <div class="rounded landing-dark-border p-9 mb-10">
+            <h2 class="text-white"><%= t('welcome.top.title.for_student_title') %></h2>
+            <%= link_to t('welcome.privacy policy.top_page_link.btn6'), root_path, class: "fw-normal fs-4 text-white opacity-50 text-hover-primary"  %>
+          </div>
+          <div class="rounded landing-dark-border p-9">
+            <h2 class="text-white"><%= t('welcome.top.title.for_company_title') %></h2>
+            <%= link_to t('welcome.privacy policy.top_page_link.btn7'), welcome_contact_path ,class: "fw-normal fs-4 text-white opacity-50 text-hover-primary" %>
+          </div>
+        </div>
+        <div class="col-lg-6 ps-lg-16">
+          <div class="d-flex justify-content-lg-end">
+            <div class="d-flex fw-bold flex-column">
+              <h4 class="fw-bolder text-gray-400 mb-6"><%= t('welcome.top.title.more_links') %></h4>
+                <%= link_to t('welcome.privacy policy.top_page_link.link1'),welcome_privacy_path, class: "text-white opacity-50 text-hover-primary fs-5 mb-6" %>
+                <%= link_to t('welcome.privacy policy.top_page_link.link2'), welcome_term_condition_path, class: "text-white opacity-50 text-hover-primary fs-5 mb-6"%>
+                <%= link_to t('welcome.privacy policy.top_page_link.link3'), welcome_contact_path, class: "text-white opacity-50 text-hover-primary fs-5 mb-6"  %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="d-flex justify-content-center pb-7">
+        <%= link_to root_path ,class: "" do %>
+          <%= image_tag "layout/header_logo.png", class: "h-15px h-md-20px" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

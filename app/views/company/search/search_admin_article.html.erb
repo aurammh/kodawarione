@@ -1,0 +1,142 @@
+<div class="subheader py-2 py-lg-6 subheader-transparent" id="kt_subheader">
+    <div class="container d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap">
+        <% breadcrumbs_navigation_add ("メンバー向け記事"), '#' %>
+        <%= render_student_breadcrumbs_navigation("メンバー向け記事") %>		
+    </div>
+</div>
+<%= form_with(url: company_search_article_path, method: :get) do |form| %>
+    <!--begin::Entry-->
+    <div class="d-flex flex-column-fluid">
+        <!--begin::Container-->
+        <div class="container">
+            <!--begin::Card-->
+            <div class="card card-custom gutter-b">
+                <div class="card-header border-0 py-5">
+                    <ul class="nav nav-light-primary nav-pills w-100">
+                        <li class="nav-item">
+                            <%= link_to company_students_search_path, class: "nav-link" do %>
+                                <span class="nav-icon">
+                                    <i class="flaticon-interface-11"></i>
+                                </span>
+                                <span class="nav-text"><%= t('dashboard.job_seeker') %></span>
+                            <% end %>
+                        </li>
+                        <li class="nav-item">
+                            <%= link_to company_search_article_path, class: "nav-link active" do %>
+                                <span class="nav-icon">
+                                    <i class="flaticon-event-calendar-symbol"></i>
+                                </span>
+                                <span class="nav-text"><%= t('search.event_search') %></span>
+                            <% end %>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!--end::Card-->
+            <div class="row" data-sticky-container="">
+				<div class="col-lg-4 col-xl-3">
+					<div class="card card-custom sticky mb-5" data-sticky="true" data-margin-top="25px" data-sticky-for="1023" data-sticky-class="sticky">
+                        <div class="flex-wrap card-header border-0 pt-6 pb-0 px-5">
+                            <h3 class="card-title align-items-start flex-column">
+                                <span class="card-label font-weight-bolder text-dark"><%= t('dashboard.search_button.button3') %></span>
+                                <span class="text-muted mt-1 font-weight-bold font-size-sm"><%=  t('search.event_count_title')  %> <%= @results.total_count %> <%= t('search.count_unit') %></span>
+                            </h3>
+                        </div>
+                        <div class="d-flex flex-column justify-content-between card-body max-w-800px p-5">
+                            <div class="mb-2">
+                                <div class="input-group input-group-lg datepicker w-100 p-0" id="a_start_date">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="flaticon-event-calendar-symbol text-primary"></i>
+                                        </span>
+                                    </div>
+                                    <%= form.text_field :startDate, "data-input": "", id: "start_date",  class: "form-control h-100", placeholder: t('search.start_date'), value: (params[:startDate])%>
+                                </div> 
+                            </div>
+                            <div class="mb-4">
+                                <div class="input-group input-group-lg date-wrapper datepicker w-100 p-0" id="a_end_date">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="flaticon-event-calendar-symbol text-primary"></i>
+                                        </span>
+                                    </div>
+                                    <%= form.text_field :endDate,  "data-input": "", id: "end_date", class: "form-control h-100", placeholder: t('search.end_date'), value: (params[:endDate])%>
+                                </div>
+                            </div>
+                            <div class="mb-7">
+                                <%= form.text_field :keyword, id: "end_date", class: "form-control shadow-none", value: (params[:keyword]), placeholder: t('search.keyword_search') %>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <%= link_to t('search.clear'), company_search_article_path, class: "btn btn-light-primary text-center custom-btn w-100 mr-1" %>
+                                <%= form.submit t('search.apply'),class: "btn btn-primary custom-btn w-100 ml-1" %> 
+                            </div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-8 col-xl-9"> 
+                    <div class="row">
+                    <% @results.each do |article| %>
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-6 col-xl-6 mb-5">
+                            <div class="card card-custom wave mb-8 mb-lg-0 h-100">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center p-5">
+                                        <div class="mr-6">
+                                            <span class="svg-icon svg-icon-4x">
+                                                <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Clipboard-check.svg-->
+                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                        <rect x="0" y="0" width="24" height="24"></rect>
+                                                        <path d="M8,3 L8,3.5 C8,4.32842712 8.67157288,5 9.5,5 L14.5,5 C15.3284271,5 16,4.32842712 16,3.5 L16,3 L18,3 C19.1045695,3 20,3.8954305 20,5 L20,21 C20,22.1045695 19.1045695,23 18,23 L6,23 C4.8954305,23 4,22.1045695 4,21 L4,5 C4,3.8954305 4.8954305,3 6,3 L8,3 Z" fill="#000000" opacity="0.3"></path>
+                                                        <path d="M10.875,15.75 C10.6354167,15.75 10.3958333,15.6541667 10.2041667,15.4625 L8.2875,13.5458333 C7.90416667,13.1625 7.90416667,12.5875 8.2875,12.2041667 C8.67083333,11.8208333 9.29375,11.8208333 9.62916667,12.2041667 L10.875,13.45 L14.0375,10.2875 C14.4208333,9.90416667 14.9958333,9.90416667 15.3791667,10.2875 C15.7625,10.6708333 15.7625,11.2458333 15.3791667,11.6291667 L11.5458333,15.4625 C11.3541667,15.6541667 11.1145833,15.75 10.875,15.75 Z" fill="#000000"></path>
+                                                        <path d="M11,2 C11,1.44771525 11.4477153,1 12,1 C12.5522847,1 13,1.44771525 13,2 L14.5,2 C14.7761424,2 15,2.22385763 15,2.5 L15,3.5 C15,3.77614237 14.7761424,4 14.5,4 L9.5,4 C9.22385763,4 9,3.77614237 9,3.5 L9,2.5 C9,2.22385763 9.22385763,2 9.5,2 L11,2 Z" fill="#000000"></path>
+                                                    </g>
+                                                </svg>
+                                                <!--end::Svg Icon-->
+                                            </span>
+                                        </div>
+                                        <div class="d-flex flex-column flex-fill">
+                                            <div class="d-flex align-items-center pr-2 mb-1">
+                                                <span class="text-muted font-weight-bolder font-size-md flex-grow-1">
+                                                    <%= l(article.created_at.strftime('%Y-%m-%d').to_date, default: '-') %>
+                                                </span>														
+                                            </div>
+                                            <p class="text-dark font-weight-bolder font-size-h4 mb-3"><%= article.title.truncate(45) %></p>
+                                            <p class="text-dark-75 font-weight-normal font-size-lg mb-5"><%= article.content.to_plain_text.truncate(50) %></p>
+                                            <div class="d-flex justify-content-end">
+                                                <%= link_to "Read More", company_search_admin_article_detail_path(:id => article.id), class: "btn btn-block btn-sm btn-light-primary font-weight-bolder py-3 w-50" %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--end::Card-->                                                                 
+                        </div>
+                    <% end %>
+                    </div>
+                    <% unless @results.present?  %>
+                        <div class="col-12 m-2">
+                            <h3> <%= (t "search.no_result") %></h3>
+                        </div>
+                    <% end %> 
+                    <!--start::Pagination-->
+                    <% if @results.present?  %>
+                        <div class="d-flex justify-content-between align-items-center flex-wrap">
+                            <div class="d-flex flex-wrap py-2 mr-3">
+                                <%= paginate @results %>
+                            </div>
+                            <div class="d-flex align-items-center py-3">
+                                <span class="text-muted">Showing <%= @results.offset_value + 1 %> - <%=  @results.offset_value + @results.count %> of <%= @results.total_count %></span>
+                            </div>
+                        </div> 
+                    <% end %>
+                    <!--end::Pagination-->                   
+				</div>
+            <!--end::Content-->
+            </div>
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Entry-->
+<% end %>
+<%= javascript_pack_tag "admin/admin_search.js" %>
+<%= javascript_pack_tag 'common.js'%>

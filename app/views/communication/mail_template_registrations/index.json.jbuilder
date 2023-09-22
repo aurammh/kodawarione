@@ -1,0 +1,1 @@
+json.array! @communication_mail_template_registrations, partial: "communication_mail_template_registrations/communication_mail_template_registration", as: :communication_mail_template_registration

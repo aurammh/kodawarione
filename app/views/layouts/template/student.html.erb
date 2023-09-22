@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= t('welcome.main_title') %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= favicon_link_tag asset_path('layout/favicon.ico') %>
+    <%= stylesheet_link_tag 'student_theme', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'react/pages/student/assessment/index', 'data-turbolinks-track': 'reload' %>
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-53QMXBF');</script>
+    <!-- End Google Tag Manager -->
+    <script>
+      $.fn.select2.defaults.set("theme", "bootstrap5");
+      $.fn.select2.defaults.set("width", "100%");
+      $.fn.select2.defaults.set("selectionCssClass", ":all:");
+    </script>
+  </head>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-53QMXBF" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <!-- begin:theme body -->
+    <body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled">
+        <!--begin::Page-->
+        <% if controller_name != "commitment_steps" %>
+            <div class="page d-flex flex-row flex-column-fluid">
+                <!--begin::Wrapper-->
+                <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+                    <!--begin::Header-->
+                    <%= render "layouts/header/student_header" %>
+                    <!--end::Header-->
+                    <!--begin::Content-->
+                    <div class="d-flex flex-column flex-column-fluid"> 
+                        <%= yield %>
+                    </div>
+                    <!--end::Content-->
+                    <!--begin::Footer-->
+                    <%= render "layouts/footer/student_footer" %>
+                    <!--end::Footer-->
+                </div>
+                <!--end::Wrapper-->
+            </div>
+        <% else %>
+            <%= yield %>
+        <% end %>
+        <!--end::Page-->
+    </body>
+    <!-- end:theme body -->
+</html>

@@ -1,0 +1,103 @@
+<!--begin::Header-->
+<% breadcrumbs_navigation_add (t ('student_commitment.menu.create_company_page')), '#' %>
+<%= render_company_breadcrumbs_navigation(t ('commitment_profile.title.commitment_profile_title')) %>	
+<!--end::Header-->
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Container-->
+    <div class="container-xxl" id="kt_content_container">
+        <%= render partial: "company/shared/commitment_profiles/common_banner" %>
+        <!--begin::Card-->
+        <div class="card bg-body mb-5 mb-xl-10">
+            <% if @company_commitment_profile.m_industry_id.present? || @company_commitment_profile.job_info.present? || @company_commitment_profile.employee_count.present? %>
+                <div class="px-9">
+                    <!--begin::Card title-->
+                    <% if can?(:home_form, Company::Company) %>
+                        <div class="d-flex justify-content-end align-items-center card-title mt-10">
+                            <%= link_to t('btn.edit'), home_form_company_commitment_profiles_path, class: "btn btn-primary" %>
+                        </div>
+                    <% end %>
+                    <!--begin::Card title-->
+                </div> 
+                <div class="card-body">
+                    <% if @company_commitment_profile.job_info.present? %>
+                        <div class="pb-10">
+                            <h3 class="text-center fs-2x text-dark fw-bolder w-100 mb-10"><%= Company::Company.human_attribute_name('job_info') %></h3>
+                            <div class="fs-6 fw-bold text-gray-700 px-4">
+                                <%= @company_commitment_profile.job_info %>
+                            </div>
+                        </div>
+                    <% end %>
+                    <!--begin::Facts-->
+                    <div class="mt-20 pb-10">
+                        <!--begin::Seperator-->
+                        <div class="separator separator-dashed border-gray-400"></div>
+                        <!--end::Seperator-->
+                        <!--begin::Industry-->
+                        <div class="row my-7 px-20">
+                            <div class="col-12 col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <h3 class="text-gray-600 fw-bolder mb-0 fs-3"><i class="fa fa-genderless text-primary fs-2 me-2"></i><%= Company::Company.human_attribute_name('m_industry_id') %></h3>
+                            </div>
+                            <div class="col-12 col-xs-8 col-sm-8 ol-md-8 col-lg-8">
+                                <p class="fw-normal text-gray-600 mb-0"><%= get_industry_name_by_ID(@company_commitment_profile.m_industry_id) %></p>
+                            </div>
+                        </div>
+                        <!--end::Industry-->
+                        <!--begin::Seperator-->
+                        <div class="separator separator-dashed border-gray-400"></div>
+                        <!--end::Seperator--> 
+                        <!--begin::Employee_count-->
+                        <div class="row my-7 px-20">
+                            <div class="col-12 col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                <h3 class="text-gray-600 fw-bolder mb-0 fs-3"><i class="fa fa-genderless text-primary fs-2 me-2"></i><%= Company::Company.human_attribute_name('employee_count') %></h3>
+                            </div>
+                            <div class="col-12 col-xs-8 col-sm-8 ol-md-8 col-lg-8">
+                                <p class="fw-normal text-gray-600 mb-0"><%= number_with_delimiter(@company_commitment_profile.employee_count) %> <%= t('unit.persons') %></p>
+                            </div>
+                        </div>
+                        <!--end::Employee_count-->
+                        <!--begin::Seperator-->
+                        <div class="separator separator-dashed border-gray-400"></div>
+                        <!--end::Seperator-->                         
+                    </div>
+                    <!--end::Facts--> 
+                    <% if @company_commitment_profile.company_intro.present? %>
+                        <div class="mt-10 pb-10">
+                            <h3 class="text-center fs-2x text-dark fw-bolder w-100 mb-10"><%= Company::Company.human_attribute_name('company_intro') %></h3>
+                            <div class="fs-6 fw-bold text-gray-700 px-4">
+                                <%= @company_commitment_profile.company_intro %>
+                            </div>
+                        </div>
+                    <% end %>
+                    <% if @company_commitment_profile.history.present? %>
+                        <div class="mt-10 pb-10">
+                            <h3 class="text-center fs-2x text-dark fw-bolder w-100 mb-10"><%= Company::Company.human_attribute_name('history') %></h3>
+                            <div class="fs-6 fw-bold text-gray-700 px-4">
+                                <%= @company_commitment_profile.history %>
+                            </div>
+                        </div>
+                    <% end %>
+                </div>
+            <% else %>
+                <div class="card-px text-center py-5 my-5">
+                    <!--begin::Title-->
+                    <h2 class="fs-2x fw-bolder mb-10"><%= t('commitment_profile.title.commitment_profile_title')%></h2>
+                    <!--end::Title-->
+                    <!--begin::Description-->
+                    <p class="text-gray-400 fs-4 fw-bold mb-7"><%= t('commitment_profile.content.home_no_data_content')%></p> 
+                    <!--end::Description-->
+                    <!--begin::Action-->
+                    <% if can?(:home_form, Company::Company) %>
+                        <%= link_to  t('commitment_profile.btn.create_home_content'), home_form_company_commitment_profiles_path, class: "btn btn-primary" %>
+                    <% end %>
+                    <!--end::Action--> 
+                </div>    
+            <% end %>
+        </div>
+        <!--end::Card-->
+    </div>
+    <!--end::Container-->
+</div>
+<!--end::Content-->
+<%# render "users/shared/toastr" %>
+<%= javascript_pack_tag "company/commitment_profile.js" %>

@@ -1,0 +1,32 @@
+ja:
+  activerecord:
+    models:
+      admin/event_participant: event_participant
+    attributes:
+      admin/event_participant:
+        name: 名前 
+        email: メールアドレス    
+        position: 役職
+        department: 部署
+        description: 備考
+  errors:
+    messages:
+      blank: "を入力してください。"
+      invalid: "無効です。"
+  event_participant:
+    title:
+      add_btn: 追加
+      join_evt_btn: 参加者の申し込み
+      updated_at: 申請日
+      delete_join_record_title: 参加者記録削除
+      delete_join_record_confirm: 参加者記録を削除されてもよろしいでしょうか？
+      company_event_participant: 申請企業一覧
+      user_event_participant: 申請学生一覧
+      partner_event_participant: パートナー申請者情報
+      super_partner_event_participant: スーパーパートナー申請者情報
+      super_partner_company_event_participants: スーパーパートナーイベント企業申請者
+      super_partner_user_event_participants: スーパーパートナー申請者
+      super_partner_partner_event_participants: スーパーパートナーイベントパートナー申請者
+      user_email: メール
+      user_name: 名称
+      notice_text: メンバーリストから参加予定者を追加してください。

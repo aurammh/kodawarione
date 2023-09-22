@@ -1,0 +1,59 @@
+<div class="d-flex flex-column flex-root">
+    <!--begin::Authentication - Password reset -->
+        <div class="d-flex flex-column flex-column-fluid bgi-position-y-bottom position-x-center bgi-no-repeat bgi-size-contain bgi-attachment-fixed">
+                <!--begin::Content-->
+                <div class="d-flex flex-center flex-column flex-column-fluid p-10 pb-lg-20">
+                    <!--begin::Logo-->
+                    <%= link_to root_path do %>
+                        <%= image_tag "layout/header_logo.png", class: "h-40px mb-12" %>   
+                    <% end %>   
+                    <!--end::Logo-->
+                    <!--begin::Wrapper-->
+                    <div class="w-lg-500px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
+                        <!--begin::Form-->
+                        <div class="form w-100 fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate" id="kt_password_reset_form">
+                            <!--begin::Heading-->
+                            <div class="text-center mb-10">
+                                <!--begin::Title-->
+                                <h1 class="text-dark mb-3"><%= t('password_setting.title.change_password_setting') %></h1>
+                                <!--end::Title-->
+                                <!--begin::Link-->
+                                <div class="text-gray-400 fw-bold fs-4"></div>
+                                <!--end::Link-->
+                            </div>
+                            <!--begin::Heading-->
+                            <!--begin::Input group-->    
+							<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+								<div class="fv-row mb-10 fv-plugins-icon-container">
+									<label class="form-label fw-bolder text-gray-900 fs-6"><%= t("student.placeholder.email1") %></label>
+									<%= f.email_field :email, class: "form-control form-control-solid" %> 
+									<p class="text-danger"><%= resource.errors.full_messages_for(:email)[0] %></p>
+								<div class="fv-plugins-message-container invalid-feedback"></div></div>
+								<!--end::Input group-->
+								<!--begin::Actions-->
+								<div class="d-flex flex-wrap justify-content-center pb-lg-0">
+									<%= link_to t('btn.cancel'), welcome_company_path, class: "btn btn-lg btn-light-primary fw-bolder me-4" %>  
+									<%= f.submit "送信", class: "btn btn-lg btn-primary fw-bolder" %>  
+								</div>
+                			<% end %>
+                        <div></div></div>
+                        <!--end::Form-->
+                    </div>
+                    <!--end::Wrapper-->
+                </div>
+                <!--end::Content-->
+                <!--begin::Footer-->
+                <div class="d-flex flex-center flex-column-auto p-10">
+                    <!--begin::Links-->
+                    <div class="d-flex align-items-center fw-bold fs-6">
+						<%= link_to t('welcome.privacy policy.top_page_link.link1'), welcome_privacy_path(user_type: @usertype || @user_type) , class: "text-muted text-hover-primary px-2", target: '_blank' %>/
+                        <%= link_to t('welcome.privacy policy.top_page_link.link2'), welcome_term_condition_path, class: "text-muted text-hover-primary mx-3", target: '_blank'%>/
+                        <%= link_to t('welcome.privacy policy.top_page_link.link3'), welcome_contact_path(user_type: @usertype || @user_type), class: "text-muted text-hover-primary px-2"  %> 	
+                    </div>
+                    <!--end::Links-->
+                </div>
+                <!--end::Footer-->
+        </div>
+    <!--end::Authentication - Password reset-->
+</div>
+<%= javascript_pack_tag "user/user.js" %>

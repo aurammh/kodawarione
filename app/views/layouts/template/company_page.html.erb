@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= t('welcome.main_title') %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= favicon_link_tag asset_path('layout/favicon.ico') %>
+
+    <% if user_signed_in? || company_user_signed_in?%>
+      <% if company_user_signed_in? %>
+        <%= stylesheet_link_tag 'company_theme', media: 'all', 'data-turbolinks-track': 'reload' %>
+      <% end %>
+      <% if user_signed_in? %>
+        <%= stylesheet_link_tag 'student_theme', media: 'all', 'data-turbolinks-track': 'reload' %>
+      <% end %>
+    <% else %>
+      <%= stylesheet_link_tag 'student_theme', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <% end %>
+
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <!-- begin:body -->
+  <% if user_signed_in? || company_user_signed_in?%>
+    <% if company_user_signed_in? %>
+      <body id="kt_body" class="sidebar-enabled">
+    <% end %>
+    <% if user_signed_in? %>
+      <body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled">
+    <% end %>
+  <% else %>
+    <body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled">
+  <% end %>
+  <!-- begin:Student template body -->
+  <!-- begin:Content -->
+  <% if user_signed_in? || company_user_signed_in? %>
+    <!-- begin:Company template -->
+    <% if company_user_signed_in? %>
+      <div class="d-flex flex-column flex-root">
+        <!--begin::Page-->
+        <div class="page d-flex flex-row flex-column-fluid">
+          <% if company_layout_check %>
+            <!--begin::Aside-->
+            <%= render "layouts/sidebar/company_sidebar" %>
+            <!--begin::Aside-->
+            <!--begin::Wrapper--> 
+            <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+          <% else %>
+            <div class="d-flex flex-column flex-row-fluid">
+          <% end %>
+              <!--begin::Content-->
+              <%= yield %>
+              <!--end::Content-->
+              <%= render "layouts/footer/company_footer" %>
+            </div>
+          <!--end::Wrapper-->
+        </div>
+        <!--end::Page-->
+      </div>
+    <!-- end:Company template -->
+    <!-- begin:Student template -->
+    <% elsif user_signed_in? %>
+      <!--begin::Page-->
+      <div class="page d-flex flex-row flex-column-fluid">
+        <!--begin::Wrapper-->
+        <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+          <%= render "layouts/header/student_header" %>
+          <div class="d-flex flex-column flex-column-fluid"> 
+            <%= yield %>
+          </div>
+          <%= render "layouts/footer/student_footer" %>
+        </div>
+        <!--end::Wrapper-->
+      </div>
+      <!--end::Page-->
+    <% end %>
+    <!-- end:Student template -->
+    <% else %>
+      <!--begin::Page-->
+      <%= yield %>
+      <!--end::Page-->
+  <% end %>
+  <!-- end:Content -->
+  </body>
+</html>

@@ -1,0 +1,180 @@
+<!--begin::Body-->
+<body id="kt_body" data-bs-spy="scroll" data-bs-target="#kt_landing_menu" data-bs-offset="200" class="bg-white position-relative">
+    <!--begin::Main-->
+    <div class="d-flex flex-column flex-root">
+         <!--begin::Header Section-->
+        <div class="mb-0">
+            <!--begin::Wrapper-->
+            <%= render partial: "company_page/header", :locals =>{:banner => false} %>
+            <!--end::Wrapper-->
+        </div>
+        <!--end::Header Section-->
+        <!--begin::Latest stories-->
+        <div class="mt-10 mb-n10 mb-lg-n20">
+            <!--begin::Container-->
+            <div class="container">
+                <!--begin::Card body-->
+                <div class="card-body p-lg-17">
+                    <!--begin::Plans-->
+                    <div class="d-flex flex-column">
+                        <!--begin::Heading-->
+                        <div class="mb-13 text-center">
+                            <h1 class="fs-2hx fw-bolder mb-5">Latest Events</h1>
+                        </div>
+                        <!--end::Heading-->
+                        <% if  @company_events_hightlight.present? %>
+                            <!--begin::Row-->
+                            <div class="row g-10">
+                                <% @company_events_hightlight.each do |event|%>
+                                    <div class="col-xl-6">
+                                        <!--begin::Card-->
+                                        <%# link_to company_event_path(:id => event.id), class: "text-decoration-none text-dark" do %>                                 
+                                            <div class="w-100 d-flex flex-column flex-center rounded-3 bg-light bg-opacity-75 p-7">       
+                                                <!--begin::Body-->
+                                                <div class="card-body">
+                                                    <div class="d-flex">
+                                                        <div class="bg-primary px-3 rounded h-50 py-3 me-8 text-white">  
+                                                            <div class="d-flex flex-column align-item-center justify-content-center">                                                                         
+                                                                <span class="text-center fw-bolder"><%= event.event_start_date.day %><%= t('date.prompts.day') %></span>
+                                                                <span class="fw-bolder"><%= Date::ABBR_MONTHNAMES[event.event_start_date.month].upcase %></span>  
+                                                            </div>                  
+                                                        </div>
+                                                        <div class="flex-grow-1 text-break">
+                                                            <div class="d-flex flex-column">
+                                                                <h5 class="card-title fw-bolder mb-2">
+                                                                    <%= event.event_name %>
+                                                                </h5>
+                                                                <span class="fw-lighter <%= event.status == '3' || event.status == '4' ? "text-danger" : "text-success" %>">
+                                                                    <%= event.status == '1'  ? t('event.title.new_event_recuirment'): event.status == '2' ? t('event.title.event_in_progress') : 
+                                                                    event.status == '3' ? t('event.title.recuirment_full') : t('event.title.recuirment_closed') %>
+                                                                </span>
+                                                                <p class="card-title text-muted mt-3">
+                                                                    <%= event.content.to_plain_text.truncate(70) %>
+                                                                </p>
+                                                                <p class="card-title mt-3 fw-bolder">
+                                                                    <i class="fas fa-map-marker-alt text-primary mr-2"></i> <%= event.venue.present? ? event.venue.truncate(60) : t("event.venue_types.online") %>                     
+                                                                </p>                                             
+                                                            </div>
+                                                            <div class="d-flex flex-wrap my-6">
+                                                                <!--begin::Due-->
+                                                                <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-7 mb-3">
+                                                                    <div class="fs-6 text-gray-800 fw-bolder"><%= event.event_start_date.strftime('%d %b %Y') %></div>
+                                                                    <div class="fw-bold text-gray-400"><%= Company::Event.human_attribute_name('event_start_date') %></div>
+                                                                </div>
+                                                                <!--end::Due-->
+                                                                <!--begin::Budget-->
+                                                                <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 mb-3">
+                                                                    <div class="fs-6 text-gray-800 fw-bolder"><%= event.event_end_date.strftime('%d %b %Y') %></div>
+                                                                    <div class="fw-bold text-gray-400"><%= Company::Event.human_attribute_name('event_end_date') %></div>
+                                                                </div>
+                                                                <!--end::Budget-->
+                                                            </div>  
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--end::Body-->                             
+                                            </div>
+                                        <%# end %>
+                                        <!--end::Card-->
+                                    </div> 
+                                <% end %>
+                            </div>
+                            <!--end::Row-->
+                        <% else %>
+                        <% end %>
+                    </div>
+                    <!--end::Plans-->
+                </div>
+                <!--end::Card body-->
+                <!--begin::Card body-->
+                <div class="card-body p-lg-17">
+                    <!--begin::Plans-->
+                    <div class="d-flex flex-column">
+                        <!--begin::Heading-->
+                        <div class="mb-13 text-center">
+                            <h1 class="fs-2hx fw-bolder mb-5">All Events</h1>
+                        </div>
+                        <!--end::Heading-->
+                        <% if  @company_events.present? %>
+                            <!--begin::Row-->
+                            <div class="row g-10">
+                                <% @company_events.each do |event|%>
+                                    <div class="col-xl-6">
+                                        <!--begin::Card-->
+                                        <%# link_to company_event_path(:id => event.id), class: "text-decoration-none text-dark" do %>                                 
+                                            <div class="w-100 d-flex flex-column flex-center rounded-3 bg-light bg-opacity-75 p-7">       
+                                                <!--begin::Body-->
+                                                <div class="card-body">
+                                                    <div class="d-flex">
+                                                        <div class="bg-primary px-3 rounded h-50 py-3 me-8 text-white">  
+                                                            <div class="d-flex flex-column align-item-center justify-content-center">                                                                         
+                                                                <span class="text-center fw-bolder"><%= event.event_start_date.day %><%= t('date.prompts.day') %></span>
+                                                                <span class="fw-bolder"><%= Date::ABBR_MONTHNAMES[event.event_start_date.month].upcase %></span>  
+                                                            </div>                  
+                                                        </div>
+                                                        <div class="flex-grow-1 text-break">
+                                                            <div class="d-flex flex-column">
+                                                                <h5 class="card-title fw-bolder mb-2">
+                                                                    <%= event.event_name %>
+                                                                </h5>
+                                                                <span class="fw-lighter <%= event.status == '3' || event.status == '4' ? "text-danger" : "text-success" %>">
+                                                                    <%= event.status == '1'  ? t('event.title.new_event_recuirment'): event.status == '2' ? t('event.title.event_in_progress') : 
+                                                                    event.status == '3' ? t('event.title.recuirment_full') : t('event.title.recuirment_closed') %>
+                                                                </span>
+                                                                <p class="card-title text-muted mt-3">
+                                                                    <%= event.content.to_plain_text.truncate(70) %>
+                                                                </p>
+                                                                <p class="card-title mt-3 fw-bolder">
+                                                                    <i class="fas fa-map-marker-alt text-primary mr-2"></i> <%= event.venue.present? ? event.venue.truncate(60) : t("event.venue_types.online") %>                     
+                                                                </p>                                             
+                                                            </div>
+                                                            <div class="d-flex flex-wrap my-6">
+                                                                <!--begin::Due-->
+                                                                <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-7 mb-3">
+                                                                    <div class="fs-6 text-gray-800 fw-bolder"><%= event.event_start_date.strftime('%d %b %Y') %></div>
+                                                                    <div class="fw-bold text-gray-400"><%= Company::Event.human_attribute_name('event_start_date') %></div>
+                                                                </div>
+                                                                <!--end::Due-->
+                                                                <!--begin::Budget-->
+                                                                <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 mb-3">
+                                                                    <div class="fs-6 text-gray-800 fw-bolder"><%= event.event_end_date.strftime('%d %b %Y') %></div>
+                                                                    <div class="fw-bold text-gray-400"><%= Company::Event.human_attribute_name('event_end_date') %></div>
+                                                                </div>
+                                                                <!--end::Budget-->
+                                                            </div>  
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!--end::Body-->                             
+                                            </div>
+                                        <%# end %>
+                                        <!--end::Card-->
+                                    </div> 
+                                <% end %>
+                            </div>
+                            <!--end::Row-->
+                        <% else %>
+                        <% end %>
+                    </div>
+                    <!--end::Plans-->
+                </div>
+                <!--end::Card body-->
+            </div>
+            <!--end::Container-->
+        </div>
+        <!--begin::Scrolltop-->
+        <div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
+            <!--begin::Svg Icon | path: icons/duotune/arrows/arr066.svg-->
+            <span class="svg-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <rect opacity="0.5" x="13" y="6" width="13" height="2" rx="1" transform="rotate(90 13 6)" fill="black" />
+                    <path d="M12.5657 8.56569L16.75 12.75C17.1642 13.1642 17.8358 13.1642 18.25 12.75C18.6642 12.3358 18.6642 11.6642 18.25 11.25L12.7071 5.70711C12.3166 5.31658 11.6834 5.31658 11.2929 5.70711L5.75 11.25C5.33579 11.6642 5.33579 12.3358 5.75 12.75C6.16421 13.1642 6.83579 13.1642 7.25 12.75L11.4343 8.56569C11.7467 8.25327 12.2533 8.25327 12.5657 8.56569Z" fill="black" />
+                </svg>
+            </span>
+            <!--end::Svg Icon-->
+        </div>
+        <!--end::Scrolltop-->
+    </div>
+    <!--end::Main-->
+</body>
+<!--end::Body-->

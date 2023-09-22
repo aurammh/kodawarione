@@ -1,0 +1,97 @@
+<% if user_signed_in? %>
+    <!--begin::Toolbar-->
+    <div class="toolbar py-5 py-lg-5" id="kt_toolbar">
+        <!--begin::Container-->
+        <div id="kt_toolbar_container" class="container-xxl d-flex flex-stack flex-wrap">
+            <!--begin::Page title-->
+            <div class="page-title d-flex flex-column me-3">
+              <!--begin::Breadcrumb-->
+              <% breadcrumbs_navigation_add (t('contact_info.title')), '#' %>
+              <%= render_student_breadcrumbs_navigation(t('contact_info.title')) %>	
+              <!--end::Breadcrumb-->
+            </div>
+            <!--end::Page title-->
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Toolbar-->
+<% end %>
+<% if company_user_signed_in? %>
+	  <!--begin::Header-->
+	  <% breadcrumbs_navigation_add (t('contact_info.title')), '#' %>
+	  <%= render_company_breadcrumbs_navigation(t('contact_info.title')) %>
+	  <!--end::Header-->
+<% end %>
+<!--begin::Container-->
+<div id="kt_content_container" class="d-flex flex-column-fluid align-items-start container-xxl">
+    <div class="content flex-row-fluid" id="kt_content">
+        <!--begin::Post-->
+        <% flash.each do |key, value| %>
+            <% if value != nil %>
+                <% if key == 'notice' %>
+                    <div id="flash" class="alert d-flex justify-content-between align-items-center <%= key == 'notice' ? 'alert-success' : 'alert-danger' %>" role="alert">
+                        <%= value %>
+                        <button type="button" class="close btn btn-outline-none fw-bold fs-2 p-0" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                <% end %>
+            <% end %>
+        <% end %> 
+        <!--begin::Hero card-->
+        <div class="<%= user_signed_in? ? "d-none" : super_partner_user_signed_in? ? "d-none" : "d-block" %>  <%= (company_user_signed_in?) || (super_partner_user_signed_in?) ? "d-none" : "d-block" %>">
+            <div class="d-flex justify-content-center my-10 ">
+                <!--begin::Logo image-->
+                <%= link_to root_path ,class: "" do %>
+                    <%= image_tag "layout/header_logo.png", class: "h-30px h-lg-50px" %>
+                <% end %>
+                <!--end::Logo image-->
+            </div>
+        </div>
+        <!--end::Hero card-->
+        <!--begin::Contact-->
+        <div class="card <%= 'bg-body' if company_user_signed_in? %>">
+            <!--begin::Body-->
+            <div class="card-body p-lg-17">
+                <!--begin::Row-->
+                <div class="row mb-3">
+                    <!--begin::Col-->
+                    <div class="col-12 pe-lg-10">
+                        <!--begin::Form-->
+                        <%= form_with(model: @contact, url: welcome_contact_create_path, :class=>"mb-15") do |form| %>
+                            <%= hidden_field_tag 'user_type', @usertype%>
+                            <h1 class="fw-bolder fs-4 fs-lg-1 text-gray-800 mb-5 mb-lg-10"><%= t('contact_info.title') %></h1>
+                            <% if !user_signed_in? && !company_user_signed_in? && !super_partner_user_signed_in? %>
+                                <%= render partial: 'welcome/contact_privacy/basic_info_form', :locals =>{:f => form} %>
+                            <% end %>
+                            <!--begin::Input group-->
+                            <div class="d-flex flex-column mb-10 fv-row">
+                                <label class="fs-6 fw-bold required mb-2"><%= form.label :content_inquiry %></label>
+                                <%= form.text_area :content_inquiry, class: "form-control form-control-solid shadow-none resize-none errors" , rows: "6" %> 
+                                <p class ="text-danger font-size-sm ms-invalid-feedback mt-1"><%= @contact.errors.full_messages_for(:content_inquiry)[0] %></p>
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Submit-->
+                            <div class="d-flex justify-content-center">
+                                <%= button_tag( :class => 'btn btn-primary fw-bolder') do %>
+                                    <%= t('btn.update') %> 
+                                <% end %>
+                            </div>
+                            <!--end::Submit-->
+                        <% end %>
+                        <!--end::Form-->
+                    </div>
+                    <!--end::Col-->
+                </div>
+                <!--end::Row-->
+            </div>
+            <!--end::Body-->
+        </div>
+        <!--end::Contact-->							
+    </div>
+    <!--end::Post-->
+</div>
+<!--end::Container-->
+<script>
+  $('#contact_classification').select2();
+</script>

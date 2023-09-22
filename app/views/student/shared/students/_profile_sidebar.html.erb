@@ -1,0 +1,61 @@
+<!--begin::Card-->
+<div class="card mb-5 mb-xl-8">
+    <!--begin::Card body-->
+    <div class="card-body">
+        <!--begin::User Info-->
+        <div class="d-flex flex-center flex-column py-5">
+            <!--begin::Avatar-->
+            <div class="symbol symbol-100px symbol-circle mb-7">
+                <% if @user_data.image.attached? %>
+                    <%= image_tag (@user_data.image) %>
+                <% else %>
+                    <%= image_tag "avatar/preview.svg" %> 
+                <% end %>
+            </div>
+            <!--end::Avatar-->
+            <!--begin::Name-->
+            <div class="fs-3 text-gray-800 text-hover-primary fw-bolder mb-3">
+                <% if @user_data.last_name.present? && @user_data.first_name.present? %>
+                    <%= @user_data.last_name %> <%= @user_data.first_name %>
+                <% else %>
+                    <%= @user_data.nick_name.truncate(20)  %> 
+                <% end %>
+            </div>
+            <!--end::Name-->
+            <!--begin::Position-->
+            <div class="mb-9">
+                <!--begin::Badge-->
+                <div class="badge badge-lg badge-light-primary text-wrap "><%= @user_data.department_name %></div>
+                <!--end::Badge-->
+            </div>
+            <!--end::Position-->
+        </div>
+        <!--end::User Info-->
+        <div class="separator"></div>
+        <!--begin::Details content-->
+        <div id="kt_user_view_details" class="collapse show">
+            <div class="pb-5 fs-6">
+                <!--begin::Details item-->
+                <div class="fw-bolder mt-5"><%= t("student.placeholder.email1") %></div>
+                <div class="text-gray-600">
+                    <a href="#" class="text-gray-600 text-hover-primary"><%= current_user.email %></a>
+                </div>
+                <% if @user_data.display_address.present? %>
+                    <div class="fw-bolder mt-5"><%= t("住所") %></div>
+                    <div class="text-gray-600">
+                        <%= @user_data.display_address %>
+                    </div>
+                <% end %>
+                <% if @user_data.birthday.present? %>
+                    <div class="fw-bolder mt-5"><%= t("生年月日") %></div>
+                    <div class="text-gray-600">
+                      <%= l @user_data.birthday %>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+        <!--end::Details content-->
+    </div>
+    <!--end::Card body-->
+</div>
+<!--end::Card-->

@@ -1,0 +1,62 @@
+<!--begin::Header-->
+<% breadcrumbs_navigation_add (t ('student_commitment.menu.create_company_page')), '#' %>
+<%= render_company_breadcrumbs_navigation(t ('commitment_profile.title.member_title')) %>	
+<!--end::Header-->
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+  <!--begin::Container-->
+  <div class="container-xxl">
+    <%= render partial: "company/shared/commitment_profiles/common_banner" %>
+    <!--begin::Card-->
+    <div class="card bg-body mb-5 mb-xl-10">
+        <% if @company_commitment_profile.about_our_team.present? || @company_commitment_profile.member_message.present? %>
+            <div class="px-9">
+                <!--begin::Card title-->
+                <% if can?(:member_form, Company::Company) %>
+                    <div class="d-flex justify-content-end align-items-center card-title mt-10">
+                        <%= link_to t('btn.edit'), member_form_company_commitment_profiles_path, class: "btn btn-primary" %>
+                    </div>
+                <% end %>
+                <!--begin::Card title-->
+            </div>
+            <div class="card-body"> 
+                <% if @company_commitment_profile.about_our_team.present? %>
+                    <div class="pb-10">
+                        <h5 class="text-center fs-2x text-dark fw-bolder w-100 mb-10"><%= Company::Company.human_attribute_name('about_our_team') %></h5>
+                        <div class="fs-6 fw-bold text-gray-700 px-4">
+                            <%= @company_commitment_profile.about_our_team %>
+                        </div>
+                    </div>
+                <% end %>
+                <% if @company_commitment_profile.member_message.present? %>
+                    <div class="mt-20 pb-10">
+                        <h5 class="text-center fs-2x text-dark fw-bolder w-100 mb-10"><%= Company::Company.human_attribute_name('member_message') %></h5>
+                        <div class="fs-6 fw-bold text-gray-700 px-4">
+                            <%= @company_commitment_profile.member_message %>
+                        </div>
+                    </div>
+                <% end %>
+            </div>        
+        <% else %>
+            <div class="card bg-body p-0">
+                <div class="card-px text-center py-5 my-5">
+                    <h2 class="fs-2x fw-bolder mb-10"><%= t('commitment_profile.title.member_title')%></h2>
+                    <!--end::Title-->
+                    <!--begin::Description-->
+                    <p class="text-gray-400 fs-4 fw-bold mb-7"><%= t('commitment_profile.content.member_no_data_content')%></p> 
+                    <!--begin::Action-->
+                    <% if can?(:member_form, Company::Company) %>
+                        <%= link_to  t('commitment_profile.btn.create_member_content'), member_form_company_commitment_profiles_path, class: "btn btn-primary" %>
+                    <% end %>
+                    <!--end::Action--> 
+                </div>
+            </div>
+        <% end %>
+    </div>
+    <!--end::Card-->
+  </div>
+  <!--end::Container-->
+</div>
+<!--end::Content-->
+<%= render "users/shared/toastr" %>
+<%= javascript_pack_tag "company/commitment_profile.js" %>

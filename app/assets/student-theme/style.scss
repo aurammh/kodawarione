@@ -1,0 +1,20 @@
+//
+// Theme style
+//
+
+// Mode
+$mode: default;
+
+// Initialize
+@import "init";
+
+// Plugins
+@import "../theme/vendors/plugins/plugins";
+
+// Components
+@import "../theme/components/components";
+
+
+// Layout
+@import "layout/layout";
+@import "layout/docs/layout";

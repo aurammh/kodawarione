@@ -1,0 +1,194 @@
+<!--begin::Header-->
+<% if current_user %>
+  <div class="toolbar py-5 py-lg-5" id="kt_toolbar">
+    <div id="kt_toolbar_container" class="container-xxl d-flex flex-stack flex-wrap">    
+      <!--begin::Breadcrumb-->          
+      <% breadcrumbs_navigation_add (t ('common.communication_dashboard_title')), '#' %>
+      <%= render_student_breadcrumbs_navigation(t ('common.communication_dashboard_title')) %>            
+      <!--end::Breadcrumb-->
+    </div>
+  </div>
+<% else %>
+  <% breadcrumbs_navigation_add (t ('menu.communication_menu')), '#' %>
+  <%= render_company_breadcrumbs_navigation(t ('menu.communication_menu')) %>
+<% end %>
+<!--end::Header--> 
+<!--begin::Content-->
+<div id="kt_content" class="d-flex flex-column-fluid align-items-start container-xxl">
+  <!--begin::Post-->
+  <div class="content flex-row-fluid" id="kt_content_container">
+    <!--begin::Layout-->
+    <div class="d-flex flex-column flex-lg-row"> 
+      <!--begin::Content-->
+      <div class="flex-lg-row-fluid mb-10 mb-lg-0">  
+        <!--begin::Card--> 
+        <div class= "card bg-body d-none d-sm-none d-md-none d-lg-block d-xl-block">
+          <!--begin::Card Header-->
+          <div class="card-header border-0 pt-5">
+            <!--begin::Card title-->
+            <div class="card-title align-items-start flex-column">
+              <% if params[:mail_type] != '2222' %>
+                <h2><%= t("communication.title.scouted_message")%></h2> 
+              <% end %>
+            </div>
+            <!--end::Card title-->
+            <!--begin::Card toolbar--> 
+          </div>          
+          <!--end::Card header-->
+          <!--begin::Body-->
+          <div class="card-body py-3">
+            <!--begin::Desktop View-->            
+            <div>
+              <!-- Mail_type => 1 [Scotted Type] && Student <=> Company [start] --> 
+              <!--begin::Table container-->
+              <div class="table-responsive">
+              <!-- New Communication DEsign by AMH>  -->
+                <% if @conversation_list.size > 0   %> 
+                  <table class="table table-row-dashed table-row-gray-300 table-hover custom-table">
+                    <!--begin::Table body-->
+                    <tbody>
+                      <% @conversation_list.each_with_index do |conversation_list,index| %>  
+                          <tr>
+                            <td class="min-w-150px w-150px w-sm-175px w-md-250px w-lg-250px">
+                              <div class="symbol symbol-35px py-1 me-4">
+                                <span class="symbol-label bg-light-primary">
+                                  <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
+                                  <span class="svg-icon svg-icon-2x svg-icon-primary">
+                                      <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                          <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                              <polygon points="0 0 24 0 24 24 0 24"/>
+                                              <path d="M18,14 C16.3431458,14 15,12.6568542 15,11 C15,9.34314575 16.3431458,8 18,8 C19.6568542,8 21,9.34314575 21,11 C21,12.6568542 19.6568542,14 18,14 Z M9,11 C6.790861,11 5,9.209139 5,7 C5,4.790861 6.790861,3 9,3 C11.209139,3 13,4.790861 13,7 C13,9.209139 11.209139,11 9,11 Z" fill="#000000" fill-rule="nonzero" opacity="0.3"/>
+                                              <path d="M17.6011961,15.0006174 C21.0077043,15.0378534 23.7891749,16.7601418 23.9984937,20.4 C24.0069246,20.5466056 23.9984937,21 23.4559499,21 L19.6,21 C19.6,18.7490654 18.8562935,16.6718327 17.6011961,15.0006174 Z M0.00065168429,20.1992055 C0.388258525,15.4265159 4.26191235,13 8.98334134,13 C13.7712164,13 17.7048837,15.2931929 17.9979143,20.2 C18.0095879,20.3954741 17.9979143,21 17.2466999,21 C13.541124,21 8.03472472,21 0.727502227,21 C0.476712155,21 -0.0204617505,20.45918 0.00065168429,20.1992055 Z" fill="#000000" fill-rule="nonzero"/>
+                                          </g>
+                                      </svg>
+                                  </span>
+                                  <!--end::Svg Icon-->
+                                </span>
+                              </div>
+                              <span class="fw-bold text-truncate text-dark"> 
+                                <%= get_sender_communication_info(conversation_list.company_user_id,conversation_list.user_id,conversation_list.company_id,conversation_list.mail_type,conversation_list.sent_type)["name"] %>,
+                                <%= get_receiver_communication_info(conversation_list.company_user_id,conversation_list.user_id,conversation_list.company_id,conversation_list.mail_type,conversation_list.sent_type)["name"] %>
+                                <% unless @conversationDetailListCount.nil? %>
+                                    <%= @conversationDetailListCount[conversation_list.id].nil? ? "" : '('+(@conversationDetailListCount[conversation_list.id]+1).to_s+')' %> 
+                                <% end %>
+                              </span>
+                            </td> 
+                            <td>
+                              <div class="text-truncate"> 
+                                <span class="fw-bolder text-dark<%= @new_communication_arr.include?(conversation_list.id) ? '' : '' %>"><%= conversation_list.title %> -</span>
+                                <span class="text-dark<%= @new_communication_arr.include?(conversation_list.id) ? '' : '' %>"><%= t("communication.title.#{conversation_list.category}")%></span>
+                                <span class="text-dark<%= @new_communication_arr.include?(conversation_list.id) ? '' : '' %> "> <%= conversation_list.content.to_plain_text  %></span>
+                              </div> 
+                            </td> 
+                            <td class="min-w-75px w-75px w-md-100px w-lg-100px">
+                              <div class="d-flex justify-content-center">
+                                <% if conversation_list.category == "Event" %>
+                                  <span class="badge badge-light-primary"><%= t("communication.title.#{conversation_list.category}")%></span> 
+                                <% else %>
+                                  <span class="badge badge-light-success"><%= t("communication.title.#{conversation_list.category}")%></span> 
+                                <% end %>
+                              </div>
+                            </td>
+                            <td class="min-w-75px w-75px w-md-100px w-lg-100px">
+                              <div class="d-flex justify-content-center">
+                                <span class="font-weight-normal text-dark"><%= time_date( conversation_list.created_at)%></span> 
+                              </div>
+                            </td>
+                            <td class="min-w-50px w-50px">
+                              <%= link_to communication_conversation_forum_path(:id => conversation_list.communication_id),remote: cookies[:previous_url] == 'communication/communications?mail_type=1111' ? true : false, class: "btn btn-icon btn-sm btn-light-primary" do %> 
+                                <i class="fas fa-envelope-open-text fs-4 "></i>
+                              <% end %>
+                            </td>
+                          </tr>  
+                      <% end %>
+                    </tbody>
+                    <!--end::Table body-->
+                  </table>
+                <% elsif params[:mail_type] == nil || params[:mail_type] == '1111' %>
+                  <p class="text-gray-400 fs-4 fw-bold mb-10"><%= t("communication.title.scouted_message")%><%= t("errors.messages.empty_list")%></p>
+                <% else %>
+                  <p class="text-gray-400 fs-4 fw-bold mb-10"><%= t'menu.communication_menu'%><%= t("errors.messages.empty_list")%></p>
+                <% end %>
+                 <!-- New Communication DEsign by AMH>  -->
+                <!-- mail_type => 2 [Direct Type] && Student <=> Company's Members [start]-->
+                <!-- mail_type => 2 [Direct Type] && Student <=> Company's Members [end]-->
+              </div>
+              <!--end::Table container--> 
+              <!-- Mail_type => 1 [Scotted Type] && Student <=> Company [end] -->  
+            </div>
+            <!--end::Desktop View-->            
+            <div class="col-12 d-flex justify-content-end mt-2 mx-2">
+              <%= paginate @conversation_list  %>
+            </div>
+            <!--end::Body-->
+          </div>
+          <!--end::Container-->
+        </div>    
+        <!--end::Card--> 
+        <!--begin::Mobile View--> 
+        <% if @conversation_list.size > 0   %> 
+          <% @conversation_list.each_with_index do |conversation_list,index| %>     
+            <div class="col-xxl-4 d-block d-sm-block d-md-block d-lg-none d-xl-none">
+              <div class="card card-custom gutter-b card-stretch mb-3 mb-xl-10">
+                <div class="card-body p-5">
+                  <div class='row'>
+                    <div class="col-6">
+                      <div class="d-flex align-items-center">
+                        <!--begin:: Avatar -->
+                        <div class="symbol symbol-35px py-1 me-4">
+                          <span class="symbol-label bg-light-primary">
+                            <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
+                            <%= link_to communication_conversation_forum_path(:id => conversation_list.communication_id),remote: cookies[:previous_url] == 'communication/communications?mail_type=1111' ? true : false, class: "btn btn-icon btn-sm btn-light-primary" do %> 
+                              <i class="fas fa-envelope-open-text fs-4 "></i>
+                            <% end %>
+                          <!--end::Svg Icon-->
+                          </span>
+                        </div>
+                        <!--end::Avatar-->
+                        <!--begin::User details-->
+                        <div class="d-flex flex-column" style="flex: 0 0 190%; min-width: 0;">
+                          <span class="text-gray-800 text-truncate w-50px w-sm-250px w-md-250px  mb-1" >
+                            <%= get_sender_communication_info(conversation_list.company_user_id,conversation_list.user_id,conversation_list.company_id,conversation_list.mail_type,conversation_list.sent_type)["name"] %>,
+                            <%= get_receiver_communication_info(conversation_list.company_user_id,conversation_list.user_id,conversation_list.company_id,conversation_list.mail_type,conversation_list.sent_type)["name"] %>
+                            <% unless @conversationDetailListCount.nil? %>
+                                <%= @conversationDetailListCount[conversation_list.id].nil? ? "" : '('+(@conversationDetailListCount[conversation_list.id]+1).to_s+')' %> 
+                            <% end %>
+                          </span> 
+                          <div class="text-truncate"> 
+                            <span class="fw-bolder text-dark<%= @new_communication_arr.include?(conversation_list.id) ? '' : '' %>"><%= conversation_list.title %> -</span>
+                            <span class="text-dark<%= @new_communication_arr.include?(conversation_list.id) ? '' : '' %>"><%= t("communication.title.#{conversation_list.category}")%></span>
+                            <span class="text-dark<%= @new_communication_arr.include?(conversation_list.id) ? '' : '' %> "> <%= conversation_list.content.to_plain_text  %></span>
+                          </div>                           
+                        </div>
+                        <!--end::User details-->
+                      </div>
+                    </div>
+                    <div class="col-6">
+                      <p class="text-end text-muted fs-9 pt-3">
+                        <%= time_date( conversation_list.created_at)%>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> 
+          <% end %>      
+        <% end %>
+        <div class="d-flex flex-wrap justify-content-between align-items-center pt-10">
+          <div class="d-flex flex-wrap">
+            <%= paginate @conversation_list  %>
+          </div>
+          <div class="d-flex align-items-center py-3">
+            <span class="text-muted"><%=  t('common.list_display')  %> <%= @conversation_list.total_count %> <%=  t('common.to')  %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <%= @conversation_list.offset_value + 1 %> ~ <%=  @conversation_list.offset_value + @conversation_list.count %> <%=  t('common.search_result')  %></span>
+          </div>
+        </div>  
+        <!--end::Mobile View--> 
+        <div id="communicationModal"></div>      
+      </div>
+      <!--end::Content--> 
+    </div>  
+    <!--end::Layout--> 
+  </div>  
+  <!--end::Post-->
+</div> 
+<!--end::Content-->

@@ -1,0 +1,65 @@
+<%= form_for('',url: admin_admin_plans_path	, method: :get) do |form| %>
+  <div class="px-sm-4 admin-news-search">
+    <div class="col-12 mt-3 mb-4 mb-lg-5 ">
+        <div class="col-12 col-md-4 col-lg-2 my-3 my-md-0 pt-0">
+            <%= link_to t('partner_plan.plan_new'), new_admin_admin_plan_path, class: "admin-search-btn pt-1 pb-2 w-100 admin-sidebar-color text-white btn text-decoration-none" %>
+        </div>
+    </div>
+      <div class="search-result company-dashboard col-12 px-3 pb-5 mb-5">
+          <div class="row p-2 shadow bg-white info-box">
+              <div class="col-8 col-xl-10 mb-3">
+                  <h1><%= t('partner_plan.partner_plan_tab') %></h1>
+              </div>
+              <div class="col-11 col-md-5 col-xl-2 mb-3 pt-2 border com-border-color admin-font-color text-center mx-3 mx-md-0 shadow-sm">
+                  <h3><%= t('search.total_count') %> <%= @results.total_count %> <%= t('search.event_count') %> </h3>
+              </div>
+              <% if @results.present? %>
+                  <div class="d-none d-md-block w-100">
+                      <table class="table table-bordered table-responsive-md">
+                          <thead class="admin-sidebar-color text-white">
+                              <tr>
+                                  <th class="w-12" scope="col"><%= Partner::PartnerPlan.human_attribute_name('name') %></th>
+                                  <th class="w-12" scope="col"><%= Partner::PartnerPlan.human_attribute_name('fee') %></th>
+                                  <th class="w-40" scope="col"><%= Partner::PartnerPlan.human_attribute_name('content') %></th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <% @results.each do |plan| %>
+                                  <tr data-link="<%= admin_admin_plan_path(:id => plan.id) %>">
+                                      <td class="conversation_tbl"><%= plan.name %></td>
+                                      <td class="conversation_tbl"><%= number_with_delimiter(plan.fee) %> 円 </td>
+                                      <td class="conversation_tbl"><%= plan.content %></td>
+                                  </tr>
+                              <% end %>
+                          </tbody>
+                      </table>
+                  </div>
+                  <div class="col-12 my-2 px-4 d-content d-md-none">
+                      <% @results.each do |plan| %>
+                          <div class="mobile-table row std-info-box p-3 my-4 rounded">
+                              <div class="row col-12" data-link="<%= admin_admin_plan_path(:id => plan.id) %>" >
+                                  <div class="h6 admin-font-color col-4"><%= Partner::PartnerPlan.human_attribute_name('name') %></div>
+                                  <div class="col-8 text-muted text-break"><%= plan.name %></div><br>
+                                  <div class="h6 admin-font-color col-4"><%= Partner::PartnerPlan.human_attribute_name('fee') %></div>
+                                  <div class="col-8 text-muted news-content-wrap"><%= plan.fee %></div><br>
+                                  <div class="h6 admin-font-color col-4"><%= Partner::PartnerPlan.human_attribute_name('content') %></div>
+                                  <div class="col-8 text-muted text-break"> <%=  plan.content %></div><br>
+                              </div>
+                          </div>
+                      <% end %>                          
+                  </div>
+                  <div class="col-12 d-flex justify-content-center mt-2 mx-2">
+                      <%= paginate @results  %>
+                  </div> 
+              <% else %>
+                  <div class="h3 col-12 mb-3">
+                      <%= t('search.no_result') %>
+                  </div>
+              <% end %> 
+          </div>
+      </div>
+  </div>   
+<% end %>
+<%= javascript_pack_tag "admin/admin_search.js" %>
+<%= javascript_pack_tag 'common.js'%>
+<%= javascript_pack_tag "student/event_search.js" %>

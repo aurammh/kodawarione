@@ -1,0 +1,81 @@
+<!--begin::Hero card-->
+<% if @company_commitment_profile.cover_photo.attached? && @company_commitment_profile.cover_photo.persisted? %>
+	<div class="card mb-12 bgi-no-repeat bgi-position-center bgi-size-cover"  style="background-image: url(<%= url_for(@company_commitment_profile.cover_photo) %>)">
+<% else %>
+	<div class="card mb-12 bgi-no-repeat bgi-position-center bgi-size-cover"  style="background-image:url(<%= asset_path 'media/misc/city.png' %>)">
+<% end %>
+	<!--begin::Hero body-->
+	<div class="card-body flex-column p-5">
+		<!--begin::Hero content-->
+		<div class="d-flex align-items-center h-lg-250px h-md-150px h-100px p-5 p-lg-15">
+			<!--begin::Wrapper-->
+			<div class="d-flex flex-column align-items-start justift-content-center flex-equal me-5">
+			</div>
+			<!--end::Wrapper-->
+		</div>
+		<!--end::Hero content-->
+		<!--begin::Hero nav-->
+		<div class="card-rounded bg-light d-flex flex-stack flex-wrap p-5">
+			<!--begin::Symbol-->
+			<div class="symbol symbol-lg-35px symbol-lg-30px symbol-sm-30px symbol-25px symbol-success overflow-hidden">
+				<span class="symbol-label">
+					<% if current_company.image.attached? %>
+						<%= image_tag (current_company.image), :class=> "h-100 align-self-end" %>
+					<% else %>
+						<%= image_tag "avatar/preview.svg", :class=> "h-100 align-self-end" %>
+					<% end %>
+				</span>
+			</div>
+			<!--end::Symbol-->
+			<!--begin::Nav-->
+			<ul class="nav flex-wrap border-transparent fw-bolder">
+				<!--begin::Nav item-->
+				<% if can?(:home, Company::Company) %>
+					<li class="nav-item my-1">
+						<%= link_to t('commitment_profile.title.commitment_profile_title'), home_company_commitment_profiles_path, class: "btn btn-color-gray-600 btn-active-white btn-active-color-primary fw-boldest fs-8 fs-lg-base nav-link px-3 px-lg-8 mx-1 text-uppercase #{company_active_url?(home_company_commitment_profiles_path)} #{company_active_url?(home_form_company_commitment_profiles_path)}" %>
+					</li>
+				<% end %>
+				<!--end::Nav item-->
+				<!--begin::Nav item-->
+				<% if can?(:about_us, Company::Company) %>
+					<li class="nav-item my-1">
+						<%= link_to t('commitment_profile.title.about_us_title'), about_us_company_commitment_profiles_path, class: "btn btn-color-gray-600 btn-active-white btn-active-color-primary fw-boldest fs-8 fs-lg-base nav-link px-3 px-lg-8 mx-1 text-uppercase #{company_active_url?(about_us_company_commitment_profiles_path)} #{company_active_url?(about_us_form_company_commitment_profiles_path)}" %>
+					</li>
+				<% end %>
+				<!--end::Nav item-->
+				<!--begin::Nav item-->
+				<% if can?(:member, Company::Company) %>
+					<li class="nav-item my-1">
+						<%= link_to t('commitment_profile.title.member_title'), member_company_commitment_profiles_path, class: "btn btn-color-gray-600 btn-active-white btn-active-color-primary fw-boldest fs-8 fs-lg-base nav-link px-3 px-lg-8 mx-1 text-uppercase #{company_active_url?(member_company_commitment_profiles_path)} #{company_active_url?(member_form_company_commitment_profiles_path)}" %>
+					</li>
+				<% end %>
+				<!--end::Nav item-->
+				<!--begin::Nav item-->
+				<% if can?(:read, Company::Activity) %>
+					<li class="nav-item my-1">
+						<%= link_to t('activity.title'), company_activities_path, class: "btn btn-color-gray-600 btn-active-white btn-active-color-primary fw-boldest fs-8 fs-lg-base nav-link px-3 px-lg-8 mx-1 text-uppercase #{company_active_url?(company_activities_path)}  #{company_active_url?(new_company_activity_path)} #{company_active_url?(edit_company_activity_path(params[:id])) if params[:id].present?} #{company_active_url?(company_activity_path(params[:id])) if params[:id].present?}" %>
+					</li>
+				<% end %>
+				<!--end::Nav item-->
+				<!--begin::Nav item-->
+				<% if can?(:read, Company::InterviewStory) %>
+					<li class="nav-item my-1">					
+						<%= link_to  t('interview_story.title.interview_story_title'), company_interview_stories_path, class: "btn btn-color-gray-600 btn-active-white btn-active-color-primary fw-boldest fs-8 fs-lg-base nav-link px-3 px-lg-8 mx-1 text-uppercase #{company_active_url?(company_interview_stories_path)} #{company_active_url?(new_company_interview_story_path)} #{company_active_url?(edit_company_interview_story_path(params[:id])) if params[:id].present?} #{company_active_url?(company_interview_story_path(params[:id])) if params[:id].present?}" %>
+					</li>
+				<% end %>
+				<!--end::Nav item-->
+				<!--begin::Nav item-->
+				<% if can?(:recruitment, Company::Company) %>
+					<li class="nav-item my-1">
+						<%= link_to t('commitment_profile.title.recruitment_title'), recruitment_company_commitment_profiles_path, class: "btn btn-color-gray-600 btn-active-white btn-active-color-primary fw-boldest fs-8 fs-lg-base nav-link px-3 px-lg-8 mx-1 text-uppercase #{company_active_url?(recruitment_company_commitment_profiles_path)} #{company_active_url?(recruitment_form_company_commitment_profiles_path)}" %>
+					</li>
+				<% end %>
+				<!--end::Nav item-->
+			</ul>
+			<!--end::Nav-->
+		</div>
+		<!--end::Hero nav-->
+	</div>
+	<!--end::Hero body-->
+</div>
+<!--end::Hero card bgi-no-repeat bgi-position-center bgi-size-cover max-h-175px-->

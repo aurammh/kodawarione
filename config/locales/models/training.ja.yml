@@ -1,0 +1,39 @@
+ja:
+  activerecord:
+    models:
+      partner/training: Training
+    attributes:
+      partner/training:
+        name: 研修名
+        start_date: 開催日〔開始〕
+        end_date: 開催日〔終了〕
+        start_time: 開催時間〔開始〕
+        end_time: 開催時間〔終了〕
+        number_of_trainer: 研修人数
+        status: ステータス
+        partner_id: パートナー
+        company_id: 会社
+        partner_user_id: パートナーユーザ
+        in_charge_name: 担当者
+    errors:
+      messages:
+        not_a_number: は番号を入力してください。
+  training:
+    title: 研修
+    training_result: 研修一覧
+    company_result_title: 研修情報（企業ごと）
+    calendar_new: カレンダーから登録
+    company_name: 企業名
+    result_list: 結果一覧
+    enum_options:
+      statuses:
+        1: "新規"
+        2: "予約"
+        3: "実施"
+        4: "欠席"
+    actions:
+      view: 詳細
+      save: 新規
+      update: 更新
+      new: 登録
+      monthly_data: 研修情報（マンスリー）

@@ -1,0 +1,13 @@
+// Plus/Minus sign icon
+.hire-btn {
+    position: relative;
+    cursor: pointer;
+    .plus_minus_icon {
+        position: absolute;
+        top: 0.2rem;
+        bottom: 0;
+        right: 0.5rem;
+        font-size: 20px;
+        font-weight: 900;
+    }
+}

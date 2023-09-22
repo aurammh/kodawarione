@@ -1,0 +1,50 @@
+<% if company_vacancies.present? %>
+    <div class="mt-4 mt-md-5 mt-lg-20 pb-4 pb-md-5 pb-lg-10">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h3 class="fs-2x text-gray-600 fw-bolder p-4"><%= t("title.latest_vacancies")%></h3>
+            <%# link_to t('company_member.title.member_list'), company_page_members_path, class: "fw-bolder" %>
+        </div>
+        <div class="row g-10">
+            <% company_vacancies.each do |vacancy| %>
+                    <!--begin::Col-->
+                    <div class="col-xl-6 col-lg-12 col-12" >
+                        <div class="card bg-body border-0 shadow-sm mh-275px" >
+                            <!--begin::Body--> 
+                            <%= link_to (vacancy_details_path(vacancy_id: vacancy)), class: "card-body p-5" do %>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <div class="text-truncate">
+                                        <span class="text-gray-400 text-truncate fs-7 fw-bolder me-2 d-block lh-1 pb-1"><%= vacancy.industry_name %> / <%= vacancy.occupation_name %></span>
+                                        <div class="text-decoration-none text-dark">     
+                                        <span class="text-gray-800 fs-2 fw-bolder"><%= vacancy.vacancy_title %></span>
+                                        </div>
+                                    </div> 
+                                </div>
+                                <div class="mb-3">
+                                    <!--begin::Text-->
+                                    <span class="d-block text-gray-600 fw-bold"><%= vacancy.vacancy_description.to_plain_text.truncate(200) %></span>
+                                    <!--end::Text-->
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <!--begin::Text-->
+                                    <div>
+                                        <span class="fw-bolder text-dark fs-7 me-2"><i class="fas fa-users me-1 text-primary"></i> <%= number_with_delimiter(vacancy.required_applicants) %><%= t('unit.persons') %> -</span>
+                                        <span class="fw-bold text-gray-600 fs-7"><i class="flaticon2-pin me-1 text-primary"></i> <%= vacancy.postalcode_city %></span>
+                                    </div>
+                                    <!--end::Text-->    
+                                    <div class="d-flex flex-wrap fw-bolder">
+                                        <%=l vacancy.display_to %>
+                                        <span class="fs-7 text-danger d-flex align-items-center fw-normal">
+                                            <span class="bullet bullet-dot bg-danger mx-2"></span>
+                                            <%= expiry_day_left(vacancy.display_from, vacancy.display_to)%>
+                                        </span>
+                                    </div>                             
+                                </div> 
+                            <!--end::Body-->
+                        </div>
+                    <% end %>
+                </div>
+                <!--end::Col-->
+            <% end %>
+        </div>
+    </div>
+<% end %>

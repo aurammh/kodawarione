@@ -1,0 +1,68 @@
+<!--begin::Breadcrumb-->
+<% breadcrumbs_navigation_add (t('company_member.title.member_list')), company_company_members_path %>
+<% breadcrumbs_navigation_add t('company_member.title.member_show'), '#' %>
+<%= render_company_breadcrumbs_navigation(t('company_member.title.member_show')) %>
+<!--end::Breadcrumb-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+	<!--begin::Container-->
+	<div class="container-xxl" id="kt_content_container">
+		<!--begin::Tab Content-->
+		<div class="tab-content">
+			<!--begin::Tab pane-->
+			<div id="kt_project_users_card_pane" class="tab-pane fade show active">
+				<!--begin::Table-->
+				<div class="card bg-body">
+					<!--begin::Header-->
+					<div class="card-header border-0 pt-5">
+						<h3 class="card-title align-items-start flex-column">
+							<span class="card-label fw-bolder fs-3 mb-1"><%= t('company_member.title.member_show') %></span> 
+						</h3>
+						<div class="card-toolbar">
+							<% if can?(:read, Company::CompanyMember) %>
+								<%= link_to company_company_members_path, class: "btn btn-sm btn-primary" do %>
+									<i class="ki ki-long-arrow-back icon-sm"></i><%= t("btn.return") %>
+								<% end %>
+							<% end %>
+						</div>
+					</div>
+					<!--end::Header-->
+					<!--begin::Body-->
+					<div class="card-body py-3">
+						<!--begin::Table container-->
+						<div class="table-responsive  overflow-auto">
+							<table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_table_users"> 
+								<thead>
+								<!--begin::Table row-->
+								<tr class="text-start text-muted fw-bolder fs-7 text-uppercase gs-0"> 
+									<th class="max-w-50px"><%= Company::CompanyMember.human_attribute_name('company_member_logo') %></th>
+									<th class="min-w-125px"><%= Company::CompanyMember.human_attribute_name('user_email') %></th>
+									<th class="min-w-125px"><%= Company::CompanyMember.human_attribute_name('company_roles_id') %></th> 
+									<th class="min-w-125px"><%= Company::CompanyMember.human_attribute_name('join_date') %></th>  
+								</tr>
+								<!--end::Table row-->
+								</thead> 
+								<tbody class="text-gray-600 fw-bold">   
+								<tr>
+									<td class="d-flex align-items-center"> 
+										<div class="symbol symbol-50px overflow-hidden me-3">
+											<%= image_tag @company_company_member.image.attached? ? @company_company_member.image : "avatar/male.svg", class: "symbol-label" %> 
+										</div>  
+									</td>  
+									<td><%= @company_company_member.user_email %></td>
+									<td><%= @company_company_member.role_type %></td> 
+									<td><%=  @company_company_member.join_date.present? ? "#{l  @company_company_member.join_date}" : "-" %></td>
+								</tr> 
+								</tbody> 
+							</table>
+						</div>
+						<!--end::Table container-->
+					</div>
+					<!--begin::Body-->
+				</div>
+				<!--end::Table--> 				
+			</div>
+		</div>
+		<!--end::Tab Content-->
+	</div>
+	<!--end::Container-->
+</div>

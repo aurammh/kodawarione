@@ -1,0 +1,8 @@
+.admin-news-search{
+    .news-content-wrap{
+        max-width: 100px !important;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}

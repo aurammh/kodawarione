@@ -1,0 +1,38 @@
+<div class="d-flex flex-column flex-root user-register"> 
+  <div id="kt_login" class="d-flex flex-row-fluid login login-4 login-signin-on">
+    <div class="d-flex flex-center flex-row-fluid bgi-size-cover bgi-position-top bgi-no-repeat">
+      <div class="login-form text-center position-relative overflow-hidden p-7">
+        <!--begin::Sign Up Header-->
+        <div class="d-flex flex-center mb-15">
+          <%= link_to root_path do %>
+            <%= image_tag "layout/header_logo.png", class: "h-40px" %>   
+          <% end %>  
+        </div>
+        <!--end::Sign Up Header-->
+        <!--begin::Sign Up form-->
+        <div class="login-signin">
+          <div class="mb-20">  
+            <h3>Welcom to company member</h3>  
+            <div class="text-muted font-weight-bold">Please click accept if you want to be commpnay members.</div>
+            <div class="text-muted font-weight-bold">Please click deny if you want to reject.</div>
+          </div>
+
+          <div class="form-group mb-5 d-flex justify-content-between">
+            <% if can?(:company_member_accept, Company::CompanyMember) %>
+              <%= link_to( company_company_member_accept_path(confirmation_token: @company_member.confirmation_token), class: "col-12 col-lg-4 welcome-btn py-3 text-center text-white com-bg-color font-weight-bold text-decoration-none rounded-pill") do %>
+                <%= t('company_member.btn.accept') %>
+              <% end %>
+            <% end %>
+            <% if can?(:company_member_reject, Company::CompanyMember) %>
+              <%= link_to( company_company_member_reject_path(confirmation_token: @company_member.confirmation_token), class: "col-12 col-lg-4 welcome-btn py-3 text-center text-white bg-danger font-weight-bold text-decoration-none rounded-pill") do %>
+                <%= t('company_member.btn.deny') %>
+              <% end %>
+            <% end %>
+          </div> 
+        </div>
+        <!--end::Sign Up form--> 
+      </div>
+    </div>
+  </div>
+</div>
+<%= javascript_pack_tag "user/user.js" %> 

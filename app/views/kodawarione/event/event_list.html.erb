@@ -1,0 +1,18 @@
+<!--begin::Header-->
+<% breadcrumbs_navigation_add (t ('event.title.event_list')), '#' %>
+<%= render_partner_breadcrumbs_navigation(t ('event.title.event_list')) %>		
+<!--end::Header-->
+<!--begin::Content-->
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+	<!--begin::Container-->
+	<div class="container-fluid" id="kt_content_container">
+		<!--begin::Tab Content-->
+		<div class="tab-content">
+			<!--begin::Tab pane-->
+			<div id="kt_project_users_card_pane" class="tab-pane fade show active">
+                <%= render partial: "kodawarione/shared/event_manage/admin_self_event_list", locals: {url: kodawarione_event_list_path}  %>              
+            </div>
+            <!--end::Tab pane-->
+        </div>
+    </div>
+</div> 

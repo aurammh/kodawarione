@@ -1,0 +1,24 @@
+<!--begin::Hero card-->
+<div class="card mb-12 <%= 'bg-body' if company_user_signed_in? %>">
+    <!--begin::Hero body-->
+	<div class="card-body flex-column p-5">
+		<!--begin::Hero content-->
+		<div class="d-flex align-items-center h-lg-300px p-5 p-lg-15">
+			<!--begin::Wrapper-->
+			<div class="d-flex flex-column align-items-start justift-content-center flex-equal me-5">
+				<!--begin::Title-->
+				<h1 class="fw-bolder fs-4 fs-lg-1 text-gray-800 mb-5 mb-lg-10"><%= hero_text %></h1>
+				<!--end::Title-->
+			</div>
+			<!--end::Wrapper-->
+			<div class="flex-equal d-flex justify-content-center align-items-end ms-5">
+				<!--begin::Illustration-->
+				<%= image_tag "media/illustrations/sketchy-1/20.png", class: "mw-100 mh-125px mh-lg-275px mb-lg-n12" %>
+				<!--end::Illustration-->
+			</div>
+		</div>
+		<!--end::Hero content-->
+	</div>
+	<!--end::Hero body-->
+</div>
+<!--end::Hero card-->

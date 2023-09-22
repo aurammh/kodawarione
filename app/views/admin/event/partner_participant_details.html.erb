@@ -1,0 +1,58 @@
+<section class="px-sm-4 d-flex flex-column align-items-center mt-3 mb-5 pb-5">
+    <div class="row w-100 bg-white py-3 shadow event-info-box">
+        <div class="col-12 px-2 px-lg-4">
+            <div class="row">
+                <div class="col-12 col-md-8 px-3 p-lg-0 row mt-5 ml-md-3 ml-lg-0 pl-5">
+                    <div class="col-12 col-lg-6 pl-md-4">
+                        <span class="font-weight-bolder warp-text text-dark pl-1"><%= Company::Company.human_attribute_name('partner_name') %></span>
+                        <span class="warp-text">- <%= @participants_partner.name %></span>
+                    </div>
+                    <div class="col-12 col-lg-6 pl-md-4 pl-lg-0 px-0">
+                        <span class="font-weight-bolder warp-text text-dark"><%= Partner::Partner.human_attribute_name('partner_code') %></span>
+                        <span class="warp-text"> - <%= @participants_partner.partner_code %></span>
+                    </div>
+                    <div class="col-12 col-lg-6 pb-lg-5 pl-md-4">
+                        <span class="font-weight-bolder warp-text text-dark pl-1"><%= Company::Company.human_attribute_name('address') %></span>
+                        <span class="warp-text"> - <%= @participants_partner.address %></span>
+                    </div>
+                    <div class="col-12 col-lg-6 pb-lg-5 pl-md-4 pl-lg-0 px-0">
+                        <span class="font-weight-bolder warp-text text-dark"><%= Company::Company.human_attribute_name('website_url') + ":" %></span>
+                        <span class="warp-text"> - <%= @participants_partner.website_url %></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 mb-3 d-none d-md-block w-100 px-3">
+                <table class="table table-bordered table-responsive-md">
+                    <thead class="com-bg-color text-white">
+                        <tr>
+                            <th class="w-12" scope="col"><%= t('event.title.name') %></th>
+                            <th class="w-12" scope="col"><%= Contact.human_attribute_name('email') %></th>
+                            <th class="w-12" scope="col"><%= t('event_participant.title.updated_at') %></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%  @partner_participant_details.each do |partner_participant| %>
+                        <tr>
+                            <td class="text-break"><%= partner_participant.first_name %> <%= partner_participant.last_name %></td>
+                            <td class="text-break"><%= partner_participant.email %></td>
+                            <td class="text-break"><%= l partner_participant.updated_at.strftime('%Y-%m-%d').to_date, default: '-' %></td>
+                        </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-12 my-2 px-4 d-content d-md-none">
+                <%  @partner_participant_details.each do |partner_participant| %>
+                    <div class="mobile-table row std-info-box p-3 my-4 rounded">                                                   
+                        <span class="h6 com-font-color col-4"><%= t('event.title.name') %></span>
+                        <span class="col-8 text-muted text-break"><%= partner_participant.first_name %> <%= partner_participant.last_name %></span>
+                        <span class="h6 com-font-color col-4"><%= Contact.human_attribute_name('email') %></span>
+                        <span class="col-8 text-muted text-break"><%= partner_participant.email %></span>
+                        <span class="h6 com-font-color col-4"><%= t('event_participant.title.updated_at') %></span>
+                        <span class="col-8 text-muted text-break"><%= partner_participant.updated_at.strftime('%Y-%m-%d') %></span>
+                    </div>
+                <% end %>                          
+            </div>
+        </div>      
+    </div>
+</section>

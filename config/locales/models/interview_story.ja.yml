@@ -1,0 +1,28 @@
+ja:
+  activerecord:
+    models:
+      company/interview_story: interview_story
+    attributes:
+      company/interview_story:
+        interview_story_create_user: 入力方のプロフィール写真
+        title: タイトル
+        review: 内容
+  errors:
+    messages:
+      blank: 'を入力してください。'
+      invalid: '無効です。'
+      is_wrong: '間違っている'
+  interview_story:
+    title:
+      interview_story_title: 記事
+      latest_stories: 最新記事
+      all_stories: すべての記事
+      story_information: 記事情報
+      create_interview_story_title: 記事の作成
+      edit_story: Edit Story
+      show_story: Show Story
+      click_btn_text: 社内の様子を簡単に記事にして、伝えましょう。
+    btn:
+      add_new_story: 記事作成
+    placeholder:
+      title: タイトル
